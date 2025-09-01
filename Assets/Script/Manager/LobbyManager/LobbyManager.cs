@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
     {
     [Header("Connection Status")]
-    public Text connectionStatusText;
+    public TMP_Text connectionStatusText;
 
     [Header("Login UI Panel")]
     public InputField playerNameInput;
@@ -25,7 +26,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     [Header("Inside Room UI Panel")]
     public GameObject InsideRoom_UI_Panel;
-    public Text roomInfoText;
+    public TMP_Text roomInfoText;
     public GameObject playerListPrefab;
     public GameObject playerListContent;
     public GameObject startGameButton;
