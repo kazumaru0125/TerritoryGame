@@ -22,6 +22,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [Header("Create Room UI Panel")]
     public GameObject CreateRoom_UI_Panel;
     public InputField roomNameInputField;
+
     //public InputField maxPlayerInputField;
 
     [Header("Inside Room UI Panel")]
@@ -93,7 +94,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
 
         RoomOptions roomOptions = new RoomOptions();
-       // roomOptions.MaxPlayers = (byte)int.Parse(maxPlayerInputField.text);
+        // roomOptions.MaxPlayers = (byte)int.Parse(maxPlayerInputField.text);
         roomOptions.MaxPlayers = 4;
 
         PhotonNetwork.CreateRoom(roomName, roomOptions);
@@ -138,7 +139,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
         if (PhotonNetwork.IsMasterClient)
             {
-            PhotonNetwork.LoadLevel("GameScene");
+            // PhotonNetwork.LoadLevel("TGameScene");
+            PhotonNetwork.LoadLevel("SampleScene");
             }
         }
 
@@ -250,11 +252,25 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             playerListGameObject.transform.SetParent(playerListContent.transform, false);
             playerListGameObject.transform.localScale = Vector3.one;
 
-            // --- PlayerNameText の取得 ---
-            var nameText = playerListGameObject.transform.Find("PlayerNameText");
-            if (nameText != null && nameText.GetComponent<Text>() != null)
+            // --- PlayerNameText の取得 (Text / TMP_Text 両対応) ---
+            var nameTextObj = playerListGameObject.transform.Find("PlayerNameText");
+            if (nameTextObj != null)
                 {
-                nameText.GetComponent<Text>().text = player.NickName;
+                var uiText = nameTextObj.GetComponent<Text>();
+                var tmpText = nameTextObj.GetComponent<TMP_Text>();
+
+                if (uiText != null)
+                    {
+                    uiText.text = player.NickName;
+                    }
+                else if (tmpText != null)
+                    {
+                    tmpText.text = player.NickName;
+                    }
+                else
+                    {
+                    Debug.LogWarning("PlayerNameText に Text または TMP_Text コンポーネントがありません！");
+                    }
                 }
             else
                 {
@@ -279,23 +295,42 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-        roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " + "Players/Max.players:" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+        roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
+                            "Players/Max.players:" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
 
         GameObject playerListGameObject = Instantiate(playerListPrefab);
-        playerListGameObject.transform.SetParent(playerListContent.transform);
+        playerListGameObject.transform.SetParent(playerListContent.transform, false);
         playerListGameObject.transform.localScale = Vector3.one;
 
-        playerListGameObject.transform.Find("PlayerNameText").GetComponent<Text>().text = newPlayer.NickName;
-        if (newPlayer.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber) //ActorNumber＝出入りで変わる識別番号
+        // --- PlayerNameText の取得 (Text / TMP_Text 両対応) ---
+        var nameTextObj = playerListGameObject.transform.Find("PlayerNameText");
+        if (nameTextObj != null)
             {
-            playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(true);
-            }
-        else
-            {
-            playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(false);
-            }
-        playerListGameObjects.Add(newPlayer.ActorNumber, playerListGameObject);
+            var uiText = nameTextObj.GetComponent<Text>();
+            var tmpText = nameTextObj.GetComponent<TMP_Text>();
 
+            if (uiText != null)
+                {
+                uiText.text = newPlayer.NickName;
+                }
+            else if (tmpText != null)
+                {
+                tmpText.text = newPlayer.NickName;
+                }
+            else
+                {
+                Debug.LogWarning("PlayerNameText に Text または TMP_Text コンポーネントがありません！");
+                }
+            }
+
+        // --- PlayerIndicator ---
+        var indicator = playerListGameObject.transform.Find("PlayerIndicator");
+        if (indicator != null)
+            {
+            indicator.gameObject.SetActive(newPlayer.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber);
+            }
+
+        playerListGameObjects.Add(newPlayer.ActorNumber, playerListGameObject);
         }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -463,7 +498,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     #endregion
 
-    public void ShowCreateRoomPanel()
+    public void ShowCreateRoomPanelClick()
         {
         ActivatePanel(CreateRoom_UI_Panel.name);
         }
