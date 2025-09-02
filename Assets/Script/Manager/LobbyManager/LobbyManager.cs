@@ -22,7 +22,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [Header("Create Room UI Panel")]
     public GameObject CreateRoom_UI_Panel;
     public InputField roomNameInputField;
-    public InputField maxPlayerInputField;
+    //public InputField maxPlayerInputField;
 
     [Header("Inside Room UI Panel")]
     public GameObject InsideRoom_UI_Panel;
@@ -93,7 +93,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
 
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = (byte)int.Parse(maxPlayerInputField.text);
+       // roomOptions.MaxPlayers = (byte)int.Parse(maxPlayerInputField.text);
+        roomOptions.MaxPlayers = 4;
 
         PhotonNetwork.CreateRoom(roomName, roomOptions);
         }
@@ -161,47 +162,120 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log(PhotonNetwork.CurrentRoom.Name + " is created.");
         }
 
+    //public override void OnJoinedRoom()
+    //    {
+    //    Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
+    //    ActivatePanel(InsideRoom_UI_Panel.name);
+
+    //    if (PhotonNetwork.LocalPlayer.IsMasterClient)
+    //        {
+    //        startGameButton.SetActive(true);
+    //        }
+    //    else
+    //        {
+    //        startGameButton.SetActive(false);
+    //        }
+
+    //    roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " + "Players/Max.players:" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+
+    //    if (playerListGameObjects == null)
+    //        {
+    //        playerListGameObjects = new Dictionary<int, GameObject>();
+    //        }
+
+    //    foreach (Player player in PhotonNetwork.PlayerList)
+    //        {
+    //        GameObject playerListGameObject = Instantiate(playerListPrefab);
+    //        playerListGameObject.transform.SetParent(playerListContent.transform);
+    //        playerListGameObject.transform.localScale = Vector3.one;
+
+    //        playerListGameObject.transform.Find("PlayerNameText").GetComponent<Text>().text = player.NickName;
+    //        if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+    //            {
+    //            playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(true);
+    //            }
+    //        else
+    //            {
+    //            playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(false);
+
+    //            }
+    //        playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
+    //        }
+
+    //    }
+
     public override void OnJoinedRoom()
         {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
         ActivatePanel(InsideRoom_UI_Panel.name);
 
-        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        // --- StartGameButton ---
+        if (startGameButton != null)
             {
-            startGameButton.SetActive(true);
+            startGameButton.SetActive(PhotonNetwork.LocalPlayer.IsMasterClient);
             }
         else
             {
-            startGameButton.SetActive(false);
+            Debug.LogWarning("startGameButton が Inspector に設定されていません！");
             }
 
-        roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " + "Players/Max.players:" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+        // --- RoomInfoText ---
+        if (roomInfoText != null)
+            {
+            roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
+                                "Players/Max.players:" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+            }
+        else
+            {
+            Debug.LogWarning("roomInfoText が Inspector に設定されていません！");
+            }
 
+        // --- PlayerList 初期化 ---
         if (playerListGameObjects == null)
             {
             playerListGameObjects = new Dictionary<int, GameObject>();
             }
 
+        // --- PlayerListPrefab / PlayerListContent チェック ---
+        if (playerListPrefab == null || playerListContent == null)
+            {
+            Debug.LogError("playerListPrefab または playerListContent が Inspector に設定されていません！");
+            return; // ここで処理を止める
+            }
+
+        // --- Player List 作成 ---
         foreach (Player player in PhotonNetwork.PlayerList)
             {
             GameObject playerListGameObject = Instantiate(playerListPrefab);
-            playerListGameObject.transform.SetParent(playerListContent.transform);
+            playerListGameObject.transform.SetParent(playerListContent.transform, false);
             playerListGameObject.transform.localScale = Vector3.one;
 
-            playerListGameObject.transform.Find("PlayerNameText").GetComponent<Text>().text = player.NickName;
-            if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            // --- PlayerNameText の取得 ---
+            var nameText = playerListGameObject.transform.Find("PlayerNameText");
+            if (nameText != null && nameText.GetComponent<Text>() != null)
                 {
-                playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(true);
+                nameText.GetComponent<Text>().text = player.NickName;
                 }
             else
                 {
-                playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(false);
-
+                Debug.LogWarning("PlayerNameText がプレハブに見つかりません！");
                 }
-            playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
-            }
 
+            // --- PlayerIndicator の処理 ---
+            var indicator = playerListGameObject.transform.Find("PlayerIndicator");
+            if (indicator != null)
+                {
+                indicator.gameObject.SetActive(player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber);
+                }
+
+            // --- Dictionary 追加 ---
+            if (!playerListGameObjects.ContainsKey(player.ActorNumber))
+                {
+                playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
+                }
+            }
         }
+
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
         {
@@ -248,13 +322,65 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         playerListGameObjects = null;
         }
 
+    //public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    //    {
+    //    ClearRoomListView();
+
+    //    foreach (RoomInfo room in roomList)
+    //        {
+    //        Debug.Log(room.Name);
+    //        if (!room.IsOpen || !room.IsVisible || room.RemovedFromList)
+    //            {
+    //            if (cachedRoomList.ContainsKey(room.Name))
+    //                {
+    //                cachedRoomList.Remove(room.Name);
+    //                }
+    //            }
+    //        else
+    //            {
+    //            if (cachedRoomList.ContainsKey(room.Name))
+    //                {
+    //                cachedRoomList[room.Name] = room;
+    //                }
+    //            else
+    //                {
+    //                cachedRoomList.Add(room.Name, room);
+    //                }
+    //            }
+    //        }
+
+    //    foreach (RoomInfo room in cachedRoomList.Values)
+    //        {
+    //        GameObject roomListEntryGameObject = Instantiate(roomListEntryPrefab);
+    //        roomListEntryGameObject.transform.SetParent(roomListParentGameObject.transform);
+    //        roomListEntryGameObject.transform.localScale = Vector3.one;
+
+    //        roomListEntryGameObject.transform.Find("RoomNameText").GetComponent<Text>().text = room.Name;
+    //        roomListEntryGameObject.transform.Find("RoomPlayersText").GetComponent<Text>().text = room.PlayerCount + " / " + room.MaxPlayers;
+    //        roomListEntryGameObject.transform.Find("JoinRoomButton").GetComponent<Button>().onClick.AddListener(() => OnJoinRoomButtonClicked(room.Name));
+
+    //        roomListGameObjects.Add(room.Name, roomListEntryGameObject);
+
+    //        }
+    //    }
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
         ClearRoomListView();
 
+        if (cachedRoomList == null)
+            {
+            cachedRoomList = new Dictionary<string, RoomInfo>();
+            }
+        if (roomListGameObjects == null)
+            {
+            roomListGameObjects = new Dictionary<string, GameObject>();
+            }
+
         foreach (RoomInfo room in roomList)
             {
-            Debug.Log(room.Name);
+            Debug.Log("Room: " + room.Name);
+
             if (!room.IsOpen || !room.IsVisible || room.RemovedFromList)
                 {
                 if (cachedRoomList.ContainsKey(room.Name))
@@ -264,31 +390,37 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 }
             else
                 {
-                if (cachedRoomList.ContainsKey(room.Name))
-                    {
-                    cachedRoomList[room.Name] = room;
-                    }
-                else
-                    {
-                    cachedRoomList.Add(room.Name, room);
-                    }
+                cachedRoomList[room.Name] = room;
                 }
             }
 
         foreach (RoomInfo room in cachedRoomList.Values)
             {
-            GameObject roomListEntryGameObject = Instantiate(roomListEntryPrefab);
-            roomListEntryGameObject.transform.SetParent(roomListParentGameObject.transform);
+            if (roomListEntryPrefab == null || roomListParentGameObject == null)
+                {
+                Debug.LogError("roomListEntryPrefab または roomListParentGameObject が設定されていません！");
+                return;
+                }
+
+            GameObject roomListEntryGameObject = Instantiate(roomListEntryPrefab, roomListParentGameObject.transform);
             roomListEntryGameObject.transform.localScale = Vector3.one;
 
-            roomListEntryGameObject.transform.Find("RoomNameText").GetComponent<Text>().text = room.Name;
-            roomListEntryGameObject.transform.Find("RoomPlayersText").GetComponent<Text>().text = room.PlayerCount + " / " + room.MaxPlayers;
-            roomListEntryGameObject.transform.Find("JoinRoomButton").GetComponent<Button>().onClick.AddListener(() => OnJoinRoomButtonClicked(room.Name));
+            var nameText = roomListEntryGameObject.transform.Find("RoomNameText");
+            if (nameText != null)
+                nameText.GetComponent<Text>().text = room.Name;
 
-            roomListGameObjects.Add(room.Name, roomListEntryGameObject);
+            var playersText = roomListEntryGameObject.transform.Find("RoomPlayersText");
+            if (playersText != null)
+                playersText.GetComponent<Text>().text = room.PlayerCount + " / " + room.MaxPlayers;
 
+            var joinButton = roomListEntryGameObject.transform.Find("JoinRoomButton");
+            if (joinButton != null)
+                joinButton.GetComponent<Button>().onClick.AddListener(() => OnJoinRoomButtonClicked(room.Name));
+
+            roomListGameObjects[room.Name] = roomListEntryGameObject;
             }
         }
+
 
     public override void OnLeftLobby()
         {
@@ -330,6 +462,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomListGameObjects.Clear();
         }
     #endregion
+
+    public void ShowCreateRoomPanel()
+        {
+        ActivatePanel(CreateRoom_UI_Panel.name);
+        }
+
 
     #region  Public Methods
     public void ActivatePanel(string panelToBeActivated)
