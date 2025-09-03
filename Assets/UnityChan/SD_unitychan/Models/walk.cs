@@ -4,7 +4,6 @@ using System.Collections;
 public class Walk : MonoBehaviour
 {
     private Animator animator;
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -19,43 +18,41 @@ public class Walk : MonoBehaviour
     {
         bool isWalking = false;
         bool isRunning = false;
+        Vector3 move = Vector3.zero;
 
-        if (Input.GetKey("up"))
+        // ëOå„
+        if (Input.GetKey(KeyCode.W) || Input.GetKey("up"))
         {
             isWalking = true;
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-            {
-                isRunning = true;
-                transform.position += transform.forward * 0.01f; //ëñÇÈéûÇÕï‡Ç≠éûÇÃ2î{ÇÃë¨Ç≥
-            }
-            else
-            {
-                transform.position += transform.forward * 0.005f;
-            }
+            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
+            move += transform.forward * speed;
+            if (speed == 0.01f) isRunning = true;
         }
-        else if (Input.GetKey("down"))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey("down"))
         {
             isWalking = true;
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-            {
-                isRunning = true;
-                transform.position -= transform.forward * 0.01f;
-            }
-            else
-            {
-                transform.position -= transform.forward * 0.005f;
-            }
+            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
+            move -= transform.forward * speed;
+            if (speed == 0.01f) isRunning = true;
+        }
+        // ç∂âE
+        if (Input.GetKey(KeyCode.A) || Input.GetKey("left"))
+        {
+            isWalking = true;
+            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
+            move -= transform.right * speed;
+            if (speed == 0.01f) isRunning = true;
+        }
+        if (Input.GetKey(KeyCode.D) || Input.GetKey("right"))
+        {
+            isWalking = true;
+            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
+            move += transform.right * speed;
+            if (speed == 0.01f) isRunning = true;
         }
 
-        if (Input.GetKey("right"))
-        {
-            transform.Rotate(0, 0.2f, 0);
-            // âEà⁄ìÆíÜÇÕï‡Ç¢ÇƒÇ¢ÇÈÇ©ëñÇ¡ÇƒÇ¢ÇÈÇ©îªíËÇÕä‹ÇﬂÇ∏âÒì]Ç…ÇÃÇ›ÇµÇƒÇ‹Ç∑
-        }
-        if (Input.GetKey("left"))
-        {
-            transform.Rotate(0, -0.2f, 0);
-        }
+        // é¿ç€ÇÃà⁄ìÆ
+        transform.position += move;
 
         animator.SetBool("is_walking", isWalking);
         animator.SetBool("is_running", isRunning);
