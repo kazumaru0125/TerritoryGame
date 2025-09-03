@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0025024414, y: -41}
+  m_AnchoredPosition: {x: -189.0025, y: -172}
   m_SizeDelta: {x: 338.2767, y: 35.9107}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5315135505406181948
@@ -96,7 +96,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 2890745528294394327}
   - component: {fileID: 8019529574974956586}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RoomNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
