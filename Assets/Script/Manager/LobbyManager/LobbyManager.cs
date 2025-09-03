@@ -402,60 +402,84 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
-        ClearRoomListView();
-
-        if (cachedRoomList == null)
-            {
-            cachedRoomList = new Dictionary<string, RoomInfo>();
-            }
+        // 1. 既存の表示をクリア
         if (roomListGameObjects == null)
-            {
             roomListGameObjects = new Dictionary<string, GameObject>();
+
+        foreach (var roomGO in roomListGameObjects.Values)
+            {
+            Destroy(roomGO);
+            }
+        roomListGameObjects.Clear();
+
+        if (roomListParentGameObject == null)
+            {
+            Debug.LogError("roomListParentGameObject が設定されていません！");
+            return;
             }
 
+        // RoomListParent を必ず表示状態にする
+        if (roomListParentGameObject != null && !roomListParentGameObject.activeSelf) { roomListParentGameObject.SetActive(true); }
+
+        // 2. RoomList を反映
         foreach (RoomInfo room in roomList)
             {
-            Debug.Log("Room: " + room.Name);
-
             if (!room.IsOpen || !room.IsVisible || room.RemovedFromList)
+                continue;
+
+            // Prefab を Content の子として生成
+            GameObject roomGO = Instantiate(roomListEntryPrefab, roomListParentGameObject.transform, false);
+
+            RectTransform rt = roomGO.GetComponent<RectTransform>();
+            rt.anchoredPosition = Vector2.zero;
+            rt.localScale = Vector3.one;
+
+            // --- 部屋名の反映 (Text / TMP_Text 両対応) ---
+            var nameObj = roomGO.transform.Find("RoomNameText");
+            if (nameObj != null)
                 {
-                if (cachedRoomList.ContainsKey(room.Name))
-                    {
-                    cachedRoomList.Remove(room.Name);
-                    }
+                var uiText = nameObj.GetComponent<Text>();
+                var tmpText = nameObj.GetComponent<TMP_Text>();
+
+                if (uiText != null) uiText.text = room.Name;
+                else if (tmpText != null) tmpText.text = room.Name;
+                else Debug.LogWarning("RoomNameText に Text または TMP_Text がありません！");
                 }
             else
                 {
-                cachedRoomList[room.Name] = room;
+                Debug.LogWarning("RoomNameText がプレハブに見つかりません！");
                 }
-            }
 
-        foreach (RoomInfo room in cachedRoomList.Values)
-            {
-            if (roomListEntryPrefab == null || roomListParentGameObject == null)
+            // --- プレイヤー数の反映 (Text / TMP_Text 両対応) ---
+            var playersObj = roomGO.transform.Find("RoomPlayersText");
+            if (playersObj != null)
                 {
-                Debug.LogError("roomListEntryPrefab または roomListParentGameObject が設定されていません！");
-                return;
+                var uiText = playersObj.GetComponent<Text>();
+                var tmpText = playersObj.GetComponent<TMP_Text>();
+
+                string playersInfo = room.PlayerCount + " / " + room.MaxPlayers;
+
+                if (uiText != null) uiText.text = playersInfo;
+                else if (tmpText != null) tmpText.text = playersInfo;
+                else Debug.LogWarning("RoomPlayersText に Text または TMP_Text がありません！");
                 }
 
-            GameObject roomListEntryGameObject = Instantiate(roomListEntryPrefab, roomListParentGameObject.transform);
-            roomListEntryGameObject.transform.localScale = Vector3.one;
-
-            var nameText = roomListEntryGameObject.transform.Find("RoomNameText");
-            if (nameText != null)
-                nameText.GetComponent<Text>().text = room.Name;
-
-            var playersText = roomListEntryGameObject.transform.Find("RoomPlayersText");
-            if (playersText != null)
-                playersText.GetComponent<Text>().text = room.PlayerCount + " / " + room.MaxPlayers;
-
-            var joinButton = roomListEntryGameObject.transform.Find("JoinRoomButton");
+            // --- Join ボタン ---
+            var joinButton = roomGO.transform.Find("JoinRoomButton")?.GetComponent<Button>();
             if (joinButton != null)
-                joinButton.GetComponent<Button>().onClick.AddListener(() => OnJoinRoomButtonClicked(room.Name));
+                {
+                joinButton.onClick.AddListener(() =>
+                {
+                    if (PhotonNetwork.InLobby) PhotonNetwork.LeaveLobby();
+                    PhotonNetwork.JoinRoom(room.Name);
+                });
+                }
 
-            roomListGameObjects[room.Name] = roomListEntryGameObject;
+            // Dictionary に登録
+            roomListGameObjects.Add(room.Name, roomGO);
             }
         }
+
 
 
     public override void OnLeftLobby()
