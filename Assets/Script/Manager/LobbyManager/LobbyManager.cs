@@ -399,6 +399,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //        }
     //    }
 
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
         ClearRoomListView();
