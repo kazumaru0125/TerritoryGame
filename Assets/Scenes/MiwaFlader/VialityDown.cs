@@ -8,51 +8,42 @@ public class DecreaseTMPNumber : MonoBehaviour
     // 数字を表示するTextMeshProの参照
     [SerializeField] private TMP_Text Enemyvitality;
 
-    // 減らす量（例：1ずつ減らす）
-    [SerializeField] private int decreaseValue = 1;
+    // 増減する量（例：1ずつ増減する）
+    [SerializeField] private int changeValue = 1;
+
+    // 数値の上限（任意で設定可能）
+    [SerializeField] private int maxValue = 100;
 
     void Update()
     {
-        // Spaceキーが押されたら処理
+        // Spaceキーが押されたら数値を減らす
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // 現在のテキストを数値に変換
             if (int.TryParse(Enemyvitality.text, out int number))
             {
                 // 数値を減らす（0未満にならないよう制限）
-                number = Mathf.Max(0, number - decreaseValue);
-
-                // テキストに反映
+                number = Mathf.Max(0, number - changeValue);
                 Enemyvitality.text = number.ToString();
-            
             }
             else
             {
                 Debug.LogWarning("TextMeshProに数字が入っていません！");
             }
         }
+
+        // Zキーが押されたら数値を増やす
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            // 現在のテキストを数値に変換
             if (int.TryParse(Enemyvitality.text, out int number))
             {
-                // 数値を減らす（0未満にならないよう制限）
-                number = Mathf.Max(0, number + decreaseValue);
-
-                // テキストに反映
+                // 数値を増やす（上限を超えないよう制限）
+                number = Mathf.Min(maxValue, number + changeValue);
                 Enemyvitality.text = number.ToString();
-
             }
             else
             {
                 Debug.LogWarning("TextMeshProに数字が入っていません！");
             }
         }
-
-
-
-
-
-
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public struct ObjectEntry
 {
-    public ;
+    //public ;
     public Vector3 position;
     public Vector3 eulerAngles;
     public Vector3 scale;
