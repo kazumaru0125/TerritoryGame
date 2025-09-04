@@ -31,5 +31,28 @@ public class DecreaseTMPNumber : MonoBehaviour
                 Debug.LogWarning("TextMeshProに数字が入っていません！");
             }
         }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            // 現在のテキストを数値に変換
+            if (int.TryParse(Enemyvitality.text, out int number))
+            {
+                // 数値を減らす（0未満にならないよう制限）
+                number = Mathf.Max(0, number + decreaseValue);
+
+                // テキストに反映
+                Enemyvitality.text = number.ToString();
+
+            }
+            else
+            {
+                Debug.LogWarning("TextMeshProに数字が入っていません！");
+            }
+        }
+
+
+
+
+
+
     }
 }
