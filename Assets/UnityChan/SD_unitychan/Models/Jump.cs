@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Jump : MonoBehaviour
 {
     float jumpForce = 5;
@@ -9,19 +8,20 @@ public class Jump : MonoBehaviour
     Animator anim; //Unityちゃんのジャンプ設定するためのAnimator
     float jumpWaitTimer; //ジャンプ待機時間
     bool isGrounded;  // 地面にいるか
-
     // Start is called before the first frame update
     void Start()
     {
         //UntiyちゃんのAnimatorを取得する。
         anim = GetComponent<Animator>();
     }
-
     // Update is called once per frame
     void Update()
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+<<<<<<< HEAD
 
+=======
+>>>>>>> Character
         if (Input.GetKeyDown("space") && isGrounded && !isJumpWait)
         {
             anim.Play("Jump", 0, 0);
