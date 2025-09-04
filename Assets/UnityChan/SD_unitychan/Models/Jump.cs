@@ -18,10 +18,6 @@ public class Jump : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
-<<<<<<< HEAD
-
-=======
->>>>>>> Character
         if (Input.GetKeyDown("space") && isGrounded && !isJumpWait)
         {
             anim.Play("Jump", 0, 0);
@@ -38,5 +34,4 @@ public class Jump : MonoBehaviour
             }
         }
     }
-
 }
