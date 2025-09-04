@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StaminaGauge : MonoBehaviour
 {
-    [SerializeField] private float maxStamina = 100f;   // Å‘åƒXƒ^ƒ~ƒi
-    private float currentStamina;                       // Œ»İ‚ÌƒXƒ^ƒ~ƒi
+    [SerializeField] private float maxStamina = 100f;   // æœ€å¤§ã‚¹ã‚¿ãƒŸãƒŠ
+    private float currentStamina;                       // ç¾åœ¨ã®ã‚¹ã‚¿ãƒŸãƒŠ
 
-    [SerializeField] private float decreaseAmount = 10f; // Á”ï—Ê
-    [SerializeField] private float recoverySpeed = 20f;   // ‰ñ•œ‘¬“x
+    [SerializeField] private float decreaseAmount = 10f; // æ¶ˆè²»é‡
+    [SerializeField] private float recoverySpeed = 20f;   // å›å¾©é€Ÿåº¦
 
-    [SerializeField] private Slider staminaSlider;       // ƒXƒ‰ƒCƒ_[UI
-    [SerializeField] private Image fillImage;            // ƒXƒ‰ƒCƒ_[‚ÌFill•”•ª
+    [SerializeField] private Slider staminaSlider;       // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼UI
+    [SerializeField] private Image fillImage;            // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®Filléƒ¨åˆ†
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class StaminaGauge : MonoBehaviour
 
     void Update()
     {
-        // Space‚ğ‰Ÿ‚µ‚½‚çƒXƒ^ƒ~ƒiÁ”ï
+        // Spaceã‚’æŠ¼ã—ãŸã‚‰ã‚¹ã‚¿ãƒŸãƒŠæ¶ˆè²»
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentStamina -= decreaseAmount;
@@ -31,7 +31,7 @@ public class StaminaGauge : MonoBehaviour
                 currentStamina = 0f;
         }
 
-        // ©‘R‰ñ•œ
+        // è‡ªç„¶å›å¾©
         if (currentStamina < maxStamina)
         {
             currentStamina += recoverySpeed * Time.deltaTime;
@@ -39,10 +39,10 @@ public class StaminaGauge : MonoBehaviour
                 currentStamina = maxStamina;
         }
 
-        // ƒXƒ‰ƒCƒ_[‚É”½‰f
+        // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã«åæ˜ 
         staminaSlider.value = currentStamina;
 
-        // ƒXƒ^ƒ~ƒi—Ê‚É‰‚¶‚ÄF‚ğ•ÏXi100%¨—ÎA50%¨‰©FA0%¨Ôj
+        // ã‚¹ã‚¿ãƒŸãƒŠé‡ã«å¿œã˜ã¦è‰²ã‚’å¤‰æ›´ï¼ˆ100%â†’ç·‘ã€50%â†’é»„è‰²ã€0%â†’èµ¤ï¼‰
         float ratio = currentStamina / maxStamina;
         fillImage.color = Color.Lerp(Color.red, Color.green, ratio);
     }
