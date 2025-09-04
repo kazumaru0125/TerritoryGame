@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StaminaGauge : MonoBehaviour
 {
+<<<<<<< HEAD
     [SerializeField] private float maxStamina = 100f;   // ÊúÄÂ§ß„Çπ„Çø„Éü„Éä
     private float currentStamina;                       // ÁèæÂú®„ÅÆ„Çπ„Çø„Éü„Éä
 
@@ -13,31 +14,76 @@ public class StaminaGauge : MonoBehaviour
 
     [SerializeField] private Slider staminaSlider;       // „Çπ„É©„Ç§„ÉÄ„ÉºUI
     [SerializeField] private Image fillImage;            // „Çπ„É©„Ç§„ÉÄ„Éº„ÅÆFillÈÉ®ÂàÜ
+=======
+    [SerializeField] private Slider staminaSlider;   // ÉXÉ^É~ÉiÉQÅ[ÉWÇÃÉXÉâÉCÉ_Å[
+    [SerializeField] private float maxStamina = 5f;  // ç≈ëÂÉXÉ^É~Éi
+    [SerializeField] private float decreaseRate = 1f; // 1ïbÇ†ÇΩÇËÇÃè¡îÔó 
+    [SerializeField] private float recoverRate = 1f;  // 1ïbÇ†ÇΩÇËÇÃâÒïúó 
+    [SerializeField] private Image fillImage;         // ÉXÉâÉCÉ_Å[ÇÃFillïîï™ÇÃImage
+
+    private float stamina;              // é¿ç€ÇÃÉXÉ^É~Éiíl
+    private float currentVelocity = 0f; // SmoothDampóp
+    [SerializeField] private float smoothTime = 0.2f; // ääÇÁÇ©Ç…í«è]Ç∑ÇÈéûä‘
+>>>>>>> UI
 
     void Start()
     {
-        currentStamina = maxStamina;
+        // èâä˙âª
+        stamina = maxStamina;
         staminaSlider.maxValue = maxStamina;
-        staminaSlider.value = currentStamina;
+        staminaSlider.value = maxStamina;
+        UpdateGaugeColor();
     }
 
     void Update()
     {
+<<<<<<< HEAD
         // Space„ÇíÊäº„Åó„Åü„Çâ„Çπ„Çø„Éü„ÉäÊ∂àË≤ª
         if (Input.GetKeyDown(KeyCode.Space))
+=======
+        // ÉXÉyÅ[ÉXÉLÅ[ÇâüÇµë±ÇØÇƒÇ¢ÇÈä‘ÅAÉXÉ^É~ÉiÇè¡îÔ
+        if (Input.GetKey(KeyCode.A) && stamina > 0)
+>>>>>>> UI
         {
-            currentStamina -= decreaseAmount;
-            if (currentStamina < 0f)
-                currentStamina = 0f;
+            stamina -= decreaseRate * Time.deltaTime;
+            stamina = Mathf.Max(0, stamina); // 0ñ¢ñûÇ…Ç»ÇÁÇ»Ç¢ÇÊÇ§Ç…êßå¿
+        }
+        // ÉXÉyÅ[ÉXÇâüÇµÇƒÇ¢Ç»Ç¢éûÇÕé©ìÆâÒïú
+        else if (stamina < maxStamina)
+        {
+            stamina += recoverRate * Time.deltaTime;
+            stamina = Mathf.Min(maxStamina, stamina); // ç≈ëÂílÇí¥Ç¶Ç»Ç¢ÇÊÇ§êßå¿
         }
 
+<<<<<<< HEAD
         // Ëá™ÁÑ∂ÂõûÂæ©
         if (currentStamina < maxStamina)
+=======
+        // ÉXÉâÉCÉ_Å[ÇääÇÁÇ©Ç…çXêV
+        float smoothedValue = Mathf.SmoothDamp(staminaSlider.value, stamina, ref currentVelocity, smoothTime);
+        staminaSlider.value = smoothedValue;
+        UpdateGaugeColor();
+    }
+    private void UpdateGaugeColor()
+    {
+        if (fillImage == null) return;
+
+        float ratio = stamina / maxStamina;
+
+        if (ratio > 0.3f) // 30%à»è„ Å® óŒ
+>>>>>>> UI
         {
-            currentStamina += recoverySpeed * Time.deltaTime;
-            if (currentStamina > maxStamina)
-                currentStamina = maxStamina;
+            fillImage.color = Color.green;
         }
+        else if (ratio > 0.1f) // 10%à»è„30%ñ¢ñû Å® â©
+        {
+            fillImage.color = Color.yellow;
+        }
+        else // 10%à»â∫ Å® ê‘
+        {
+            fillImage.color = Color.red;
+        }
+<<<<<<< HEAD
 
         // „Çπ„É©„Ç§„ÉÄ„Éº„Å´ÂèçÊò†
         staminaSlider.value = currentStamina;
@@ -45,5 +91,7 @@ public class StaminaGauge : MonoBehaviour
         // „Çπ„Çø„Éü„ÉäÈáè„Å´Âøú„Åò„Å¶Ëâ≤„ÇíÂ§âÊõ¥Ôºà100%‚ÜíÁ∑ë„ÄÅ50%‚ÜíÈªÑËâ≤„ÄÅ0%‚ÜíËµ§Ôºâ
         float ratio = currentStamina / maxStamina;
         fillImage.color = Color.Lerp(Color.red, Color.green, ratio);
+=======
+>>>>>>> UI
     }
 }
