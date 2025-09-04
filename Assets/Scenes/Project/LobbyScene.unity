@@ -1640,8 +1640,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 386115147}
   m_HandleRect: {fileID: 386115146}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1.0000082
+  m_Size: 0.96867657
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2982,10 +2982,10 @@ RectTransform:
   - {fileID: 2090908979}
   m_Father: {fileID: 794657905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -218, y: -224}
-  m_SizeDelta: {x: 201.12, y: 29.5912}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 130, y: 22}
+  m_SizeDelta: {x: 201.12, y: 29.591202}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161346545
 MonoBehaviour:
@@ -3432,8 +3432,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 541172318}
   m_HandleRect: {fileID: 541172317}
   m_Direction: 0
-  m_Value: 1.0000157
-  m_Size: 0.995799
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3927,10 +3927,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 794657905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 296.29437, y: -208.16142}
-  m_SizeDelta: {x: 563.1313, y: 274.79}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -8.499542, y: -1.7429962}
+  m_SizeDelta: {x: 666.3121, y: 354.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1466243480
 MonoBehaviour:
@@ -4006,10 +4006,10 @@ RectTransform:
   - {fileID: 746433611}
   m_Father: {fileID: 794657905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 305.7616, y: -216.66144}
-  m_SizeDelta: {x: 578.1968, y: 292.0771}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -4.6949005}
+  m_SizeDelta: {x: 696, y: 360.144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1530293186
 MonoBehaviour:
