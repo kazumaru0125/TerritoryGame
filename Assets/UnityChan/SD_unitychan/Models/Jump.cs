@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    float jumpForce = 4;
+    float jumpForce = 5;
     bool isJump, isJumpWait; //ジャンプフラグの設定。Unityちゃんが飛んでいるか否か。
     Animator anim; //Unityちゃんのジャンプ設定するためのAnimator
     float jumpWaitTimer; //ジャンプ待機時間
@@ -20,16 +20,14 @@ public class Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 地面判定（例：Raycastを使用して足元をチェックする）
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
 
-        if (Input.GetKeyUp("space") && isGrounded && !isJumpWait)
+        if (Input.GetKeyDown("space") && isGrounded && !isJumpWait)
         {
             anim.Play("Jump", 0, 0);
             isJumpWait = true;
             jumpWaitTimer = 0.5f;
         }
-
         if (isJumpWait)
         {
             jumpWaitTimer -= Time.deltaTime;
@@ -40,4 +38,5 @@ public class Jump : MonoBehaviour
             }
         }
     }
+
 }
