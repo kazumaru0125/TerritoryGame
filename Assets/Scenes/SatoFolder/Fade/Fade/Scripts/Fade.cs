@@ -10,15 +10,16 @@ public class Fade : MonoBehaviour
         {
         Init();
         // 開始時は真っ暗にする
-        cutoutRange = 0f;
+        cutoutRange = 1f;
         fade.Range = cutoutRange;
         }
 
     void Start()
         {
         // シーン開始時にフェードイン
-        FadeIn(1.0f);
+        FadeOut(1.0f);
         }
+
 
     void Update()
         {
