@@ -1014,7 +1014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 228, y: -112}
+  m_AnchoredPosition: {x: 247, y: -131}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &486338483
@@ -1720,8 +1720,8 @@ RectTransform:
   m_Children:
   - {fileID: 1158305102}
   - {fileID: 748612590}
-  - {fileID: 2047844627}
   - {fileID: 391364903}
+  - {fileID: 2047844627}
   m_Father: {fileID: 303174833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1799,7 +1799,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'GameStert
+
+'
 --- !u!222 &635838906
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3511,10 +3513,10 @@ RectTransform:
   - {fileID: 866880220}
   m_Father: {fileID: 634219909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -189, y: -131}
-  m_SizeDelta: {x: 201.12, y: 29.5912}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 101, y: 34}
+  m_SizeDelta: {x: 201.12, y: 29.591202}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1158305103
 MonoBehaviour:
@@ -5247,12 +5249,12 @@ GameObject:
   - component: {fileID: 2047844626}
   - component: {fileID: 2047844625}
   m_Layer: 5
-  m_Name: PlayerListContent
+  m_Name: playerListContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2047844625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5273,7 +5275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
