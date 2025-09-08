@@ -22,6 +22,8 @@ public class createMap : MonoBehaviour
     [SerializeField]
     private GameObject floor;
 
+    // ägëÂî{ó¶ÇéwíËÅiç°âÒÇÕ5î{Åj
+    private float scale = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -59,33 +61,33 @@ public class createMap : MonoBehaviour
                         switch (testMap[i, j])
                         {
                             case "1":
-                                Instantiate(hiwall, new Vector3(-4.5f + j, 1.0f, 4.5f - i), Quaternion.identity);
+                                Instantiate(hiwall, new Vector3((-4.5f + j) * scale, 5.0f, (4.5f - i) * scale), Quaternion.identity);
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
                             case "2":
-                                Instantiate(nomalwall, new Vector3(-4.5f + j, 0.5f, 4.5f - i), Quaternion.identity);
+                                Instantiate(nomalwall, new Vector3((-4.5f + j) * scale, 2.5f, (4.5f - i) * scale), Quaternion.identity);
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
                             case "3":
-                                Instantiate(lowwall, new Vector3(-4.5f + j, 0.25f, 4.5f - i), Quaternion.Euler(90, 0, 0));
+                                Instantiate(lowwall, new Vector3((-4.5f + j) * scale, 1.25f, (4.5f - i) * scale), Quaternion.Euler(90, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            case "4":
-                                Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                                break;
+                            //case "4":
+                            //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                            //    break;
 
-                            case "0":
-                                Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                                break;
+                            //case "0":
+                            //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                            //    break;
 
-                            case "99":
-                                Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                                break;
+                            //case "99":
+                            //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                            //    break;
                         }
-                        Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                        Instantiate(floor, new Vector3((-4.5f + j) * scale,-2.5f, (4.5f - i) * scale), Quaternion.identity);
                     }
                     //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                 }
