@@ -14,6 +14,6 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     void SpawnPlayer()
         {
         Vector3 pos = new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(-3.0f, 3.0f), 0.0f);
-        PhotonNetwork.Instantiate("akai", pos, Quaternion.identity);
+        PhotonNetwork.Instantiate("unitychan", pos, Quaternion.identity);
         }
     }
