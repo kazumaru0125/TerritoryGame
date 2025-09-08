@@ -26,49 +26,29 @@ public class Walk : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
-        Vector3 move = Vector3.zero;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey("up"))
-        {
-            isWalking = true;
-            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
-            move += forward * speed;
-            if (speed == 0.01f) isRunning = true;
-        }
-        if (Input.GetKey(KeyCode.S) || Input.GetKey("down"))
-        {
-            isWalking = true;
-            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
-            move -= forward * speed;
-            if (speed == 0.01f) isRunning = true;
-        }
-        if (Input.GetKey(KeyCode.A) || Input.GetKey("left"))
-        {
-            isWalking = true;
-            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
-            move -= right * speed;
-            if (speed == 0.01f) isRunning = true;
-        }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey("right"))
-        {
-            isWalking = true;
-            float speed = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 0.01f : 0.005f;
-            move += right * speed;
-            if (speed == 0.01f) isRunning = true;
-        }
+        Vector3 move = forward * z + right * x;
 
-        transform.position += move;
+        // Aボタン押下判定（joystick button 0はXboxのAボタン）
+        bool isDash = Input.GetKey("joystick button 0");
 
-        Vector3 moveDir = new Vector3(move.x, 0, move.z);
-        if (moveDir.magnitude > 0.001f)
+        if (move.magnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            isWalking = true;
+            float speed = isDash ? 0.02f : 0.01f; // ダッシュ時は速度2倍
+            move = move.normalized * speed;
+            transform.position += move;
+
+            Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+
+            if (isDash) isRunning = true;
         }
 
         animator.SetBool("is_walking", isWalking);
         animator.SetBool("is_running", isRunning);
     }
-
 
 }
