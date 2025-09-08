@@ -41,10 +41,14 @@ public class Walk : MonoBehaviour
         // Aボタン押下判定（joystick button 0）
         bool isDash = Input.GetKey("joystick button 0");
 
-        if (move.magnitude > 0.01f)
+        if (move.magnitude > 0.05f)
         {
             isWalking = true;
+<<<<<<< HEAD
             float speed = (isDash || isRun) ? 0.02f : 0.01f; // ダッシュ時は速度2倍
+=======
+            float speed = isDash ? 0.075f : 0.05f; // ダッシュ時は速度2倍
+>>>>>>> NewTest
             move = move.normalized * speed;
             transform.position += move;
             Quaternion targetRotation = Quaternion.LookRotation(move);
