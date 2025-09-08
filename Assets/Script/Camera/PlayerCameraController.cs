@@ -1,39 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-//using UnityEditor.Rendering.LookDev;
 using UnityEngine;
+using Photon.Pun;
 
-
-public class PlayerCameraController : MonoBehaviour
+public class PlayerCameraController : MonoBehaviourPun
     {
-    private ICameraState currentState;
-
-    public Transform target; // 追従対象（プレイヤー）
-    public Vector3 followOffset = new Vector3(0, 2, -5);
-    public float smoothSpeed = 10f;
-
-    private void Start()
+    void Start()
         {
-        // 初期状態を設定（追従カメラ）
-        ChangeState(new FollowCameraState());
-        }
-
-    private void Update()
-        {
-        if (currentState != null)
+        if (photonView.IsMine)
             {
-            currentState.UpdateState(this);
+            // 自分のプレイヤーをカメラに登録
+            Camera.main.GetComponent<PlayerCameraFollow>().SetTarget(transform);
             }
-        }
-
-    public void ChangeState(ICameraState newState)
-        {
-        if (currentState != null)
-            {
-            currentState.ExitState(this);
-            }
-
-        currentState = newState;
-        currentState.EnterState(this);
         }
     }
