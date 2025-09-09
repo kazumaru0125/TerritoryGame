@@ -12,26 +12,30 @@ public class Jump : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        if (anim == null) Debug.LogError("Animatorが見つかりません！");
+        if (GetComponent<Rigidbody>() == null) Debug.LogError("Rigidbodyが見つかりません！");
+    }
+    void FixedUpdate()
+    {
+        // Updateより固定時間での物理判定が安定
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.3f);
     }
 
     void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
-
-        // スペースキーまたはXboxコントローラーのAボタン(joystick button 5)でジャンプ判定
         if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 5")) && isGrounded && !isJumpWait)
         {
-            anim.Play("Jump", 0, 0);
+            if (anim != null) anim.Play("Jump", 0, 0);
             isJumpWait = true;
             jumpWaitTimer = 0.5f;
         }
-
         if (isJumpWait)
         {
             jumpWaitTimer -= Time.deltaTime;
             if (jumpWaitTimer < 0)
             {
-                GetComponent<Rigidbody>().velocity = transform.up * jumpForce;
+                var rb = GetComponent<Rigidbody>();
+                if (rb != null) rb.linearVelocity = transform.up * jumpForce;
                 isJumpWait = false;
             }
         }

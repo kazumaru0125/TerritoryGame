@@ -5,9 +5,9 @@ public class CameraController : MonoBehaviour
     public Transform target;         // 追従するキャラクター
     public float mouseSensitivity = 2.0f;
     public float stickSensitivity = 1.0f;
+    private Vector3 initialRotation;
     private float cameraPitch = 0.0f;
     private float cameraYaw = 0.0f;
-    private Vector3 initialRotation;
 
     void Start()
     {
