@@ -38,7 +38,7 @@ public class Walk : MonoBehaviour
         // トグル切替（LBボタン: joystick button 8）
         if (Input.GetKeyDown("joystick button 8"))
             {
-            isRun = !isRun;
+                isRun = !isRun;
             }
 
         // ダッシュ判定（Aボタン: joystick button 0）
