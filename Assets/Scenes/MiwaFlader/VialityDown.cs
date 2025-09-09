@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;  // TextMeshProを使うときに必要
+using static UnityEngine.Rendering.DebugUI;
 
 public class DecreaseTMPNumber : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class DecreaseTMPNumber : MonoBehaviour
             {
                 // 数値を減らす（0未満にならないよう制限）
                 number = Mathf.Max(0, number - changeValue);
-                Enemyvitality.text = number.ToString();
+                Enemyvitality.text = number.ToString() ;
+
             }
             else
             {
@@ -38,7 +40,7 @@ public class DecreaseTMPNumber : MonoBehaviour
             {
                 // 数値を増やす（上限を超えないよう制限）
                 number = Mathf.Min(maxValue, number + changeValue);
-                Enemyvitality.text = number.ToString();
+                Enemyvitality.text = number.ToString() ;
             }
             else
             {
