@@ -4,7 +4,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     float jumpForce = 5;
-    bool isJumpWait; //ƒWƒƒƒ“ƒv‘Ò‹@ƒtƒ‰ƒO
+    bool isJumpWait; //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Ò‹@ï¿½tï¿½ï¿½ï¿½O
     Animator anim; //Animator
     float jumpWaitTimer;
     bool isGrounded;
@@ -18,7 +18,7 @@ public class Jump : MonoBehaviour
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
 
-        // ƒXƒy[ƒXƒL[‚Ü‚½‚ÍXboxƒRƒ“ƒgƒ[ƒ‰[‚ÌAƒ{ƒ^ƒ“(joystick button 5)‚ÅƒWƒƒƒ“ƒv”»’è
+        // ï¿½Xï¿½yï¿½[ï¿½Xï¿½Lï¿½[ï¿½Ü‚ï¿½ï¿½ï¿½Xboxï¿½Rï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½[ï¿½ï¿½Aï¿½{ï¿½^ï¿½ï¿½(joystick button 5)ï¿½ÅƒWï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½
         if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 5")) && isGrounded && !isJumpWait)
         {
             anim.Play("Jump", 0, 0);
@@ -31,7 +31,7 @@ public class Jump : MonoBehaviour
             jumpWaitTimer -= Time.deltaTime;
             if (jumpWaitTimer < 0)
             {
-                GetComponent<Rigidbody>().velocity = transform.up * jumpForce;
+                GetComponent<Rigidbody>().linearVelocity = transform.up * jumpForce;
                 isJumpWait = false;
             }
         }
