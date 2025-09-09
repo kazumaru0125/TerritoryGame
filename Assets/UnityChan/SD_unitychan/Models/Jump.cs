@@ -4,7 +4,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     float jumpForce = 5;
-    bool isJumpWait; //�W�����v�ҋ@�t���O
+    bool isJumpWait;
     Animator anim; //Animator
     float jumpWaitTimer;
     bool isGrounded;
@@ -23,12 +23,6 @@ public class Jump : MonoBehaviour
 
     void Update()
     {
-<<<<<<< HEAD
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
-
-        // �X�y�[�X�L�[�܂���Xbox�R���g���[���[��A�{�^��(joystick button 5)�ŃW�����v����
-=======
->>>>>>> Character
         if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 5")) && isGrounded && !isJumpWait)
         {
             if (anim != null) anim.Play("Jump", 0, 0);
@@ -40,12 +34,8 @@ public class Jump : MonoBehaviour
             jumpWaitTimer -= Time.deltaTime;
             if (jumpWaitTimer < 0)
             {
-<<<<<<< HEAD
-                GetComponent<Rigidbody>().linearVelocity = transform.up * jumpForce;
-=======
                 var rb = GetComponent<Rigidbody>();
                 if (rb != null) rb.linearVelocity = transform.up * jumpForce;
->>>>>>> Character
                 isJumpWait = false;
             }
         }
