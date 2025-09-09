@@ -2634,7 +2634,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5781632681493303041}
   - component: {fileID: 5781632681500762601}
-  - component: {fileID: 2690038085152537541}
   - component: {fileID: 2045131322530834841}
   - component: {fileID: 3194315250033605975}
   - component: {fileID: 4696421125782473938}
@@ -2643,6 +2642,7 @@ GameObject:
   - component: {fileID: 2780743690659803650}
   - component: {fileID: 2644153454451094390}
   - component: {fileID: -8991113474305585966}
+  - component: {fileID: 8363599808599498051}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: Untagged
@@ -2689,18 +2689,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2690038085152537541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5781632681493467937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd7c143af6a4e14e99279c304ddd83c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2045131322530834841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2849,6 +2837,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &8363599808599498051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781632681493467937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a54ea49c8ed074e9995005b29c58ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5781632681493467945
 GameObject:
   m_ObjectHideFlags: 0
