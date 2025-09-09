@@ -7,8 +7,8 @@ public class PlayerCameraController : MonoBehaviourPun
         {
         if (photonView.IsMine)
             {
-            // 自分のプレイヤーをカメラに登録
-            Camera.main.GetComponent<PlayerCameraFollow>().SetTarget(transform);
+                // 自分のプレイヤーをカメラに登録
+                Camera.main.GetComponent<PlayerCameraFollow>().SetTarget(transform);
             }
         }
     }
