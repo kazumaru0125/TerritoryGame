@@ -8,6 +8,9 @@ public class CharacterMovePhysics : MonoBehaviour
     private Rigidbody rb;
     private Vector3 moveInput;
 
+    private Renderer objRenderer;
+    private Color originalColor;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,10 +37,18 @@ public class CharacterMovePhysics : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))  // áŠQ•¨‚É‚Í"Obstacle"ƒ^ƒO‚ğİ’è
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
             currentSpeed = slowSpeed;
-            Debug.Log("áŠQ•¨‚ÉÚG‚µ‚½‚½‚ß‘¬“x‚ğŒ¸‘¬");
+            Debug.Log("áŠQ•¨‚ÉÚG‚µ‚½‚Ì‚Å‘¬“x‚ğŒ¸‘¬");
+        }
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            currentSpeed = slowSpeed;
         }
     }
 
@@ -49,4 +60,5 @@ public class CharacterMovePhysics : MonoBehaviour
             Debug.Log("áŠQ•¨‚©‚ç—£‚ê‚½‚Ì‚Å‘¬“x‚ğ–ß‚·");
         }
     }
+
 }
