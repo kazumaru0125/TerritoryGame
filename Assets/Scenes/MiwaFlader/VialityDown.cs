@@ -1,51 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;  // TextMeshProを使うときに必要
-using static UnityEngine.Rendering.DebugUI;
+using TMPro;
+using Photon.Pun; // PUN2必須
 
-public class DecreaseTMPNumber : MonoBehaviour
-{
-    // 数字を表示するTextMeshProの参照
-    [SerializeField] private TMP_Text Enemyvitality;
+public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
+    {
+    [SerializeField] private TMP_Text ATeamVitality;
+    [SerializeField] private TMP_Text BTeamVitality;
 
-    // 増減する量（例：1ずつ増減する）
     [SerializeField] private int changeValue = 1;
-
-    // 数値の上限（任意で設定可能）
     [SerializeField] private int maxValue = 100;
 
-    void Update()
-    {
-        // Spaceキーが押されたら数値を減らす
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (int.TryParse(Enemyvitality.text, out int number))
-            {
-                // 数値を減らす（0未満にならないよう制限）
-                number = Mathf.Max(0, number - changeValue);
-                Enemyvitality.text = number.ToString() ;
+    private int ATeamcurrentValue = 0;
+    private int BTeamcurrentValue = 0;
 
-            }
-            else
+    void Start()
+        {
+        ATeamcurrentValue = 0;
+        BTeamcurrentValue = 0;
+        UpdateUI();
+        }
+
+    void Update()
+        {
+        if (!photonView.IsMine) return; // 自分のオブジェクトでないなら入力は無視
+
+        if (Input.GetKeyDown(KeyCode.Q))
             {
-                Debug.LogWarning("TextMeshProに数字が入っていません！");
+            ATeamcurrentValue = Mathf.Max(0, ATeamcurrentValue - changeValue);
+            UpdateUI();
+            }
+
+        if (Input.GetKeyDown(KeyCode.E))
+            {
+            BTeamcurrentValue = Mathf.Max(0, BTeamcurrentValue - changeValue);
+            UpdateUI();
+            }
+
+        if (Input.GetKeyDown(KeyCode.W))
+            {
+            ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + changeValue);
+            UpdateUI();
+            }
+
+        if (Input.GetKeyDown(KeyCode.R))
+            {
+            BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + changeValue);
+            UpdateUI();
             }
         }
 
-        // Zキーが押されたら数値を増やす
-        if (Input.GetKeyDown(KeyCode.Z))
+    void UpdateUI()
         {
-            if (int.TryParse(Enemyvitality.text, out int number))
+        ATeamVitality.text = ATeamcurrentValue.ToString();
+        BTeamVitality.text = BTeamcurrentValue.ToString();
+        }
+
+    // --- PUNの同期処理 ---
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+        if (stream.IsWriting) // 自分の値を送信
             {
-                // 数値を増やす（上限を超えないよう制限）
-                number = Mathf.Min(maxValue, number + changeValue);
-                Enemyvitality.text = number.ToString() ;
+            stream.SendNext(ATeamcurrentValue);
+            stream.SendNext(BTeamcurrentValue);
             }
-            else
+        else // 受信
             {
-                Debug.LogWarning("TextMeshProに数字が入っていません！");
+            ATeamcurrentValue = (int)stream.ReceiveNext();
+            BTeamcurrentValue = (int)stream.ReceiveNext();
+            UpdateUI();
             }
         }
     }
-}
