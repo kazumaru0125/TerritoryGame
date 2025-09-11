@@ -27,7 +27,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
         {
         Vector3 pos = new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(-3.0f, 3.0f), 0.0f);
-       // GameObject player = PhotonNetwork.Instantiate("akai", pos, Quaternion.identity);
-        GameObject player = PhotonNetwork.Instantiate("unitychan", pos, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate("akai", pos, Quaternion.identity);
+       // GameObject player = PhotonNetwork.Instantiate("unitychan", pos, Quaternion.identity);
         }
     }
