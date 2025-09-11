@@ -781,6 +781,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4535796427919657302, guid: d5bbb3b46b9511243908cd8b0648c94c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535796427919657302, guid: d5bbb3b46b9511243908cd8b0648c94c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535796427919657302, guid: d5bbb3b46b9511243908cd8b0648c94c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535796427919657302, guid: d5bbb3b46b9511243908cd8b0648c94c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
     - target: {fileID: 6202360796399374265, guid: d5bbb3b46b9511243908cd8b0648c94c, type: 3}
       propertyPath: m_Name
       value: BTeam
@@ -1504,6 +1520,22 @@ PrefabInstance:
     - target: {fileID: 6389964819449204795, guid: 706734f9410c31344b658f764e381ddd, type: 3}
       propertyPath: m_Name
       value: ATeam
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889156787376353578, guid: 706734f9410c31344b658f764e381ddd, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889156787376353578, guid: 706734f9410c31344b658f764e381ddd, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.20103836
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889156787376353578, guid: 706734f9410c31344b658f764e381ddd, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889156787376353578, guid: 706734f9410c31344b658f764e381ddd, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294914816
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

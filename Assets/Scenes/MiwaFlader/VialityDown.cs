@@ -53,8 +53,8 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
     void UpdateUI()
         {
-        ATeamVitality.text = ATeamcurrentValue.ToString();
-        BTeamVitality.text = BTeamcurrentValue.ToString();
+        ATeamVitality.text = ATeamcurrentValue.ToString()+"%";
+        BTeamVitality.text = BTeamcurrentValue.ToString()+"%";
         }
 
     // --- PUN‚Ì“¯Šúˆ— ---
