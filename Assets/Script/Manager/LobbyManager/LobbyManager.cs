@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using ExitGames.Client.Photon; 
 using Photon.Realtime;
 using TMPro;
 
@@ -37,8 +38,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject roomListEntryPrefab;
     public GameObject roomListParentGameObject;
 
-    [Header("Join Random Room UI Panel")]
-    public GameObject JoinRandomRoom_UI_Panel;
+    [Header("Team UI")]
+    public GameObject Team_UI_Panel;
+    public TMP_Text teamAListText;
+    public TMP_Text teamBListText;
+    //public Button resetButton; // ResetÉ{É^Éì
+
+    private const int MaxPerTeam = 2;
+
+
 
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListGameObjects;
@@ -129,17 +137,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
         }
 
-    public void OnJoinRandomRoomButtonClicked()
+    public void OnTeamButtonClicked()
         {
-        ActivatePanel(JoinRandomRoom_UI_Panel.name);
-        PhotonNetwork.JoinRandomRoom();
+        ActivatePanel(Team_UI_Panel.name);
+        //PhotonNetwork.JoinRandomRoom();
         }
 
     public void OnStartGameButtonClicked()
         {
         if (PhotonNetwork.IsMasterClient)
             {
-             PhotonNetwork.LoadLevel("TGameScene");
+            PhotonNetwork.LoadLevel("TGameScene");
             //PhotonNetwork.LoadLevel("SampleScene");
             }
         }
@@ -248,7 +256,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // --- Player List çÏê¨ ---
         foreach (Player player in PhotonNetwork.PlayerList)
             {
-            GameObject playerListGameObject = Instantiate(playerListPrefab);
+            //GameObject playerListGameObject = Instantiate(playerListPrefab);
+            GameObject playerListGameObject = Instantiate(playerListPrefab, playerListContent.transform, false);
+
             playerListGameObject.transform.SetParent(playerListContent.transform, false);
             playerListGameObject.transform.localScale = Vector3.one;
 
@@ -298,7 +308,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
                             "Players/Max.players:" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
 
-        GameObject playerListGameObject = Instantiate(playerListPrefab);
+        // GameObject playerListGameObject = Instantiate(playerListPrefab);
+        GameObject playerListGameObject = Instantiate(playerListPrefab, playerListContent.transform, false);
+
         playerListGameObject.transform.SetParent(playerListContent.transform, false);
         playerListGameObject.transform.localScale = Vector3.one;
 
@@ -537,9 +549,81 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         CreateRoom_UI_Panel.SetActive(panelToBeActivated.Equals(CreateRoom_UI_Panel.name));
         InsideRoom_UI_Panel.SetActive(panelToBeActivated.Equals(InsideRoom_UI_Panel.name));
         RoomList_UI_Panel.SetActive(panelToBeActivated.Equals(RoomList_UI_Panel.name));
-        JoinRandomRoom_UI_Panel.SetActive(panelToBeActivated.Equals(JoinRandomRoom_UI_Panel.name));
+        Team_UI_Panel.SetActive(panelToBeActivated.Equals(Team_UI_Panel.name));
         }
     #endregion
+
+    public void OnTeamAButtonClicked()
+        {
+        if (CountPlayersInTeam("A") >= MaxPerTeam)
+            {
+            Debug.Log("Team A is full!");
+            return;
+            }
+
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
+        props["Team"] = "A";
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        }
+
+    public void OnTeamBButtonClicked()
+        {
+        if (CountPlayersInTeam("B") >= MaxPerTeam)
+            {
+            Debug.Log("Team B is full!");
+            return;
+            }
+
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
+        props["Team"] = "B";
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        }
+
+    private int CountPlayersInTeam(string team)
+        {
+        int count = 0;
+        foreach (Player p in PhotonNetwork.PlayerList)
+            {
+            if (p.CustomProperties.ContainsKey("Team") && (string)p.CustomProperties["Team"] == team)
+                {
+                count++;
+                }
+            }
+        return count;
+        }
+
+    private void UpdateTeamUI()
+        {
+        List<string> teamA = new List<string>();
+        List<string> teamB = new List<string>();
+
+        foreach (Player p in PhotonNetwork.PlayerList)
+            {
+            if (p.CustomProperties.ContainsKey("Team"))
+                {
+                string team = (string)p.CustomProperties["Team"];
+                if (team == "A") teamA.Add(p.NickName);
+                else if (team == "B") teamB.Add(p.NickName);
+                }
+            }
+
+        teamAListText.text = "Team A:\n" + string.Join("\n", teamA);
+        teamBListText.text = "Team B:\n" + string.Join("\n", teamB);
+        }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+        {
+        if (changedProps.ContainsKey("Team"))
+            {
+            UpdateTeamUI();
+            }
+        }
+
+    //public override void OnJoinedRoom()
+    //    {
+    //    base.OnJoinedRoom();
+    //    UpdateTeamUI(); // èâä˙ï\é¶
+    //    }
 
 
     }
