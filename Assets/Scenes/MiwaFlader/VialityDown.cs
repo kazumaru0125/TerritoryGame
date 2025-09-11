@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Photon.Pun; // PUN2ïKê{
+using Photon.Pun; 
 
 public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     {
@@ -56,6 +56,15 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         ATeamVitality.text = ATeamcurrentValue.ToString()+"%";
         BTeamVitality.text = BTeamcurrentValue.ToString()+"%";
         }
+
+    public void AddATeamVitality(int value)
+        {
+        if (!photonView.IsMine) return;
+
+        ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + value);
+        UpdateUI();
+        }
+
 
     // --- PUNÇÃìØä˙èàóù ---
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
