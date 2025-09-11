@@ -18,6 +18,11 @@ public class Walk : MonoBehaviourPun
         animator = GetComponent<Animator>();
     }
 
+    public void OnCallChangeFace()
+    {
+        // 何も処理しなくてOK
+    }
+
     void Update()
     {
         // 【重要】自分のプレイヤー以外は処理しない（Photon同期の基本）
