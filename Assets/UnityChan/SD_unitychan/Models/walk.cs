@@ -1,52 +1,88 @@
 using UnityEngine;
-using System.Collections;
+using Photon.Pun;
 
-public class Walk : MonoBehaviour
+public class Walk : MonoBehaviourPun
 {
+    // 【Animatorコントローラー（キャラのアニメーション制御用）】
     private Animator animator;
+    // 【走りトグル用：一度押すと切り替わる変数】
     private bool isRun = false;
-    private Rigidbody rb;
-    public float speed = 5f; // 移動速度
-    private Vector3 latestMove = Vector3.zero;
+    // 【通常歩き速度】
+    [SerializeField] float walkSpeed = 3.0f;
+    // 【走り（ダッシュ）速度】
+    [SerializeField] float runSpeed = 6.0f;
 
     void Start()
     {
+        // Animator取得（キャラにAnimatorコンポーネント必須）
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
+        // 【重要】自分のプレイヤー以外は処理しない（Photon同期の基本）
+        if (!photonView.IsMine)
+            return;
+
+        // アニメーション状態フラグ
+        // 歩き中か
+        bool isWalking = false;
+        // 走り中か
+        bool isRunning = false;
+
+        // カメラ基準の移動ベクトル計算
+        // カメラ前方向
         Vector3 forward = Camera.main.transform.forward;
+        // カメラ右方向
         Vector3 right = Camera.main.transform.right;
         forward.y = 0;
         right.y = 0;
         forward.Normalize();
         right.Normalize();
 
+
+        // 入力を取得（WASDやコントローラーのスティック、InputManagerで設定）
+        // 横（A/D, ←/→）
         float x = Input.GetAxis("Horizontal");
+        // 縦（W/S, ↑/↓）
         float z = Input.GetAxis("Vertical");
 
+        // 入力から移動方向ベクトルを生成（カメラ向き考慮）
         Vector3 move = forward * z + right * x;
-        Vector3 moveDir = Vector3.zero;
 
+        // 走り「トグル」処理：LeftShiftまたはLB（ボタン8）でON/OFF切り替え
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown("joystick button 8"))
+        {
+            isRun = !isRun;
+        }
+
+        // 一時的なダッシュ：SpaceまたはAボタン（ボタン0）を押している間
+        bool isDash = Input.GetKey(KeyCode.Space) || Input.GetKey("joystick button 0");
+
+        // 実際の速度：ダッシュorトグル走りならrunSpeed、そうでなければwalkSpeed
+        float speed = (isDash || isRun) ? runSpeed : walkSpeed;
+
+        // 入力があれば移動・回転処理
         if (move.magnitude > 0.05f)
         {
-            moveDir = move.normalized * speed;  // 速度一定のため正規化
-            // ここに回転処理も入れてもOKです
-            Quaternion targetRotation = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+            isWalking = true;
+            if (isDash || isRun)
+                isRunning = true;
+
+            // 方向を正規化し、速度×フレーム時間で移動量を算出
+            Vector3 moveDir = move.normalized * speed * Time.deltaTime;
+            // 位置を直接加算で移動
+            transform.position += moveDir;
+
+            // キャラクターを移動方向にスムーズに向ける
+            Quaternion targetRot = Quaternion.LookRotation(move);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
         }
 
-        latestMove = moveDir;
-    }
-
-    void FixedUpdate()
-    {
-        if (latestMove.magnitude > 0)
-        {
-            Vector3 newPos = rb.position + latestMove * Time.fixedDeltaTime;
-            rb.MovePosition(newPos);
-        }
+        // アニメーション用パラメータをAnimatorに反映
+        // 歩きモーションON/OFF
+        animator.SetBool("is_walking", isWalking);
+        // 走りモーションON/OFF
+        animator.SetBool("is_running", isRunning);
     }
 }
