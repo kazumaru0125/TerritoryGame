@@ -5,24 +5,40 @@ public class CharacterMovePhysics : MonoBehaviour
     public float normalSpeed = 5f;        // 通常速度
     public float slowSpeed = 2f;          // 障害物接触時の減速速度
     private float currentSpeed;
+    private bool isSlowing = false;       // 障害物に接触中かどうか
     private Rigidbody rb;
     private Vector3 moveInput;
 
-    private Renderer objRenderer;
-    private Color originalColor;
+    private bool canDash = true;          // ダッシュ許可フラグ
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentSpeed = normalSpeed;
+        canDash = true;
     }
+
+    public bool CanDash { get { return canDash; } }
 
     void Update()
     {
-        // 入力受け取り（例）
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         moveInput = new Vector3(x, 0, z).normalized;
+
+        // ここでダッシュ禁止の条件をつける例
+        if (Input.GetKey(KeyCode.LeftShift) && canDash)
+        {
+            currentSpeed = normalSpeed * 2f; // ダッシュ時速度（例）
+        }
+        else if (isSlowing)
+        {
+            currentSpeed = slowSpeed;
+        }
+        else
+        {
+            currentSpeed = normalSpeed;
+        }
     }
 
     void FixedUpdate()
@@ -35,20 +51,12 @@ public class CharacterMovePhysics : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            currentSpeed = slowSpeed;
-            Debug.Log("障害物に接触したので速度を減速");
-        }
-    }
-
     void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            currentSpeed = slowSpeed;
+            isSlowing = true;
+            canDash = false;  // 障害物に接触中はダッシュ不可
         }
     }
 
@@ -56,9 +64,8 @@ public class CharacterMovePhysics : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            currentSpeed = normalSpeed;
-            Debug.Log("障害物から離れたので速度を戻す");
+            isSlowing = false;
+            canDash = true;   // 障害物から離れたらダッシュ許可
         }
     }
-
 }
