@@ -1,22 +1,36 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class GetVitalityScriput : MonoBehaviour
+public class GetVitalityScriput : MonoBehaviourPun
     {
-    public int Vitality;
+    public int Vitality = 1;
 
     private void OnCollisionEnter(Collision collision)
         {
+        if (!photonView.IsMine) return; // 自分のキャラだけが処理
+
         if (collision.gameObject.CompareTag("vitality"))
             {
-            // シーン内の DecreaseTMPNumber を探して Aチームゲージに加算
-            DecreaseTMPNumber manager = FindObjectOfType<DecreaseTMPNumber>();
-            if (manager != null)
-                {
-                manager.AddATeamVitality(Vitality); // 1だけ加算（必要なら値を変える）
-                }
+            PlayerRole role = GetComponent<PlayerRole>();
+            if (role == null || string.IsNullOrEmpty(role.CurrentTeam)) return;
 
-            // 触れたvitalityオブジェクトを削除する場合
-            Destroy(collision.gameObject);
+            // スコア加算を全員に同期
+            photonView.RPC(nameof(AddScoreRPC), RpcTarget.All, role.CurrentTeam, Vitality);
+
+            // アイテムを全員から削除
+            PhotonNetwork.Destroy(collision.gameObject);
             }
+        }
+
+    [PunRPC]
+    private void AddScoreRPC(string team, int value)
+        {
+        DecreaseTMPNumber manager = FindObjectOfType<DecreaseTMPNumber>();
+        if (manager == null) return;
+
+        if (team == "A")
+            manager.AddATeamVitality(value);
+        else if (team == "B")
+            manager.AddBTeamVitality(value);
         }
     }

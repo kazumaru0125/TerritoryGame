@@ -139,9 +139,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnTeamButtonClicked()
         {
-        ActivatePanel(Team_UI_Panel.name);
-        //PhotonNetwork.JoinRandomRoom();
+        if (PhotonNetwork.IsMasterClient)
+            {
+            ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
+            props["CanSelectTeam"] = true;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(props);
+            }
         }
+
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+        {
+        if (propertiesThatChanged.ContainsKey("CanSelectTeam"))
+            {
+            bool canSelect = (bool)propertiesThatChanged["CanSelectTeam"];
+            if (canSelect)
+                {
+                ActivatePanel(Team_UI_Panel.name);
+                UpdateTeamUI(); // èâä˙ï\é¶çXêV
+                }
+            }
+        }
+
 
     public void OnStartGameButtonClicked()
         {
