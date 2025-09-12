@@ -12,6 +12,10 @@ public class Walk : MonoBehaviourPun
     // 【走り（ダッシュ）速度】
     [SerializeField] float runSpeed = 6.0f;
 
+    [SerializeField] Jump jumpScript;
+
+
+
     void Start()
     {
         // Animator取得（キャラにAnimatorコンポーネント必須）
@@ -61,11 +65,13 @@ public class Walk : MonoBehaviourPun
             isRun = !isRun;
         }
 
+        bool isGrounded = (jumpScript == null) ? true : jumpScript.IsGrounded;
+
         // 一時的なダッシュ：（ボタン0）を押している間
-        bool isDash = /*Input.GetKey(KeyCode.Space) ||*/ Input.GetKey("joystick button 0");
+        bool isDash = Input.GetKey("joystick button 0") && isGrounded;
 
         // 実際の速度：ダッシュorトグル走りならrunSpeed、そうでなければwalkSpeed
-        float speed = (isDash || isRun) ? runSpeed : walkSpeed;
+        float speed = (isDash || isRun) && isGrounded ? runSpeed : walkSpeed;
 
         // 入力があれば移動・回転処理
         if (move.magnitude > 0.05f)
