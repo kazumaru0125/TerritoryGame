@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    float jumpForce = 7;
+    float jumpForce = 6;//ヒトなら/6アイテム使用時OR鬼なら7
     bool isJumpWait;
     Animator anim; // Animator
     float jumpWaitTimer;
