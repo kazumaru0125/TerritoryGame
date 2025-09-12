@@ -1,101 +1,59 @@
-<<<<<<< HEAD
-=======
 using System.Collections;
->>>>>>> UnitytyanMovement
 using UnityEngine;
 
 public class Jump : MonoBehaviour
-{
-<<<<<<< HEAD
-    float jumpForce = 6;//ƒqƒg‚È‚ç/6ƒAƒCƒeƒ€g—pOR‹S‚È‚ç7
-    bool isJumpWait;
-    Animator anim; // Animator
-    float jumpWaitTimer;
-    bool isGrounded;
-=======
-    [SerializeField] private float jumpForce = 7f;    // ƒWƒƒƒ“ƒv—Í
-    private bool isJumping = false;                   // ƒWƒƒƒ“ƒv’†ƒtƒ‰ƒO
+    {
+    [SerializeField] private float jumpForce = 7f;    // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½
+    private bool isJumping = false;                   // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O
     private Animator anim;
     private Rigidbody rb;
     private bool isGrounded = false;
     public bool IsGrounded { get { return isGrounded; } }
 
-    private float groundCheckDistance = 0.3f;         // ’n–Ê”»’è‚Ì‹——£
+    private float groundCheckDistance = 0.3f;         // ï¿½nï¿½Ê”ï¿½ï¿½ï¿½Ì‹ï¿½ï¿½ï¿½
     private Vector3 groundCheckOffset = Vector3.up * 0.1f;
->>>>>>> UnitytyanMovement
 
     void Start()
-    {
+        {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        if (anim == null) Debug.LogError("Animator‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
-        if (rb == null) Debug.LogError("Rigidbody‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
-    }
+        if (anim == null) Debug.LogError("Animatorï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½I");
+        if (rb == null) Debug.LogError("Rigidbodyï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½I");
+        }
 
     void FixedUpdate()
-    {
-<<<<<<< HEAD
-        // ’n–Ê”»’è‚ÌRaycast‚Ì‹——£‚ğ’²®i‹——£‚ğ‚à‚¤­‚µ’Z‚­‚µ‚½‚èƒŒƒC‚ÌŠJn“_‚ğ”÷’²®‚·‚é‚ÆŒø‰Ê“Ij
-        isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f);
-=======
-        // ’n–Ê”»’èi’†S‚æ‚è­‚µã‚©‚ç^‰º‚ÖƒŒƒC‚ğ”ò‚Î‚·j
+        {
+        // ï¿½nï¿½Ê”ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½Sï¿½ï¿½è­ï¿½ï¿½ï¿½ã‚©ï¿½ï¿½^ï¿½ï¿½ï¿½Öƒï¿½ï¿½Cï¿½ï¿½ï¿½Î‚ï¿½ï¿½j
         isGrounded = Physics.Raycast(transform.position + groundCheckOffset, Vector3.down, groundCheckDistance);
 
-        // ’…’n”»’è‚ÉƒWƒƒƒ“ƒvó‘ÔI—¹
+        // ï¿½ï¿½ï¿½nï¿½ï¿½ï¿½èï¿½ÉƒWï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ÔIï¿½ï¿½
         if (isGrounded && isJumping)
-        {
+            {
             isJumping = false;
+            }
         }
->>>>>>> UnitytyanMovement
-    }
 
     void Update()
-    {
-<<<<<<< HEAD
-        // ƒWƒƒƒ“ƒv“ü—Í‚©‚Â’n–Ê‚É‚¢‚ÄƒWƒƒƒ“ƒv‘Ò‹@’†‚Å‚È‚¯‚ê‚ÎƒWƒƒƒ“ƒvŠJn
-        if ((Input.GetKeyDown("space") || Input.GetKeyDown("joystick button 5")) && isGrounded && !isJumpWait)
         {
-            if (anim != null) anim.Play("Jump", 0, 0);
-            isJumpWait = true;
-            jumpWaitTimer = 0.3f;
-        }
-
-        if (isJumpWait)
-        {
-            jumpWaitTimer -= Time.deltaTime;
-            if (jumpWaitTimer < 0)
-            {
-                // ƒWƒƒƒ“ƒvŠJn‚ÉRigidbody‚Ì‘¬“x‚ğƒŠƒZƒbƒg‚µ‚Ä‚©‚ç—Í‚ğ‰Á‚¦‚éi‚±‚ê‚ªd—vj
-                var rb = GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.linearVelocity = Vector3.zero;  // ‘¬“xƒŠƒZƒbƒg
-                    rb.linearVelocity = transform.up * jumpForce;  // ƒWƒƒƒ“ƒv‚Ì‰‘¬‚ğƒZƒbƒg
-                }
-
-                isJumpWait = false;
-            }
-=======
-        // ƒWƒƒƒ“ƒv“ü—Í
+        // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 5")) && isGrounded && !isJumping)
-        {
+            {
             if (anim != null) anim.Play("Jump", 0, 0);
             isJumping = true;
 
-            // Rigidbody‚ÌY‘¬“x‚ğƒŠƒZƒbƒgiŒx‰ñ”ğ‚Í‰ºQÆj
-            Vector3 velocity = rb.velocity;
+            // Rigidbodyï¿½ï¿½Yï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
+            Vector3 velocity = rb.linearVelocity;
             velocity.y = 0;
-            rb.velocity = velocity;
+            rb.linearVelocity = velocity;
 
-            // ƒWƒƒƒ“ƒv—Í‚Í•¨—XV‚É‡‚í‚¹‚ÄƒRƒ‹[ƒ`ƒ“‚Å•t—^
+            // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Í‚ğ•¨—ï¿½ï¿½Xï¿½Vï¿½Éï¿½ï¿½í‚¹ï¿½ÄƒRï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½Å•tï¿½^
             StartCoroutine(ApplyJumpForce());
->>>>>>> UnitytyanMovement
+            }
         }
-    }
 
     IEnumerator ApplyJumpForce()
-    {
+        {
         yield return new WaitForFixedUpdate();
         rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+        }
     }
-}
