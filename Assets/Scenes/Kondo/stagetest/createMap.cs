@@ -71,7 +71,7 @@ public class createMap : MonoBehaviour
                                 break;
 
                             case "3":
-                                Instantiate(lowwall, new Vector3((-4.5f + j) * scale, 1.25f, (4.5f - i) * scale), Quaternion.Euler(90, 0, 0));
+                                Instantiate(lowwall, new Vector3((-4.5f + j) * scale, 0.625f, (4.5f - i) * scale), Quaternion.Euler(90, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
