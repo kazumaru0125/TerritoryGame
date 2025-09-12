@@ -61,8 +61,8 @@ public class Walk : MonoBehaviourPun
             isRun = !isRun;
         }
 
-        // 一時的なダッシュ：SpaceまたはAボタン（ボタン0）を押している間
-        bool isDash = Input.GetKey(KeyCode.Space) || Input.GetKey("joystick button 0");
+        // 一時的なダッシュ：（ボタン0）を押している間
+        bool isDash = /*Input.GetKey(KeyCode.Space) ||*/ Input.GetKey("joystick button 0");
 
         // 実際の速度：ダッシュorトグル走りならrunSpeed、そうでなければwalkSpeed
         float speed = (isDash || isRun) ? runSpeed : walkSpeed;
