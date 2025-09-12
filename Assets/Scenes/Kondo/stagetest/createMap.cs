@@ -21,6 +21,10 @@ public class createMap : MonoBehaviour
     private GameObject nomalwall;
     [SerializeField]
     private GameObject floor;
+    [SerializeField]
+    private GameObject item;
+    [SerializeField]
+    private GameObject start;
 
     // ägëÂî{ó¶ÇéwíËÅiç°âÒÇÕ5î{Åj
     private float scale = 5.0f;
@@ -75,13 +79,13 @@ public class createMap : MonoBehaviour
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            //case "4":
-                            //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                            //    break;
+                            case "4":
+                                Instantiate(item, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
 
-                            //case "5":
-                            //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                            //    break;
+                            case "5":
+                               Instantiate(start, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                               break;
 
                         }
                         Instantiate(floor, new Vector3((-4.5f + j) * scale,-2.5f, (4.5f - i) * scale), Quaternion.identity);

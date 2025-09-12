@@ -9,6 +9,7 @@ MonoImporter:
   - lowwall: {fileID: 7205464216301828355, guid: 328e699069c6afb4483bebfcd1151952, type: 3}
   - nomalwall: {fileID: 2180572532513028759, guid: 62c14e9810a58dd48ae3e0d4464ed2f4, type: 3}
   - floor: {fileID: 8948983873443096413, guid: 2f14769369bd8694997ca551a7903270, type: 3}
+  - item: {fileID: 5039460124530293624, guid: dee602668084c6c43849bd9020dc24d2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
