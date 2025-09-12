@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    float jumpForce = 5;
+    float jumpForce = 7;
     bool isJumpWait;
     Animator anim; // Animator
     float jumpWaitTimer;
