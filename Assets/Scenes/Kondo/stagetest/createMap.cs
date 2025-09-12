@@ -79,13 +79,10 @@ public class createMap : MonoBehaviour
                             //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                             //    break;
 
-                            //case "0":
+                            //case "5":
                             //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                             //    break;
 
-                            //case "99":
-                            //    Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                            //    break;
                         }
                         Instantiate(floor, new Vector3((-4.5f + j) * scale,-2.5f, (4.5f - i) * scale), Quaternion.identity);
                     }
