@@ -65,6 +65,14 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         UpdateUI();
         }
 
+    public void AddBTeamVitality(int value)
+        {
+        if (!photonView.IsMine) return;
+
+        BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + value);
+        UpdateUI();
+        }
+
 
     // --- PUN‚Ì“¯Šúˆ— ---
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
