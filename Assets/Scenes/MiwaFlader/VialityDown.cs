@@ -26,29 +26,29 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         {
         if (!photonView.IsMine) return; // 自分のオブジェクトでないなら入力は無視
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            {
-            ATeamcurrentValue = Mathf.Max(0, ATeamcurrentValue - changeValue);
-            UpdateUI();
-            }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //    {
+        //    ATeamcurrentValue = Mathf.Max(0, ATeamcurrentValue - changeValue);
+        //    UpdateUI();
+        //    }
 
-        if (Input.GetKeyDown(KeyCode.E))
-            {
-            BTeamcurrentValue = Mathf.Max(0, BTeamcurrentValue - changeValue);
-            UpdateUI();
-            }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //    {
+        //    BTeamcurrentValue = Mathf.Max(0, BTeamcurrentValue - changeValue);
+        //    UpdateUI();
+        //    }
 
-        if (Input.GetKeyDown(KeyCode.W))
-            {
-            ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + changeValue);
-            UpdateUI();
-            }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //    {
+        //    ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + changeValue);
+        //    UpdateUI();
+        //    }
 
-        if (Input.GetKeyDown(KeyCode.R))
-            {
-            BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + changeValue);
-            UpdateUI();
-            }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //    {
+        //    BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + changeValue);
+        //    UpdateUI();
+        //    }
         }
 
     void UpdateUI()

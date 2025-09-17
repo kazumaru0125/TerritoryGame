@@ -2703,6 +2703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b691fa1629d24f439abde222c1620ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 7
 --- !u!54 &3194315250033605975
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2868,6 +2869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5.5
   runSpeed: 11
+  jumpScript: {fileID: 2045131322530834841}
 --- !u!114 &-1456311623171615639
 MonoBehaviour:
   m_ObjectHideFlags: 0

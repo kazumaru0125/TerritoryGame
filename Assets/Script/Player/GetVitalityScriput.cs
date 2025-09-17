@@ -17,8 +17,12 @@ public class GetVitalityScriput : MonoBehaviourPun
             // スコア加算を全員に同期
             photonView.RPC(nameof(AddScoreRPC), RpcTarget.All, role.CurrentTeam, Vitality);
 
-            // アイテムを全員から削除
-            PhotonNetwork.Destroy(collision.gameObject);
+            // アイテム削除を MasterClient に依頼
+            PhotonView targetView = collision.gameObject.GetComponent<PhotonView>();
+            if (targetView != null)
+                {
+                photonView.RPC(nameof(RequestDestroyRPC), RpcTarget.MasterClient, targetView.ViewID);
+                }
             }
         }
 
@@ -32,5 +36,17 @@ public class GetVitalityScriput : MonoBehaviourPun
             manager.AddATeamVitality(value);
         else if (team == "B")
             manager.AddBTeamVitality(value);
+        }
+
+    [PunRPC]
+    private void RequestDestroyRPC(int viewID)
+        {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        PhotonView pv = PhotonView.Find(viewID);
+        if (pv != null)
+            {
+            PhotonNetwork.Destroy(pv.gameObject);
+            }
         }
     }
