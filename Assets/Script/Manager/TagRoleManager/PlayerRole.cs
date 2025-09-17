@@ -10,15 +10,18 @@ public class PlayerRole : MonoBehaviourPunCallbacks
     private TextMeshPro teamText;
     private Transform uiTransform;
 
-    void Start()
-    {
+    private void Start()
+        {
         UpdateTeam();
 
         // --- ローカルUIを頭の上に生成 ---
         GameObject uiObj = new GameObject("TeamUI");
         uiObj.transform.SetParent(transform);
         uiTransform = uiObj.transform;
-        uiTransform.localPosition = new Vector3(0, 2.2f, 0);
+        uiTransform.localPosition = new Vector3(0, 2.0f, 0);
+
+        // スケール調整でUIサイズを小さく
+        uiTransform.localScale = Vector3.one * 0.1f; // 0.5倍に縮小
 
         teamText = uiObj.AddComponent<TextMeshPro>();
         teamText.alignment = TextAlignmentOptions.Center;
@@ -28,7 +31,19 @@ public class PlayerRole : MonoBehaviourPunCallbacks
         teamText.color = Color.white;
 
         UpdateTeamUI();
-    }
+        }
+
+    private void LateUpdate()
+        {
+        if (uiTransform != null && Camera.main != null)
+            {
+            // カメラ方向に常に向ける
+            Vector3 direction = uiTransform.position - Camera.main.transform.position;
+            if (direction.sqrMagnitude > 0.001f) // ゼロ除算回避
+                uiTransform.rotation = Quaternion.LookRotation(direction);
+            }
+        }
+
 
     public override void OnPlayerPropertiesUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
     {
@@ -73,11 +88,11 @@ public class PlayerRole : MonoBehaviourPunCallbacks
         }
     }
 
-    private void LateUpdate()
-    {
-        if (uiTransform != null && Camera.main != null)
-        {
-            uiTransform.rotation = Quaternion.LookRotation(uiTransform.position - Camera.main.transform.position);
-        }
-    }
+    //private void LateUpdate()
+    //{
+    //    if (uiTransform != null && Camera.main != null)
+    //    {
+    //        uiTransform.rotation = Quaternion.LookRotation(uiTransform.position - Camera.main.transform.position);
+    //    }
+    //}
 }
