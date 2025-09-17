@@ -25,6 +25,18 @@ public class createMap : MonoBehaviour
     private GameObject item;
     [SerializeField]
     private GameObject start;
+    [SerializeField]
+    private GameObject ofuda;
+    [SerializeField]
+    private GameObject box;
+    [SerializeField]
+    private GameObject jump;
+    /*
+    [SerializeField]
+    private GameObject start;
+    [SerializeField]
+    private GameObject start;
+    */
 
     // 拡大倍率を指定（今回は5倍）
     private float scale = 5.0f;
@@ -64,28 +76,46 @@ public class createMap : MonoBehaviour
                     {
                         switch (testMap[i, j])
                         {
-                            case "1":
+                            case "1"://高い壁
                                 Instantiate(hiwall, new Vector3((-4.5f + j) * scale, 5.0f, (4.5f - i) * scale), Quaternion.identity);
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            case "2":
+                            case "2"://鬼が超えれる壁
                                 Instantiate(nomalwall, new Vector3((-4.5f + j) * scale, 2.5f, (4.5f - i) * scale), Quaternion.identity);
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            case "3":
+                            case "3"://全員が超えれる壁
                                 Instantiate(lowwall, new Vector3((-4.5f + j) * scale, 0.625f, (4.5f - i) * scale), Quaternion.Euler(90, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            case "4":
+                            case "4"://収集アイテム
                                 Instantiate(item, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
-                            case "5":
+                            case "5"://スタート地点
                                Instantiate(start, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                break;
+                                
+                                case "6"://お札
+                                Instantiate(ofuda, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+                                case "7"://アイテムボックス
+                                Instantiate(box, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+                                case "8"://ジャンプ
+                                Instantiate(jump, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+                                /*
+                                case "9"://収集アイテム
+                                Instantiate(item, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+                                case "10"://収集アイテム
+                                Instantiate(item, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+                                */
 
                         }
                         Instantiate(floor, new Vector3((-4.5f + j) * scale,-2.5f, (4.5f - i) * scale), Quaternion.identity);

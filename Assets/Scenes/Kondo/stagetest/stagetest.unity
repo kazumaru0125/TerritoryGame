@@ -315,6 +315,9 @@ MonoBehaviour:
   floor: {fileID: 8948983873443096413, guid: 2f14769369bd8694997ca551a7903270, type: 3}
   item: {fileID: 5039460124530293624, guid: dee602668084c6c43849bd9020dc24d2, type: 3}
   start: {fileID: 8768764319957394087, guid: 4105f058c638fdf4aa1a512c198db6dc, type: 3}
+  ofuda: {fileID: 3057292656095708627, guid: b304f815e375aae40b028e859ff37a5d, type: 3}
+  box: {fileID: 3165322309811437156, guid: 676fb5f842ac32141913fe7aebd9851a, type: 3}
+  jump: {fileID: 4976997056025506496, guid: 75d69bb68fb878d459ab9960f4126d40, type: 3}
 --- !u!4 &1783784741
 Transform:
   m_ObjectHideFlags: 0
