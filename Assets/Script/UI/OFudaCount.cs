@@ -12,8 +12,8 @@ public class OfudaCount : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private int changeValue = 1;
     [SerializeField] private int maxValue = 5;
 
-    private int ATeamcuOfuda = 0;
-    private int BTeamcuOfuda = 0;
+    public int ATeamcuOfuda = 0;
+    public int BTeamcuOfuda = 0;
 
     void Start()
         {
