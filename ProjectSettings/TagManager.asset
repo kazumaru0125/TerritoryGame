@@ -8,6 +8,7 @@ TagManager:
   - vitality
   - SpawnArea
   - Floor
+  - Ofuda
   layers:
   - Default
   - TransparentFX
