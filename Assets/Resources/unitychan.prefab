@@ -2646,6 +2646,7 @@ GameObject:
   - component: {fileID: 7944209061429467919}
   - component: {fileID: -1456311623171615639}
   - component: {fileID: 6241007831953216157}
+  - component: {fileID: -7869629915454095893}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: Player
@@ -2897,6 +2898,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vitality: 1
+--- !u!114 &-7869629915454095893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781632681493467937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d8a6051612da54eb905b4519544757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  human: {fileID: 7554126206906552853, guid: b82900233200dc94fb64c6ee08254b4b, type: 3}
+  oni: {fileID: 4028787327237398052, guid: 6ab0465c66f92c743a6de3070ee3202f, type: 3}
 --- !u!1 &5781632681493467945
 GameObject:
   m_ObjectHideFlags: 0
