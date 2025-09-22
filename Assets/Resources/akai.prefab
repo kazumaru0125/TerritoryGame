@@ -1900,6 +1900,7 @@ GameObject:
   - component: {fileID: -7421554259469106829}
   - component: {fileID: 4157575740269145331}
   - component: {fileID: -2263529683795761528}
+  - component: {fileID: 3217519551943492963}
   m_Layer: 0
   m_Name: akai
   m_TagString: Player
@@ -2185,6 +2186,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vitality: 10
+--- !u!114 &3217519551943492963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947932653896784670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee1fe2deac5119468f537fb5cc42765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  models: []
 --- !u!1 &7116537091347959610
 GameObject:
   m_ObjectHideFlags: 0

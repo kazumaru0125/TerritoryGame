@@ -46,6 +46,8 @@ MonoBehaviour:
   - SyncValue
   - AddScoreRPC
   - RequestDestroyRPC
+  - RequestDestroyOfudaRPC
+  - AddOfudaScoreRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
