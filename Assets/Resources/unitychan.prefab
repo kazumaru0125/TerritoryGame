@@ -1857,8 +1857,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5781632681493467759}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.000000002661807}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2645,6 +2645,7 @@ GameObject:
   - component: {fileID: 9105878519249519012}
   - component: {fileID: 7944209061429467919}
   - component: {fileID: -1456311623171615639}
+  - component: {fileID: 6241007831953216157}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: Player
@@ -2883,6 +2884,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vitality: 10
+--- !u!114 &6241007831953216157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781632681493467937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2610d924a89890a4089cf6766b7d06b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vitality: 1
 --- !u!1 &5781632681493467945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,8 +3015,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5781632681493467951}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

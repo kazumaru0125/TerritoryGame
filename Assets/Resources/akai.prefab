@@ -1888,7 +1888,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7721372372014104996}
   - component: {fileID: 4451807783923702750}
-  - component: {fileID: -2921698151963607161}
   - component: {fileID: 6829807632486507494}
   - component: {fileID: 5733641340597092911}
   - component: {fileID: 5395160134639886144}
@@ -1901,6 +1900,7 @@ GameObject:
   - component: {fileID: -7421554259469106829}
   - component: {fileID: 4157575740269145331}
   - component: {fileID: -2263529683795761528}
+  - component: {fileID: 3217519551943492963}
   m_Layer: 0
   m_Name: akai
   m_TagString: Player
@@ -1948,20 +1948,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-2921698151963607161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6947932653896784670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee1fe2deac5119468f537fb5cc42765, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model1: {fileID: 6947932653896784670}
-  model2: {fileID: 5781632681493467937, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
 --- !u!114 &6829807632486507494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,6 +2186,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vitality: 10
+--- !u!114 &3217519551943492963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947932653896784670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee1fe2deac5119468f537fb5cc42765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  models: []
 --- !u!1 &7116537091347959610
 GameObject:
   m_ObjectHideFlags: 0

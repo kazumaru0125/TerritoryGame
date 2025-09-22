@@ -1,48 +1,87 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class CharacterChange : MonoBehaviour
+public class CharacterChange : MonoBehaviourPun
     {
+    [SerializeField] private GameObject[] models; // Inspectorでモデルを登録
     private int index = 0;
-    private int o_max = 0;
-    GameObject[] childObject;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // 変更したいモデルを事前にInspectorで割り当てておく
-    public GameObject model1;
-    public GameObject model2;
+    private PlayerCameraFollow cameraFollow;
 
     void Start()
         {
-        // 最初はモデル1だけを表示する
-        model1.SetActive(true);
-        model2.SetActive(false);
+        ShowModel(index); // 最初のモデルを表示
+
+        // 自分のプレイヤーならカメラを登録
+        if (photonView.IsMine)
+            {
+            cameraFollow = Camera.main.GetComponent<PlayerCameraFollow>();
+            UpdateCameraTarget();
+            }
         }
 
-    public void SwitchToModel2()
-        {
-        model1.SetActive(false);
-        model2.SetActive(true);
-        }
-
-    public void SwitchToModel1()
-        {
-        model1.SetActive(true);
-        model2.SetActive(false);
-        }
-
-
-    // Update is called once per frame
     void Update()
         {
-        if (Input.GetKeyDown("z"))
+        if (!photonView.IsMine) return; // 自分のプレイヤーだけ処理
+        if (models == null || models.Length == 0) return;
+
+        if (Input.GetKeyDown(KeyCode.Z))
             {
-            SwitchToModel2();
+            index = (index + 1) % models.Length;
+            ShowModel(index);
+            UpdateCameraTarget();
             }
 
-        if (Input.GetKeyDown("x"))
+        if (Input.GetKeyDown(KeyCode.X))
             {
-            SwitchToModel1();
+            index = (index - 1 + models.Length) % models.Length;
+            ShowModel(index);
+            UpdateCameraTarget();
             }
         }
-    }
 
+    public void ShowModel(int targetIndex)
+        {
+        GameObject current = null;
+        foreach (var m in models)
+            {
+            if (m.activeSelf)
+                {
+                current = m;
+                break;
+                }
+            }
+
+        Vector3 currentPos = current != null ? current.transform.position : Vector3.zero;
+        Quaternion currentRot = current != null ? current.transform.rotation : Quaternion.identity;
+
+        for (int i = 0; i < models.Length; i++)
+            {
+            models[i].SetActive(i == targetIndex);
+            }
+
+        models[targetIndex].transform.position = currentPos;
+        models[targetIndex].transform.rotation = currentRot;
+
+        index = targetIndex;
+        }
+
+    private void UpdateCameraTarget()
+        {
+        if (cameraFollow != null)
+            {
+            cameraFollow.SetTarget(models[index].transform);
+            }
+        }
+
+    public void SetAsOni()
+        {
+        ShowModel(0);
+        if (photonView.IsMine) UpdateCameraTarget();
+        }
+
+    public void SetAsNigeru()
+        {
+        ShowModel(1);
+        if (photonView.IsMine) UpdateCameraTarget();
+        }
+    }
