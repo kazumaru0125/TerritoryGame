@@ -290,6 +290,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1943197184293927131, guid: 62c14e9810a58dd48ae3e0d4464ed2f4, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 68adc9d76759905419625ae1ae57f151, type: 2}
     - target: {fileID: 2180572532513028759, guid: 62c14e9810a58dd48ae3e0d4464ed2f4, type: 3}
       propertyPath: m_Name
       value: nomalwall
@@ -474,6 +478,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8991113474305585966, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 68adc9d76759905419625ae1ae57f151, type: 2}
     - target: {fileID: -1456311623171615639, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1000,6 +1008,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8991113474305585966, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 68adc9d76759905419625ae1ae57f151, type: 2}
     - target: {fileID: -1456311623171615639, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_Enabled
       value: 0
