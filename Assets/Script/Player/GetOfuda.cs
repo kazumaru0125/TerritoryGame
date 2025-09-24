@@ -1,27 +1,54 @@
 using Photon.Pun;
 using UnityEngine;
+using System.Collections;
 
 public class GetOfuda : MonoBehaviourPun
     {
-    public int Vitality = 1;
+    public int Vitality = 1; // 所持ポイント
+    public float invincibleTime = 2f; // 奪われ後の無敵時間
+    private bool isInvincible = false;
+
+    private Collider col;
+
+    private void Start()
+        {
+        col = GetComponent<Collider>();
+        }
 
     private void OnCollisionEnter(Collision collision)
         {
-        if (!photonView.IsMine) return; // 自分のキャラだけが処理
+        if (!photonView.IsMine) return; // 自分のキャラだけ処理
 
+        // --- Ofuda取得 ---
         if (collision.gameObject.CompareTag("Ofuda"))
             {
             PlayerRole role = GetComponent<PlayerRole>();
             if (role == null || string.IsNullOrEmpty(role.CurrentTeam)) return;
 
-            // スコア加算を全員に同期（RPC名をユニークに変更）
             photonView.RPC(nameof(AddOfudaScoreRPC), RpcTarget.All, role.CurrentTeam, Vitality);
 
-            // アイテム削除を MasterClient に依頼
             PhotonView targetView = collision.gameObject.GetComponent<PhotonView>();
             if (targetView != null)
                 {
                 photonView.RPC(nameof(RequestDestroyOfudaRPC), RpcTarget.MasterClient, targetView.ViewID);
+                }
+            }
+
+        // --- プレイヤー同士の奪取 ---
+        if (collision.gameObject.CompareTag("Player"))
+            {
+            if (isInvincible) return; // 自分が無敵なら奪われない
+
+            GetOfuda other = collision.gameObject.GetComponent<GetOfuda>();
+            PlayerRole myRole = GetComponent<PlayerRole>();
+
+            if (other != null && myRole != null && !string.IsNullOrEmpty(myRole.CurrentTeam))
+                {
+                if (other.Vitality > 0 && !other.isInvincible)
+                    {
+                    // 1ポイント奪うRPCを呼ぶ
+                    photonView.RPC(nameof(StealOfudaRPC), RpcTarget.All, myRole.CurrentTeam, other.photonView.ViewID);
+                    }
                 }
             }
         }
@@ -49,4 +76,44 @@ public class GetOfuda : MonoBehaviourPun
             PhotonNetwork.Destroy(pv.gameObject);
             }
         }
+
+    // --- 奪取処理 ---
+    [PunRPC]
+    private void StealOfudaRPC(string thiefTeam, int victimViewID)
+        {
+        PhotonView victimPV = PhotonView.Find(victimViewID);
+        if (victimPV == null) return;
+
+        GetOfuda victim = victimPV.GetComponent<GetOfuda>();
+        if (victim != null && victim.Vitality > 0)
+            {
+            // 被害者 -1
+            victim.Vitality -= 1;
+
+            // 無敵時間付与
+         //   victim.StartCoroutine(victim.SetInvincible());
+
+            // チームスコア加算
+            OfudaCount manager = FindObjectOfType<OfudaCount>();
+            if (manager != null)
+                {
+                if (thiefTeam == "A")
+                    manager.AddATeamVitality(1);
+                else if (thiefTeam == "B")
+                    manager.AddBTeamVitality(1);
+                }
+            }
+        }
+
+    // --- 無敵時間処理 ---
+    //private IEnumerator SetInvincible()
+    //    {
+    //    isInvincible = true;
+    //    //if (col != null) col.enabled = false; // 当たり判定OFF
+
+    //    //yield return new WaitForSeconds(invincibleTime);
+
+    //    //if (col != null) col.enabled = true; // 当たり判定ON
+    //    //isInvincible = false;
+    //    }
     }
