@@ -12566,6 +12566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vitality: 1
+  invincibleTime: 2
 --- !u!114 &-7869629915454095893
 MonoBehaviour:
   m_ObjectHideFlags: 0

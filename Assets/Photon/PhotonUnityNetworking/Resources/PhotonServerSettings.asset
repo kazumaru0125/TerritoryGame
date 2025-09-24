@@ -48,6 +48,8 @@ MonoBehaviour:
   - RequestDestroyRPC
   - RequestDestroyOfudaRPC
   - AddOfudaScoreRPC
+  - PickupOfudaRPC
+  - StealOfudaRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
