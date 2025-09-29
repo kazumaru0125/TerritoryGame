@@ -12302,7 +12302,6 @@ GameObject:
   - component: {fileID: 5781632681500762601}
   - component: {fileID: 2045131322530834841}
   - component: {fileID: 3194315250033605975}
-  - component: {fileID: 4696421125782473938}
   - component: {fileID: 6620187788905966261}
   - component: {fileID: 2975494611145034866}
   - component: {fileID: 2780743690659803650}
@@ -12313,6 +12312,7 @@ GameObject:
   - component: {fileID: -1456311623171615639}
   - component: {fileID: 6241007831953216157}
   - component: {fileID: -7869629915454095893}
+  - component: {fileID: -5657241611611212362}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: Player
@@ -12401,30 +12401,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &4696421125782473938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5781632681493467937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 0
-  ObservedComponents:
-  - {fileID: 2975494611145034866}
-  - {fileID: 2780743690659803650}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &6620187788905966261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12580,6 +12556,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   human: {fileID: 7117021541265704847}
   oni: {fileID: 4028787327237398052}
+--- !u!114 &-5657241611611212362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781632681493467937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2975494611145034866}
+  - {fileID: 2780743690659803650}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5781632681493467945
 GameObject:
   m_ObjectHideFlags: 0
