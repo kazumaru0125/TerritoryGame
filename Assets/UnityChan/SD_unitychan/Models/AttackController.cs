@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CatchingController : MonoBehaviour
+public class AttackController : MonoBehaviour
 {
     Animator anim;
     bool isCatchingPlaying = false;
@@ -18,7 +18,7 @@ public class CatchingController : MonoBehaviour
 
         if (!isCatchingPlaying)
         {
-            if (Input.GetKeyDown(KeyCode.C) || rt > 0.5f)
+            if (Input.GetKeyDown(KeyCode.F) || rt > 0.5f)
             {
                 anim.SetBool("is_caughting", true);
                 isCatchingPlaying = true;
