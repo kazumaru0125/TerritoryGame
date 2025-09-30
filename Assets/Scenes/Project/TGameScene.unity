@@ -4937,7 +4937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f22fce8d64f194e8d67924a54bda3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 14
+  time: 30
   Count: {fileID: 819886420}
   Wave: {fileID: 555594418}
   ofudaCount: {fileID: 1294930897}
