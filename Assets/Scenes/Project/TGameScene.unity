@@ -545,6 +545,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset2: {x: 0, y: 2.5, z: -5}
   smoothSpeed: 10
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!20 &495137133
 Camera:
   m_ObjectHideFlags: 0
