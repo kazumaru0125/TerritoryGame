@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -16,7 +16,7 @@ public class PlayerRole : MonoBehaviourPunCallbacks
         UpdateTeam();
         UpdateRole();
 
-        // --- UI���� ---
+        // --- UI生成 ---
         GameObject uiObj = new GameObject("TeamUI");
         uiObj.transform.SetParent(transform);
         uiTransform = uiObj.transform;
@@ -35,11 +35,51 @@ public class PlayerRole : MonoBehaviourPunCallbacks
 
     private void LateUpdate()
         {
+        // ★ QキーでRoleを切り替え（自分のオブジェクトだけ）
+        if (photonView.IsMine && Input.GetKeyDown(KeyCode.Q))
+            {
+            ToggleRoleForTeam(CurrentTeam);
+            }
+
+        // UIを常にカメラの方に向ける
         if (uiTransform != null && Camera.main != null)
             {
             Vector3 direction = uiTransform.position - Camera.main.transform.position;
             if (direction.sqrMagnitude > 0.001f)
                 uiTransform.rotation = Quaternion.LookRotation(direction);
+            }
+        }
+
+    void OnCollisionEnter(Collision collision)
+        {
+        if (!photonView.IsMine) return; // 自分のオブジェクトだけが処理
+
+        if (collision.gameObject.CompareTag("Player"))
+            {
+            PlayerRole otherRole = collision.gameObject.GetComponent<PlayerRole>();
+            if (otherRole == null) return;
+
+            // チーム単位でロール切り替え
+            ToggleRoleForTeam(CurrentTeam);
+            }
+        }
+
+    // ✅ チーム全員のロールを切り替えるメソッド
+    private void ToggleRoleForTeam(string team)
+        {
+        foreach (var player in PhotonNetwork.PlayerList)
+            {
+            if (player.CustomProperties.TryGetValue("Team", out object t) && (string)t == team)
+                {
+                string currentRole = player.CustomProperties.TryGetValue("Role", out object r) ? (string)r : "Human";
+                string newRole = (currentRole == "Human") ? "Oni" : "Human";
+
+                var props = new ExitGames.Client.Photon.Hashtable
+                {
+                    { "Role", newRole }
+                };
+                player.SetCustomProperties(props);
+                }
             }
         }
 
@@ -62,7 +102,7 @@ public class PlayerRole : MonoBehaviourPunCallbacks
             ApplyTeamVisual();
             UpdateTeamUI();
 
-            Debug.Log($"{photonView.Owner.NickName} �̃`�[���� {CurrentTeam} �ɂȂ�܂���");
+            Debug.Log($"{photonView.Owner.NickName} のチームは {CurrentTeam} になりました");
             }
         }
 
@@ -73,7 +113,7 @@ public class PlayerRole : MonoBehaviourPunCallbacks
             CurrentRole = (string)role;
             UpdateTeamUI();
 
-            Debug.Log($"{photonView.Owner.NickName} �̖����� {CurrentRole} �ɂȂ�܂���");
+            Debug.Log($"{photonView.Owner.NickName} の役割は {CurrentRole} になりました");
             }
         }
 
@@ -100,4 +140,3 @@ public class PlayerRole : MonoBehaviourPunCallbacks
             }
         }
     }
-

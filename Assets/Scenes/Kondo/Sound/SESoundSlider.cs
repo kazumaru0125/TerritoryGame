@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI; // Sliderを使用するために必要
 
 [RequireComponent(typeof(Slider))]
-public class BGMSlider : MonoBehaviour
+public class SESlider : MonoBehaviour
 {
     Slider m_Slider; // 音量調整用スライダー
     [SerializeField]
-    AudioSource m_BGMSource; // BGM用AudioSourceをインスペクターで指定する
+    AudioSource m_SESource; // SE用AudioSourceをインスペクターで指定する
 
     [SerializeField]
     bool m_isInput; // キー入力で調整できるようにするか
@@ -18,19 +18,19 @@ public class BGMSlider : MonoBehaviour
     void Awake()
     {
         m_Slider = GetComponent<Slider>();
-        if (m_BGMSource != null)
+        if (m_SESource != null)
         {
-            m_Slider.value = m_BGMSource.volume;
+            m_Slider.value = m_SESource.volume;
         }
     }
 
     private void OnEnable()
     {
-        if (m_BGMSource != null)
+        if (m_SESource != null)
         {
-            m_Slider.value = m_BGMSource.volume;
-            // スライダーの値が変更されたらBGMの音量を変更する
-            m_Slider.onValueChanged.AddListener((sliderValue) => m_BGMSource.volume = sliderValue);
+            m_Slider.value = m_SESource.volume;
+            // スライダーの値が変更されたらSEの音量を変更する
+            m_Slider.onValueChanged.AddListener((sliderValue) => m_SESource.volume = sliderValue);
         }
     }
 

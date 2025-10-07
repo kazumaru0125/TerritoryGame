@@ -545,6 +545,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset2: {x: 0, y: 2.5, z: -5}
   smoothSpeed: 10
+  stickSensitivity: 3
+  minPitch: -20
+  maxPitch: 60
+  defaultYaw: 0
+  defaultPitch: 20
   collisionMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3524,7 +3529,7 @@ GameObject:
   - component: {fileID: 1294930894}
   - component: {fileID: 1294930893}
   - component: {fileID: 1294930897}
-  - component: {fileID: 1294930896}
+  - component: {fileID: 1294930898}
   - component: {fileID: 1294930895}
   m_Layer: 0
   m_Name: VitalityManager
@@ -3585,25 +3590,10 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 1294930893}
   - {fileID: 1294930897}
-  - {fileID: 1294930896}
+  - {fileID: 1294930898}
   sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1294930896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294930892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b39e78d8f5581e24c8a025c43d656534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shoukiGaugeA: {fileID: 1223888232}
-  shoukiGaugeB: {fileID: 1855634219}
-  maxShouki: 5
 --- !u!114 &1294930897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3622,6 +3612,21 @@ MonoBehaviour:
   maxValue: 5
   ATeamcuOfuda: 0
   BTeamcuOfuda: 0
+--- !u!114 &1294930898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294930892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c223a521de36d7c49b93102a54f8f088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shoukiGaugeA: {fileID: 1223888232}
+  shoukiGaugeB: {fileID: 1855634219}
+  maxShouki: 5
 --- !u!1 &1328107970
 GameObject:
   m_ObjectHideFlags: 0

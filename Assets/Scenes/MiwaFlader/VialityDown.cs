@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun; 
 
+
 public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     {
     [SerializeField] private TMP_Text ATeamVitality;
@@ -49,6 +50,15 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         //    BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + changeValue);
         //    UpdateUI();
         //    }
+        if(maxValue== ATeamcurrentValue)
+            {
+            Debug.Log("ATeamWIN");
+            }
+
+        if (maxValue == BTeamcurrentValue)
+            {
+            Debug.Log("BTeamWIN");
+            }
         }
 
     void UpdateUI()
