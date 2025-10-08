@@ -18,7 +18,7 @@ public class ClapController : MonoBehaviour
 
         if (!isClapPlaying)
         {
-            if (/*Input.GetKeyDown(KeyCode.Alpha1)*/Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown("joystick button 2"))
+            if (Input.GetKeyDown(KeyCode.Alpha1)|| Input.GetKeyDown("joystick button 2"))
             {
                 anim.SetBool("is_claping", true);
                 isClapPlaying = true;
