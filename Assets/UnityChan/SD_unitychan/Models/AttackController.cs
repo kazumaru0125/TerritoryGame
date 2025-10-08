@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     Animator anim;
-    bool isCatchingPlaying = false;
+    bool isAttackPlaying = false;
 
     void Start()
     {
@@ -16,16 +16,13 @@ public class AttackController : MonoBehaviour
     {
         float rt = Input.GetAxis("RT");
 
-        if (!isCatchingPlaying)
+        if (!isAttackPlaying)
         {
             if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1") || rt > 0.5f)
             {
                 anim.SetBool("is_attacking", true);
-                isCatchingPlaying = true;
+                isAttackPlaying = true;
             }
-
-            // ここにキャラの移動処理を書くと移動禁止になるタイミング調整可能
-            // 例えば: if (!isCatchingPlaying) { 移動処理 }
         }
         else
         {
@@ -35,7 +32,7 @@ public class AttackController : MonoBehaviour
             if (!stateInfo.IsName("is_attacking") || stateInfo.normalizedTime >= 1f)
             {
                 anim.SetBool("is_attacking", false);
-                isCatchingPlaying = false;
+                isAttackPlaying = false;
             }
         }
     }
