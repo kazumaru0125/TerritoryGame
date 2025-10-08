@@ -18,9 +18,9 @@ public class AttackController : MonoBehaviour
 
         if (!isCatchingPlaying)
         {
-            if (Input.GetKeyDown(KeyCode.F) || rt > 0.5f)
+            if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1") || rt > 0.5f)
             {
-                anim.SetBool("is_caughting", true);
+                anim.SetBool("is_attacking", true);
                 isCatchingPlaying = true;
             }
 
@@ -31,10 +31,10 @@ public class AttackController : MonoBehaviour
         {
             // アニメーション終了判定
             AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-            // is_caughtingがtrueの間かつアニメーションの再生時間が終わっていればフラグ解除
-            if (!stateInfo.IsName("is_caughting") || stateInfo.normalizedTime >= 1f)
+            // is_attackingがtrueの間かつアニメーションの再生時間が終わっていればフラグ解除
+            if (!stateInfo.IsName("is_attacking") || stateInfo.normalizedTime >= 1f)
             {
-                anim.SetBool("is_caughting", false);
+                anim.SetBool("is_attacking", false);
                 isCatchingPlaying = false;
             }
         }
