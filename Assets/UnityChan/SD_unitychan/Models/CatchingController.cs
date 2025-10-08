@@ -18,7 +18,7 @@ public class CatchingController : MonoBehaviour
 
         if (!isCatchingPlaying)
         {
-            if (Input.GetKeyDown(KeyCode.C) || rt > 0.5f)
+            if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown("joystick button 1") || rt > 0.5f)
             {
                 anim.SetBool("is_caughting", true);
                 isCatchingPlaying = true;

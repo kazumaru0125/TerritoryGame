@@ -18,8 +18,10 @@ public class WallPenetrationFix : MonoBehaviour
             // 自分自身のColliderは除外し、Trigger状態のColliderは物理衝突無視でパス
             if (col != myCollider && !col.isTrigger)
             {
-                Vector3 direction; // 押し出す方向のベクトル受け取り用
-                float distance;    // 押し出す距離受け取り用
+                // 押し出す方向のベクトル受け取り用
+                Vector3 direction;
+                // 押し出す距離受け取り用
+                float distance;    
 
                 // ComputePenetrationは二つのColliderのめり込み情報を計算する
                 // 自分のColliderと位置・回転
