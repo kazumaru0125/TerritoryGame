@@ -41,7 +41,7 @@ public class Jump : MonoBehaviour
     void Update()
         {
         // スペースキーまたはコントローラのRTボタンが押され、地面にいてジャンプ中でなければジャンプ実行
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 5")) && isGrounded && !isJumping)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0")) && isGrounded && !isJumping)
             {
             // ジャンプアニメーション再生
             if (anim != null) anim.Play("Jump", 0, 0);
