@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-    [SerializeField] private float jumpForce = 1f;      // 少しジャンプする力
+    // 少しジャンプする力
+    [SerializeField] private float jumpForce = 2f;
     private Rigidbody rb;
     Animator anim;
     bool isAttackPlaying = false;
@@ -11,7 +12,7 @@ public class AttackController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();   // << 必ず初期化！
+        rb = GetComponent<Rigidbody>();
         if (anim == null)
             Debug.LogError("Animatorが見つかりません！");
         if (rb == null)
@@ -38,7 +39,7 @@ public class AttackController : MonoBehaviour
         else
         {
             AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-            // ステート名はAnimator内で設定したもの（例:"Attack"）に揃える
+
             if (!stateInfo.IsName("Attack") || stateInfo.normalizedTime >= 1f)
             {
                 anim.SetBool("is_attacking", false);
