@@ -6,15 +6,15 @@ public class PlayerMoveingState : IPlayerState
     // 【走りトグル用：一度押すと切り替わる変数】
     private bool isRun = false;
     // 【通常歩き速度】
-    [SerializeField] float walkSpeed = 3.0f;
+    [SerializeField] float walkSpeed = 7.5f;
     // 【走り（ダッシュ）速度】
-    [SerializeField] float runSpeed = 6.0f;
+    [SerializeField] float runSpeed = 14.0f;
 
     [SerializeField] Jump jumpScript;
     //開始
     public void EnterState(PlayerController player)
     {
-        Debug.Log("クラウチングスタート");
+        //Debug.Log("クラウチングスタート");
     }
 
     //更新処理
@@ -81,7 +81,7 @@ public class PlayerMoveingState : IPlayerState
     //終了
     public void ExitState(PlayerController player)
     {
-        Debug.Log("うー");
+        //Debug.Log("うー");
     }
 
 }

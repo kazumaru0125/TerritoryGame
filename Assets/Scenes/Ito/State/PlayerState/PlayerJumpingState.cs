@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerJumpingState : IPlayerState
 {
     // ジャンプする力の大きさ
-    private float jumpForce = 7f;
+    private float jumpForce = 9f;
     // 現在ジャンプ中かどうかのフラグ
     private bool isJumping = false;
    // private Animator anim;
