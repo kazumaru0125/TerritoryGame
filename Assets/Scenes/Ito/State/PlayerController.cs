@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour
     private IPlayerState currentState;
 
     public PlayerIdlingState idelState = new PlayerIdlingState();
-    public MoveingState moveingState = new MoveingState();
+    public PlayerMoveingState moveingState = new PlayerMoveingState();
+    public PlayerJumpingState jumpingState = new PlayerJumpingState();
+    public PlayerAttackingState attackingState = new PlayerAttackingState();
+    public PlayerCatchingState catchingState = new PlayerCatchingState();
 
     public float moveSpeed = 5.0f;
 
@@ -28,12 +31,22 @@ public class PlayerController : MonoBehaviour
             currentState.UpdateState(this);
         }
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-            {
-            if (moveingState != null)
-            {
-                ChangeState(moveingState);
-            }
+ 
+        if (moveingState != null)
+        {
+            ChangeState(moveingState);
+        }
+        if (jumpingState != null)
+        {
+            ChangeState(jumpingState);
+        }
+        if (attackingState != null)
+        {
+            ChangeState(jumpingState);
+        }
+        if(catchingState != null)
+        {
+            ChangeState(catchingState);
         }
     }
 

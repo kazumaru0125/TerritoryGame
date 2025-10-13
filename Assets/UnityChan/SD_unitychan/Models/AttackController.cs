@@ -24,9 +24,6 @@ public class AttackController : MonoBehaviour
                 anim.SetBool("is_attacking", true);
                 isCatchingPlaying = true;
             }
-
-            // ここにキャラの移動処理を書くと移動禁止になるタイミング調整可能
-            // 例えば: if (!isCatchingPlaying) { 移動処理 }
         }
         else
         {
