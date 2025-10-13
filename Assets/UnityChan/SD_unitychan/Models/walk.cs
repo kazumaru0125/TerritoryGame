@@ -68,7 +68,8 @@ public class Walk : MonoBehaviourPun
         bool isGrounded = (jumpScript == null) ? true : jumpScript.IsGrounded;
 
         // 一時的なダッシュ：（ボタン0）を押している間
-        bool isDash = Input.GetKey("joystick button 0") && isGrounded;
+        //　一旦保留で残しておく
+        bool isDash = Input.GetKey("joystick button 2") && isGrounded;
 
         // 実際の速度：ダッシュorトグル走りならrunSpeed、そうでなければwalkSpeed
         float speed = (isDash || isRun) && isGrounded ? runSpeed : walkSpeed;
