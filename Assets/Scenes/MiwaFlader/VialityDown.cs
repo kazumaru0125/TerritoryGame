@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Photon.Pun; 
-
+using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     {
@@ -15,6 +14,7 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
     private int ATeamcurrentValue = 0;
     private int BTeamcurrentValue = 0;
+    private bool isGameEnded = false;
 
     void Start()
         {
@@ -25,74 +25,71 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
         {
-        if (!photonView.IsMine) return; // 自分のオブジェクトでないなら入力は無視
+        if (!photonView.IsMine || isGameEnded) return;
 
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //    {
-        //    ATeamcurrentValue = Mathf.Max(0, ATeamcurrentValue - changeValue);
-        //    UpdateUI();
-        //    }
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //    {
-        //    BTeamcurrentValue = Mathf.Max(0, BTeamcurrentValue - changeValue);
-        //    UpdateUI();
-        //    }
-
-        //if (Input.GetKeyDown(KeyCode.W))
-        //    {
-        //    ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + changeValue);
-        //    UpdateUI();
-        //    }
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //    {
-        //    BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + changeValue);
-        //    UpdateUI();
-        //    }
-        if(maxValue== ATeamcurrentValue)
+        // 勝利判定
+        if (ATeamcurrentValue >= maxValue)
             {
-            Debug.Log("ATeamWIN");
+            photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "A");
+            isGameEnded = true;
             }
-
-        if (maxValue == BTeamcurrentValue)
+        else if (BTeamcurrentValue >= maxValue)
             {
-            Debug.Log("BTeamWIN");
+            photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "B");
+            isGameEnded = true;
             }
         }
 
     void UpdateUI()
         {
-        ATeamVitality.text = ATeamcurrentValue.ToString()+"%";
-        BTeamVitality.text = BTeamcurrentValue.ToString()+"%";
+        ATeamVitality.text = ATeamcurrentValue + "%";
+        BTeamVitality.text = BTeamcurrentValue + "%";
         }
 
     public void AddATeamVitality(int value)
         {
-        if (!photonView.IsMine) return;
-
+        if (!photonView.IsMine || isGameEnded) return;
         ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + value);
         UpdateUI();
         }
 
     public void AddBTeamVitality(int value)
         {
-        if (!photonView.IsMine) return;
-
+        if (!photonView.IsMine || isGameEnded) return;
         BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + value);
         UpdateUI();
         }
 
+    [PunRPC]
+    void OnTeamWin(string team)
+        {
+        if (isGameEnded) return;
+        isGameEnded = true;
 
-    // --- PUNの同期処理 ---
+        Debug.Log($"{team} Team WIN!");
+
+        StartCoroutine(GoToTitleAfterDelay(2.0f));
+        }
+
+    IEnumerator GoToTitleAfterDelay(float delay)
+        {
+        yield return new WaitForSeconds(delay);
+
+        if (PhotonNetwork.IsMasterClient)
+            {
+            Debug.Log("Loading TitleScene...");
+            PhotonNetwork.LoadLevel("TitleScene");
+            }
+        }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
-        if (stream.IsWriting) // 自分の値を送信
+        if (stream.IsWriting)
             {
             stream.SendNext(ATeamcurrentValue);
             stream.SendNext(BTeamcurrentValue);
             }
-        else // 受信
+        else
             {
             ATeamcurrentValue = (int)stream.ReceiveNext();
             BTeamcurrentValue = (int)stream.ReceiveNext();
