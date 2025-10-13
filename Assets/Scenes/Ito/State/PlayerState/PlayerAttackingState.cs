@@ -3,51 +3,70 @@ using UnityEngine;
 
 public class PlayerAttackingState : IPlayerState
 {
-    //private Animator anim;
-    private bool isCatchingPlaying = false;
+    private bool isAttackingPlaying = false;
     private PlayerController playerController;
+
+    // 攻撃判定用GameObject
+    private GameObject attackHitbox;
 
     public void EnterState(PlayerController player)
     {
         playerController = player;
-        //anim = player.GetComponent<Animator>();
-        //if (anim == null)
-        //{
-        //    Debug.LogError("Animatorが見つかりません！");
-        //}
-        isCatchingPlaying = false;
+
+        // 攻撃判定用GameObject取得・非アクティブ化
+        attackHitbox = player.transform.Find("AttackHitbox")?.gameObject;
+        if (attackHitbox != null)
+            attackHitbox.SetActive(false);
+
+        isAttackingPlaying = false;
     }
 
     public void UpdateState(PlayerController player)
     {
         float rt = Input.GetAxis("RT");
 
-        if (!isCatchingPlaying)
+        if (!isAttackingPlaying)
         {
             if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1") || rt > 0.5f)
             {
-                //anim.SetBool("is_attacking", true);
-                isCatchingPlaying = true;
+                // 攻撃開始：当たり判定を有効化
+                if (attackHitbox != null)
+                    attackHitbox.SetActive(true);
+
+                isAttackingPlaying = true;
+
+                Debug.LogError("しばく");
+                // 攻撃アニメーションがあればここで再生する
+                // playerController.GetComponent<Animator>().SetTrigger("Attack");
             }
         }
         else
         {
-            // アニメーション終了判定
-            //AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-            // 実際の攻撃アニメーション名(例: "Attack")で判定するのが安全
-            //if (!stateInfo.IsName("Attack") || stateInfo.normalizedTime >= 1f)
-            //{
-            //    //anim.SetBool("is_attacking", false);
-            //    isCatchingPlaying = false;
-            //    // 攻撃終了後にアイドル状態に戻す
-            //    player.ChangeState(player.idelState);
-            //}
+            // 攻撃終了の判定はアニメーション時間や別トリガーで行うのが望ましい
+            // ここでは簡単に一定時間後に当たり判定無効化と状態遷移を行う例
+
+            // ここは例なので攻撃持続時間1秒後に終了させましょう
+            playerController.StartCoroutine(EndAttackAfterDelay(1.0f));
         }
     }
 
     public void ExitState(PlayerController player)
     {
-        //anim.SetBool("is_attacking", false);
-        isCatchingPlaying = false;
+        if (attackHitbox != null)
+            attackHitbox.SetActive(false);
+        isAttackingPlaying = false;
+    }
+
+    private IEnumerator EndAttackAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (attackHitbox != null)
+            attackHitbox.SetActive(false);
+
+        isAttackingPlaying = false;
+
+        // 攻撃終了後、アイドル状態に戻す
+        playerController.ChangeState(playerController.idelState);
     }
 }

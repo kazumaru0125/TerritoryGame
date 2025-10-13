@@ -9,6 +9,7 @@ TagManager:
   - SpawnArea
   - Floor
   - Ofuda
+  - AttackHitbox
   layers:
   - Default
   - TransparentFX
