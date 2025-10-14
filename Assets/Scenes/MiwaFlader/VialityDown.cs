@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
 public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     {
@@ -68,19 +69,31 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
         Debug.Log($"{team} Team WIN!");
 
-        StartCoroutine(GoToTitleAfterDelay(2.0f));
+        if (PhotonNetwork.IsConnected)
+            {
+            StartCoroutine(DisconnectAndGoToTitle(2f));
+            }
+        else
+            {
+            SceneManager.LoadScene("TitleScene");
+            }
         }
 
-    IEnumerator GoToTitleAfterDelay(float delay)
+    private IEnumerator DisconnectAndGoToTitle(float delay)
         {
         yield return new WaitForSeconds(delay);
 
-        if (PhotonNetwork.IsMasterClient)
-            {
-            Debug.Log("Loading TitleScene...");
-            PhotonNetwork.LoadLevel("TitleScene");
-            }
+        PhotonNetwork.Disconnect();
         }
+
+    // 切断完了時に呼ばれるコールバック
+    public override void OnDisconnected(DisconnectCause cause)
+        {
+        Debug.Log("Photon disconnected: " + cause);
+        SceneManager.LoadScene("TitleScene");
+        }
+
+
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
