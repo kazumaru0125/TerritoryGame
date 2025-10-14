@@ -69,15 +69,10 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
         Debug.Log($"{team} Team WIN!");
 
-        if (PhotonNetwork.IsConnected)
-            {
-            StartCoroutine(DisconnectAndGoToTitle(2f));
-            }
-        else
-            {
-            SceneManager.LoadScene("TitleScene");
-            }
+        // ’¼ÚSceneManager‚ğŒÄ‚Î‚¸‚ÉManager‚É’Ê’m
+        ChangeSceneManager.Instance.GoToTitleScene(2f);
         }
+
 
     private IEnumerator DisconnectAndGoToTitle(float delay)
         {
