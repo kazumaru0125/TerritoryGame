@@ -44,6 +44,7 @@ public class PlayerJumpingState : IPlayerState
             isJumping = false;
             // ƒAƒCƒhƒ‹ó‘Ô‚É–ß‚é
             player.ChangeState(player.idelState);
+          
             return;
         }
 

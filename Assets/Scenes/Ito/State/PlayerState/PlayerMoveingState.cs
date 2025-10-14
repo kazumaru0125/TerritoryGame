@@ -14,7 +14,7 @@ public class PlayerMoveingState : IPlayerState
     //開始
     public void EnterState(PlayerController player)
     {
-        //Debug.Log("クラウチングスタート");
+        Debug.Log("クラウチングスタート");
     }
 
     //更新処理
@@ -64,6 +64,8 @@ public class PlayerMoveingState : IPlayerState
         // 入力があれば移動・回転処理
         if (move.magnitude > 0.05f)
         {
+            Debug.Log("移動中");
+
             isWalking = true;
             if (isDash || isRun)
                 isRunning = true;
@@ -81,7 +83,7 @@ public class PlayerMoveingState : IPlayerState
     //終了
     public void ExitState(PlayerController player)
     {
-        //Debug.Log("うー");
+        Debug.Log("うー");
     }
 
 }

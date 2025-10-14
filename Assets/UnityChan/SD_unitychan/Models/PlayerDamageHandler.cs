@@ -31,10 +31,16 @@ public class PlayerDamageHandler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("AttackHitbox"))
         {
-            Debug.Log("ダメージ受けました");
-            PlayDamageAnimation();
-
-            // さらにHP減少処理などあればここに
+            var status = other.GetComponent<AttackHitboxStatus>();
+            if (status != null && status.isAttacking)
+            {
+                Debug.Log("ダメージ受けました");
+                PlayDamageAnimation();
+            }
+            else
+            {
+                Debug.Log("攻撃判定はあるがisAttackingがfalse");
+            }
         }
     }
 }

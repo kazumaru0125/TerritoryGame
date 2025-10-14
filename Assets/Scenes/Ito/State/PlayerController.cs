@@ -38,11 +38,11 @@ public class PlayerController : MonoBehaviourPun
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
         {
             ChangeState(jumpingState);
-            return;
+            //return;
         }
 
         // UŒ‚ƒL[‚ª‰Ÿ‚³‚ê‚½‚çUŒ‚ó‘Ô‚É‘JˆÚ
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1"))
         {
             ChangeState(attackingState);
             return;
