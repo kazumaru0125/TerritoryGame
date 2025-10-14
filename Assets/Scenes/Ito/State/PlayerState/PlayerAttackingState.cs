@@ -11,8 +11,8 @@ public class PlayerAttackingState : IPlayerState
 
     public void EnterState(PlayerController player)
     {
+        Debug.Log("攻撃開始");
         playerController = player;
-
         // 攻撃判定用GameObject取得・非アクティブ化
         attackHitbox = player.transform.Find("AttackHitbox")?.gameObject;
         if (attackHitbox != null)
@@ -23,35 +23,29 @@ public class PlayerAttackingState : IPlayerState
 
     public void UpdateState(PlayerController player)
     {
-        float rt = Input.GetAxis("RT");
+        Debug.Log("攻撃中: hitbox有効化");
+        //float rt = Input.GetAxis("RT");
 
-        if (!isAttackingPlaying)
-        {
-            if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1") || rt > 0.5f)
-            {
-                // 攻撃開始：当たり判定を有効化
-                if (attackHitbox != null)
-                    attackHitbox.SetActive(true);
-
-                isAttackingPlaying = true;
-
-                Debug.LogError("しばく");
-                // 攻撃アニメーションがあればここで再生する
-                // playerController.GetComponent<Animator>().SetTrigger("Attack");
-            }
-        }
-        else
-        {
-            // 攻撃終了の判定はアニメーション時間や別トリガーで行うのが望ましい
-            // ここでは簡単に一定時間後に当たり判定無効化と状態遷移を行う例
-
-            // ここは例なので攻撃持続時間1秒後に終了させましょう
-            playerController.StartCoroutine(EndAttackAfterDelay(1.0f));
-        }
+        //if (!isAttackingPlaying)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1") || rt > 0.5f)
+        //    {
+        //        Debug.Log("攻撃中: hitbox有効化");
+        //        if (attackHitbox != null)
+        //        {
+        //            attackHitbox.SetActive(true);
+        //            attackHitbox.GetComponent<AttackHitboxStatus>().isAttacking = true;
+        //        }
+        //        isAttackingPlaying = true;
+        //        playerController.StartCoroutine(EndAttackAfterDelay(0.3f));
+        //    }
+        //}
     }
+
 
     public void ExitState(PlayerController player)
     {
+        Debug.Log("攻撃終了");
         if (attackHitbox != null)
             attackHitbox.SetActive(false);
         isAttackingPlaying = false;
@@ -64,9 +58,12 @@ public class PlayerAttackingState : IPlayerState
         if (attackHitbox != null)
             attackHitbox.SetActive(false);
 
+        attackHitbox.GetComponent<AttackHitboxStatus>().isAttacking = false;
+
         isAttackingPlaying = false;
 
-        // 攻撃終了後、アイドル状態に戻す
+        // 攻撃終了後アイドル状態へ
         playerController.ChangeState(playerController.idelState);
     }
+
 }
