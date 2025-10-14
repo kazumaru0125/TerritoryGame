@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Project/TitleScene.unity
     guid: b83ec3dca55e37546b6e70e76ced3940
   - enabled: 1
+    path: Assets/Scenes/Kondo/newtestmap/newstagetest.unity
+    guid: 109b4ce2c2901004eb1e5bb390ce0319
+  - enabled: 0
     path: Assets/Scenes/Project/LobbyScene.unity
     guid: 900a65e953426fb4dbe7bfb2632af31f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Project/TGameScene.unity
     guid: d94b8e0c9515ce04d9db372a23a3d1ee
   - enabled: 0
