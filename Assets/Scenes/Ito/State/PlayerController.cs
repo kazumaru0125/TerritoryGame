@@ -3,91 +3,49 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviourPun
 {
+    public Animator Animator { get; private set; }
+    public Rigidbody Rigidbody { get; private set; }
+    public float JumpForce = 9f;
+    public float RunSpeed = 14.0f;
+    public float WalkSpeed = 7.5f;
+
+    public bool IsRun { get; private set; }
+
     private IPlayerState currentState;
-
-    public PlayerIdlingState idelState = new PlayerIdlingState();
-    public PlayerMoveingState moveingState = new PlayerMoveingState();
-    public PlayerJumpingState jumpingState = new PlayerJumpingState();
-    public PlayerAttackingState attackingState = new PlayerAttackingState();
-    public PlayerCatchingState catchingState = new PlayerCatchingState();
-
-    public float moveSpeed = 5.0f;
 
     void Start()
     {
-        // 自分のプレイヤーのみ初期化
-        if (!photonView.IsMine) return;
-
-        if (idelState != null)
-        {
-            currentState = idelState;
-            currentState.EnterState(this);
-        }
+        Animator = GetComponent<Animator>();
+        Rigidbody = GetComponent<Rigidbody>();
+        ChangeState(new PlayerMoveingState());
     }
 
     void Update()
     {
-        if (!photonView.IsMine) return;  // 自分のプレイヤーのみ操作許可
+        if (!photonView.IsMine) return;
 
-        if (currentState != null)
-        {
-            currentState.UpdateState(this);
-        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            IsRun = !IsRun;
 
-        // ジャンプキーが押されたらジャンプ状態に遷移
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
-        {
-            ChangeState(jumpingState);
-            //return;
-        }
-
-        // 攻撃キーが押されたら攻撃状態に遷移
-        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1"))
-        {
-            ChangeState(attackingState);
-            return;
-        }
-
-        // キャッチキーが押されたらキャッチ状態に遷移
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ChangeState(catchingState);
-            return;
-        }
-
-        // もし現在の状態がIdleで、移動入力があればMoveingStateに切り替える例
-        if (currentState == idelState)
-        {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-            if (Mathf.Abs(x) > 0.1f || Mathf.Abs(z) > 0.1f)
-            {
-                ChangeState(moveingState);
-                return;
-            }
-        }
-
-        // 移動状態から入力なしでIdle状態に戻す例
-        if (currentState == moveingState)
-        {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-            if (Mathf.Abs(x) < 0.1f && Mathf.Abs(z) < 0.1f)
-            {
-                ChangeState(idelState);
-                return;
-            }
-        }
+        currentState?.UpdateState(this);
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0")) && IsGrounded())
+            ChangeState(new PlayerJumpingState());
+        else if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1"))
+            ChangeState(new PlayerAttackingState());
     }
-
 
     public void ChangeState(IPlayerState newState)
     {
-        if (newState != null && currentState != newState)
-        {
-            currentState?.ExitState(this);
-            currentState = newState;
-            currentState?.EnterState(this);
-        }
+        currentState?.ExitState(this);
+        currentState = newState;
+        currentState?.EnterState(this);
     }
+
+    public bool IsGrounded()
+    {
+        float checkDistance = 0.3f;
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+        return Physics.Raycast(origin, Vector3.down, checkDistance);
+    }
+
 }
