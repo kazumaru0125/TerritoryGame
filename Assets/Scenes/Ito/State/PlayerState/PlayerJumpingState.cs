@@ -30,4 +30,3 @@ public class PlayerJumpingState : IPlayerState
         // 着地時のアニメーションや状態リセットがあれば記述
     }
 }
-
