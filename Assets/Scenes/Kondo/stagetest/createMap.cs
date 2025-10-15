@@ -100,7 +100,7 @@ public class createMap : MonoBehaviour
                                break;
                                 
                                 case "6"://お札
-                                Instantiate(ofuda, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(ofuda, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.Euler(-90, 0, 0));
                                 break;
                                 case "7"://アイテムボックス
                                 Instantiate(box, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
