@@ -11,20 +11,19 @@ public class ItemRouletteScript : MonoBehaviour
     public RawImage rouletteImage; // 現在のアイテムを表示するUI
 
     [Header("ルーレット設定")]
-    public float spinDuration = 3f; // ルーレットが回る時間
-    public float initialSpeed = 0.05f; // 最初の切り替え間隔
-    public float slowDownRate = 0.01f; // 徐々に遅くする間隔増加量
+    public float spinDuration = 2f; // ルーレットが回る時間（2秒で止まる）
+    public float switchInterval = 0.02f; // 切り替え間隔（速さ）
 
     private bool isSpinning = false;
     private Texture2D decidedItem; // 決定した画像
 
     void Start()
         {
-        // 🎯 初期状態では何も表示しない
+        // 初期状態では非表示
         if (rouletteImage != null)
             {
             rouletteImage.texture = null;
-            rouletteImage.color = new Color(1, 1, 1, 0); // 非表示
+            rouletteImage.color = new Color(1, 1, 1, 0);
             }
         }
 
@@ -53,22 +52,17 @@ public class ItemRouletteScript : MonoBehaviour
 
         isSpinning = true;
         float timer = 0f;
-        float currentSpeed = initialSpeed;
 
         // 表示を有効化
         rouletteImage.color = new Color(1, 1, 1, 1);
 
-        // 🎡 ランダムに画像を切り替えるルーレット演出
+        // 🎡 高速で画像を切り替える（一定速度）
         while (timer < spinDuration)
             {
             int randomIndex = Random.Range(0, itemTextures.Length);
             rouletteImage.texture = itemTextures[randomIndex];
-
-            yield return new WaitForSeconds(currentSpeed);
-
-            // 徐々にスピードを落とす
-            currentSpeed += slowDownRate;
-            timer += Time.deltaTime;
+            yield return new WaitForSeconds(switchInterval);
+            timer += switchInterval;
             }
 
         // 🎯 最終的にランダムなアイテムを選択
@@ -89,14 +83,13 @@ public class ItemRouletteScript : MonoBehaviour
         if (rouletteImage != null)
             {
             rouletteImage.texture = null;
-            rouletteImage.color = new Color(1, 1, 1, 0); // 非表示
+            rouletteImage.color = new Color(1, 1, 1, 0);
             }
         Debug.Log("ルーレット非表示");
         }
 
     void GiveItemToPlayer(Texture2D item)
         {
-        // 実際のゲームロジックに合わせてここをカスタマイズ
         Debug.Log($"プレイヤーが {item.name} を取得！");
         // 例: GameManager.Instance.AddItemTexture(item);
         }

@@ -622,9 +622,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: adf958780dddb4745a28af16803cd205, type: 3}
   - {fileID: 2800000, guid: c5be2506fb4befa4bbdbe394d23be59b, type: 3}
   rouletteImage: {fileID: 1614515186}
-  spinDuration: 2.6
-  initialSpeed: 0.04
-  slowDownRate: 0.015
+  spinDuration: 1.5
+  switchInterval: 0.02
 --- !u!114 &1614515186
 MonoBehaviour:
   m_ObjectHideFlags: 0
