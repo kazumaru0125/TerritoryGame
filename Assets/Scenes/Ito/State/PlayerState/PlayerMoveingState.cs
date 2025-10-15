@@ -42,6 +42,7 @@ public class PlayerMoveingState : IPlayerState
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRot, Time.deltaTime * 10f);
         }
 
+
         // Animator用パラメータを確実にセット
         if(!isWalking)
         {

@@ -5,6 +5,8 @@ public class PlayerAttackingState : IPlayerState
     public void EnterState(PlayerController player)
     {
         player.Animator.SetBool("is_attacking", true);
+        player.Animator.SetBool("is_walking", false);
+        player.Animator.SetBool("is_running", false);
     }
 
     public void UpdateState(PlayerController player)

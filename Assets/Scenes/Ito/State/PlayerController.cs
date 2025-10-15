@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown("joystick button 8"))
             IsRun = !IsRun;
 
         currentState?.UpdateState(this);
