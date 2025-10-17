@@ -4,8 +4,35 @@ public class PlayerMoveingState : IPlayerState
 {
     public void EnterState(PlayerController player)
     {
-        // 何もしない（初期状態はAnimator側のIdle、Walk、Runに任せる）
+        // 現在の移動・走り状態を即時反映
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+        forward.y = 0; right.y = 0;
+        forward.Normalize(); right.Normalize();
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 move = forward * z + right * x;
+        bool isWalking = move.magnitude > 0.05f;
+        bool isRunning = player.IsRun && isWalking;
+
+        if (isRunning)
+        {
+            player.Animator.SetBool("is_running", true);
+            player.Animator.SetBool("is_walking", false);
+        }
+        else if (isWalking)
+        {
+            player.Animator.SetBool("is_walking", true);
+            player.Animator.SetBool("is_running", false);
+        }
+        else
+        {
+            player.Animator.SetBool("is_running", false);
+            player.Animator.SetBool("is_walking", false);
+        }
     }
+
 
     public void UpdateState(PlayerController player)
     {
@@ -18,8 +45,8 @@ public class PlayerMoveingState : IPlayerState
         float z = Input.GetAxis("Vertical");
         Vector3 move = forward * z + right * x;
 
-        bool isWalking = false;
-        bool isRunning = false;
+        bool isWalking = move.magnitude > 0.05f;
+        bool isRunning = player.IsRun && isWalking;
 
         // 地面判定
         bool isGrounded = player.IsGrounded();
@@ -42,7 +69,6 @@ public class PlayerMoveingState : IPlayerState
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRot, Time.deltaTime * 10f);
         }
 
-
         // Animator用パラメータを確実にセット
         if(!isWalking)
         {
@@ -58,7 +84,6 @@ public class PlayerMoveingState : IPlayerState
         player.Animator.SetBool("is_running", isRunning);
         player.Animator.SetBool("is_attacking", false);
     }
-
 
     public void ExitState(PlayerController player)
     {
