@@ -25,7 +25,7 @@ public class GetAitem : MonoBehaviour
     void Update()
         {
         // Spaceキーで効果発動
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.X))
             {
             int num = ItemRouletteScript.decidedItemNumber;
 
