@@ -10,6 +10,7 @@ TagManager:
   - Floor
   - Ofuda
   - AttackHitbox
+  - Bomb
   layers:
   - Default
   - TransparentFX
