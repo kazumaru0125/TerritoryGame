@@ -672,6 +672,7 @@ MonoBehaviour:
   ofudas: {fileID: 806702070725058142, guid: 776f147532fa46c4899bc07c7884d6f1, type: 3}
   boxs: {fileID: 3165322309811437156, guid: 676fb5f842ac32141913fe7aebd9851a, type: 3}
   jumps: {fileID: 4976997056025506496, guid: 75d69bb68fb878d459ab9960f4126d40, type: 3}
+  testOBJ: {fileID: 3414737929206863314, guid: b78c5965638a992418ba48cb85060f6a, type: 3}
 --- !u!1 &2055210114
 GameObject:
   m_ObjectHideFlags: 0

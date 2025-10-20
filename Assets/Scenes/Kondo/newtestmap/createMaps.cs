@@ -31,6 +31,8 @@ public class createMaps : MonoBehaviour
     private GameObject boxs;
     [SerializeField]
     private GameObject jumps;
+    [SerializeField]
+    private GameObject testOBJ;
     /*
     [SerializeField]
     private GameObject start;
@@ -108,10 +110,11 @@ public class createMaps : MonoBehaviour
                                 case "8"://ジャンプ
                                 Instantiate(jumps, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
-                                /*
-                                case "9"://収集アイテム
-                                Instantiate(item, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                
+                                case "11"://収集アイテム
+                                Instantiate(testOBJ, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
+                                /*
                                 case "10"://収集アイテム
                                 Instantiate(item, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
