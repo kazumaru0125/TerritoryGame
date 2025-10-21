@@ -14,7 +14,7 @@ public class PlayerMoveingState : IPlayerState
         float z = Input.GetAxis("Vertical");
         Vector3 move = forward * z + right * x;
         bool isWalking = move.magnitude > 0.05f;
-        bool isRunning = player.IsRun && isWalking;
+        bool isRunning = player.IsRun && (isWalking || player.Animator.GetBool("is_running"));
 
         if (isRunning)
         {
