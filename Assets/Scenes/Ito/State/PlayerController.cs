@@ -1,4 +1,4 @@
-using Photon.Pun;  // Photon用に追加
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviourPun
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviourPun
     public bool IsRun { get; private set; }
 
     private IPlayerState currentState;
+    private bool isAttackTriggered = false; // 攻撃トリガーフラグ
 
     void Start()
     {
@@ -27,11 +28,23 @@ public class PlayerController : MonoBehaviourPun
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown("joystick button 8"))
             IsRun = !IsRun;
 
-        currentState?.UpdateState(this);
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0")) && IsGrounded())
-            ChangeState(new PlayerJumpingState());
-        else if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1"))
+        // 攻撃トリガー（攻撃中は二重に遷移しない）
+        if (!isAttackTriggered && (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1")))
+        {
+            isAttackTriggered = true;
             ChangeState(new PlayerAttackingState());
+        }
+
+        // 状態更新
+        currentState?.UpdateState(this);
+
+        // 攻撃終了でトリガーフラグを解除
+        if (currentState is PlayerMoveingState)
+            isAttackTriggered = false;
+
+        // ジャンプトリガーは攻撃フラグが立ってないときのみ許可
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0")) && IsGrounded() && !(currentState is PlayerAttackingState))
+            ChangeState(new PlayerJumpingState());
     }
 
     public void ChangeState(IPlayerState newState)
@@ -47,5 +60,4 @@ public class PlayerController : MonoBehaviourPun
         Vector3 origin = transform.position + Vector3.up * 0.1f;
         return Physics.Raycast(origin, Vector3.down, checkDistance);
     }
-
 }
