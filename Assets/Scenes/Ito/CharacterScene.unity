@@ -253,7 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f16632f55d67684c86c0513cba28c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  JumpForce: 9
+  RunSpeed: 14
+  WalkSpeed: 7.5
 --- !u!1 &428262184 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5781632681493467937, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
@@ -1308,7 +1310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f16632f55d67684c86c0513cba28c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  JumpForce: 9
+  RunSpeed: 14
+  WalkSpeed: 7.5
 --- !u!4 &1580095206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5781632681493303055, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
@@ -6765,6 +6769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: unitychan_Oni
       objectReference: {fileID: 0}
+    - target: {fileID: 5781632681500762601, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e493ec62579a4ed49b9f57f5f9a652f8, type: 2}
     - target: {fileID: 6620187788905966261, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_Enabled
       value: 0
