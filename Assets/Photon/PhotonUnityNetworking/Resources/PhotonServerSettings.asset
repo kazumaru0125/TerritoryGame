@@ -48,6 +48,7 @@ MonoBehaviour:
   - RequestDestroyRPC
   - RequestDestroyOfudaRPC
   - AddOfudaScoreRPC
+  - RPC_PlayDamageAnimation
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

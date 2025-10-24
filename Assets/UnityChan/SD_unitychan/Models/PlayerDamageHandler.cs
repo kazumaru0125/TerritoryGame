@@ -29,6 +29,8 @@ public class PlayerDamageHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Hit detected with: {other.gameObject.name} Tag:{other.gameObject.tag}");
+
         if (other.gameObject.CompareTag("AttackHitbox"))
         {
             var status = other.GetComponent<AttackHitboxStatus>();
