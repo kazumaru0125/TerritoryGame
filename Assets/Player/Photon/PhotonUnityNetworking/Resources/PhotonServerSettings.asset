@@ -48,9 +48,13 @@ MonoBehaviour:
   - RequestDestroyRPC
   - RequestDestroyOfudaRPC
   - AddOfudaScoreRPC
+<<<<<<< HEAD:Assets/Player/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset
   - PickupOfudaRPC
   - StealOfudaRPC
   - OnTeamWin
+=======
+  - RPC_PlayDamageAnimation
+>>>>>>> UnityOni:Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

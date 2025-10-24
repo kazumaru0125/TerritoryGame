@@ -10,7 +10,11 @@ TagManager:
   - Floor
   - Ofuda
   - AttackHitbox
+<<<<<<< HEAD
   - Bomb
+=======
+  - Oni
+>>>>>>> UnityOni
   layers:
   - Default
   - TransparentFX

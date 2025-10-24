@@ -813,6 +813,10 @@ PrefabInstance:
       propertyPath: jumpScript
       value: 
       objectReference: {fileID: 428262197}
+    - target: {fileID: 9105878519249519012, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5443770315238386101, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
@@ -1313,6 +1317,19 @@ MonoBehaviour:
   JumpForce: 9
   RunSpeed: 14
   WalkSpeed: 7.5
+--- !u!114 &1561098549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561098461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b855b07cc3d1594c9934d707ac5eaad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!4 &1580095206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5781632681493303055, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
@@ -1488,6 +1505,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
+<<<<<<< HEAD
   m_Center: {x: 0, y: -0.3, z: 0.1}
 --- !u!114 &1846706262
 MonoBehaviour:
@@ -1502,6 +1520,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+=======
+  m_Center: {x: 0, y: -1, z: 0.1}
+>>>>>>> UnityOni
 --- !u!1 &1918572310
 GameObject:
   m_ObjectHideFlags: 0
@@ -6691,7 +6712,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2780743690659803650, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_SynchronizeParameters.Array.size
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2780743690659803650, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[2].Name
+      value: is_attacking
       objectReference: {fileID: 0}
     - target: {fileID: 2780743690659803650, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[3].Name
@@ -6769,6 +6794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: unitychan_Oni
       objectReference: {fileID: 0}
+    - target: {fileID: 5781632681493467937, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
+      propertyPath: m_TagString
+      value: Oni
+      objectReference: {fileID: 0}
     - target: {fileID: 5781632681500762601, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_Controller
       value: 
@@ -6844,6 +6873,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5781632681493467937, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1561098536}
+    - targetCorrespondingSourceObject: {fileID: 5781632681493467937, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1561098549}
   m_SourcePrefab: {fileID: 100100000, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
