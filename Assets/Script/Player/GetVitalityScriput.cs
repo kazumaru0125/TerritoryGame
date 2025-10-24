@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using Photon.Pun;
 
 public class GetVitalityScriput : MonoBehaviourPun
@@ -7,17 +7,17 @@ public class GetVitalityScriput : MonoBehaviourPun
 
     private void OnCollisionEnter(Collision collision)
         {
-        if (!photonView.IsMine) return; // ©•ª‚ÌƒLƒƒƒ‰‚¾‚¯‚ªˆ—
+        if (!photonView.IsMine) return; // è‡ªåˆ†ã®ã‚­ãƒ£ãƒ©ã ã‘ãŒå‡¦ç†
 
         if (collision.gameObject.CompareTag("vitality"))
             {
             PlayerRole role = GetComponent<PlayerRole>();
             if (role == null || string.IsNullOrEmpty(role.CurrentTeam)) return;
 
-            // ƒXƒRƒA‰ÁZ‚ğ‘Sˆõ‚É“¯Šú
+            // ã‚¹ã‚³ã‚¢åŠ ç®—ã‚’å…¨å“¡ã«åŒæœŸ
             photonView.RPC(nameof(AddScoreRPC), RpcTarget.All, role.CurrentTeam, Vitality);
 
-            // ƒAƒCƒeƒ€íœ‚ğ MasterClient ‚ÉˆË—Š
+            // ã‚¢ã‚¤ãƒ†ãƒ å‰Šé™¤ã‚’ MasterClient ã«ä¾é ¼
             PhotonView targetView = collision.gameObject.GetComponent<PhotonView>();
             if (targetView != null)
                 {

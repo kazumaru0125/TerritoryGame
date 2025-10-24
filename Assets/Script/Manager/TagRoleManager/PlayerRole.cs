@@ -11,10 +11,17 @@ public class PlayerRole : MonoBehaviourPunCallbacks
     private TextMeshPro teamText;
     private Transform uiTransform;
 
+    public GameObject humanModel;
+    public GameObject oniModel;
+
     private void Start()
         {
         UpdateTeam();
         UpdateRole();
+
+        if (humanModel != null) humanModel.SetActive(false);
+        if (oniModel != null) oniModel.SetActive(false);
+
 
         // --- UI生成 ---
         GameObject uiObj = new GameObject("TeamUI");
@@ -112,7 +119,7 @@ public class PlayerRole : MonoBehaviourPunCallbacks
             {
             CurrentRole = (string)role;
             UpdateTeamUI();
-
+            ApplyRoleVisual();
             Debug.Log($"{photonView.Owner.NickName} の役割は {CurrentRole} になりました");
             }
         }
@@ -130,6 +137,15 @@ public class PlayerRole : MonoBehaviourPunCallbacks
                 renderer.material.color = Color.gray;
             }
         }
+
+    private void ApplyRoleVisual()
+        {
+        if (humanModel != null)
+            humanModel.SetActive(CurrentRole == "Human" || CurrentRole == "Runner"); // RunnerならHumanモデル
+        if (oniModel != null)
+            oniModel.SetActive(CurrentRole == "Oni");
+        }
+
 
     private void UpdateTeamUI()
         {
