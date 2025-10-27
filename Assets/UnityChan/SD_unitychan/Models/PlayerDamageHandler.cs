@@ -27,22 +27,18 @@ public class PlayerDamageHandler : MonoBehaviour
         animator.SetBool("is_damage", false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"Hit detected with: {other.gameObject.name} Tag:{other.gameObject.tag}");
-
+        var status = other.GetComponent<AttackHitboxStatus>();
+        Debug.Log("[OnTriggerStay] " + (status != null ? status.isAttacking.ToString() : "null"));
         if (other.gameObject.CompareTag("AttackHitbox"))
         {
-            var status = other.GetComponent<AttackHitboxStatus>();
             if (status != null && status.isAttacking)
             {
-                Debug.Log("ダメージ受けました");
+                Debug.Log("ダメージ受けました（Stay）");
                 PlayDamageAnimation();
-            }
-            else
-            {
-                Debug.Log("攻撃判定はあるがisAttackingがfalse");
             }
         }
     }
+
 }
