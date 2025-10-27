@@ -11,7 +11,8 @@ public class GetVitalityScriput : MonoBehaviourPun
 
         if (collision.gameObject.CompareTag("vitality"))
             {
-            PlayerRole role = GetComponent<PlayerRole>();
+            //PlayerRole role = GetComponent<PlayerRole>();
+            TestPlayerRoll role = GetComponent<TestPlayerRoll>();
             if (role == null || string.IsNullOrEmpty(role.CurrentTeam)) return;
 
             // スコア加算を全員に同期
@@ -44,9 +45,10 @@ public class GetVitalityScriput : MonoBehaviourPun
         if (!PhotonNetwork.IsMasterClient) return;
 
         PhotonView pv = PhotonView.Find(viewID);
-        if (pv != null)
+        if (pv != null && pv.gameObject != null)
             {
             PhotonNetwork.Destroy(pv.gameObject);
             }
         }
+
     }

@@ -86,8 +86,8 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         if (myIndex >= 0 && myIndex < spawnAreas.Length)
             {
             Transform spawnPoint = spawnAreas[myIndex];
-             PhotonNetwork.Instantiate("unitychan", spawnPoint.position, spawnPoint.rotation);
-            //PhotonNetwork.Instantiate("Player", spawnPoint.position, spawnPoint.rotation);
+            // PhotonNetwork.Instantiate("unitychan", spawnPoint.position, spawnPoint.rotation);
+               PhotonNetwork.Instantiate("Player", spawnPoint.position, spawnPoint.rotation);
             }
         else
             {
