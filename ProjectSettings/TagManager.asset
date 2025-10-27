@@ -3,23 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Obstacle
-  - vitality
-  - SpawnArea
-  - Floor
-  - Ofuda
-  - AttackHitbox
-<<<<<<< HEAD
-  - Bomb
-=======
-  - Oni
->>>>>>> UnityOni
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Minimap
+  - 
   - Water
   - UI
   - 
