@@ -11,17 +11,33 @@ public class PlayerRole : MonoBehaviourPunCallbacks
     private TextMeshPro teamText;
     private Transform uiTransform;
 
-    public GameObject humanModel;
-    public GameObject oniModel;
+    //private void Start()
+    //    {
+    //    UpdateTeam();
+    //    UpdateRole();
+
+    //    // --- UI生成 ---
+    //    GameObject uiObj = new GameObject("TeamUI");
+    //    uiObj.transform.SetParent(transform);
+    //    uiTransform = uiObj.transform;
+    //    uiTransform.localPosition = new Vector3(0, 2.0f, 0);
+    //    uiTransform.localScale = Vector3.one * 0.1f;
+
+    //    teamText = uiObj.AddComponent<TextMeshPro>();
+    //    teamText.alignment = TextAlignmentOptions.Center;
+    //    teamText.fontSize = 2.5f;
+    //    teamText.enableAutoSizing = true;
+    //    teamText.text = "";
+    //    teamText.color = Color.white;
+
+    //    UpdateTeamUI();
+    //    }
 
     private void Start()
         {
+        AssignTeamAndRoleIfEmpty();
         UpdateTeam();
         UpdateRole();
-
-        if (humanModel != null) humanModel.SetActive(false);
-        if (oniModel != null) oniModel.SetActive(false);
-
 
         // --- UI生成 ---
         GameObject uiObj = new GameObject("TeamUI");
@@ -38,6 +54,40 @@ public class PlayerRole : MonoBehaviourPunCallbacks
         teamText.color = Color.white;
 
         UpdateTeamUI();
+        }
+
+    // --- チームとロールの未設定時の振り分け ---
+    private void AssignTeamAndRoleIfEmpty()
+        {
+        var playerList = PhotonNetwork.PlayerList;
+
+        // 既にチーム設定されている人数をカウント
+        int countA = 0;
+        int countB = 0;
+        foreach (var p in playerList)
+            {
+            if (p.CustomProperties.TryGetValue("Team", out object t))
+                {
+                if ((string)t == "A") countA++;
+                else if ((string)t == "B") countB++;
+                }
+            }
+
+        // 自分がまだ未設定なら割り振り
+        if (!photonView.Owner.CustomProperties.ContainsKey("Team"))
+            {
+            string assignedTeam = (countA < 2) ? "A" : "B";
+            var props = new ExitGames.Client.Photon.Hashtable { { "Team", assignedTeam } };
+            photonView.Owner.SetCustomProperties(props);
+            }
+
+        // ロールも未設定なら順番に割り振り（Human/Oni）
+        if (!photonView.Owner.CustomProperties.ContainsKey("Role"))
+            {
+            string assignedRole = (Random.value < 0.5f) ? "Human" : "Oni";
+            var props = new ExitGames.Client.Photon.Hashtable { { "Role", assignedRole } };
+            photonView.Owner.SetCustomProperties(props);
+            }
         }
 
     private void LateUpdate()
@@ -119,7 +169,7 @@ public class PlayerRole : MonoBehaviourPunCallbacks
             {
             CurrentRole = (string)role;
             UpdateTeamUI();
-            ApplyRoleVisual();
+
             Debug.Log($"{photonView.Owner.NickName} の役割は {CurrentRole} になりました");
             }
         }
@@ -137,15 +187,6 @@ public class PlayerRole : MonoBehaviourPunCallbacks
                 renderer.material.color = Color.gray;
             }
         }
-
-    private void ApplyRoleVisual()
-        {
-        if (humanModel != null)
-            humanModel.SetActive(CurrentRole == "Human" || CurrentRole == "Runner"); // RunnerならHumanモデル
-        if (oniModel != null)
-            oniModel.SetActive(CurrentRole == "Oni");
-        }
-
 
     private void UpdateTeamUI()
         {
