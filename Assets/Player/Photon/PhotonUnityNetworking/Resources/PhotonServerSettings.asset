@@ -51,6 +51,8 @@ MonoBehaviour:
   - PickupOfudaRPC
   - StealOfudaRPC
   - OnTeamWin
+  - SetRole
+  - SetTeam
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
