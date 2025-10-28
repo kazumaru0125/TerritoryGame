@@ -5812,12 +5812,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> PhotnCharacter
     - target: {fileID: 2518660916166642187, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: sceneViewId
       value: 4
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 >>>>>>> DemoTitleScene
+=======
+>>>>>>> PhotnCharacter
     - target: {fileID: 2644153454451094390, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -6642,12 +6648,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> PhotnCharacter
     - target: {fileID: 2518660916166642187, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: sceneViewId
       value: 3
       objectReference: {fileID: 0}
+<<<<<<< HEAD
 >>>>>>> DemoTitleScene
+=======
+>>>>>>> PhotnCharacter
     - target: {fileID: 2644153454451094390, guid: 0800488ce9963df43a9fe4c6d6ed1405, type: 3}
       propertyPath: m_Enabled
       value: 0
