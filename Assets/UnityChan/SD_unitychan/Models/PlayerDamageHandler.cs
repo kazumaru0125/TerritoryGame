@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerDamageHandler : MonoBehaviour
 {
     private Animator animator;
+   // private AttackHitboxStatus status;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class PlayerDamageHandler : MonoBehaviour
     public void PlayDamageAnimation()
     {
         StartCoroutine(DamageRoutine());
+
     }
 
     private IEnumerator DamageRoutine()
@@ -33,10 +35,12 @@ public class PlayerDamageHandler : MonoBehaviour
         Debug.Log("[OnTriggerStay] " + (status != null ? status.isAttacking.ToString() : "null"));
         if (other.gameObject.CompareTag("AttackHitbox"))
         {
+            status.StartHitbox();
             if (status != null && status.isAttacking)
             {
                 Debug.Log("ダメージ受けました（Stay）");
                 PlayDamageAnimation();
+                status.EndHitbox();
             }
         }
     }

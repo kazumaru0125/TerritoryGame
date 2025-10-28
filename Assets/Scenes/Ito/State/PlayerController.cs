@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviourPun
     public float RunSpeed = 14.0f;
     public float WalkSpeed = 7.5f;
 
+    public GameObject HetBox;
+
     public bool IsRun { get; private set; }
 
     private IPlayerState currentState;
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviourPun
         Animator = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody>();
         ChangeState(new PlayerMoveingState());
+        HetBox.SetActive(false);
     }
 
     void Update()
@@ -33,10 +36,15 @@ public class PlayerController : MonoBehaviourPun
         {
             isAttackTriggered = true;
             ChangeState(new PlayerAttackingState());
+            HetBox.SetActive(true);
+        }
+        else
+        {
+            HetBox.SetActive(false);
         }
 
-        // 状態更新
-        currentState?.UpdateState(this);
+            // 状態更新
+            currentState?.UpdateState(this);
 
         // 攻撃終了でトリガーフラグを解除
         if (currentState is PlayerMoveingState)
