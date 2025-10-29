@@ -347,7 +347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &34358041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2059,7 +2059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &701023516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3460,8 +3460,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u90E8\u5C4B\u306E\u540D\u524D:"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f83479b3119682b4381726927e81ce85, type: 2}
-  m_sharedMaterial: {fileID: 158728416602301638, guid: f83479b3119682b4381726927e81ce85, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b36acc553cf3014fb9e5610c3d60a2d, type: 2}
+  m_sharedMaterial: {fileID: 21949642160576604, guid: 8b36acc553cf3014fb9e5610c3d60a2d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3583,23 +3583,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 43.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 21.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3041762608396676951, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_fontAsset
@@ -3994,8 +3994,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u6B21\u3078"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f83479b3119682b4381726927e81ce85, type: 2}
-  m_sharedMaterial: {fileID: 158728416602301638, guid: f83479b3119682b4381726927e81ce85, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3efee4f854459214f87fc6f32795320a, type: 2}
+  m_sharedMaterial: {fileID: -7666864097485439972, guid: 3efee4f854459214f87fc6f32795320a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4089,7 +4089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1147366074
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5241,23 +5241,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 43.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 21.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3041762608396676951, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_fontAsset
