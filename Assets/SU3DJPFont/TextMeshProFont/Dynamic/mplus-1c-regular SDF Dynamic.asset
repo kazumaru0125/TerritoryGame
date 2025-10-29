@@ -248,10 +248,17 @@ Texture2D:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
+<<<<<<< HEAD
   serializedVersion: 2
   m_Width: 0
   m_Height: 0
   m_CompleteImageSize: 0
+=======
+  serializedVersion: 3
+  m_Width: 1
+  m_Height: 1
+  m_CompleteImageSize: 1
+>>>>>>> NewTitleScene
   m_MipsStripped: 0
   m_TextureFormat: 1
   m_MipCount: 1
@@ -275,8 +282,13 @@ Texture2D:
   m_LightmapFormat: 0
   m_ColorSpace: 0
   m_PlatformBlob: 
+<<<<<<< HEAD
   image data: 0
   _typelessdata: 
+=======
+  image data: 1
+  _typelessdata: 00
+>>>>>>> NewTitleScene
   m_StreamData:
     serializedVersion: 2
     offset: 0
