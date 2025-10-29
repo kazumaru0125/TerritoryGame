@@ -7,6 +7,9 @@ TagManager:
   - Floor
   - Ofuda
   - vitality
+  - AttackHitbox
+  - Oni
+  - Obstacle
   layers:
   - Default
   - TransparentFX
