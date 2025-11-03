@@ -58,6 +58,17 @@ public class TagRoleManager : MonoBehaviourPunCallbacks
             }
         }
 
+    //void AssignInitialRoles()
+    //    {
+    //    foreach (var p in PhotonNetwork.PlayerList)
+    //        {
+    //        ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable();
+    //        ht["Role"] = "Runner"; // ← 全員Human固定
+    //      //  p.SetCustomProperties(ht);
+    //        }
+    //    }
+
+
     /// <summary>
     /// 鬼が人を捕まえた時に呼ばれる（MasterClientのみが処理）
     /// </summary>

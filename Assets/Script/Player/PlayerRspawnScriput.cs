@@ -11,7 +11,7 @@ public class PlayerRespawnScript : MonoBehaviour
             }
         }
 
-    void RespawnAtRandomSpawnArea()
+   public  void RespawnAtRandomSpawnArea()
         {
         // Tagが "SpawnArea" のオブジェクトをすべて取得
         GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag("SpawnArea");
