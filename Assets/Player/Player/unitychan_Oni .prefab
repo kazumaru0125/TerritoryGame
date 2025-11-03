@@ -1027,7 +1027,6 @@ GameObject:
   - component: {fileID: 473430778476320478}
   - component: {fileID: 3947262378283738355}
   - component: {fileID: 4427939031833044416}
-  - component: {fileID: 6540765603771628094}
   - component: {fileID: 2822000872468865815}
   - component: {fileID: 8525371725570987988}
   - component: {fileID: 2956360696738780559}
@@ -1149,7 +1148,7 @@ MonoBehaviour:
   observableSearch: 0
   ObservedComponents:
   - {fileID: 4427939031833044416}
-  - {fileID: 6540765603771628094}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1169,33 +1168,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &6540765603771628094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764282223856640934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 2
-    Name: is_walking
-  - Type: 4
-    SynchronizeType: 2
-    Name: is_running
-  - Type: 4
-    SynchronizeType: 0
-    Name: is_attacking
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
 --- !u!114 &2822000872468865815
 MonoBehaviour:
   m_ObjectHideFlags: 0
