@@ -1,39 +1,37 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerRespawnScript : MonoBehaviour
+public class PlayerRespawnScript : MonoBehaviourPunCallbacks
     {
-    void Update()
+    public void RespawnAtRandomSpawnArea()
         {
-        // 「L」キーを押したら実行
-        if (Input.GetKeyDown(KeyCode.L))
-            {
-            RespawnAtRandomSpawnArea();
-            }
-        }
+        //if (!photonView.IsMine) return; // 自分のプレイヤーのみ実行
 
-   public  void RespawnAtRandomSpawnArea()
-        {
-        // Tagが "SpawnArea" のオブジェクトをすべて取得
         GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag("SpawnArea");
-
         if (spawnAreas.Length == 0)
             {
             Debug.LogWarning("SpawnAreaタグのオブジェクトが見つかりません。");
             return;
             }
 
-        // ランダムに1つ選ぶ
         GameObject randomArea = spawnAreas[Random.Range(0, spawnAreas.Length)];
-
-        // 選んだSpawnAreaの位置を取得
         Vector3 areaPos = randomArea.transform.position;
-
-        // 例えばSpawnAreaの少し上に移動（y座標を少し上げる）
         Vector3 newPosition = new Vector3(areaPos.x, areaPos.y + 1.0f, areaPos.z);
 
-        // このスクリプトがついているオブジェクトを移動
+        // 自分の位置を直接変更（←自分は自分で動かす）
         transform.position = newPosition;
 
-        Debug.Log($"{gameObject.name} が {randomArea.name} の上に移動しました。");
+        // ★ 全員にこの座標を通知
+        photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, newPosition);
+
+        Debug.Log($"[自分側] {gameObject.name} が {randomArea.name} の上に移動しました。");
+        }
+
+    // 他プレイヤーが見る位置を更新
+    [PunRPC]
+    void RPC_SetRespawnPosition(Vector3 newPosition)
+        {
+        transform.position = newPosition;
+        Debug.Log($"[他クライアント] {gameObject.name} がリスポーンしました。");
         }
     }
