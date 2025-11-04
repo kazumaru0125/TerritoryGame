@@ -54,11 +54,22 @@ public class PlayerCameraFollow : MonoBehaviour
         Vector3 desiredPos = targetPos + rotation * offset2;
 
         // Raycastで遮蔽物をチェック
+        // Raycastで遮蔽物をチェック
         RaycastHit hit;
-        if (Physics.Linecast(targetPos, desiredPos, out hit, collisionMask))
+        float cameraDistance = offset2.magnitude; // 本来の距離
+        Vector3 cameraDir = (rotation * offset2).normalized;
+
+        if (Physics.Raycast(targetPos, cameraDir, out hit, cameraDistance, collisionMask))
             {
-            desiredPos = hit.point + hit.normal * 0.2f;
+            // 遮蔽物の手前で止める
+            float hitDist = Mathf.Max(0.2f, hit.distance - 0.2f);
+            desiredPos = targetPos + cameraDir * hitDist;
             }
+        else
+            {
+            desiredPos = targetPos + rotation * offset2;
+            }
+
 
         // スムーズに移動
         transform.position = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
