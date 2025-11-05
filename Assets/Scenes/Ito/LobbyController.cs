@@ -115,7 +115,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     private IEnumerator WaitAndHideModel()
     {
         // Saluteステートの長さ取得
-        float saluteLength = 1.5f;
+        float saluteLength = 5.5f;
         if (animator != null)
         {
             foreach (var clip in animator.runtimeAnimatorController.animationClips)
@@ -226,7 +226,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + "is connected to Photon");
-        ActivatePanel(GameOptions_UI_Panel.name);
+        //ActivatePanel(GameOptions_UI_Panel.name);
 
     }
 

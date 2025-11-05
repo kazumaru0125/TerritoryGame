@@ -2611,6 +2611,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716383670}
   m_CullTransparentMesh: 1
+--- !u!1 &727277390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8135745641931580309, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
+  m_PrefabInstance: {fileID: 671153413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &740319238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2621,6 +2626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 740319240}
   - component: {fileID: 740319239}
+  - component: {fileID: 740319241}
   m_Layer: 0
   m_Name: 'LobbyManager '
   m_TagString: Untagged
@@ -2635,7 +2641,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740319238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0df386ee086c8684495a499cefb8ca5b, type: 3}
   m_Name: 
@@ -2672,6 +2678,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &740319241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740319238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e7ccf8c30c0dc489546b0614a5ce8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectionStatusText: {fileID: 1821322968}
+  playerNameInput: {fileID: 292178571}
+  Login_UI_Panel: {fileID: 1271866790}
+  GameOptions_UI_Panel: {fileID: 1951399701}
+  CreateRoom_UI_Panel: {fileID: 672361811}
+  roomNameInputField: {fileID: 1516788471}
+  InsideRoom_UI_Panel: {fileID: 538518057}
+  roomInfoText: {fileID: 1942130456}
+  playerListPrefab: {fileID: 727277390}
+  playerListContent: {fileID: 2001099832142661876, guid: 5c8e9880b19dfbc48a0d95211f5eefde, type: 3}
+  startGameButton: {fileID: 150638419}
+  RoomList_UI_Panel: {fileID: 1984944544}
+  roomListEntryPrefab: {fileID: 3994814421131352053, guid: 4fc0b83b946785f438bd30a1270c19a7, type: 3}
+  roomListParentGameObject: {fileID: 924120979}
+  Team_UI_Panel: {fileID: 550700563}
+  teamAListText: {fileID: 1961234367}
+  teamBListText: {fileID: 1539931263}
+  SD_unitychan_humanoid: {fileID: 2019825863}
 --- !u!1001 &746064988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3563,8 +3599,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnLoginButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -6430,6 +6466,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013670501}
   m_CullTransparentMesh: 1
+--- !u!1 &2019825863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100264, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
+  m_PrefabInstance: {fileID: 746064988}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2043263958
 GameObject:
   m_ObjectHideFlags: 0
