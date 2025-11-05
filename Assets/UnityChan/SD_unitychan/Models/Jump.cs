@@ -1,66 +1,61 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class Jump : MonoBehaviour
+public class Jump : MonoBehaviourPun
     {
-    // ジャンプする力の大きさ
     [SerializeField] private float jumpForce = 7f;
-    // 現在ジャンプ中かどうかのフラグ
     private bool isJumping = false;
     private Animator anim;
     private Rigidbody rb;
-    // プレイヤーが地面にいるかどうか
-    private bool isGrounded = false;
-    public bool IsGrounded { get { return isGrounded; } }
-    // 地面判定に使う距離
+    public bool isGrounded = false;
     private float groundCheckDistance = 0.3f;
-    // 地面判定を少し上から出すオフセット
     private Vector3 groundCheckOffset = Vector3.up * 0.1f;
 
     void Start()
         {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        // AnimatorまたはRigidbodyがセットされていない場合エラーメッセージを表示
-        if (anim == null) Debug.LogError("Animatorコンポーネントが見つかりません！");
-        if (rb == null) Debug.LogError("Rigidbodyコンポーネントが見つかりません！");
         }
 
     void FixedUpdate()
         {
-        // Raycastで足元に地面があるかチェックし、isGroundedに結果を入れる
         isGrounded = Physics.Raycast(transform.position + groundCheckOffset, Vector3.down, groundCheckDistance);
-
-        // 着地したらジャンプ状態を解除
         if (isGrounded && isJumping)
-            {
             isJumping = false;
-            }
         }
 
     void Update()
         {
-        // スペースキーまたはコントローラのRTボタンが押され、地面にいてジャンプ中でなければジャンプ実行
+        if (!photonView.IsMine)
+            return;
+
+        // 入力とジャンプ条件
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0")) && isGrounded && !isJumping)
             {
-            // ジャンプアニメーション再生
-            if (anim != null) anim.Play("Jump", 0, 0);
-            isJumping = true;
+            anim.applyRootMotion = false;
 
-            // ジャンプ前にRigidbodyのY方向速度をリセット
+            isJumping = true;
+            photonView.RPC(nameof(PlayJumpAnimation), RpcTarget.All); // ✅ 全クライアントへ送信
+
+            // 物理ジャンプ
             Vector3 velocity = rb.linearVelocity;
             velocity.y = 0;
             rb.linearVelocity = velocity;
-
-            // FixedUpdateの後で力を加えるためCoroutineで遅延
             StartCoroutine(ApplyJumpForce());
             }
         }
 
-    // ジャンプの力を物理的に加える（FixedUpdate後に実行するためコルーチン）
+    [PunRPC]
+    void PlayJumpAnimation()
+        {
+        if (anim != null)
+            anim.Play("Jump", 0, 0);
+        }
+
     IEnumerator ApplyJumpForce()
         {
         yield return new WaitForFixedUpdate();
-        rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }

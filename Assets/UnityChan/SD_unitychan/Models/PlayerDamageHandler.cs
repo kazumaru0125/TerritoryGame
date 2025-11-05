@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
-public class PlayerDamageHandler : MonoBehaviour
+public class PlayerDamageHandler : MonoBehaviourPun
     {
     private Animator animator;
-    private PlayerRespawnScript respawnScript; // ← 追加
+    private PlayerRespawnScript respawnScript;
 
     void Start()
         {
@@ -12,7 +13,6 @@ public class PlayerDamageHandler : MonoBehaviour
         if (animator == null)
             Debug.LogError("Animatorが見つかりません");
 
-        // 同じオブジェクト、または親オブジェクトにあるPlayerRespawnScriptを取得
         respawnScript = GetComponent<PlayerRespawnScript>();
         if (respawnScript == null)
             respawnScript = GetComponentInParent<PlayerRespawnScript>();
@@ -20,32 +20,37 @@ public class PlayerDamageHandler : MonoBehaviour
 
     public void PlayDamageAnimation()
         {
+        //// 自分のキャラでなければアニメーションをトリガーしない
+        //if (!photonView.IsMine)
+        //    return;
+
+        // RPCで全員に通知
+        photonView.RPC(nameof(RPC_PlayDamageAnimation), RpcTarget.All);
+        }
+
+    [PunRPC]
+    private void RPC_PlayDamageAnimation()
+        {
         StartCoroutine(DamageRoutine());
         }
 
     private IEnumerator DamageRoutine()
         {
+        if (animator == null) yield break;
+
         animator.SetBool("is_damage", true);
 
-        // ダメージアニメーション時間
+        // ダメージアニメーションの再生時間
         yield return new WaitForSeconds(1.0f);
 
         if (this != null && gameObject != null)
-            {
             animator.SetBool("is_damage", false);
-            }
 
-//        animator.SetBool("is_damage", false);
-
-        // ★ ダメージ後にリスポーンを呼び出す
-        if (respawnScript != null)
+        // リスポーン処理は自分のプレイヤーのみ実行
+        if (photonView.IsMine && respawnScript != null)
             {
             Debug.Log("ダメージ後にリスポーン実行");
             respawnScript.RespawnAtRandomSpawnArea();
-            }
-        else
-            {
-            Debug.LogWarning("PlayerRespawnScriptが見つからなかったためリスポーンできません。");
             }
         }
 
@@ -53,13 +58,14 @@ public class PlayerDamageHandler : MonoBehaviour
         {
         var status = other.GetComponent<AttackHitboxStatus>();
         Debug.Log("[OnTriggerStay] " + (status != null ? status.isAttacking.ToString() : "null"));
+
         if (other.gameObject.CompareTag("AttackHitbox"))
             {
             status.StartHitbox();
             if (status != null && status.isAttacking)
                 {
                 Debug.Log("ダメージ受けました（Stay）");
-                PlayDamageAnimation();
+                PlayDamageAnimation(); // ← RPC経由で全員に同期される
                 status.EndHitbox();
                 }
             }
