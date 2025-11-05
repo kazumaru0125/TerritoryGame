@@ -7,8 +7,8 @@ using Photon.Realtime;
 
 public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     {
-    [SerializeField] private TMP_Text ATeamVitality;
-    [SerializeField] private TMP_Text BTeamVitality;
+    [SerializeField] private TMP_Text myTeamVitalityText;
+    [SerializeField] private TMP_Text enemyTeamVitalityText;
 
     [SerializeField] private int changeValue = 1;
     [SerializeField] private int maxValue = 100;
@@ -17,8 +17,21 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     private int BTeamcurrentValue = 0;
     private bool isGameEnded = false;
 
+    private string myTeam; // 自分のチーム ("A" or "B")
+
     void Start()
         {
+        // 自分のチームをPlayer Custom Propertiesなどから取得
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
+            {
+            myTeam = (string)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+            }
+        else
+            {
+            // デフォルトでAチーム扱い
+            myTeam = "A";
+            }
+
         ATeamcurrentValue = 0;
         BTeamcurrentValue = 0;
         UpdateUI();
@@ -43,8 +56,16 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
     void UpdateUI()
         {
-        ATeamVitality.text = ATeamcurrentValue + "%";
-        BTeamVitality.text = BTeamcurrentValue + "%";
+        if (myTeam == "A")
+            {
+            myTeamVitalityText.text = ATeamcurrentValue + "%";
+            enemyTeamVitalityText.text = BTeamcurrentValue + "%";
+            }
+        else // 自分がBチームの場合
+            {
+            myTeamVitalityText.text = BTeamcurrentValue + "%";
+            enemyTeamVitalityText.text = ATeamcurrentValue + "%";
+            }
         }
 
     public void AddATeamVitality(int value)
@@ -69,26 +90,20 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
         Debug.Log($"{team} Team WIN!");
 
-        // 直接SceneManagerを呼ばずにManagerに通知
         ChangeSceneManager.Instance.GoToTitleScene(2f);
         }
-
 
     private IEnumerator DisconnectAndGoToTitle(float delay)
         {
         yield return new WaitForSeconds(delay);
-
         PhotonNetwork.Disconnect();
         }
 
-    // 切断完了時に呼ばれるコールバック
     public override void OnDisconnected(DisconnectCause cause)
         {
         Debug.Log("Photon disconnected: " + cause);
         SceneManager.LoadScene("TitleScene");
         }
-
-
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {

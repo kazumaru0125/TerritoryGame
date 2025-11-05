@@ -3932,8 +3932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f4df0421619034bb6324587dfea41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ATeamVitality: {fileID: 668298684}
-  BTeamVitality: {fileID: 478827898}
+  myTeamVitalityText: {fileID: 668298684}
+  enemyTeamVitalityText: {fileID: 478827898}
   changeValue: 1
   maxValue: 100
 --- !u!4 &1294930894

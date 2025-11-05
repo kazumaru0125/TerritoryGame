@@ -1,9 +1,12 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Data;
 
 public class ChildVitalityCollector : MonoBehaviour
     {
     public int Vitality = 1; // この子が取ったときのスコア
+    public int minusVitality = 1;
+
 
     private void OnCollisionEnter(Collision collision)
         {
@@ -22,6 +25,7 @@ public class ChildVitalityCollector : MonoBehaviour
             if (parentView != null)
                 parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, Vitality);
 
+
             // アイテム削除 RPC
             PhotonView targetView = collision.gameObject.GetComponent<PhotonView>();
             if (targetView != null)
@@ -30,5 +34,18 @@ public class ChildVitalityCollector : MonoBehaviour
                     parentView.RPC("RequestDestroyRPC", RpcTarget.MasterClient, targetView.ViewID);
                 }
             }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+
+        // --- 減算アイテムの場合 ---
+        if (other.gameObject.CompareTag("AttackHitbox"))
+            {
+            TestPlayerRoll role = GetComponentInParent<TestPlayerRoll>();
+            PhotonView parentView = role.photonView;
+            parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, -minusVitality);
+            }
+
         }
     }

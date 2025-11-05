@@ -71,7 +71,7 @@ public class TestMove : MonoBehaviour
            
             }
 
-        bool isGrounded = (jumpScript == null) ? true : jumpScript.IsGrounded;
+        bool isGrounded = (jumpScript == null) ? true : jumpScript.isGrounded;
 
         // 一時的なダッシュ：（ボタン0）を押している間
         //　一旦保留で残しておくnum_playerWalkSpeed
