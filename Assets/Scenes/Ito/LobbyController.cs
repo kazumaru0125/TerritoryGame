@@ -57,6 +57,32 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public GameObject SD_unitychan_humanoid; // モデルのGameObject
     private Animator animator;
 
+    public TMP_Text roomHostText;
+    public TMP_Text membersListText;
+    public int maxPlayers = 4;         // ルーム最大人数
+
+    private string[] dotsAnimArray = { "・", "・・", "・・・" };
+    private int dotsAnimIndex = 0;
+    private float dotsAnimInterval = 0.5f; // 点の更新間隔
+    private float dotsAnimTimer = 0f;
+
+
+    private List<string> randomNames = new List<string> 
+    {
+        "Unityちゃん", "トライデント", "ぼんじり", "前田",
+        "匿名希望", "名無しさん", "わしじゃよ"
+        // ここに好きな名前を追加
+    };
+
+    public static string GetHostName()
+    {
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+            if (p.IsMasterClient) return p.NickName;
+        }
+        return "Unknown";
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -71,6 +97,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
         if (SD_unitychan_humanoid != null)
         {
+            SD_unitychan_humanoid.SetActive(true);
             animator = SD_unitychan_humanoid.GetComponent<Animator>();
         }
     }
@@ -79,7 +106,21 @@ public class LobbyController : MonoBehaviourPunCallbacks
     private void Update()
     {
         connectionStatusText.text = "Connection status: " + PhotonNetwork.NetworkClientState;
+
+        // アニメーションタイマー処理
+        dotsAnimTimer += Time.deltaTime;
+        if (dotsAnimTimer >= dotsAnimInterval)
+        {
+            dotsAnimIndex = (dotsAnimIndex + 1) % dotsAnimArray.Length;
+            dotsAnimTimer = 0f;
+            // アニメーション表示をアップデート
+            if (InsideRoom_UI_Panel.activeSelf)
+            {
+                UpdateRoomInfoUI();
+            }
+        }
     }
+
 
     #endregion
 
@@ -136,6 +177,20 @@ public class LobbyController : MonoBehaviourPunCallbacks
         // UI次画面へ
         ActivatePanel(GameOptions_UI_Panel.name);
     }
+
+    public void OnRandomButtonClicked()
+    {
+        if (randomNames.Count == 0) return;
+
+        int index = Random.Range(0, randomNames.Count);
+        string selected = randomNames[index];
+
+        if (playerNameInput != null)
+        {
+            playerNameInput.text = selected;
+        }
+    }
+
 
     public void OnCreateRoomButtonClicked()
     {
@@ -321,6 +376,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
                 playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
             }
         }
+
+        UpdateRoomInfoUI();
     }
 
 
@@ -364,6 +421,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
 
         playerListGameObjects.Add(newPlayer.ActorNumber, playerListGameObject);
+
+        UpdateRoomInfoUI();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -377,6 +436,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
         {
             startGameButton.SetActive(true);
         }
+
+        UpdateRoomInfoUI();
     }
 
     public override void OnLeftRoom()
@@ -569,6 +630,34 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
         return count;
     }
+
+    void UpdateRoomInfoUI()
+    {
+        string hostName = GetHostName();
+        roomHostText.text = $"RoomHost : <b>{hostName}</b>";
+
+        List<string> memberNames = new List<string>();
+        foreach (Player p in PhotonNetwork.PlayerList)
+            memberNames.Add(p.NickName);
+
+        string result = "";
+        for (int i = 1; i < maxPlayers; i++)
+        {
+            int memberIndex = i;
+            if (i < memberNames.Count)
+            {
+                result += $"Member {memberIndex} : {memberNames[i]}\n";
+            }
+            else
+            {
+                string dots = dotsAnimArray[dotsAnimIndex];
+                result += $"Member {memberIndex} : 探しています{dots}\n";
+            }
+        }
+        membersListText.text = result;
+    }
+
+
 
     private void UpdateTeamUI()
     {
