@@ -1,74 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class moveCamera : MonoBehaviour
-{
-    // 🧭 追従の基準になるオブジェクト（例：testOBJ）
-    [SerializeField]
-    private GameObject referenceObj;
+public class MoveCamera : MonoBehaviour
+    {
+    private float fixedY;
+    private Vector3 offset = new Vector3(0, 10f, 0); // カメラの位置調整
+    private GameObject currentTarget;
 
-    [SerializeField]
-    private GameObject nextitem;
-
-    private float fixedY;      // カメラの高さを固定して保持
-
-    bool changeCamera = true;
-
-    // 🌸 基準からどれだけずらすか
-    private Vector3 offset = new Vector3(0.0f, 0.0f, 0.0f);
-
-    // 🎬 Startは最初の1回だけ呼ばれる
     void Start()
-    {
-        fixedY = transform.position.y;  // 初期Y座標を記録
-        // 安全チェック：参照が設定されていなかったら警告を出すの
-        if (referenceObj == null)
         {
-            Debug.LogWarning("referenceObj が設定されていません！インスペクタで testOBJ を指定してください♡");
+        fixedY = transform.position.y;
         }
-        if (nextitem == null)
-        {
-            Debug.LogWarning("nextitem が設定されていません！インスペクタで testOBJ を指定してください♡");
-        }
-    }
 
-    // 🕊 Updateは毎フレーム呼ばれる（プレイヤーの移動に合わせて動く）
     void Update()
-    {
-        // 🍀 1回だけEnterキーを押した時にカメラを切り替える処理
-        if (Input.GetKeyDown(KeyCode.Return)) // ← Returnキー（Enter）が押された瞬間だけ反応する
         {
-            changeCamera = !changeCamera; // true ↔ false を切り替え
-        }
+        // 毎フレーム、有効な MiniCameraChildScript を探す
+        MiniCameraChildScript[] allChildren = FindObjectsOfType<MiniCameraChildScript>();
 
-        if (changeCamera == true)
-        {
-            // もし参照が設定されていなければ何もしない
-            if (referenceObj == null) return;
+        foreach (var child in allChildren)
+            {
+            if (child.IsActive && child.enabled)
+                {
+                currentTarget = child.gameObject;
+                break;
+                }
+            }
 
-            // 🎯 基準オブジェクトの現在位置を取得
-            Vector3 basePos = referenceObj.transform.position;
+        if (currentTarget == null) return;
 
-            // 🌟 XとZだけ +5 した位置を計算（Yは同じ高さにする）
-            Vector3 newPos = new Vector3(basePos.x + offset.x, fixedY, basePos.z + offset.z);
+        // 追従対象の位置
+        Vector3 targetPos = currentTarget.transform.position + offset;
 
-            // 📦 自分自身（このスクリプトを持つオブジェクト）をその位置に移動させる
-            transform.position = newPos;
-        }
-        else
-        {
-            // もし参照が設定されていなければ何もしない
-            if (nextitem == null) return;
-
-            // 🎯 基準オブジェクトの現在位置を取得
-            Vector3 basePos = nextitem.transform.position;
-
-            // 🌟 XとZだけ位置を計算（Yは同じ高さにする）
-            Vector3 newPos = new Vector3(basePos.x + offset.x, fixedY, basePos.z + offset.z);
-
-            // 📦 自分自身（このスクリプトを持つオブジェクト）をその位置に移動させる
-            transform.position = newPos;
+        // 高さ固定 or なめらか追従
+        Vector3 smoothPos = Vector3.Lerp(transform.position, targetPos, 0.1f);
+        transform.position = new Vector3(smoothPos.x, fixedY, smoothPos.z);
         }
     }
-}
