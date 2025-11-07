@@ -2198,8 +2198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fedf1aecc0bf234092ee0955345df5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceObj: {fileID: 0}
-  nextitem: {fileID: 0}
 --- !u!20 &841816104
 Camera:
   m_ObjectHideFlags: 0
