@@ -10,6 +10,8 @@ TagManager:
   - AttackHitbox
   - Oni
   - Obstacle
+  - SpawnArea
+  - "MiniMapIcon \u3000"
   layers:
   - Default
   - TransparentFX
