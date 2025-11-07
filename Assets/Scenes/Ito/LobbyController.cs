@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +42,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public GameObject Team_UI_Panel;
     public TMP_Text teamAListText;
     public TMP_Text teamBListText;
-    //public Button resetButton; // Resetƒ{ƒ^ƒ“
+    //public Button resetButton; // Resetãƒœã‚¿ãƒ³
 
     private const int MaxPerTeam = 2;
 
@@ -54,24 +54,24 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     #region Unity Methods
 
-    public GameObject SD_unitychan_humanoid; // ƒ‚ƒfƒ‹‚ÌGameObject
+    public GameObject SD_unitychan_humanoid; // ãƒ¢ãƒ‡ãƒ«ã®GameObject
     private Animator animator;
 
     public TMP_Text roomHostText;
     public TMP_Text membersListText;
-    public int maxPlayers = 4;         // ƒ‹[ƒ€Å‘ål”
+    public int maxPlayers = 4;         // ãƒ«ãƒ¼ãƒ æœ€å¤§äººæ•°
 
-    private string[] dotsAnimArray = { "E", "EE", "EEE" };
+    private string[] dotsAnimArray = { "ãƒ»", "ãƒ»ãƒ»", "ãƒ»ãƒ»ãƒ»" };
     private int dotsAnimIndex = 0;
-    private float dotsAnimInterval = 0.5f; // “_‚ÌXVŠÔŠu
+    private float dotsAnimInterval = 0.5f; // ç‚¹ã®æ›´æ–°é–“éš”
     private float dotsAnimTimer = 0f;
 
 
     private List<string> randomNames = new List<string> 
     {
-        "Unity‚¿‚á‚ñ", "ƒgƒ‰ƒCƒfƒ“ƒg", "‚Ú‚ñ‚¶‚è", "‘O“c",
-        "“½–¼Šó–]", "–¼–³‚µ‚³‚ñ", "‚í‚µ‚¶‚á‚æ"
-        // ‚±‚±‚ÉD‚«‚È–¼‘O‚ğ’Ç‰Á
+        "Unityã¡ã‚ƒã‚“", "ãƒˆãƒ©ã‚¤ãƒ‡ãƒ³ãƒˆ", "ã¼ã‚“ã˜ã‚Š", "å‰ç”°",
+        "åŒ¿åå¸Œæœ›", "åç„¡ã—ã•ã‚“", "ã‚ã—ã˜ã‚ƒã‚ˆ"
+        // ã“ã“ã«å¥½ããªåå‰ã‚’è¿½åŠ 
     };
 
     public static string GetHostName()
@@ -107,13 +107,13 @@ public class LobbyController : MonoBehaviourPunCallbacks
     {
         connectionStatusText.text = "Connection status: " + PhotonNetwork.NetworkClientState;
 
-        // ƒAƒjƒ[ƒVƒ‡ƒ“ƒ^ƒCƒ}[ˆ—
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¿ã‚¤ãƒãƒ¼å‡¦ç†
         dotsAnimTimer += Time.deltaTime;
         if (dotsAnimTimer >= dotsAnimInterval)
         {
             dotsAnimIndex = (dotsAnimIndex + 1) % dotsAnimArray.Length;
             dotsAnimTimer = 0f;
-            // ƒAƒjƒ[ƒVƒ‡ƒ“•\¦‚ğƒAƒbƒvƒf[ƒg
+            // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¡¨ç¤ºã‚’ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
             if (InsideRoom_UI_Panel.activeSelf)
             {
                 UpdateRoomInfoUI();
@@ -127,7 +127,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     #region UI Callbacks
     public void OnLoginButtonClicked()
     {
-        // Šù‘¶ˆ—FPhotonÚ‘±
+        // æ—¢å­˜å‡¦ç†ï¼šPhotonæ¥ç¶š
         string playerName = playerNameInput.text;
         if (!string.IsNullOrEmpty(playerName))
         {
@@ -139,23 +139,23 @@ public class LobbyController : MonoBehaviourPunCallbacks
             Debug.Log("PlayerName is invalid!");
         }
 
-        // SaluteƒAƒjƒŠJn
+        // Saluteã‚¢ãƒ‹ãƒ¡é–‹å§‹
         if (animator != null)
         {
             animator.SetBool("is_saluteing", true);
-            // ƒRƒ‹[ƒ`ƒ“‹N“®‚ÅƒAƒjƒI—¹‚Ü‚Å‘Ò‚Â
+            // ã‚³ãƒ«ãƒ¼ãƒãƒ³èµ·å‹•ã§ã‚¢ãƒ‹ãƒ¡çµ‚äº†ã¾ã§å¾…ã¤
             StartCoroutine(WaitAndHideModel());
-            Debug.Log("is_saluteing‚ğtrue‚É‚µ‚Ü‚µ‚½");
+            Debug.Log("is_saluteingã‚’trueã«ã—ã¾ã—ãŸ");
         }
         else
         {
-            Debug.LogWarning("Animator‚ªæ“¾‚Å‚«‚Ä‚¢‚Ü‚¹‚ñI");
+            Debug.LogWarning("AnimatorãŒå–å¾—ã§ãã¦ã„ã¾ã›ã‚“ï¼");
         }
     }
 
     private IEnumerator WaitAndHideModel()
     {
-        // SaluteƒXƒe[ƒg‚Ì’·‚³æ“¾
+        // Saluteã‚¹ãƒ†ãƒ¼ãƒˆã®é•·ã•å–å¾—
         float saluteLength = 5.5f;
         if (animator != null)
         {
@@ -168,13 +168,13 @@ public class LobbyController : MonoBehaviourPunCallbacks
                 }
             }
         }
-        // ƒAƒjƒÄ¶•ª‚¾‚¯‘Ò‚Â
+        // ã‚¢ãƒ‹ãƒ¡å†ç”Ÿåˆ†ã ã‘å¾…ã¤
         yield return new WaitForSeconds(saluteLength);
 
-        // ƒ‚ƒfƒ‹”ñ•\¦
+        // ãƒ¢ãƒ‡ãƒ«éè¡¨ç¤º
         SD_unitychan_humanoid.SetActive(false);
 
-        // UIŸ‰æ–Ê‚Ö
+        // UIæ¬¡ç”»é¢ã¸
         ActivatePanel(GameOptions_UI_Panel.name);
     }
 
@@ -255,7 +255,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             if (canSelect)
             {
                 ActivatePanel(Team_UI_Panel.name);
-                UpdateTeamUI(); // ‰Šú•\¦XV
+                UpdateTeamUI(); // åˆæœŸè¡¨ç¤ºæ›´æ–°
             }
         }
     }
@@ -302,7 +302,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.LogWarning("startGameButton ‚ª Inspector ‚Éİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            Debug.LogWarning("startGameButton ãŒ Inspector ã«è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
         }
 
         // --- RoomInfoText ---
@@ -313,23 +313,23 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.LogWarning("roomInfoText ‚ª Inspector ‚Éİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            Debug.LogWarning("roomInfoText ãŒ Inspector ã«è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
         }
 
-        // --- PlayerList ‰Šú‰» ---
+        // --- PlayerList åˆæœŸåŒ– ---
         if (playerListGameObjects == null)
         {
             playerListGameObjects = new Dictionary<int, GameObject>();
         }
 
-        // --- PlayerListPrefab / PlayerListContent ƒ`ƒFƒbƒN ---
+        // --- PlayerListPrefab / PlayerListContent ãƒã‚§ãƒƒã‚¯ ---
         if (playerListPrefab == null || playerListContent == null)
         {
-            Debug.LogError("playerListPrefab ‚Ü‚½‚Í playerListContent ‚ª Inspector ‚Éİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
-            return; // ‚±‚±‚Åˆ—‚ğ~‚ß‚é
+            Debug.LogError("playerListPrefab ã¾ãŸã¯ playerListContent ãŒ Inspector ã«è¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
+            return; // ã“ã“ã§å‡¦ç†ã‚’æ­¢ã‚ã‚‹
         }
 
-        // --- Player List ì¬ ---
+        // --- Player List ä½œæˆ ---
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             //GameObject playerListGameObject = Instantiate(playerListPrefab);
@@ -338,7 +338,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             playerListGameObject.transform.SetParent(playerListContent.transform, false);
             playerListGameObject.transform.localScale = Vector3.one;
 
-            // --- PlayerNameText ‚Ìæ“¾ (Text / TMP_Text —¼‘Î‰) ---
+            // --- PlayerNameText ã®å–å¾— (Text / TMP_Text ä¸¡å¯¾å¿œ) ---
             var nameTextObj = playerListGameObject.transform.Find("PlayerNameText");
             if (nameTextObj != null)
             {
@@ -355,22 +355,22 @@ public class LobbyController : MonoBehaviourPunCallbacks
                 }
                 else
                 {
-                    Debug.LogWarning("PlayerNameText ‚É Text ‚Ü‚½‚Í TMP_Text ƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‚ ‚è‚Ü‚¹‚ñI");
+                    Debug.LogWarning("PlayerNameText ã« Text ã¾ãŸã¯ TMP_Text ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚ã‚Šã¾ã›ã‚“ï¼");
                 }
             }
             else
             {
-                Debug.LogWarning("PlayerNameText ‚ªƒvƒŒƒnƒu‚ÉŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
+                Debug.LogWarning("PlayerNameText ãŒãƒ—ãƒ¬ãƒãƒ–ã«è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
             }
 
-            // --- PlayerIndicator ‚Ìˆ— ---
+            // --- PlayerIndicator ã®å‡¦ç† ---
             var indicator = playerListGameObject.transform.Find("PlayerIndicator");
             if (indicator != null)
             {
                 indicator.gameObject.SetActive(player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber);
             }
 
-            // --- Dictionary ’Ç‰Á ---
+            // --- Dictionary è¿½åŠ  ---
             if (!playerListGameObjects.ContainsKey(player.ActorNumber))
             {
                 playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
@@ -392,7 +392,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
         playerListGameObject.transform.SetParent(playerListContent.transform, false);
         playerListGameObject.transform.localScale = Vector3.one;
 
-        // --- PlayerNameText ‚Ìæ“¾ (Text / TMP_Text —¼‘Î‰) ---
+        // --- PlayerNameText ã®å–å¾— (Text / TMP_Text ä¸¡å¯¾å¿œ) ---
         var nameTextObj = playerListGameObject.transform.Find("PlayerNameText");
         if (nameTextObj != null)
         {
@@ -409,7 +409,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             }
             else
             {
-                Debug.LogWarning("PlayerNameText ‚É Text ‚Ü‚½‚Í TMP_Text ƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‚ ‚è‚Ü‚¹‚ñI");
+                Debug.LogWarning("PlayerNameText ã« Text ã¾ãŸã¯ TMP_Text ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚ã‚Šã¾ã›ã‚“ï¼");
             }
         }
 
@@ -453,7 +453,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        // 1. Šù‘¶‚Ì•\¦‚ğƒNƒŠƒA
+        // 1. æ—¢å­˜ã®è¡¨ç¤ºã‚’ã‚¯ãƒªã‚¢
         if (roomListGameObjects == null)
             roomListGameObjects = new Dictionary<string, GameObject>();
 
@@ -465,27 +465,27 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
         if (roomListParentGameObject == null)
         {
-            Debug.LogError("roomListParentGameObject ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            Debug.LogError("roomListParentGameObject ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
             return;
         }
 
-        // RoomListParent ‚ğ•K‚¸•\¦ó‘Ô‚É‚·‚é
+        // RoomListParent ã‚’å¿…ãšè¡¨ç¤ºçŠ¶æ…‹ã«ã™ã‚‹
         if (roomListParentGameObject != null && !roomListParentGameObject.activeSelf) { roomListParentGameObject.SetActive(true); }
 
-        // 2. RoomList ‚ğ”½‰f
+        // 2. RoomList ã‚’åæ˜ 
         foreach (RoomInfo room in roomList)
         {
             if (!room.IsOpen || !room.IsVisible || room.RemovedFromList)
                 continue;
 
-            // Prefab ‚ğ Content ‚Ìq‚Æ‚µ‚Ä¶¬
+            // Prefab ã‚’ Content ã®å­ã¨ã—ã¦ç”Ÿæˆ
             GameObject roomGO = Instantiate(roomListEntryPrefab, roomListParentGameObject.transform, false);
 
             RectTransform rt = roomGO.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
             rt.localScale = Vector3.one;
 
-            // --- •”‰®–¼‚Ì”½‰f (Text / TMP_Text —¼‘Î‰) ---
+            // --- éƒ¨å±‹åã®åæ˜  (Text / TMP_Text ä¸¡å¯¾å¿œ) ---
             var nameObj = roomGO.transform.Find("RoomNameText");
             if (nameObj != null)
             {
@@ -494,14 +494,14 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
                 if (uiText != null) uiText.text = room.Name;
                 else if (tmpText != null) tmpText.text = room.Name;
-                else Debug.LogWarning("RoomNameText ‚É Text ‚Ü‚½‚Í TMP_Text ‚ª‚ ‚è‚Ü‚¹‚ñI");
+                else Debug.LogWarning("RoomNameText ã« Text ã¾ãŸã¯ TMP_Text ãŒã‚ã‚Šã¾ã›ã‚“ï¼");
             }
             else
             {
-                Debug.LogWarning("RoomNameText ‚ªƒvƒŒƒnƒu‚ÉŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
+                Debug.LogWarning("RoomNameText ãŒãƒ—ãƒ¬ãƒãƒ–ã«è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
             }
 
-            // --- ƒvƒŒƒCƒ„[”‚Ì”½‰f (Text / TMP_Text —¼‘Î‰) ---
+            // --- ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ•°ã®åæ˜  (Text / TMP_Text ä¸¡å¯¾å¿œ) ---
             var playersObj = roomGO.transform.Find("RoomPlayersText");
             if (playersObj != null)
             {
@@ -512,10 +512,10 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
                 if (uiText != null) uiText.text = playersInfo;
                 else if (tmpText != null) tmpText.text = playersInfo;
-                else Debug.LogWarning("RoomPlayersText ‚É Text ‚Ü‚½‚Í TMP_Text ‚ª‚ ‚è‚Ü‚¹‚ñI");
+                else Debug.LogWarning("RoomPlayersText ã« Text ã¾ãŸã¯ TMP_Text ãŒã‚ã‚Šã¾ã›ã‚“ï¼");
             }
 
-            // --- Join ƒ{ƒ^ƒ“ ---
+            // --- Join ãƒœã‚¿ãƒ³ ---
             var joinButton = roomGO.transform.Find("JoinRoomButton")?.GetComponent<Button>();
             if (joinButton != null)
             {
@@ -526,7 +526,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
                 });
             }
 
-            // Dictionary ‚É“o˜^
+            // Dictionary ã«ç™»éŒ²
             roomListGameObjects.Add(room.Name, roomGO);
         }
     }
@@ -651,7 +651,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             else
             {
                 string dots = dotsAnimArray[dotsAnimIndex];
-                result += $"Member {memberIndex} : ’T‚µ‚Ä‚¢‚Ü‚·{dots}\n";
+                result += $"Member {memberIndex} : æ¢ã—ã¦ã„ã¾ã™{dots}\n";
             }
         }
         membersListText.text = result;
