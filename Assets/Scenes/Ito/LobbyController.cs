@@ -66,6 +66,9 @@ public class LobbyController : MonoBehaviourPunCallbacks
     private float dotsAnimInterval = 0.5f; // 点の更新間隔
     private float dotsAnimTimer = 0f;
 
+    public GameObject emptyRoomImage;
+    public TMP_Text emptyRoomText;
+
 
     private List<string> randomNames = new List<string> 
     {
@@ -459,6 +462,21 @@ public class LobbyController : MonoBehaviourPunCallbacks
         {
             Debug.LogError("roomListParentGameObject が設定されていません！");
             return;
+        }
+
+        // 部屋が存在するかを判定
+        bool hasRoom = false;
+        foreach (RoomInfo room in roomList)
+        {
+            if (room.IsOpen && room.IsVisible && !room.RemovedFromList) hasRoom = true;
+        }
+
+        // 部屋がなければ画像とテキストを表示、あれば隠す
+        emptyRoomImage.SetActive(!hasRoom);
+        emptyRoomText.gameObject.SetActive(!hasRoom);
+        if (!hasRoom)
+        {
+            emptyRoomText.text = "部屋がありません";
         }
 
         // RoomListParent を必ず表示状態にする
