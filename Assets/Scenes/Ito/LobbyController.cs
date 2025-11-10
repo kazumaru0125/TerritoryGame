@@ -331,54 +331,46 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
         // --- Player List 作成 ---
         foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            //GameObject playerListGameObject = Instantiate(playerListPrefab);
-            GameObject playerListGameObject = Instantiate(playerListPrefab, playerListContent.transform, false);
+            {
+            // ① 親を指定せず生成
+            GameObject playerListGameObject = Instantiate(playerListPrefab);
 
+            // ② 生成後に親を設定（falseにするとローカル座標維持）
             playerListGameObject.transform.SetParent(playerListContent.transform, false);
             playerListGameObject.transform.localScale = Vector3.one;
 
-            // --- PlayerNameText の取得 (Text / TMP_Text 両対応) ---
+            // --- PlayerNameText の設定 ---
             var nameTextObj = playerListGameObject.transform.Find("PlayerNameText");
             if (nameTextObj != null)
-            {
+                {
                 var uiText = nameTextObj.GetComponent<Text>();
                 var tmpText = nameTextObj.GetComponent<TMP_Text>();
 
                 if (uiText != null)
-                {
                     uiText.text = player.NickName;
-                }
                 else if (tmpText != null)
-                {
                     tmpText.text = player.NickName;
-                }
                 else
-                {
                     Debug.LogWarning("PlayerNameText に Text または TMP_Text コンポーネントがありません！");
                 }
-            }
             else
-            {
+                {
                 Debug.LogWarning("PlayerNameText がプレハブに見つかりません！");
-            }
+                }
 
             // --- PlayerIndicator の処理 ---
             var indicator = playerListGameObject.transform.Find("PlayerIndicator");
             if (indicator != null)
-            {
                 indicator.gameObject.SetActive(player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber);
-            }
 
             // --- Dictionary 追加 ---
             if (!playerListGameObjects.ContainsKey(player.ActorNumber))
-            {
                 playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
             }
-        }
 
         UpdateRoomInfoUI();
-    }
+
+        }
 
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
