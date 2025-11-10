@@ -80,17 +80,17 @@ public class createMaps : MonoBehaviour
                         switch (testMap[i, j])
                         {
                             case "1"://çÇÇ¢ï«
-                                Instantiate(hiwalls, new Vector3((-4.5f + j) * scale, 5.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(hiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
                             case "2"://ãSÇ™í¥Ç¶ÇÍÇÈï«
-                                Instantiate(nomalwalls, new Vector3((-4.5f + j) * nomalscale, 3.0f, (4.5f - i) * nomalscale), Quaternion.identity);
+                                Instantiate(nomalwalls, new Vector3((-4.5f + j) * nomalscale, 0.0f, (4.5f - i) * nomalscale), Quaternion.Euler(-89.98f, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
                             case "3"://ëSàıÇ™í¥Ç¶ÇÍÇÈï«
-                                Instantiate(lowwalls, new Vector3((-4.5f + j) * scale, 0.625f, (4.5f - i) * scale), Quaternion.Euler(90, 0, 0));
+                                Instantiate(lowwalls, new Vector3((-4.5f + j) * scale, 2.0f, (4.5f - i) * scale), Quaternion.Euler(90, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
@@ -122,7 +122,7 @@ public class createMaps : MonoBehaviour
                                 */
 
                         }
-                        Instantiate(floors, new Vector3((-4.5f + j) * scale,-2.5f, (4.5f - i) * scale), Quaternion.identity);
+                        Instantiate(floors, new Vector3((-4.5f + j) * scale,0.0f, (4.5f - i) * scale), Quaternion.identity);
                     }
                     //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                 }
