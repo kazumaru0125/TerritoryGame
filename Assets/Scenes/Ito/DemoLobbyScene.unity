@@ -3073,6 +3073,8 @@ MonoBehaviour:
   roomHostText: {fileID: 549682708}
   membersListText: {fileID: 1688936075}
   maxPlayers: 4
+  emptyRoomImage: {fileID: 0}
+  emptyRoomText: {fileID: 0}
 --- !u!1001 &746064988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6782,7 +6784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1951399702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6871,7 +6873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1984944545
 RectTransform:
   m_ObjectHideFlags: 0
