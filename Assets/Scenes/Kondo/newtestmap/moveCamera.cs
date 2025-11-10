@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
 public class MoveCamera : MonoBehaviour
     {
@@ -13,12 +14,16 @@ public class MoveCamera : MonoBehaviour
 
     void Update()
         {
-        // 毎フレーム、有効な MiniCameraChildScript を探す
+        // 毎フレーム、自分の MiniCameraChildScript を探す
         MiniCameraChildScript[] allChildren = FindObjectsOfType<MiniCameraChildScript>();
+
+        currentTarget = null; // 毎フレーム初期化
 
         foreach (var child in allChildren)
             {
-            if (child.IsActive && child.enabled)
+            // 自分のキャラクターかどうかを確認
+            PhotonView pv = child.GetComponent<PhotonView>();
+            if (pv != null && pv.IsMine && child.IsActive && child.enabled)
                 {
                 currentTarget = child.gameObject;
                 break;
