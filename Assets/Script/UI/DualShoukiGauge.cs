@@ -1,92 +1,146 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ï»¿using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine.UI;
 
 public class DualShoukiGauge : MonoBehaviourPunCallbacks, IPunObservable
     {
     [Header("UI Sliders")]
-    [SerializeField] private Slider shoukiGaugeA; // á‹CƒQ[ƒWA
-    [SerializeField] private Slider shoukiGaugeB; // á‹CƒQ[ƒWB
+    [SerializeField] private Slider shoukiGaugeA;
+    [SerializeField] private Slider shoukiGaugeB;
 
-    [Header("İ’è’l")]
-    [SerializeField] private float maxShouki = 5f; // ƒQ[ƒWÅ‘å’l
-    private float shoukiA; // A‚ÌŒ»İ’l
-    private float shoukiB; // B‚ÌŒ»İ’l
+    [Header("è¨­å®šå€¤")]
+    [SerializeField] private float maxShouki = 3f; // 3æ®µéšã§Max
+    private float shoukiA;
+    private float shoukiB;
 
-    private float velA = 0f; // A‚ÌƒXƒ€[ƒY•âŠÔ—p
-    private float velB = 0f; // B‚ÌƒXƒ€[ƒY•âŠÔ—p
+    private float velA = 0f;
+    private float velB = 0f;
 
-    void Start()
+    // --- ãƒ­ãƒ¼ãƒ«åˆ¶å¾¡ã‚’æŒã¤ã‚¹ã‚¯ãƒªãƒ—ãƒˆå‚ç…§ ---
+    private TestPlayerRoll playerRoll;
+
+    private void Start()
         {
-        // ‰Šú‰»
-        shoukiA = maxShouki / 2f;
-        shoukiB = maxShouki / 2f;
+        // PlayerRollã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’æ¢ã™ï¼ˆåŒã˜ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚ã‚‹å‰æï¼‰
+        playerRoll = GetComponent<TestPlayerRoll>();
+        if (playerRoll == null)
+            {
+            Debug.LogWarning("TestPlayerRoll ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
+            }
 
         shoukiGaugeA.maxValue = maxShouki;
         shoukiGaugeB.maxValue = maxShouki;
+
+        // åˆæœŸå€¤ï¼šãƒ­ãƒ¼ãƒ«ã«å¿œã˜ã¦è¨­å®š
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Role", out object roleObj))
+            {
+            ApplyRoleGauge(roleObj.ToString());
+            }
+        else
+            {
+            shoukiA = shoukiB = maxShouki / 2f;
+            }
 
         shoukiGaugeA.value = shoukiA;
         shoukiGaugeB.value = shoukiB;
         }
 
-    void Update()
+    private void Update()
         {
-        // ƒXƒ€[ƒY‚É”½‰f
-        float currentA = Mathf.SmoothDamp(shoukiGaugeA.value, shoukiA, ref velA, 0.1f);
-        float currentB = Mathf.SmoothDamp(shoukiGaugeB.value, shoukiB, ref velB, 0.1f);
+        // ã‚¹ãƒ ãƒ¼ã‚ºè£œé–“
+        shoukiGaugeA.value = Mathf.SmoothDamp(shoukiGaugeA.value, shoukiA, ref velA, 0.1f);
+        shoukiGaugeB.value = Mathf.SmoothDamp(shoukiGaugeB.value, shoukiB, ref velB, 0.1f);
 
-        shoukiGaugeA.value = currentA;
-        shoukiGaugeB.value = currentB;
-
-        // š ©•ª‚ÌƒNƒ‰ƒCƒAƒ“ƒg‚¾‚¯“ü—Í‚ğó‚¯•t‚¯‚é
         if (!photonView.IsMine) return;
 
-        if (Input.GetKeyDown(KeyCode.Space)) // A‚ğ‘‚â‚·
+        // --- ã‚­ãƒ¼æ“ä½œ ---
+        if (Input.GetKeyDown(KeyCode.X))
             {
-            AddToGaugeA(1f);
+            OniLoseHumanGain(maxShouki / 3f);
             }
-        else if (Input.GetKeyDown(KeyCode.Z)) // B‚ğ‘‚â‚·
+        else if (Input.GetKeyDown(KeyCode.C))
             {
-            AddToGaugeB(1f);
+            HumanLoseOniGain(maxShouki / 3f);
+            }
+
+        // --- Roleè‡ªå‹•åˆ‡ã‚Šæ›¿ãˆ ---
+        if (playerRoll != null)
+            {
+            if (playerRoll.CurrentRole == "Oni" && shoukiA <= 0f)
+                {
+                playerRoll.RequestRoleChange("Human");
+                }
+            else if (playerRoll.CurrentRole == "Human" && shoukiB >= maxShouki)
+                {
+                playerRoll.RequestRoleChange("Oni");
+                }
             }
         }
 
-    /// <summary>
-    /// AƒQ[ƒW‚É‰ÁZ ¨ ‚»‚Ì•ªB‚©‚çŒ¸Z
-    /// </summary>
-    void AddToGaugeA(float amount)
+
+    // -----------------------------
+    // --- ã‚²ãƒ¼ã‚¸æ“ä½œ ----------
+    // -----------------------------
+    private void OniLoseHumanGain(float amount)
         {
-        float canAdd = Mathf.Min(amount, maxShouki - shoukiA, shoukiB);
-        shoukiA += canAdd;
-        shoukiB -= canAdd;
+        // Oniã‚²ãƒ¼ã‚¸æ¸›å°‘ã€Humanã‚²ãƒ¼ã‚¸å¢—åŠ 
+        float canChange = Mathf.Min(amount, shoukiA, maxShouki - shoukiB);
+        shoukiA -= canChange;
+        shoukiB += canChange;
         }
 
-    /// <summary>
-    /// BƒQ[ƒW‚É‰ÁZ ¨ ‚»‚Ì•ªA‚©‚çŒ¸Z
-    /// </summary>
-    void AddToGaugeB(float amount)
+    private void HumanLoseOniGain(float amount)
         {
-        float canAdd = Mathf.Min(amount, maxShouki - shoukiB, shoukiA);
-        shoukiB += canAdd;
-        shoukiA -= canAdd;
+        // Humanã‚²ãƒ¼ã‚¸æ¸›å°‘ã€Oniã‚²ãƒ¼ã‚¸å¢—åŠ 
+        float canChange = Mathf.Min(amount, shoukiB, maxShouki - shoukiA);
+        shoukiB -= canChange;
+        shoukiA += canChange;
         }
 
-    /// <summary>
-    /// ƒlƒbƒgƒ[ƒN“¯Šúˆ—
-    /// </summary>
+    // -----------------------------
+    // --- PhotonåŒæœŸ ----------
+    // -----------------------------
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
-        if (stream.IsWriting) // ©•ª‚Ì’l‚ğ‘—M
+        if (stream.IsWriting)
             {
             stream.SendNext(shoukiA);
             stream.SendNext(shoukiB);
             }
-        else // ‘¼l‚Ì’l‚ğóM
+        else
             {
             shoukiA = (float)stream.ReceiveNext();
             shoukiB = (float)stream.ReceiveNext();
+            }
+        }
+
+    // -----------------------------
+    // --- Roleå¤‰æ›´æ¤œçŸ¥ ----------
+    // -----------------------------
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+        {
+        if (targetPlayer == PhotonNetwork.LocalPlayer && changedProps.ContainsKey("Role"))
+            {
+            string newRole = changedProps["Role"].ToString();
+            ApplyRoleGauge(newRole);
+            }
+        }
+
+    // -----------------------------
+    // --- Roleã«å¿œã˜ãŸåˆæœŸåŒ– ----
+    // -----------------------------
+    private void ApplyRoleGauge(string role)
+        {
+        if (role == "Oni")
+            {
+            shoukiA = maxShouki;
+            shoukiB = 0f;
+            }
+        else if (role == "Human")
+            {
+            shoukiA = 0f;
+            shoukiB = maxShouki;
             }
         }
     }

@@ -13031,6 +13031,8 @@ MonoBehaviour:
   roomHostText: {fileID: 918035936}
   membersListText: {fileID: 1670880861}
   maxPlayers: 4
+  emptyRoomImage: {fileID: 0}
+  emptyRoomText: {fileID: 0}
 --- !u!114 &1919117733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13038,7 +13040,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919117731}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0df386ee086c8684495a499cefb8ca5b, type: 3}
   m_Name: 
