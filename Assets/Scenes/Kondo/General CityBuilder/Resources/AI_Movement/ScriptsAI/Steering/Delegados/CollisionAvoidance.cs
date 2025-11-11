@@ -7,8 +7,11 @@ public class CollisionAvoidance : Seek
     float minBoxLength;
     Agent agenteVirtual;
 
+    private string myRoll;
+
     void Start()
     {
+       
         this.nameSteering = "CollisionAvoidance";
         agenteVirtual = Agent.createBasicNewVirtualAgent(new Vector3(0,0,0), 0);
         agenteVirtual.alturaEnEscena = GetComponent<Agent>().alturaEnEscena;

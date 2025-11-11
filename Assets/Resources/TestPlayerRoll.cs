@@ -183,6 +183,23 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         }
 
 
+    // ==============================
+    // DualShoukiGauge から呼ばれる
+    // ==============================
+    public void RequestRoleChange(string newRole)
+        {
+        if (CurrentRole == newRole) return;
+
+        // Masterが管理している場合はRPCなどに変更してもOK
+        PhotonNetwork.LocalPlayer.SetCustomProperties(
+            new ExitGames.Client.Photon.Hashtable { { "Role", newRole } }
+        );
+
+        Debug.Log($"[TestPlayerRoll] Role changed to {newRole}");
+        }
+
+
+
     [PunRPC]
     public void AddScoreRPC(string team, int value)
         {
