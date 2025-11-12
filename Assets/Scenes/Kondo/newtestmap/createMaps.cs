@@ -95,7 +95,7 @@ public class createMaps : MonoBehaviour
                                 break;
 
                             case "4"://収集アイテム
-                                Instantiate(items, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(items, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
                             case "5"://スタート地点
@@ -106,7 +106,7 @@ public class createMaps : MonoBehaviour
                                 Instantiate(ofudas, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.Euler(-90f, 0f, 0f));
                                 break;
                                 case "7"://アイテムボックス
-                                Instantiate(boxs, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(boxs, new Vector3((-4.5f + j) * scale, 2.0f, (4.5f - i) * scale), Quaternion.Euler(90f, 0f, 0f));
                                 break;
                                 case "8"://ジャンプ
                                 Instantiate(jumps, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
