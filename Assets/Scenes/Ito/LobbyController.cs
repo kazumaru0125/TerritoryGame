@@ -157,6 +157,14 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
     }
 
+    void UpdateStartGameButtonVisibility()
+    {
+        if (StartGameButton != null)
+        {
+            StartGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        }
+    }
+
     private IEnumerator WaitAndHideModel()
     {
         // Saluteステートの長さ取得
@@ -588,6 +596,24 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public void ShowCreateRoomPanelClick()
     {
         ActivatePanel(CreateRoom_UI_Panel.name);
+    }
+
+    void ShowTeamPanelAndSetStartButton()
+    {
+        Team_UI_Panel.SetActive(true);
+        if (StartGameButton != null)
+        {
+            StartGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        }
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        // チームパネルが表示中なら、再度ボタン表示を同期
+        if (Team_UI_Panel.activeSelf && StartGameButton != null)
+        {
+            StartGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        }
     }
 
 
