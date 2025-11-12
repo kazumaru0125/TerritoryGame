@@ -51,6 +51,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListGameObjects;
     private Dictionary<int, GameObject> playerListGameObjects;
+    public GameObject StartGameButton;
 
     #region Unity Methods
 
@@ -599,6 +600,12 @@ public class LobbyController : MonoBehaviourPunCallbacks
         InsideRoom_UI_Panel.SetActive(panelToBeActivated.Equals(InsideRoom_UI_Panel.name));
         RoomList_UI_Panel.SetActive(panelToBeActivated.Equals(RoomList_UI_Panel.name));
         Team_UI_Panel.SetActive(panelToBeActivated.Equals(Team_UI_Panel.name));
+
+        // チームパネル表示のときだけ、ホスト判定でボタン表示
+        if (panelToBeActivated.Equals(Team_UI_Panel.name) && StartGameButton != null)
+        {
+            StartGameButton.SetActive(PhotonNetwork.IsMasterClient);
+        }
     }
     #endregion
 
