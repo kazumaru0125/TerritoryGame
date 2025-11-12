@@ -156,7 +156,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: is_claping
+    m_ConditionEvent: is_prayering
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3868762789933196270}
@@ -611,7 +611,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: is_claping
+  - m_Name: is_prayering
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -824,7 +824,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Claping
+  m_Name: Prayering
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -838,7 +838,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 4593edf252124e44795be19787bdcb3e, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: be91572d7c90e304a8dc1937983d7c6f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -936,7 +936,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: is_claping
+    m_ConditionEvent: is_prayering
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6448352667305009358}
