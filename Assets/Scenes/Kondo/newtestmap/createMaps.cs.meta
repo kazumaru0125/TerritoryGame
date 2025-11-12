@@ -14,6 +14,7 @@ MonoImporter:
   - ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
   - boxs: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
   - jumps: {fileID: 4976997056025506496, guid: 25716c2ebf8494343911b0bd69fa5f4b, type: 3}
+  - newhiwalls: {fileID: 8724796524908712674, guid: fac446728a43e7d4ea615a34b5c1112f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

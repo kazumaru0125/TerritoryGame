@@ -31,6 +31,8 @@ public class createMaps : MonoBehaviour
     private GameObject boxs;
     [SerializeField]
     private GameObject jumps;
+    [SerializeField]
+    private GameObject newhiwalls;
     //[SerializeField]
     //private GameObject testOBJ;
     /*
@@ -112,8 +114,8 @@ public class createMaps : MonoBehaviour
                                 Instantiate(jumps, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
                                 
-                                case "11"://収集アイテム
-                                //Instantiate(testOBJ, new Vector3((-4.5f + j) * scale, 1.1f, (4.5f - i) * scale), Quaternion.identity);
+                                case "11"://新しい壁
+                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
                                 /*
                                 case "10"://収集アイテム

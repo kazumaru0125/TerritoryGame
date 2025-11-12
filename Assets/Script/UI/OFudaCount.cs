@@ -53,8 +53,8 @@ public class OfudaCount : MonoBehaviourPunCallbacks, IPunObservable
 
     void UpdateUI()
         {
-        ATeamOfudaUI.text = ATeamcuOfuda.ToString() ;
-        BTeamOfudaUI.text = BTeamcuOfuda.ToString() ;
+        ATeamOfudaUI.text = $"Ç®éDÅF{ATeamcuOfuda.ToString()}";
+        BTeamOfudaUI.text = $"Ç®éDÅF{BTeamcuOfuda.ToString()}";
         }
 
     public void AddATeamVitality(int value)

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
@@ -17,18 +17,16 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     private int BTeamcurrentValue = 0;
     private bool isGameEnded = false;
 
-    private string myTeam; // ©•ª‚Ìƒ`[ƒ€ ("A" or "B")
+    private string myTeam; // è‡ªåˆ†ã®ãƒãƒ¼ãƒ  ("A" or "B")
 
     void Start()
         {
-        // ©•ª‚Ìƒ`[ƒ€‚ğPlayer Custom Properties‚È‚Ç‚©‚çæ“¾
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
             {
             myTeam = (string)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
             }
         else
             {
-            // ƒfƒtƒHƒ‹ƒg‚ÅAƒ`[ƒ€ˆµ‚¢
             myTeam = "A";
             }
 
@@ -41,7 +39,7 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         {
         if (!photonView.IsMine || isGameEnded) return;
 
-        // Ÿ—˜”»’è
+        // å‹åˆ©åˆ¤å®š
         if (ATeamcurrentValue >= maxValue)
             {
             photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "A");
@@ -61,7 +59,7 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
             myTeamVitalityText.text = ATeamcurrentValue + "%";
             enemyTeamVitalityText.text = BTeamcurrentValue + "%";
             }
-        else // ©•ª‚ªBƒ`[ƒ€‚Ìê‡
+        else
             {
             myTeamVitalityText.text = BTeamcurrentValue + "%";
             enemyTeamVitalityText.text = ATeamcurrentValue + "%";
@@ -71,14 +69,20 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     public void AddATeamVitality(int value)
         {
         if (!photonView.IsMine || isGameEnded) return;
-        ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + value);
+
+        // âœ… 0æœªæº€ãƒ»æœ€å¤§å€¤è¶…éã‚’é˜²æ­¢
+        ATeamcurrentValue = Mathf.Clamp(ATeamcurrentValue + value, 0, maxValue);
+
         UpdateUI();
         }
 
     public void AddBTeamVitality(int value)
         {
         if (!photonView.IsMine || isGameEnded) return;
-        BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + value);
+
+        // âœ… 0æœªæº€ãƒ»æœ€å¤§å€¤è¶…éã‚’é˜²æ­¢
+        BTeamcurrentValue = Mathf.Clamp(BTeamcurrentValue + value, 0, maxValue);
+
         UpdateUI();
         }
 
