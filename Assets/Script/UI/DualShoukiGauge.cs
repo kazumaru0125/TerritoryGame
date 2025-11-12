@@ -143,4 +143,20 @@ public class DualShoukiGauge : MonoBehaviourPunCallbacks, IPunObservable
             shoukiB = maxShouki;
             }
         }
+
+    //private void ApplyRoleGauge(string role)
+    //    {
+    //    // Oniの場合のみAを最大、Humanは両方0
+    //    if (role == "Oni")
+    //        {
+    //        shoukiA = maxShouki;
+    //        shoukiB = 0f;
+    //        }
+    //    else if (role == "Human")
+    //        {
+    //        shoukiA = 0f;
+    //        shoukiB = 0f;
+    //        }
+    //    }
+
     }
