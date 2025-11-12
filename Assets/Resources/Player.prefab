@@ -24445,12 +24445,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8641027731880386601}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2610d924a89890a4089cf6766b7d06b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Vitality: 1
+  Ofuda: 1
+  minusOfuda: 1
 --- !u!114 &759772478087793745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30546,6 +30547,10 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7269033854180276815, guid: b578b6d7125ee8249b59ea6f3b9a2e07, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b5b51f7bbf73cf84fb0b4f2a0cf91d92, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
