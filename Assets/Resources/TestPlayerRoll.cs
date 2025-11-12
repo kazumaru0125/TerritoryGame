@@ -68,11 +68,18 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             photonView.Owner.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Team", assignedTeam } });
             }
 
+        //if (!photonView.Owner.CustomProperties.ContainsKey("Role"))
+        //    {
+        //    string assignedRole = (Random.value < 0.5f) ? "Human" : "Oni";
+        //    photonView.Owner.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", assignedRole } });
+        //    }
+
         if (!photonView.Owner.CustomProperties.ContainsKey("Role"))
             {
-            string assignedRole = (Random.value < 0.5f) ? "Human" : "Oni";
+            string assignedRole = "Human"; // 常にHumanを初期設定
             photonView.Owner.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", assignedRole } });
             }
+
         }
 
     private void ToggleRoleForTeam(string team)
