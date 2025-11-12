@@ -95,7 +95,7 @@ public class createMaps : MonoBehaviour
                                 break;
 
                             case "4"://収集アイテム
-                                Instantiate(items, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(items, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
                             case "5"://スタート地点
