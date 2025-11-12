@@ -24209,6 +24209,7 @@ GameObject:
   - component: {fileID: 2830193753899968192}
   - component: {fileID: 7798546357997499223}
   - component: {fileID: 6489388087688984589}
+  - component: {fileID: 6092081059349534717}
   m_Layer: 0
   m_Name: unitychan_human
   m_TagString: Player
@@ -24358,10 +24359,10 @@ MonoBehaviour:
     Name: is_attacking
   - Type: 4
     SynchronizeType: 1
-    Name: is_claping
-  - Type: 4
-    SynchronizeType: 1
     Name: is_damage
+  - Type: 4
+    SynchronizeType: 0
+    Name: is_prayering
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -24567,6 +24568,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+--- !u!114 &6092081059349534717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8641027731880386601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0c9410575b90a42812e992054e16ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8687656080849002831
 GameObject:
   m_ObjectHideFlags: 0
