@@ -57,6 +57,9 @@ MonoBehaviour:
   - RPC_SetRespawnPosition
   - PlayJumpAnimation
   - OnMaxShoukiReached
+  - RPC_SetAttackState
+  - RPC_UpdateMoveAnimation
+  - RPC_PlayJumpAnimation
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
