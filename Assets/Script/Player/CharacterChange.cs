@@ -7,8 +7,26 @@ public class CharacterChange : MonoBehaviourPun
     private int index = 0;
     private PlayerCameraFollow cameraFollow;
 
+    //void Start()
+    //    {
+    //    ShowModel(index); // 最初のモデルを表示
+
+    //    // 自分のプレイヤーならカメラを登録
+    //    if (photonView.IsMine)
+    //        {
+    //        cameraFollow = Camera.main.GetComponent<PlayerCameraFollow>();
+    //        UpdateCameraTarget();
+    //        }
+    //    }
+
     void Start()
         {
+        if (models == null || models.Length == 0)
+            {
+            Debug.LogError($"{name} の CharacterChange にモデルが登録されていません！");
+            return;
+            }
+
         ShowModel(index); // 最初のモデルを表示
 
         // 自分のプレイヤーならカメラを登録
@@ -18,6 +36,7 @@ public class CharacterChange : MonoBehaviourPun
             UpdateCameraTarget();
             }
         }
+
 
     void Update()
         {
