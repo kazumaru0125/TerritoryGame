@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviourPun
-{
+    {
     public Animator Animator { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public float JumpForce = 9f;
@@ -14,58 +14,80 @@ public class PlayerController : MonoBehaviourPun
     public bool IsRun { get; private set; }
 
     private IPlayerState currentState;
-    private bool isAttackTriggered = false; // UŒ‚ƒgƒŠƒK[ƒtƒ‰ƒO
+    private bool isAttackTriggered = false; // æ”»æ’ƒãƒˆãƒªã‚¬ãƒ¼ãƒ•ãƒ©ã‚°
 
     void Start()
-    {
+        {
         Animator = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody>();
         ChangeState(new PlayerMoveingState());
         HetBox.SetActive(false);
-    }
+        }
 
     void Update()
-    {
+        {
         if (!photonView.IsMine) return;
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown("joystick button 8"))
             IsRun = !IsRun;
 
-        // UŒ‚ƒgƒŠƒK[iUŒ‚’†‚Í“ñd‚É‘JˆÚ‚µ‚È‚¢j
+        // æ”»æ’ƒãƒˆãƒªã‚¬ãƒ¼ï¼ˆæ”»æ’ƒä¸­ã¯äºŒé‡ã«é·ç§»ã—ãªã„ï¼‰
         if (!isAttackTriggered && (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1")))
-        {
+            {
             isAttackTriggered = true;
             ChangeState(new PlayerAttackingState());
             HetBox.SetActive(true);
-        }
+            }
         else
-        {
+            {
             HetBox.SetActive(false);
-        }
+            }
 
-            // ó‘ÔXV
-            currentState?.UpdateState(this);
+        // çŠ¶æ…‹æ›´æ–°
+        currentState?.UpdateState(this);
 
-        // UŒ‚I—¹‚ÅƒgƒŠƒK[ƒtƒ‰ƒO‚ğ‰ğœ
+        // æ”»æ’ƒçµ‚äº†ã§ãƒˆãƒªã‚¬ãƒ¼ãƒ•ãƒ©ã‚°ã‚’è§£é™¤
         if (currentState is PlayerMoveingState)
             isAttackTriggered = false;
 
-        // ƒWƒƒƒ“ƒvƒgƒŠƒK[‚ÍUŒ‚ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚È‚¢‚Æ‚«‚Ì‚İ‹–‰Â
+        // ã‚¸ãƒ£ãƒ³ãƒ—ãƒˆãƒªã‚¬ãƒ¼ã¯æ”»æ’ƒãƒ•ãƒ©ã‚°ãŒç«‹ã£ã¦ãªã„ã¨ãã®ã¿è¨±å¯
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0")) && IsGrounded() && !(currentState is PlayerAttackingState))
             ChangeState(new PlayerJumpingState());
-    }
+        }
 
     public void ChangeState(IPlayerState newState)
-    {
+        {
         currentState?.ExitState(this);
         currentState = newState;
         currentState?.EnterState(this);
-    }
+        }
 
     public bool IsGrounded()
-    {
+        {
         float checkDistance = 0.3f;
         Vector3 origin = transform.position + Vector3.up * 0.1f;
         return Physics.Raycast(origin, Vector3.down, checkDistance);
+        }
+
+    [PunRPC]
+    public void RPC_SetAttackState(bool isAttacking)
+        {
+        Animator.SetBool("is_attacking", isAttacking);
+        }
+
+    [PunRPC]
+    public void RPC_UpdateMoveAnimation(bool isWalking, bool isRunning)
+        {
+        Animator.SetBool("is_walking", isWalking && !isRunning);
+        Animator.SetBool("is_running", isRunning);
+        }
+
+    [PunRPC]
+    public void RPC_PlayJumpAnimation()
+        {
+        Animator.Play("Jump", 0, 0);
+        }
+
+
+
     }
-}
