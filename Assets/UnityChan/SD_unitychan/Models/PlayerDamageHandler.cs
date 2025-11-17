@@ -7,6 +7,9 @@ public class PlayerDamageHandler : MonoBehaviourPun
     private Animator animator;
     private PlayerRespawnScript respawnScript;
 
+    [Header("Damage Particle")]
+    public ParticleSystem damageParticle; // インスペクターでセット
+
     void Start()
         {
         animator = GetComponent<Animator>();
@@ -16,14 +19,13 @@ public class PlayerDamageHandler : MonoBehaviourPun
         respawnScript = GetComponent<PlayerRespawnScript>();
         if (respawnScript == null)
             respawnScript = GetComponentInParent<PlayerRespawnScript>();
+
+        if (damageParticle == null)
+            Debug.LogWarning("Damage Particleが設定されていません");
         }
 
     public void PlayDamageAnimation()
         {
-        //// 自分のキャラでなければアニメーションをトリガーしない
-        //if (!photonView.IsMine)
-        //    return;
-
         // RPCで全員に通知
         photonView.RPC(nameof(RPC_PlayDamageAnimation), RpcTarget.All);
         }
@@ -36,14 +38,16 @@ public class PlayerDamageHandler : MonoBehaviourPun
 
     private IEnumerator DamageRoutine()
         {
-        if (animator == null) yield break;
+        if (animator != null)
+            animator.SetBool("is_damage", true);
 
-        animator.SetBool("is_damage", true);
+        // パーティクル再生
+        if (damageParticle != null)
+            damageParticle.Play();
 
-        // ダメージアニメーションの再生時間
         yield return new WaitForSeconds(1.0f);
 
-        if (this != null && gameObject != null)
+        if (this != null && gameObject != null && animator != null)
             animator.SetBool("is_damage", false);
 
         // リスポーン処理は自分のプレイヤーのみ実行
