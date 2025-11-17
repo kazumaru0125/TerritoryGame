@@ -14,6 +14,11 @@ public class Walk : MonoBehaviourPun
 
     [SerializeField] Jump jumpScript;
 
+    public int Stamina = 100;
+    public int UseStamina = 10;
+    public int ReStamina = 20;
+
+
 
 
     void Start()
