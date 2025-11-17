@@ -3,22 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneController : MonoBehaviour
 {
-    // 遷移先のシーン名
     public string nextScene = "LobbyScene";
+    public AudioFader audioFader;
 
     void Update()
     {
-        // スペースキーでシーン遷移
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene(nextScene);
+            // BGMフェードアウト後にシーン遷移
+            audioFader.FadeOut(() => SceneManager.LoadScene(nextScene));
+            // 一度の入力で二重コールされないようフラグで制御するのがおすすめです
         }
-
-        // 画面クリックでシーン遷移
-        if (Input.GetMouseButtonDown(0))
-        {
-            SceneManager.LoadScene(nextScene);
-        }
-
     }
 }
