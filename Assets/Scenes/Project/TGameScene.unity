@@ -2396,6 +2396,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1802678908630874647, guid: 706734f9410c31344b658f764e381ddd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1802678908630874647, guid: 706734f9410c31344b658f764e381ddd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -347.7
+      objectReference: {fileID: 0}
     - target: {fileID: 2692486044755198813, guid: 706734f9410c31344b658f764e381ddd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -133.6
@@ -2506,7 +2514,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e87beceb148217343916f139b16b2bc0, type: 2}
     - target: {fileID: 5368712051008728100, guid: 706734f9410c31344b658f764e381ddd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6350056575158955304, guid: 706734f9410c31344b658f764e381ddd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6849,9 +6857,9 @@ SceneRoots:
   - {fileID: 2083968217}
   - {fileID: 1294429591}
   - {fileID: 1011705017}
-  - {fileID: 973889313}
-  - {fileID: 857323690}
   - {fileID: 604606543}
+  - {fileID: 857323690}
+  - {fileID: 973889313}
   - {fileID: 492169931}
   - {fileID: 1294930894}
   - {fileID: 1853736622}

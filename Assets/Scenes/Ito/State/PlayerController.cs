@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviourPun
     public float JumpForce = 9f;
     public float RunSpeed = 14.0f;
     public float WalkSpeed = 7.5f;
+    public int Stamina = 100;
 
     public GameObject HetBox;
 
