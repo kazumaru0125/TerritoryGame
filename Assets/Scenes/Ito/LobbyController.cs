@@ -550,8 +550,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
     }
 
-
-
     public override void OnLeftLobby()
     {
         ClearRoomListView();
@@ -700,8 +698,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
         membersListText.text = result;
     }
 
-
-
     private void UpdateTeamUI()
     {
         List<string> teamA = new List<string>();
@@ -727,5 +723,16 @@ public class LobbyController : MonoBehaviourPunCallbacks
         {
             UpdateTeamUI();
         }
+    }
+
+
+    public void OnBackFromGameOptions_UI_PanelClicked()
+    {
+        ActivatePanel(Login_UI_Panel.name);
+    }
+    // ルーム入室中はGameOptionsなど
+    public void OnBackCreateRoom_UI_PanelClicked()
+    {
+        ActivatePanel(GameOptions_UI_Panel.name);
     }
 }
