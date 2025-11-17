@@ -23894,7 +23894,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 5371060105985850168}
-  playerName: NameA
 --- !u!1 &8078505823970572574
 GameObject:
   m_ObjectHideFlags: 0
@@ -31018,7 +31017,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 298719563715504306}
-  playerName: NameA
 --- !u!1 &9190232158571851233
 GameObject:
   m_ObjectHideFlags: 0
