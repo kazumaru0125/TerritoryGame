@@ -13,8 +13,10 @@ public class PrayerController : MonoBehaviour
 
     void Update()
     {
-        // キー・ボタンの長押し判定
-        bool isKeyHeld = Input.GetKey(KeyCode.F) || Input.GetKey("joystick button 1");
+        //float rlValue = Input.GetAxis("RL");
+        bool isKeyHeld = Input.GetKey(KeyCode.F)
+            || Input.GetKey("joystick button 1");
+            //|| rlValue > 0.5f;
 
         anim.SetBool("is_prayering", isKeyHeld);
     }
