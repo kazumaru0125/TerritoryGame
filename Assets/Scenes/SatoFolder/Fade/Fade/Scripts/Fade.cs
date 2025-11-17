@@ -26,23 +26,23 @@ public class Fade : MonoBehaviour
         // スペースキーが押されたらフェードアウト
         if (Input.GetKeyDown(KeyCode.Space))
             {
-            FadeOut(1.0f, () =>
-            {
-                Debug.Log("フェードアウト完了！");
-                // ここにシーン遷移などを追加できる
-                // SceneManager.LoadScene("NextScene");
-            });
+            //FadeOut(1.0f, () =>
+            //{
+            //    Debug.Log("フェードアウト完了！");
+            //    // ここにシーン遷移などを追加できる
+            //    // SceneManager.LoadScene("NextScene");
+            //});
             }
 
         if (Input.GetKeyDown(KeyCode.Z))
             {
         
-            FadeIn(1.0f, () =>
-            {
-                Debug.Log("フェードイン完了！");
-                // ここにシーン遷移などを追加できる
-                // SceneManager.LoadScene("NextScene");
-            });
+            //FadeIn(1.0f, () =>
+            //{
+            //    Debug.Log("フェードイン完了！");
+            //    // ここにシーン遷移などを追加できる
+            //    // SceneManager.LoadScene("NextScene");
+            //});
             }
         }
 

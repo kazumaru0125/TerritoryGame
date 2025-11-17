@@ -24554,7 +24554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41010377459004448ff5b90837331ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Vitality: 20
+  Vitality: 5
   minusVitality: 10
 --- !u!114 &6489388087688984589
 MonoBehaviour:
@@ -30509,6 +30509,10 @@ PrefabInstance:
     - target: {fileID: 755648216150278130, guid: b578b6d7125ee8249b59ea6f3b9a2e07, type: 3}
       propertyPath: m_Name
       value: RunEffct
+      objectReference: {fileID: 0}
+    - target: {fileID: 755648216150278130, guid: b578b6d7125ee8249b59ea6f3b9a2e07, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4006309723720124235, guid: b578b6d7125ee8249b59ea6f3b9a2e07, type: 3}
       propertyPath: m_LocalPosition.x
