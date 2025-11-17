@@ -14966,7 +14966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   humanModel: {fileID: 8641027731880386601}
   oniModel: {fileID: 8942398273559051621}
-  uiOffset: {x: 0, y: 2, z: 0}
+  uiOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &4702702548486361465
 GameObject:
   m_ObjectHideFlags: 0
@@ -24427,6 +24427,9 @@ MonoBehaviour:
   walkSpeed: 5.5
   runSpeed: 11
   jumpScript: {fileID: 647320340408529253}
+  Stamina: 100
+  UseStamina: 10
+  ReStamina: 20
 --- !u!114 &52201538017062784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25180,6 +25183,9 @@ MonoBehaviour:
   walkSpeed: 7.5
   runSpeed: 14
   jumpScript: {fileID: 1406827345065882244}
+  Stamina: 100
+  UseStamina: 10
+  ReStamina: 20
 --- !u!114 &3246096675931309498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25279,6 +25285,7 @@ MonoBehaviour:
   JumpForce: 9
   RunSpeed: 14
   WalkSpeed: 7.5
+  Stamina: 100
   HetBox: {fileID: 4887309009242741597}
 --- !u!114 &4903980198980328735
 MonoBehaviour:
