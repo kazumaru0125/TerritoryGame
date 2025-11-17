@@ -504,8 +504,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnCreateRoomButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -637,8 +637,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnTeamButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -1015,8 +1015,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: ShowCreateRoomPanelClick
         m_Mode: 1
         m_Arguments:
@@ -1732,8 +1732,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnStartGameButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -2153,7 +2153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &550700564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2621,23 +2621,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 72.01
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 36.005
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 3041762608396676951, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_fontAsset
@@ -3253,8 +3253,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnTeamBButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -3766,8 +3766,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnLoginButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -4315,8 +4315,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnBackButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -5356,8 +5356,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnShowRoomListButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -6313,8 +6313,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnTeamAButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -6582,8 +6582,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnBackButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -7202,8 +7202,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 740319239}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 740319241}
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
         m_MethodName: OnBackButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -7354,23 +7354,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 72.01
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 36.005
       objectReference: {fileID: 0}
     - target: {fileID: 3024227128276249764, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 3041762608396676951, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
       propertyPath: m_fontAsset
@@ -7601,7 +7601,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
