@@ -24,9 +24,18 @@ public class PlayerDamageHandler : MonoBehaviourPun
             Debug.LogWarning("Damage Particleが設定されていません");
         }
 
+    private void Update()
+        {
+        if (Input.GetKeyUp(KeyCode.M))
+            {
+            // パーティクルが存在し、生きていて、Destroyされていない場合のみ再生
+            if (IsValidParticle())
+                damageParticle.Play();
+            }
+        }
+
     public void PlayDamageAnimation()
         {
-        // RPCで全員に通知
         photonView.RPC(nameof(RPC_PlayDamageAnimation), RpcTarget.All);
         }
 
@@ -41,16 +50,16 @@ public class PlayerDamageHandler : MonoBehaviourPun
         if (animator != null)
             animator.SetBool("is_damage", true);
 
-        // パーティクル再生
-        if (damageParticle != null)
+        // ここでも安全チェック
+        if (IsValidParticle())
             damageParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
 
-        if (this != null && gameObject != null && animator != null)
+        if (animator != null)
             animator.SetBool("is_damage", false);
 
-        // リスポーン処理は自分のプレイヤーのみ実行
+        // リスポーン処理（自分のキャラのみ）
         if (photonView.IsMine && respawnScript != null)
             {
             Debug.Log("ダメージ後にリスポーン実行");
@@ -65,13 +74,25 @@ public class PlayerDamageHandler : MonoBehaviourPun
 
         if (other.gameObject.CompareTag("AttackHitbox"))
             {
+            if (status == null) return;
+
             status.StartHitbox();
-            if (status != null && status.isAttacking)
+
+            if (status.isAttacking)
                 {
                 Debug.Log("ダメージ受けました（Stay）");
-                PlayDamageAnimation(); // ← RPC経由で全員に同期される
+                PlayDamageAnimation(); // RPC
                 status.EndHitbox();
                 }
             }
+        }
+
+    /// <summary>
+    /// パーティクルが null / Destroy済み / 破棄直前かを安全に判定
+    /// </summary>
+    private bool IsValidParticle()
+        {
+        // Unity の Destroy 判定は null チェックで捕まるためこれでOK
+        return damageParticle != null && damageParticle.gameObject != null;
         }
     }
