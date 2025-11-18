@@ -67,4 +67,9 @@ public class PrayerController : MonoBehaviour
             Debug.LogWarning("vitalityParticle ‚Í Destroy Ï‚İ‚Ì‚½‚ßÄ¶‚Å‚«‚Ü‚¹‚ñ");
             }
         }
+
+    public void OnCallChangeFace()
+        {
+        // ‰½‚àˆ—‚µ‚È‚­‚ÄOK
+        }
     }

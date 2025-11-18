@@ -70,6 +70,11 @@ public class PlayerController : MonoBehaviourPun
         return Physics.Raycast(origin, Vector3.down, checkDistance);
         }
 
+    public void OnCallChangeFace()
+        {
+        // 何も処理しなくてOK
+        }
+
     [PunRPC]
     public void RPC_SetAttackState(bool isAttacking)
         {

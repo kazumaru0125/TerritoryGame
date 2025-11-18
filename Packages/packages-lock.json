@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.litefeel.finder": {
+      "version": "https://github.com/litefeel/Unity-Finder.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "bcf88c523538c69a48a23835d93fbeb074abc7fc"
+    },
     "com.unity.animation.rigging": {
       "version": "1.3.1",
       "depth": 0,
