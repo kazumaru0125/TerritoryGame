@@ -30,7 +30,8 @@ public class PlayerDamageHandler : MonoBehaviourPun
             {
             // パーティクルが存在し、生きていて、Destroyされていない場合のみ再生
             if (IsValidParticle())
-                damageParticle.Play();
+                //  damageParticle.Play();
+                SafePlayDamageParticle();
             }
         }
 
@@ -52,8 +53,8 @@ public class PlayerDamageHandler : MonoBehaviourPun
 
         // ここでも安全チェック
         if (IsValidParticle())
-            damageParticle.Play();
-
+            //damageParticle.Play();
+            SafePlayDamageParticle();
         yield return new WaitForSeconds(1.0f);
 
         if (animator != null)
@@ -95,4 +96,21 @@ public class PlayerDamageHandler : MonoBehaviourPun
         // Unity の Destroy 判定は null チェックで捕まるためこれでOK
         return damageParticle != null && damageParticle.gameObject != null;
         }
+
+    private void SafePlayDamageParticle()
+        {
+        // 完全に Destroy 済みも検出
+        if (damageParticle == null) return;
+
+        try
+            {
+            damageParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            damageParticle.Play(true);
+            }
+        catch
+            {
+            Debug.LogWarning("Damage Particle は Destroy 済みのため再生できません");
+            }
+        }
+
     }
