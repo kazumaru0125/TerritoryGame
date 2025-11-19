@@ -40,33 +40,41 @@ public class ChildVitalityCollector : MonoBehaviour
         if (parentView == null || !parentView.IsMine) return;
 
         // --- 減算アイテムに当たっているとき ---
-        if (other.gameObject.CompareTag("AttackHitbox"))
+        if (other.CompareTag("vitality"))
             {
-            parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, -minusVitality);
-            }
+            lanternStatus ls = other.GetComponent<lanternStatus>();
+            if (ls == null) return;
 
-        // --- vitalityエリアにいる場合 ---
-        if (other.gameObject.CompareTag("vitality"))
-            {
-            // XBOX の B ボタン（Input の "joystick button 1"）を押している間のみ
+            // ★ CurrentVitality が 0 なら加算不可
+            if (ls.CurrentVitality <= 0)
+                return;
+
             if (Input.GetKey("joystick button 1"))
                 {
                 addTimer += Time.deltaTime;
 
-                if (addTimer >= 1f) // 1秒ごとに加算
+                if (addTimer >= 1f)
                     {
                     addTimer = 0f;
 
-                    // Oniは加算しない
                     if (role.CurrentRole == "Oni") return;
 
-                    parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, Vitality);
+                    int addValue = ls.GetRecoveryVitality();
+
+                    // ランタン残量を減らす
+                    ls.AddVitality(-addValue);
+
+                    // プレイヤーに加算
+                    parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, addValue);
                     }
                 }
             else
                 {
-                addTimer = 0f; // 離したらリセット
+                addTimer = 0f;
                 }
             }
+
+
         }
     }
+    
