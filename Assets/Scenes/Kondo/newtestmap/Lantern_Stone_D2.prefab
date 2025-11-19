@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 2567036081662408579}
   - component: {fileID: 627703321417115713}
   - component: {fileID: 7846401044043922242}
+  - component: {fileID: 8412120046322574923}
   m_Layer: 0
   m_Name: Lantern_Stone_D2
   m_TagString: vitality
@@ -205,7 +206,7 @@ MeshRenderer:
     firstSubMesh: 0
     subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
+  m_ProbeAnchor: {fileID: 3203311360411561530}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_ReceiveGI: 1
@@ -264,6 +265,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0.00003671646, y: 1.137964, z: 0.000013321638}
+--- !u!114 &8412120046322574923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499151234154285395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f694be6412124d44ac9e1e05db6c974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Maxvitality: 20
+  RecoveryVitality: 1
+  Aura: {fileID: 7886073035307725586}
+  CurrentVitality: 20
+  isActive: 1
 --- !u!1 &7886073035307725586
 GameObject:
   m_ObjectHideFlags: 0
