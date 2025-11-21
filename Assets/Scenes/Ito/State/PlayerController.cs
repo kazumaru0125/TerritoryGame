@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviourPun
 
     void Start()
         {
-        Animator = GetComponent<Animator>();
-        Rigidbody = GetComponent<Rigidbody>();
+       // Animator = GetComponent<Animator>();
+      //  Rigidbody = GetComponent<Rigidbody>();
         ChangeState(new PlayerMoveingState());
         HetBox.SetActive(false);
         }
@@ -74,6 +74,13 @@ public class PlayerController : MonoBehaviourPun
         {
         // 何も処理しなくてOK
         }
+
+    void Awake()
+        {
+        Animator = GetComponent<Animator>();
+        Rigidbody = GetComponent<Rigidbody>();
+        }
+
 
     [PunRPC]
     public void RPC_SetAttackState(bool isAttacking)

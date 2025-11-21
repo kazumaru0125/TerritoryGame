@@ -2019,7 +2019,8 @@ namespace Photon.Pun
         /// and can return later on. Setting becomeInactive to false deliberately, means to "abandon" the room, despite the
         /// playerTTL allowing you to come back.
         ///
-        /// In a room with playerTTL == 0, become inactive has no effect (clients are removed from the room right away).
+        /// In a room with playerTTL == 0, become inactive has no effect (clients are removed from the room right 
+        /// y).
         /// </remarks>
         /// <param name="becomeInactive">If this client becomes inactive in a room with playerTTL &lt; 0. Defaults to true.</param>
         public static bool LeaveRoom(bool becomeInactive = true)
