@@ -2757,6 +2757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cherry blossoms Effct
       objectReference: {fileID: 0}
+    - target: {fileID: 8487878173758764400, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
