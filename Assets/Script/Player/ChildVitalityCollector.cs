@@ -39,13 +39,13 @@ public class ChildVitalityCollector : MonoBehaviour
         PhotonView parentView = role.photonView;
         if (parentView == null || !parentView.IsMine) return;
 
-        // --- 加算アイテムに当たっているとき ---
+        // --- 減算アイテムに当たっているとき ---
         if (other.CompareTag("vitality"))
             {
             lanternStatus ls = other.GetComponent<lanternStatus>();
             if (ls == null) return;
 
-            // CurrentVitality が 0 なら加算不可
+            // ★ CurrentVitality が 0 なら加算不可
             if (ls.CurrentVitality <= 0)
                 return;
 

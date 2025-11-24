@@ -60,6 +60,10 @@ MonoBehaviour:
   - RPC_SetAttackState
   - RPC_UpdateMoveAnimation
   - RPC_PlayJumpAnimation
+  - RPC_AddVitality
+  - RPC_SetAuraState
+  - ReportDeathRPC
+  - AddTeamDamageRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

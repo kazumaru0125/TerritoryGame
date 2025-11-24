@@ -20,6 +20,16 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
 
     private void Start()
         {
+        if (PhotonNetwork.IsMasterClient)
+            {
+            PhotonNetwork.CurrentRoom.SetCustomProperties(
+                new ExitGames.Client.Photon.Hashtable {
+            { "TeamA_Damage", 0 },
+            { "TeamB_Damage", 0 }
+                }
+            );
+            }
+
         AssignTeamAndRoleIfEmpty();
         UpdateTeam();
         UpdateRole();
@@ -228,6 +238,98 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         if (pv != null)
             PhotonNetwork.Destroy(pv.gameObject);
         }
+
+    // ==============================
+    // チームダメージの加算（Masterのみ）
+    // ==============================
+    [PunRPC]
+    //public void AddTeamDamageRPC(string team)
+    //    {
+    //    if (!PhotonNetwork.IsMasterClient) return;
+
+    //    // ルームプロパティ辞書
+    //    var room = PhotonNetwork.CurrentRoom;
+    //    if (room == null) return;
+
+    //    // キー決定
+    //    string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+    //    // 現在値を取得
+    //    int current = 0;
+    //    if (room.CustomProperties.ContainsKey(key))
+    //        current = (int)room.CustomProperties[key];
+
+    //    current += 1;
+
+    //    // 更新
+    //    room.SetCustomProperties(
+    //        new ExitGames.Client.Photon.Hashtable { { key, current } }
+    //    );
+
+    //    Debug.Log($"[Master] Team {team} Damage = {current}");
+
+    //    // 3回以上でロール反転
+    //    if (current >= 3)
+    //        {
+    //        // ① 今ダメージを食らったチームを反転
+    //        ToggleRoleForTeam(team);
+
+    //        // ② 相手チームも反転
+    //        string otherTeam = (team == "A") ? "B" : "A";
+    //        ToggleRoleForTeam(otherTeam);
+
+    //        // リセット
+    //        room.SetCustomProperties(
+    //            new ExitGames.Client.Photon.Hashtable { { key, 0 } }
+    //        );
+
+    //        Debug.Log($"[Master] Team A and B Roles Swapped!");
+    //        }
+    //    }
+
+  //  [PunRPC]
+    public void AddTeamDamageRPC(string team)
+        {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        var room = PhotonNetwork.CurrentRoom;
+        if (room == null) return;
+
+        string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+        int current = 0;
+        if (room.CustomProperties.ContainsKey(key))
+            current = (int)room.CustomProperties[key];
+
+        current += 1;
+
+        room.SetCustomProperties(
+            new ExitGames.Client.Photon.Hashtable { { key, current } }
+        );
+
+        // ★ 残り死亡回数をログに表示（3回まで）
+        int remaining = Mathf.Max(0, 3 - current);
+        Debug.Log($"[Master] Team {team} Damage = {current} / 3  残り {remaining}回");
+
+        // 3回以上でロール反転
+        if (current >= 3)
+            {
+            Debug.Log($"[Master] Team {team} が3回死亡 → 全チームのロール反転開始！");
+
+            ToggleRoleForTeam(team);
+
+            string otherTeam = (team == "A") ? "B" : "A";
+            ToggleRoleForTeam(otherTeam);
+
+            // リセット
+            room.SetCustomProperties(
+                new ExitGames.Client.Photon.Hashtable { { key, 0 } }
+            );
+
+            Debug.Log($"[Master] Team A と Team B のロールを反転しました！");
+            }
+        }
+
 
 
     }
