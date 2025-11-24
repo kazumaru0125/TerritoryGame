@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 174259871}
-  fadeDuration: 2
+  fadeDuration: 0.1
 --- !u!82 &174259871
 AudioSource:
   m_ObjectHideFlags: 0
