@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class lanternStatus : MonoBehaviour, IPunObservable
     {
@@ -8,46 +9,53 @@ public class lanternStatus : MonoBehaviour, IPunObservable
 
     public GameObject Aura;
 
-    // 現在のランタン残量（プレイヤーが吸うたびに減る）
     public int CurrentVitality = 20;
 
-    // 同期したい状態
     public bool isActive = true;
+
+    // ← ここで TMP_Text を追加
+    [SerializeField] private TMP_Text vitalityText;
 
     void Start()
         {
         CurrentVitality = Maxvitality;
         UpdateVisible();
         Aura.SetActive(true);
+        UpdateUI();
         }
 
-    // ★ ここが重要：プレイヤーに引かれる用の関数
+    // プレイヤーに引かれる用の関数
     public void AddVitality(int value)
         {
         CurrentVitality += value;
 
-        // 上限チェック
         if (CurrentVitality > Maxvitality)
             CurrentVitality = Maxvitality;
 
         if (CurrentVitality < 0)
             CurrentVitality = 0;
 
-        // 0になったらランタンを非表示にするなど
         if (CurrentVitality <= 0)
-           // isActive = false;
-           Aura.SetActive(false);
+            Aura.SetActive(false);
 
         UpdateVisible();
+        UpdateUI(); // UIも更新
         }
 
-    // ランタンの表示状態
     private void UpdateVisible()
         {
         gameObject.SetActive(isActive);
         }
 
-    // Photon同期
+    private void UpdateUI()
+        {
+        if (vitalityText != null)
+            {
+            //vitalityText.text = $"{CurrentVitality}/{Maxvitality}";
+            vitalityText.text = $"{CurrentVitality}";
+            }
+        }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
         if (stream.IsWriting)
@@ -60,10 +68,10 @@ public class lanternStatus : MonoBehaviour, IPunObservable
             CurrentVitality = (int)stream.ReceiveNext();
             isActive = (bool)stream.ReceiveNext();
             UpdateVisible();
+            UpdateUI(); // 受信したらUI更新
             }
         }
 
-    // プレイヤーが1回で吸える回復量
     public int GetRecoveryVitality()
         {
         return RecoveryVitality;
