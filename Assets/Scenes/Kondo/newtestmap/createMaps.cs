@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,9 +97,14 @@ public class createMaps : MonoBehaviour
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            case "4"://収集アイテム
-                                Instantiate(items, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                            case "4": // ランタン
+                                if (PhotonNetwork.IsMasterClient)
+                                    {
+                                    Vector3 pos = new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale);
+                                    PhotonNetwork.Instantiate("Lantern_Stone", pos, Quaternion.identity);
+                                    }
                                 break;
+
 
                             case "5"://スタート地点
                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);

@@ -53,6 +53,26 @@ public class ChildVitalityCollector : MonoBehaviour
                 {
                 addTimer += Time.deltaTime;
 
+                //    if (addTimer >= 1f)
+                //        {
+                //        addTimer = 0f;
+
+                //        if (role.CurrentRole == "Oni") return;
+
+                //        int addValue = ls.GetRecoveryVitality();
+
+                //        // ランタン残量を減らす
+                //        ls.AddVitality(-addValue);
+
+                //        // プレイヤーに加算
+                //        parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, addValue);
+                //        }
+                //    }
+                //else
+                //    {
+                //    addTimer = 0f;
+                //    }
+
                 if (addTimer >= 1f)
                     {
                     addTimer = 0f;
@@ -61,20 +81,17 @@ public class ChildVitalityCollector : MonoBehaviour
 
                     int addValue = ls.GetRecoveryVitality();
 
-                    // ランタン残量を減らす
-                    ls.AddVitality(-addValue);
+                    PhotonView lsView = ls.GetComponent<PhotonView>();
+                    if (lsView != null)
+                        lsView.RPC("RpcConsumeVitality", RpcTarget.MasterClient, addValue);
 
-                    // プレイヤーに加算
                     parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, addValue);
                     }
-                }
-            else
-                {
-                addTimer = 0f;
+
                 }
             }
 
 
-        }
+            }
     }
     
