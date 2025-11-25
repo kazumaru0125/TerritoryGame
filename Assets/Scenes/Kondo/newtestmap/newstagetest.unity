@@ -586,11 +586,7 @@ MonoBehaviour:
   lowwalls: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   nomalwalls: {fileID: 7292319159218376259, guid: d9a027720de9da3409e12c7c0a9208fe, type: 3}
   floors: {fileID: 529180695197480336, guid: 4d231b80b32d9ac41a7ddfa1c930b6ba, type: 3}
-<<<<<<< HEAD
   items: {fileID: 7499151234154285395, guid: d445977d28abb74409746c65054eff99, type: 3}
-=======
-  items: {fileID: 7499151234154285395, guid: f9cda0a1b9439524f975a9fac25c68c8, type: 3}
->>>>>>> newMap
   starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0, type: 3}
   ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
   boxs: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
