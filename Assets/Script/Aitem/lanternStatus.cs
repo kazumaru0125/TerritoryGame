@@ -30,7 +30,11 @@ public class lanternStatus : MonoBehaviour, IPunObservable
         UpdateVisible();
         UpdateUI();
         }
+    public void Update() 
+        {
 
+        Recovery();
+        }
     // プレイヤーが Vitality を消費させる用途
     public void AddVitality(int value)
         {
@@ -64,6 +68,14 @@ public class lanternStatus : MonoBehaviour, IPunObservable
         gameObject.SetActive(isActive);
         }
 
+    private void Recovery()
+        {
+        if(CurrentVitality==0)
+            {
+            CurrentVitality = 20;
+            }
+        }
+
     private void UpdateUI()
         {
         if (vitalityText != null)
@@ -95,6 +107,8 @@ public class lanternStatus : MonoBehaviour, IPunObservable
             // 受信した Aura 状態を反映
             Aura.SetActive(auraActive);
             }
+
+
         }
     // ---------------------------------------------
 

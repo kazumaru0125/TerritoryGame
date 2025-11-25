@@ -63272,8 +63272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Maxvitality: 20
   RecoveryVitality: 1
-  Aura: {fileID: 7886073035307725586}
   CurrentVitality: 20
+  Aura: {fileID: 7886073035307725586}
   isActive: 1
   vitalityText: {fileID: 3262437542296599254}
 --- !u!114 &1869308149178254247
