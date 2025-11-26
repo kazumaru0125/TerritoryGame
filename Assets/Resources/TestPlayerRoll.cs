@@ -287,7 +287,49 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
     //        }
     //    }
 
-  //  [PunRPC]
+    //  [PunRPC]
+    //public void AddTeamDamageRPC(string team)
+    //    {
+    //    if (!PhotonNetwork.IsMasterClient) return;
+
+    //    var room = PhotonNetwork.CurrentRoom;
+    //    if (room == null) return;
+
+    //    string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+    //    int current = 0;
+    //    if (room.CustomProperties.ContainsKey(key))
+    //        current = (int)room.CustomProperties[key];
+
+    //    current += 1;
+
+    //    room.SetCustomProperties(
+    //        new ExitGames.Client.Photon.Hashtable { { key, current } }
+    //    );
+
+    //    // ★ 残り死亡回数をログに表示（3回まで）
+    //    int remaining = Mathf.Max(0, 3 - current);
+    //    Debug.Log($"[Master] Team {team} Damage = {current} / 3  残り {remaining}回");
+
+    //    // 3回以上でロール反転
+    //    if (current >= 3)
+    //        {
+    //        Debug.Log($"[Master] Team {team} が3回死亡 → 全チームのロール反転開始！");
+
+    //        ToggleRoleForTeam(team);
+
+    //        string otherTeam = (team == "A") ? "B" : "A";
+    //        ToggleRoleForTeam(otherTeam);
+
+    //        // リセット
+    //        room.SetCustomProperties(
+    //            new ExitGames.Client.Photon.Hashtable { { key, 0 } }
+    //        );
+
+    //        Debug.Log($"[Master] Team A と Team B のロールを反転しました！");
+    //        }
+    //    }
+
     public void AddTeamDamageRPC(string team)
         {
         if (!PhotonNetwork.IsMasterClient) return;
@@ -295,26 +337,40 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         var room = PhotonNetwork.CurrentRoom;
         if (room == null) return;
 
-        string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+        // ダメージを受けたチームのキー
+        string damagedKey = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
 
-        int current = 0;
-        if (room.CustomProperties.ContainsKey(key))
-            current = (int)room.CustomProperties[key];
+        // ダメージを与えた側のキー
+        string attackerKey = (team == "A") ? "TeamB_Damage" : "TeamA_Damage";
 
-        current += 1;
+        // --- ① ダメージ受けた側を +1 ---
+        int damagedValue = room.CustomProperties.ContainsKey(damagedKey)
+            ? (int)room.CustomProperties[damagedKey] : 0;
 
+        damagedValue += 1;
+
+
+        // --- ② ダメージ与えた側を -1（0未満にはしない） ---
+        int attackerValue = room.CustomProperties.ContainsKey(attackerKey)
+            ? (int)room.CustomProperties[attackerKey] : 0;
+
+        attackerValue = Mathf.Max(0, attackerValue - 1);
+
+
+        // --- ③ ルームプロパティ更新 ---
         room.SetCustomProperties(
-            new ExitGames.Client.Photon.Hashtable { { key, current } }
+            new ExitGames.Client.Photon.Hashtable {
+            { damagedKey, damagedValue },
+            { attackerKey, attackerValue }
+            }
         );
 
-        // ★ 残り死亡回数をログに表示（3回まで）
-        int remaining = Mathf.Max(0, 3 - current);
-        Debug.Log($"[Master] Team {team} Damage = {current} / 3  残り {remaining}回");
+        Debug.Log($"[Master] {team} チームが被弾 → {damagedKey}={damagedValue}, 反対側 {attackerKey}={attackerValue}");
 
-        // 3回以上でロール反転
-        if (current >= 3)
+        // --- ④ ロール反転判定 ---
+        if (damagedValue >= 3)
             {
-            Debug.Log($"[Master] Team {team} が3回死亡 → 全チームのロール反転開始！");
+            Debug.Log($"[Master] Team {team} が3回死亡 → 全チームのロール反転！");
 
             ToggleRoleForTeam(team);
 
@@ -322,13 +378,40 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             ToggleRoleForTeam(otherTeam);
 
             // リセット
-            room.SetCustomProperties(
-                new ExitGames.Client.Photon.Hashtable { { key, 0 } }
-            );
+            room.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { damagedKey, 0 } });
 
-            Debug.Log($"[Master] Team A と Team B のロールを反転しました！");
+            Debug.Log("[Master] ロール反転完了！");
             }
         }
+
+    public int GetRemainingLifeForTeam(string team)
+        {
+        var room = PhotonNetwork.CurrentRoom;
+        if (room == null) return 3;
+
+        string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+        if (!room.CustomProperties.ContainsKey(key)) return 3;
+
+        int current = (int)room.CustomProperties[key];
+        return Mathf.Max(0, 3 - current);
+        }
+
+
+
+    public int GetRemainingLife()
+        {
+        var room = PhotonNetwork.CurrentRoom;
+        if (room == null) return 3;
+
+        string key = (CurrentTeam == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+        if (!room.CustomProperties.ContainsKey(key)) return 3;
+
+        int current = (int)room.CustomProperties[key];
+        return Mathf.Max(0, 3 - current);
+        }
+
 
 
 
