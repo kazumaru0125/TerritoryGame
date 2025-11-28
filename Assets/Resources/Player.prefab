@@ -62816,6 +62816,7 @@ GameObject:
   - component: {fileID: 5555850184839248972}
   - component: {fileID: 3400802970881686639}
   - component: {fileID: 4159382970079350881}
+  - component: {fileID: 2680647912401526124}
   m_Layer: 0
   m_Name: unitychan_human
   m_TagString: Player
@@ -62904,7 +62905,6 @@ MonoBehaviour:
   guideOfuda: {fileID: 6166888613297300842}
   guideHeight: 1
   guideDistance: 1
-  wavemanager: {fileID: 0}
 --- !u!54 &7839519997189391517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63215,6 +63215,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vitalityParticle: {fileID: 7093104765821716040}
+--- !u!114 &2680647912401526124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7188627608320446384}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9da3277216c2c94680a0f652eb74a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7188627608320446384}
+  bombPrefab: {fileID: 6798921797372410193, guid: 2f299bde3409e7b4a8f5030ae158c3fc, type: 3}
+  electricFloorPrefab: {fileID: 5855856240255083517, guid: fffc047908e8a664d8a389f34f02eb33, type: 3}
+  stamina: 100
+  moveSpeed: 5
+  jumpPower: 7
 --- !u!1 &7203659100262464425
 GameObject:
   m_ObjectHideFlags: 0
@@ -72514,6 +72532,7 @@ MonoBehaviour:
   WalkSpeed: 7.5
   Stamina: 100
   HetBox: {fileID: 8077136533012180591}
+  isTrapped: 0
 --- !u!114 &7906769824520635133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72730,6 +72749,7 @@ MonoBehaviour:
   WalkSpeed: 7.5
   Stamina: 100
   HetBox: {fileID: 527187752998259799}
+  isTrapped: 0
 --- !u!54 &7796311292477805761
 Rigidbody:
   m_ObjectHideFlags: 0
