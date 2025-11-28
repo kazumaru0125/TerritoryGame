@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviourPun
     [SerializeField] private OfudaCount ofudaCount; // Inspectorでセット
 
     private bool wave1Ended = false;
+    public int currentWave;
 
     private void Start()
         {
@@ -30,6 +31,7 @@ public class WaveManager : MonoBehaviourPun
             }
 
         Wave.text = "Wave1";
+        currentWave = 1;
         }
 
     private void Update()
@@ -45,7 +47,7 @@ public class WaveManager : MonoBehaviourPun
 
                 Wave.text = "Wave2";
                 Debug.Log("Wave1終了");
-
+                currentWave = 2;
                 if (PhotonNetwork.IsMasterClient)
                     {
                     HandleWaveEnd();

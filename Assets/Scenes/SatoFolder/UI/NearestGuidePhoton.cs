@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 
 public class NearestGuidePhoton : MonoBehaviourPun
     {
@@ -18,26 +19,52 @@ public class NearestGuidePhoton : MonoBehaviourPun
 
     private Transform cachedTransform;
 
+    public WaveManager wavemanager;
+
     void Start()
         {
         cachedTransform = transform;
 
+        // WaveManager を自動取得（Hierarchy のオブジェクト）
+        if (wavemanager == null)
+            {
+            wavemanager = FindObjectOfType<WaveManager>();
+            }
+
         // 他プレイヤーのガイドは非表示
         if (!photonView.IsMine)
             {
-          //  if (guideOni) guideOni.gameObject.SetActive(false);
             if (guideOfuda) guideOfuda.gameObject.SetActive(false);
             }
         }
 
+
+
     void Update()
         {
-     
         if (!photonView.IsMine) return;
 
-       // UpdateGuide(oniTag, guideOni);
-        UpdateGuide(ofudaTag, guideOfuda);
+        float rt = Input.GetAxis("RT");
+        bool isRTPressed = Mathf.Abs(rt) > 0.1f;
+
+        if (isRTPressed)
+            {
+            if (wavemanager.currentWave == 1)
+                {
+                UpdateGuide(ofudaTag, guideOfuda);
+                }
+            else if (wavemanager.currentWave == 2)
+                {
+                UpdateGuide("vitality", guideOfuda);
+                }
+            }
+        else
+            {
+            if (guideOfuda) guideOfuda.gameObject.SetActive(false);
+            }
         }
+
+
 
     void UpdateGuide(string tag, Transform guide)
         {

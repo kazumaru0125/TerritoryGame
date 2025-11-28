@@ -62904,6 +62904,7 @@ MonoBehaviour:
   guideOfuda: {fileID: 6166888613297300842}
   guideHeight: 1
   guideDistance: 1
+  wavemanager: {fileID: 0}
 --- !u!54 &7839519997189391517
 Rigidbody:
   m_ObjectHideFlags: 0
