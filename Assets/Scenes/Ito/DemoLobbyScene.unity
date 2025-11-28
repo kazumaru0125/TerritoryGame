@@ -5564,6 +5564,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: cherry blossoms Effct (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6080,6 +6096,22 @@ PrefabInstance:
     - target: {fileID: 8487878173758764400, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
       propertyPath: m_Name
       value: cherry blossoms Effct (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7128,7 +7160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1271866791
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7632,7 +7664,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7999,6 +8043,22 @@ PrefabInstance:
     - target: {fileID: 8487878173758764400, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
       propertyPath: m_Name
       value: cherry blossoms Effct (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8554978381202607376, guid: 8293f393e6a56f5408cd85d4f1a6c046, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
