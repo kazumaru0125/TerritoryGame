@@ -190,10 +190,17 @@ MonoBehaviour:
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords:
+<<<<<<< HEAD
     - m_ComponentGlyphIDs: 820b0000540b0000
       m_LigatureGlyphID: 8367
     - m_ComponentGlyphIDs: 820b0000530b0000
       m_LigatureGlyphID: 2947
+=======
+    - m_ComponentGlyphIDs: 130b0000530b0000
+      m_LigatureGlyphID: 2836
+    - m_ComponentGlyphIDs: 110b0000530b0000
+      m_LigatureGlyphID: 2834
+>>>>>>> DemoLobbyScene12
     m_GlyphPairAdjustmentRecords: []
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []
