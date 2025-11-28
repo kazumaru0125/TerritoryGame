@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviourPun
     {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviourPun
 
     public GameObject HetBox;
 
+   public bool isTrapped;
     public bool IsRun { get; private set; }
 
     private IPlayerState currentState;
@@ -80,6 +82,28 @@ public class PlayerController : MonoBehaviourPun
         Animator = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody>();
         }
+
+    private void OnCollisionEnter(Collision collision)
+        {
+        // もし触れたオブジェクトのタグが "Player" なら
+        if (collision.gameObject.CompareTag("Trap"))
+            {
+            isTrapped = true; // 捕まった状態
+            Rigidbody.linearVelocity = Vector3.zero; // 動きを止める
+            Animator.SetBool("is_walking", false);
+            Animator.SetBool("is_running", false);
+            }
+        }
+
+    private void OnCollisionExit(Collision collision)
+        {
+        if (collision.gameObject.CompareTag("Trap"))
+            {
+         //   isTrapped = false; // 捕まり解除
+            }
+        }
+
+
 
 
     [PunRPC]

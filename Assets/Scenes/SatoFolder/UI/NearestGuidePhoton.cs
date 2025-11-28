@@ -19,7 +19,7 @@ public class NearestGuidePhoton : MonoBehaviourPun
 
     private Transform cachedTransform;
 
-    public WaveManager wavemanager;
+     WaveManager wavemanager;
 
     void Start()
         {

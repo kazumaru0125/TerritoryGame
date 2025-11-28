@@ -26,7 +26,7 @@ public class BearTrap : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
         {
         // もし触れたオブジェクトのタグが "Player" なら
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Oni"))
             {
             PlayTrapAnimation();
             }
@@ -42,18 +42,28 @@ public class BearTrap : MonoBehaviour
             }
         }
 
+    //IEnumerator DeleteAfterAnimation()
+    //    {
+    //    // 現在のアニメーションクリップの長さを取得
+    //    float clipLength = anim.clip.length;
+
+    //    // アニメーション終了まで待つ
+    //    yield return new WaitForSeconds(clipLength);
+
+    //    // さらに5秒待ってから削除
+    //    yield return new WaitForSeconds(3f);
+
+    //    Debug.Log("BearTrap削除");
+    //    Destroy(gameObject);
+    //    }
+
     IEnumerator DeleteAfterAnimation()
         {
-        // 現在のアニメーションクリップの長さを取得
-        float clipLength = anim.clip.length;
-
-        // アニメーション終了まで待つ
-        yield return new WaitForSeconds(clipLength);
-
-        // さらに5秒待ってから削除
-        yield return new WaitForSeconds(3f);
+        // 発動して5秒後に消える
+        yield return new WaitForSeconds(5f);
 
         Debug.Log("BearTrap削除");
         Destroy(gameObject);
         }
+
     }
