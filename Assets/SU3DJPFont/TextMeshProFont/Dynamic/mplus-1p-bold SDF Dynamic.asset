@@ -189,6 +189,7 @@ MonoBehaviour:
     m_Height: 1023
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
+<<<<<<< HEAD
     m_LigatureSubstitutionRecords:
     - m_ComponentGlyphIDs: 820b0000540b0000
       m_LigatureGlyphID: 8367
@@ -1110,6 +1111,10 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: -1234213584
+=======
+    m_LigatureSubstitutionRecords: []
+    m_GlyphPairAdjustmentRecords: []
+>>>>>>> DemoLobbyScene9
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []
   m_ShouldReimportFontFeatures: 0
