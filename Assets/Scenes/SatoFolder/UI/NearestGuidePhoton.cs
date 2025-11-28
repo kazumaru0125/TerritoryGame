@@ -5,11 +5,11 @@ using Photon.Pun;
 public class NearestGuidePhoton : MonoBehaviourPun
     {
     [Header("タグ設定")]
-    public string oniTag = "Oni";
+    //public string oniTag = "Oni";
     public string ofudaTag = "Ofuda";
 
     [Header("ガイドオブジェクト")]
-    public Transform guideOni;
+ //   public Transform guideOni;
     public Transform guideOfuda;
 
     [Header("ガイド位置")]
@@ -25,16 +25,17 @@ public class NearestGuidePhoton : MonoBehaviourPun
         // 他プレイヤーのガイドは非表示
         if (!photonView.IsMine)
             {
-            if (guideOni) guideOni.gameObject.SetActive(false);
+          //  if (guideOni) guideOni.gameObject.SetActive(false);
             if (guideOfuda) guideOfuda.gameObject.SetActive(false);
             }
         }
 
     void Update()
         {
+     
         if (!photonView.IsMine) return;
 
-        UpdateGuide(oniTag, guideOni);
+       // UpdateGuide(oniTag, guideOni);
         UpdateGuide(ofudaTag, guideOfuda);
         }
 

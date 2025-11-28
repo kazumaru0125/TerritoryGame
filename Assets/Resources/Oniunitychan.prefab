@@ -4850,7 +4850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5447856210701748043
 Transform:
   m_ObjectHideFlags: 0
@@ -17209,6 +17209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 7
+  isGrounded: 0
 --- !u!54 &3194315250033605975
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17293,10 +17294,10 @@ MonoBehaviour:
     Name: is_attacking
   - Type: 4
     SynchronizeType: 0
-    Name: is_claping
+    Name: is_damage
   - Type: 4
     SynchronizeType: 0
-    Name: is_damage
+    Name: is_prayering
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -17360,6 +17361,9 @@ MonoBehaviour:
   walkSpeed: 5.5
   runSpeed: 30
   jumpScript: {fileID: 2045131322530834841}
+  Stamina: 100
+  UseStamina: 10
+  ReStamina: 20
 --- !u!114 &-1456311623171615639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17385,7 +17389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2610d924a89890a4089cf6766b7d06b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Vitality: 1
+  Ofuda: 1
+  minusOfuda: 1
 --- !u!114 &-7869629915454095893
 MonoBehaviour:
   m_ObjectHideFlags: 0
