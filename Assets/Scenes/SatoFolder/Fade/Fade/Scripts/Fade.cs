@@ -46,6 +46,14 @@ public class Fade : MonoBehaviour
             }
         }
 
+    public void CloseFade()
+        {
+        FadeIn(1.0f, () =>
+        {
+            Debug.Log("フェードイン完了！");
+        });
+        }
+
     void Init()
         {
         fade = GetComponent<IFade>();
