@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviourPun
     public int Stamina = 100;
 
     public GameObject HetBox;
+    public GameObject attackEffectPrefab;
 
-   public bool isTrapped;
+    public bool isTrapped;
     public bool IsRun { get; private set; }
 
     private IPlayerState currentState;
@@ -125,6 +126,20 @@ public class PlayerController : MonoBehaviourPun
         Animator.Play("Jump", 0, 0);
         }
 
+    // 攻撃エフェクトの同期
+    [PunRPC]
+    public void RPC_SpawnAttackEffect()
+        {
+        if (attackEffectPrefab != null)
+            {
+            // プレイヤーを親として生成（ローカル座標がそのまま使われる）
+            GameObject effect = Instantiate(attackEffectPrefab, transform);
+
+            // Prefab に設定されている localPosition / localRotation を使用
+            effect.transform.localPosition = attackEffectPrefab.transform.localPosition;
+            effect.transform.localRotation = attackEffectPrefab.transform.localRotation;
+            }
+        }
 
 
     }
