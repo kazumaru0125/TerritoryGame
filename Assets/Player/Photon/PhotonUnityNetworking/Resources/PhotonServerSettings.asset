@@ -65,6 +65,7 @@ MonoBehaviour:
   - ReportDeathRPC
   - AddTeamDamageRPC
   - RpcConsumeVitality
+  - RPC_SpawnAttackEffect
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
