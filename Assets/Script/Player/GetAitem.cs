@@ -25,10 +25,8 @@ public class GetAitem : MonoBehaviourPun
 
     void Update()
         {
-        // 自分のキャラだけ入力受付
         if (!photonView.IsMine) return;
 
-        // Xキーで効果発動
         if (Input.GetKeyDown(KeyCode.X))
             {
             int num = ItemRouletteScript.decidedItemNumber;
@@ -40,11 +38,30 @@ public class GetAitem : MonoBehaviourPun
                 }
 
             Debug.Log($"取得アイテム番号: {num}");
-            photonView.RPC(nameof(ActivateEffect), RpcTarget.All, num);
+
+            // RPC ではなくローカルで直接呼び出す
+            ActivateEffect(num);
+            }
+
+        if (Input.GetKeyDown(KeyCode.C))
+            {
+            int num = ItemRouletteScript.decidedItemNumber;
+
+            if (num == -1)
+                {
+                Debug.Log("まだアイテムが決まっていません。");
+                return;
+                }
+
+            Debug.Log($"取得アイテム番号: {num}");
+
+            // RPC ではなくローカルで直接呼び出す
+            ActivateEffect(num);
+
+            num = -2;
             }
         }
 
-    [PunRPC]
     void ActivateEffect(int itemNumber)
         {
         switch (itemNumber)
@@ -79,14 +96,19 @@ public class GetAitem : MonoBehaviourPun
         {
         if (bombPrefab != null)
             {
-            PhotonNetwork.Instantiate(bombPrefab.name, player.transform.position, Quaternion.identity);
-            Debug.Log("💣 爆弾を生成しました！（全員に同期）");
+            if (photonView.IsMine)
+                {
+                // 自分のクライアントだけで生成
+                PhotonNetwork.Instantiate(bombPrefab.name, player.transform.position, Quaternion.identity);
+                Debug.Log("💣 爆弾を生成しました！（自分のみ）");
+                }
             }
         else
             {
             Debug.LogWarning("爆弾プレハブが設定されていません！");
             }
         }
+
 
     void HighJump()
         {
@@ -102,9 +124,12 @@ public class GetAitem : MonoBehaviourPun
         {
         if (BearTrapPrefab != null)
             {
-            Vector3 spawnPos = player.transform.position + Vector3.down * 0.5f;
-            PhotonNetwork.Instantiate(BearTrapPrefab.name, spawnPos, Quaternion.identity);
-            Debug.Log("トラばさみを生成しました！（全員同期）");
+            if (photonView.IsMine)
+                {
+                Vector3 spawnPos = player.transform.position + Vector3.down * 0.5f;
+                PhotonNetwork.Instantiate(BearTrapPrefab.name, spawnPos, Quaternion.identity);
+                Debug.Log("トラばさみを生成しました！（自分のみ）");
+                }
             }
         else
             {
