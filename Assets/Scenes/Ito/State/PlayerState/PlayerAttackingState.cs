@@ -46,6 +46,7 @@ public class PlayerAttackingState : IPlayerState
     private void SpawnAttackEffect(PlayerController player)
         {
         if (!player.photonView.IsMine) return;
+        if (player.IsStunned) return;
 
         if (player.attackEffectPrefab != null && hitboxStatus != null)
             {
