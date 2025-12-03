@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
-public class GetAitem : MonoBehaviour
+public class GetAitem : MonoBehaviourPun
     {
     [Header("プレイヤー本体（自分自身でもOK）")]
     public GameObject player;
 
-    [Header("生成用プレハブ")]
-    public GameObject bombPrefab;      // 爆弾
-    public GameObject electricFloorPrefab; // 電撃床
+    [Header("生成用プレハブ（Resources 直下に入れておく）")]
+    public GameObject bombPrefab;           // 爆弾
+    public GameObject BearTrapPrefab;  // 電撃床
 
     [Header("プレイヤーのパラメータ")]
     public float stamina = 100f;
@@ -24,7 +25,10 @@ public class GetAitem : MonoBehaviour
 
     void Update()
         {
-        // Spaceキーで効果発動
+        // 自分のキャラだけ入力受付
+        if (!photonView.IsMine) return;
+
+        // Xキーで効果発動
         if (Input.GetKeyDown(KeyCode.X))
             {
             int num = ItemRouletteScript.decidedItemNumber;
@@ -36,10 +40,11 @@ public class GetAitem : MonoBehaviour
                 }
 
             Debug.Log($"取得アイテム番号: {num}");
-            ActivateEffect(num);
+            photonView.RPC(nameof(ActivateEffect), RpcTarget.All, num);
             }
         }
 
+    [PunRPC]
     void ActivateEffect(int itemNumber)
         {
         switch (itemNumber)
@@ -53,7 +58,7 @@ public class GetAitem : MonoBehaviour
                 break;
 
             case 2:
-                SpawnElectricFloor();
+                SpawnBearTrap();
                 break;
 
             case 3:
@@ -74,8 +79,8 @@ public class GetAitem : MonoBehaviour
         {
         if (bombPrefab != null)
             {
-            Instantiate(bombPrefab, player.transform.position, Quaternion.identity);
-            Debug.Log("💣 爆弾を生成しました！");
+            PhotonNetwork.Instantiate(bombPrefab.name, player.transform.position, Quaternion.identity);
+            Debug.Log("💣 爆弾を生成しました！（全員に同期）");
             }
         else
             {
@@ -87,19 +92,19 @@ public class GetAitem : MonoBehaviour
         {
         if (rb != null)
             {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // 一旦リセット
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * (jumpPower * 2f), ForceMode.VelocityChange);
-            Debug.Log("🦘 ハイジャンプ発動！");
+            Debug.Log(" ハイジャンプ発動！（ローカル）");
             }
         }
 
-    void SpawnElectricFloor()
+    void SpawnBearTrap()
         {
-        if (electricFloorPrefab != null)
+        if (BearTrapPrefab != null)
             {
             Vector3 spawnPos = player.transform.position + Vector3.down * 0.5f;
-            Instantiate(electricFloorPrefab, spawnPos, Quaternion.identity);
-            Debug.Log("トラばさみを生成しました！");
+            PhotonNetwork.Instantiate(BearTrapPrefab.name, spawnPos, Quaternion.identity);
+            Debug.Log("トラばさみを生成しました！（全員同期）");
             }
         else
             {

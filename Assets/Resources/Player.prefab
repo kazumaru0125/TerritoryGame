@@ -53398,6 +53398,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: is_prayering
+  - Type: 4
+    SynchronizeType: 0
+    Name: is_dizzying
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -53634,7 +53637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7188627608320446384}
   bombPrefab: {fileID: 6798921797372410193, guid: 2f299bde3409e7b4a8f5030ae158c3fc, type: 3}
-  electricFloorPrefab: {fileID: 5855856240255083517, guid: fffc047908e8a664d8a389f34f02eb33, type: 3}
+  BearTrapPrefab: {fileID: 5855856240255083517, guid: 1afeb2fdca42f51469356ad5ef38e226, type: 3}
   stamina: 100
   moveSpeed: 5
   jumpPower: 7
