@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24222c75bb5bb5b438c72ad38b7b5c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quitConfirmPanel: {fileID: 0}
 --- !u!4 &125659404
 Transform:
   m_ObjectHideFlags: 0
@@ -7551,7 +7552,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e23d9524e2540d341ae2b3714b3dee79, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7fa56b936f38874abd419883199da6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7571,7 +7572,7 @@ Transform:
   m_GameObject: {fileID: 1350585085}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.019, y: 3.715, z: 1.345}
+  m_LocalPosition: {x: 0, y: 3.715, z: 1.345}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7976,7 +7977,7 @@ RectTransform:
   m_GameObject: {fileID: 1671470021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 739463487}
@@ -7984,7 +7985,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 100, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1671470024
 CanvasRenderer:
@@ -8014,7 +8015,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: d1163f937e030d848aa2e678796a0e33, type: 3}
+  m_Texture: {fileID: 2800000, guid: c7fa56b936f38874abd419883199da6c, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
