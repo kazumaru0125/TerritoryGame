@@ -67,6 +67,8 @@ MonoBehaviour:
   - RpcConsumeVitality
   - RPC_SpawnAttackEffect
   - ActivateEffect
+  - RPC_DestroySelf
+  - RPC_ExplosionStart
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
