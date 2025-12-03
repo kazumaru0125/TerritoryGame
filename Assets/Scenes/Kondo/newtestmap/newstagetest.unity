@@ -732,11 +732,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 4900000, guid: 7155c780b5318364d9911262c093dc5e, type: 3}
+<<<<<<< HEAD
   hiwalls: {fileID: 1859527680857348, guid: 0661896a9b0e4d548bebff48f276f91a, type: 3}
+=======
+  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+>>>>>>> newMap
   hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
   lowwalls: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   nomalwalls: {fileID: 7292319159218376259, guid: d9a027720de9da3409e12c7c0a9208fe, type: 3}
-  floors: {fileID: 529180695197480336, guid: 4d231b80b32d9ac41a7ddfa1c930b6ba, type: 3}
+  floors: {fileID: 3615299149272416980, guid: 7f4b16f969c59224db8384d535e42acc, type: 3}
   items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
   starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0, type: 3}
   ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
