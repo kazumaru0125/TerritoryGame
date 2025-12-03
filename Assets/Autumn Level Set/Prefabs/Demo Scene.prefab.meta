@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f46041349e9c4e24ebc6d241f23fb44f
+timeCreated: 1470832516
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Prefabs/Demo Scene.prefab
+  uploadId: 228970

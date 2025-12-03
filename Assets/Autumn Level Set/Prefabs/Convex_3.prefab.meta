@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 16a74e874596dfb47986e73d946f968d
+timeCreated: 1470843269
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Prefabs/Convex_3.prefab
+  uploadId: 228970

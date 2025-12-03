@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d0dcd31c4590cbf40a5f24fbae3886bb
+timeCreated: 1470804409
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Demo Scene/Materials/AutumnLevel_Leaf.mat
+  uploadId: 228970

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8d62ffc94b5ac3b4d9868f3e60b1bb09
+timeCreated: 1470834465
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Prefabs/floor_variability_09a.prefab
+  uploadId: 228970

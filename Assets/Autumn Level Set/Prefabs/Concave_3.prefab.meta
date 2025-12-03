@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f933949b16fab6445a171a89f0c7b06d
+timeCreated: 1470843262
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Prefabs/Concave_3.prefab
+  uploadId: 228970
