@@ -47,7 +47,7 @@ public class ItemRouletteScript : MonoBehaviour
             timer += switchInterval;
             }
 
-        // 🎯 最終結果
+        // 最終結果
         int finalIndex = Random.Range(0, itemTextures.Length);
         decidedItem = itemTextures[finalIndex];
         decidedItemNumber = finalIndex; // ← ここで番号も保存
