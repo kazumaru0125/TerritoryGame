@@ -99,11 +99,11 @@ public class GetAitem : MonoBehaviour
             {
             Vector3 spawnPos = player.transform.position + Vector3.down * 0.5f;
             Instantiate(electricFloorPrefab, spawnPos, Quaternion.identity);
-            Debug.Log("⚡ 電撃床を生成しました！");
+            Debug.Log("トラばさみを生成しました！");
             }
         else
             {
-            Debug.LogWarning("電撃床プレハブが設定されていません！");
+            Debug.LogWarning("トラばさみが設定されていません！");
             }
         }
 
