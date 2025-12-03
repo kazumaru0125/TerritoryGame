@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 402d7ef15d5b64e4e9f8ef3d4138ddb9
+timeCreated: 1470804408
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Demo Scene/Materials/AutumnLevel_Atlast.mat
+  uploadId: 228970

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a64604ace4e489a4baa085ffb9c81691
+timeCreated: 1470833702
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Models/Materials/Leaf_Decal.mat
+  uploadId: 228970

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ac565cbcd5cd9834f9b88b3cd81b7144
+timeCreated: 1470834823
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69314
+  packageName: Autumnal Nature Level Set
+  packageVersion: 1.1
+  assetPath: Assets/Autumn Level Set/Prefabs/Grass_01_Large_b.prefab
+  uploadId: 228970
