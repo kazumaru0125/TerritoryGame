@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   bombPrefab: {fileID: 6798921797372410193, guid: 2f299bde3409e7b4a8f5030ae158c3fc, type: 3}
-  electricFloorPrefab: {fileID: 5855856240255083517, guid: fffc047908e8a664d8a389f34f02eb33, type: 3}
+  BearTrapPrefab: {fileID: 0}
   stamina: 100
   moveSpeed: 5
   jumpPower: 7
@@ -4685,8 +4685,8 @@ MonoBehaviour:
   hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
   hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
   lowwalls: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
-  nomalwalls: {fileID: 7292319159218376259, guid: d9a027720de9da3409e12c7c0a9208fe, type: 3}
-  floors: {fileID: 3615299149272416980, guid: 7f4b16f969c59224db8384d535e42acc, type: 3}
+  nomalwalls: {fileID: 449982750405866708, guid: 3dd013ea157678e4db91b78e49f2a53c, type: 3}
+  floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
   items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
   starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0, type: 3}
   ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
