@@ -135,7 +135,7 @@ public class createMaps : MonoBehaviour
 
 
                         }
-                        Instantiate(floors, new Vector3((-4.5f + j) * scale,0.0f, (4.5f - i) * scale), Quaternion.identity);
+                        Instantiate(floors, new Vector3((-4.5f + j) * scale,-4.0f, (4.5f - i) * scale), Quaternion.identity);
                     }
                     //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                 }
