@@ -14,6 +14,7 @@ public class PlayerMoveingState : IPlayerState
     {
         // ©•ª‚ÌƒLƒƒƒ‰ˆÈŠO‚Í“ü—Íˆ—‚ğ‚µ‚È‚¢
         if (!player.photonView.IsMine) return;
+        if (player.IsStunned) return;
 
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;

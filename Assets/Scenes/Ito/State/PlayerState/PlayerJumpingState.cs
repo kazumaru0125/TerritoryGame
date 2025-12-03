@@ -19,7 +19,9 @@ public class PlayerJumpingState : IPlayerState
             // ジャンプ力適用
             player.Rigidbody.AddForce(Vector3.up * player.JumpForce, ForceMode.VelocityChange);
             }
-        }
+
+        if (player.IsStunned) return;
+    }
 
     public void UpdateState(PlayerController player)
         {
