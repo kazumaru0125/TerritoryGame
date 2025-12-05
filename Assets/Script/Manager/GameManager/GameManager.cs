@@ -1,23 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
     {
-        
-    }
+    [Header("終了確認パネル")]
+    public GameObject quitConfirmPanel; // 確認パネル
 
-    // Update is called once per frame
+    private bool isConfirmOpen = false;
+
     void Update()
         {
-        // ESCキーが押されたらアプリを終了
+        // ESCキーが押されたら確認ダイアログ表示
         if (Input.GetKeyDown(KeyCode.Escape))
             {
-            Application.Quit();
-            Debug.Log("ゲーム終了");
+            if (!isConfirmOpen)
+                {
+                OpenQuitConfirm();
+                }
+            else
+                {
+                CloseQuitConfirm();
+                }
             }
         }
-}
+
+    // 終了確認パネルを開く
+    public void OpenQuitConfirm()
+        {
+        quitConfirmPanel.SetActive(true);
+        isConfirmOpen = true;
+        }
+
+    // 終了確認パネルを閉じる
+    public void CloseQuitConfirm()
+        {
+        quitConfirmPanel.SetActive(false);
+        isConfirmOpen = false;
+        }
+
+    // 「はい」ボタンに設定（2秒待って終了）
+    public void QuitGame()
+        {
+        StartCoroutine(QuitAfterDelay());
+        }
+
+    private System.Collections.IEnumerator QuitAfterDelay()
+        {
+        yield return new WaitForSeconds(1f);
+        Debug.Log("ゲーム終了");
+        Application.Quit();
+        }
+    }

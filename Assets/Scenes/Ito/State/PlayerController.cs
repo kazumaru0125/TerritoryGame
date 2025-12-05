@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviourPun
     {
@@ -11,11 +12,18 @@ public class PlayerController : MonoBehaviourPun
     public int Stamina = 100;
 
     public GameObject HetBox;
+    public GameObject attackEffectPrefab;
 
+    public bool isTrapped;
     public bool IsRun { get; private set; }
 
     private IPlayerState currentState;
     private bool isAttackTriggered = false; // 攻撃トリガーフラグ
+
+    // スタン時間
+    public float StunDuration = 2.0f;
+    // スタン状態
+    public bool IsStunned { get; private set; }
 
     void Start()
         {
@@ -25,9 +33,22 @@ public class PlayerController : MonoBehaviourPun
         HetBox.SetActive(false);
         }
 
+    public void SetStun(bool isOn)
+    {
+        IsStunned = isOn;
+    }
+
     void Update()
         {
         if (!photonView.IsMine) return;
+
+        // ここでスタン中は一切の入力を受け付けない
+        if (IsStunned)
+        {
+            // 走りトグルや攻撃・ジャンプなども全部スキップ
+            currentState?.UpdateState(this); // アニメ進行など必要なら残す
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown("joystick button 8"))
             IsRun = !IsRun;
@@ -81,6 +102,66 @@ public class PlayerController : MonoBehaviourPun
         Rigidbody = GetComponent<Rigidbody>();
         }
 
+    //private void OnCollisionEnter(Collision collision)
+    //    {
+    //    // もし触れたオブジェクトのタグが "Player" なら
+    //    if (collision.gameObject.CompareTag("Trap"))
+    //        {
+    //        isTrapped = true; // 捕まった状態
+    //        Rigidbody.linearVelocity = Vector3.zero; // 動きを止める
+    //        Animator.SetBool("is_walking", false);
+    //        Animator.SetBool("is_running", false);
+    //        }
+    //    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Hit: " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            Debug.Log("Trap hit!");
+            isTrapped = true;
+            Rigidbody.linearVelocity = Vector3.zero;
+            Animator.SetBool("is_walking", false);
+            Animator.SetBool("is_running", false);
+
+            if (photonView.IsMine)
+            {
+                ChangeState(new PlayerTrapDameageState());
+            }
+        }
+    }
+
+    // Collider.IsTrigger = true なオブジェクト用
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("OnTriggerEnter: " + other.name);
+
+        if (other.CompareTag("Trap"))
+        {
+            Debug.Log("Trap trigger hit!");
+            isTrapped = true;
+            Rigidbody.linearVelocity = Vector3.zero;
+            Animator.SetBool("is_walking", false);
+            Animator.SetBool("is_running", false);
+
+            if (photonView.IsMine)
+            {
+                ChangeState(new PlayerTrapDameageState());
+            }
+        }
+    }
+
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Trap"))
+            {
+         //   isTrapped = false; // 捕まり解除
+            }
+    }
+
+
+
 
     [PunRPC]
     public void RPC_SetAttackState(bool isAttacking)
@@ -101,6 +182,26 @@ public class PlayerController : MonoBehaviourPun
         Animator.Play("Jump", 0, 0);
         }
 
+    // 攻撃エフェクトの同期
+    [PunRPC]
+    public void RPC_SpawnAttackEffect()
+    {
+        if (attackEffectPrefab != null)
+            {
+            // プレイヤーを親として生成（ローカル座標がそのまま使われる）
+            GameObject effect = Instantiate(attackEffectPrefab, transform);
 
-
+            // Prefab に設定されている localPosition / localRotation を使用
+            effect.transform.localPosition = attackEffectPrefab.transform.localPosition;
+            effect.transform.localRotation = attackEffectPrefab.transform.localRotation;
+            }
     }
+
+    [PunRPC]
+    public void RPC_SetDizzyingState(bool isDizzying)
+    {
+        Animator.SetBool("is_dizzying", isDizzying);
+    }
+
+
+}

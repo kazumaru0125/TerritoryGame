@@ -16,7 +16,7 @@ public class ItemRouletteScript : MonoBehaviour
 
     private bool isSpinning = false;
 
-    // 🟢 他のスクリプトから参照できる変数
+    //  他のスクリプトから参照できる変数
     public static Texture2D decidedItem;
     public static int decidedItemNumber = -1; // アイテム番号（-1は未決定の意味）
 
@@ -47,10 +47,10 @@ public class ItemRouletteScript : MonoBehaviour
             timer += switchInterval;
             }
 
-        // 🎯 最終結果
+        // 最終結果
         int finalIndex = Random.Range(0, itemTextures.Length);
         decidedItem = itemTextures[finalIndex];
-        decidedItemNumber = finalIndex; // ← ここで番号も保存
+        decidedItemNumber = finalIndex; 
         rouletteImage.texture = decidedItem;
 
         Debug.Log($"決定アイテム番号: {finalIndex}, 名前: {decidedItem.name}");

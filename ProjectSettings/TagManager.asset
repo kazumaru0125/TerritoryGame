@@ -12,6 +12,8 @@ TagManager:
   - Obstacle
   - SpawnArea
   - "MiniMapIcon \u3000"
+  - Trap
+  - Bomb
   layers:
   - Default
   - TransparentFX

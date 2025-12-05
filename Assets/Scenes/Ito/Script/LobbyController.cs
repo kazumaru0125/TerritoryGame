@@ -46,8 +46,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     private const int MaxPerTeam = 2;
 
-
-
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListGameObjects;
     private Dictionary<int, GameObject> playerListGameObjects;
@@ -728,7 +726,14 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void OnBackFromGameOptions_UI_PanelClicked()
     {
+        // パネル切り替え
         ActivatePanel(Login_UI_Panel.name);
+
+        // Unityちゃんを表示
+        if (SD_unitychan_humanoid != null)
+        {
+            SD_unitychan_humanoid.SetActive(true);
+        }
     }
     // ルーム入室中はGameOptionsなど
     public void OnBackCreateRoom_UI_PanelClicked()
