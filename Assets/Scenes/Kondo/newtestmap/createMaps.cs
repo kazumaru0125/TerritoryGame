@@ -85,8 +85,8 @@ public class createMaps : MonoBehaviour
                         switch (testMap[i, j])
                         {
                             case "1"://çÇÇ¢ï«
-                                Instantiate(hiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
-                                Instantiate(hitwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(hiwalls, new Vector3((-4.5f + j) * scale, 7.5f, (4.5f - i) * scale), Quaternion.identity);
+                                //Instantiate(hitwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
