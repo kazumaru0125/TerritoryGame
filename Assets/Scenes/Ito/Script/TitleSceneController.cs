@@ -8,11 +8,14 @@ public class TitleSceneController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space) || 
+            Input.GetMouseButtonDown(0) ||
+            Input.GetKeyDown("joystick button 0") ||
+            Input.GetKeyDown("joystick button 1"))
         {
             // BGMフェードアウト後にシーン遷移
             audioFader.FadeOut(() => SceneManager.LoadScene(nextScene));
-            // 一度の入力で二重コールされないようフラグで制御するのがおすすめです
+           
         }
     }
 }
