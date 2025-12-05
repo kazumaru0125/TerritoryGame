@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 133992359881266697}
   m_Layer: 0
   m_Name: BombExplosion
-  m_TagString: Bomb
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9958,11 +9958,11 @@ GameObject:
   - component: {fileID: 3609851676314584613}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7982311898673427693
 Transform:
   m_ObjectHideFlags: 0
@@ -9973,7 +9973,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6129768488605754347}
