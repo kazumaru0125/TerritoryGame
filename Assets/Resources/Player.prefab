@@ -53636,7 +53636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7188627608320446384}
-  bombPrefab: {fileID: 6798921797372410193, guid: 2f299bde3409e7b4a8f5030ae158c3fc, type: 3}
+  bombPrefab: {fileID: 6798921797372410193, guid: 3dac18181a7e46948b0882df15b6022f, type: 3}
   BearTrapPrefab: {fileID: 5855856240255083517, guid: 1afeb2fdca42f51469356ad5ef38e226, type: 3}
   stamina: 100
   moveSpeed: 5
@@ -62942,6 +62942,7 @@ MonoBehaviour:
   HetBox: {fileID: 8077136533012180591}
   attackEffectPrefab: {fileID: 0}
   isTrapped: 0
+  StunDuration: 2
 --- !u!114 &7906769824520635133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63161,6 +63162,7 @@ MonoBehaviour:
   HetBox: {fileID: 527187752998259799}
   attackEffectPrefab: {fileID: 4937401631404549062}
   isTrapped: 0
+  StunDuration: 5
 --- !u!54 &7796311292477805761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63252,6 +63254,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: is_attacking
+  - Type: 4
+    SynchronizeType: 0
+    Name: is_dizzying
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
