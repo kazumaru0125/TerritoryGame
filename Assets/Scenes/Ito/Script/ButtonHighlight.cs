@@ -2,16 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class ButtonHoverHighlight : MonoBehaviour,
+    IPointerEnterHandler, IPointerExitHandler
 {
-    public Image borderImage;         // 枠線Image
-    public float flashSpeed = 4f;     // 点滅スピード
+    public Image borderImage;
+    public float flashSpeed = 4f;
 
-    bool isSelected;
+    bool isHover;
 
     void Reset()
     {
-        // 自動で子のImageを探す（"Border"など名前で）
         if (borderImage == null)
         {
             var t = transform.Find("Border");
@@ -23,9 +23,8 @@ public class ButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         if (borderImage == null) return;
 
-        if (isSelected)
+        if (isHover)
         {
-            // sin波で0～1を往復させてAlphaを点滅
             float a = (Mathf.Sin(Time.unscaledTime * flashSpeed) + 1f) * 0.5f;
             var c = borderImage.color;
             c.a = a;
@@ -33,20 +32,19 @@ public class ButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
         else
         {
-            // 非選択時は枠線消す
             var c = borderImage.color;
             c.a = 0f;
             borderImage.color = c;
         }
     }
 
-    public void OnSelect(BaseEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        isSelected = true;
+        isHover = true;
     }
 
-    public void OnDeselect(BaseEventData eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
-        isSelected = false;
+        isHover = false;
     }
 }
