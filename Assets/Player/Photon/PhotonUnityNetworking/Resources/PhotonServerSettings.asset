@@ -70,6 +70,7 @@ MonoBehaviour:
   - RPC_SetDizzyingState
   - RPC_DestroySelf
   - RPC_ExplosionStart
+  - StartJump
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
