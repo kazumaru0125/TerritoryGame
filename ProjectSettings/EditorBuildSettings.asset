@@ -12,13 +12,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Kondo/newtestmap/newstagetest.unity
     guid: 109b4ce2c2901004eb1e5bb390ce0319
   - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: Assets/Scenes/Project/LobbyScene.unity
     guid: 900a65e953426fb4dbe7bfb2632af31f
   - enabled: 1
+    path: Assets/Scenes/Project/TGameScene 1.unity
+    guid: 99ec79bf4e936ea478a2c1ad834b239c
+  - enabled: 1
     path: Assets/Scenes/Project/TGameScene.unity
     guid: d94b8e0c9515ce04d9db372a23a3d1ee
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

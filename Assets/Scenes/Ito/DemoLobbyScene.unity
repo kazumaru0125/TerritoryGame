@@ -6138,7 +6138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &536677770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8830,6 +8830,7 @@ MonoBehaviour:
   GameOptions_UI_Panel: {fileID: 1951399701}
   CreateRoom_UI_Panel: {fileID: 672361811}
   roomNameInputField: {fileID: 1516788471}
+  StageSelectionRoom_UI_Panel: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 538518057}
   roomInfoText: {fileID: 1942130456}
   playerListPrefab: {fileID: 727277390}
@@ -14573,6 +14574,7 @@ MonoBehaviour:
   GameOptions_UI_Panel: {fileID: 1807857343}
   CreateRoom_UI_Panel: {fileID: 1521137869}
   roomNameInputField: {fileID: 204919166}
+  StageSelectionRoom_UI_Panel: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 1410883722}
   roomInfoText: {fileID: 2105276597}
   playerListPrefab: {fileID: 1781790425}
