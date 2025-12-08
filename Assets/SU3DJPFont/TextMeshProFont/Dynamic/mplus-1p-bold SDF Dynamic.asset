@@ -294,12 +294,16 @@ MonoBehaviour:
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_LigatureSubstitutionRecords:
     - m_ComponentGlyphIDs: 130b0000530b0000
       m_LigatureGlyphID: 2836
 =======
     m_LigatureSubstitutionRecords: []
 >>>>>>> NewLobbyScene
+=======
+    m_LigatureSubstitutionRecords: []
+>>>>>>> USEAitem
     m_GlyphPairAdjustmentRecords: []
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []

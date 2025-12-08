@@ -16,11 +16,24 @@ public class GetAitem : MonoBehaviourPun
     public float jumpPower = 7f;
 
     private Rigidbody rb;
-
+    private ItemRouletteScript roulette;
     void Start()
         {
         if (player == null) player = gameObject;
         rb = player.GetComponent<Rigidbody>();
+
+        // ★ Canvas 内の特定オブジェクト（例： "ItemRoulette"）から取得
+        GameObject rouletteObj = GameObject.Find("ItemRoulette");
+
+        if (rouletteObj != null)
+            {
+            roulette = rouletteObj.GetComponent<ItemRouletteScript>();
+            Debug.Log("画面上のルーレットUIを取得しました！");
+            }
+        else
+            {
+            Debug.LogError("ItemRoulette オブジェクトが見つかりません！名前を確認してください");
+            }
         }
 
     void Update()
@@ -61,6 +74,21 @@ public class GetAitem : MonoBehaviourPun
             num = -2;
             }
         }
+
+    private void OnTriggerStay(Collider other)
+        {
+        if (other.CompareTag("AitemBox"))
+            {
+            if (Input.GetKey("joystick button 5"))
+                {
+                if (roulette != null)
+                    {
+                    roulette.StartRoulette(); // 画面上 UI のルーレット開始！
+                    }
+                }
+            }
+        }
+
 
     void ActivateEffect(int itemNumber)
         {
