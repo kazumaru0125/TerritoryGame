@@ -24,6 +24,9 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public GameObject CreateRoom_UI_Panel;
     public InputField roomNameInputField;
 
+    [Header("Stage Selection UI Panel")]
+    public GameObject StageSelectionRoom_UI_Panel;
+
     //public InputField maxPlayerInputField;
 
     [Header("Inside Room UI Panel")]
@@ -211,12 +214,24 @@ public class LobbyController : MonoBehaviourPunCallbacks
             roomName = "Room " + Random.Range(1000, 10000);
         }
 
-        RoomOptions roomOptions = new RoomOptions();
-        // roomOptions.MaxPlayers = (byte)int.Parse(maxPlayerInputField.text);
-        roomOptions.MaxPlayers = 4;
-
-        PhotonNetwork.CreateRoom(roomName, roomOptions);
+        // 部屋名入力が終わったのでステージ選択画面へ
+        ActivatePanel(StageSelectionRoom_UI_Panel.name);
     }
+    //public void OnCreateRoomButtonClicked()
+    //{
+    //    string roomName = roomNameInputField.text;
+
+    //    if (string.IsNullOrEmpty(roomName))
+    //    {
+    //        roomName = "Room " + Random.Range(1000, 10000);
+    //    }
+
+    //    RoomOptions roomOptions = new RoomOptions();
+    //    // roomOptions.MaxPlayers = (byte)int.Parse(maxPlayerInputField.text);
+    //    roomOptions.MaxPlayers = 4;
+
+    //    PhotonNetwork.CreateRoom(roomName, roomOptions);
+    //}
 
     public void OnCancelButtonClicked()
     {
@@ -279,7 +294,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
             //PhotonNetwork.LoadLevel("SampleScene");
         }
     }
-
 
     #endregion
 
@@ -619,9 +633,18 @@ public class LobbyController : MonoBehaviourPunCallbacks
         Login_UI_Panel.SetActive(panelToBeActivated.Equals(Login_UI_Panel.name));
         GameOptions_UI_Panel.SetActive(panelToBeActivated.Equals(GameOptions_UI_Panel.name));
         CreateRoom_UI_Panel.SetActive(panelToBeActivated.Equals(CreateRoom_UI_Panel.name));
+        StageSelectionRoom_UI_Panel.SetActive(panelToBeActivated.Equals(StageSelectionRoom_UI_Panel.name));
         InsideRoom_UI_Panel.SetActive(panelToBeActivated.Equals(InsideRoom_UI_Panel.name));
         RoomList_UI_Panel.SetActive(panelToBeActivated.Equals(RoomList_UI_Panel.name));
         Team_UI_Panel.SetActive(panelToBeActivated.Equals(Team_UI_Panel.name));
+
+        //// ★ 追加：ステージ選択パネル
+        //if (StageSelectionRoom_UI_Panel != null)
+        //{
+        //    StageSelectionRoom_UI_Panel.SetActive(
+        //        panelToBeActivated.Equals(StageSelectionRoom_UI_Panel.name)
+        //    );
+        //}
 
         // チームパネル表示のときだけ、ホスト判定でボタン表示
         if (panelToBeActivated.Equals(Team_UI_Panel.name) && StartGameButton != null)
@@ -629,6 +652,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             StartGameButton.SetActive(PhotonNetwork.IsMasterClient);
         }
     }
+
     #endregion
 
     public void OnTeamAButtonClicked()
