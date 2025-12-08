@@ -227,21 +227,43 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
     }
 
+    //public void OnCreateRoomButtonClicked()
+    //{
+    //    string roomName = roomNameInputField.text;
+    //
+    //     if (string.IsNullOrEmpty(roomName))
+    //     {
+    //         roomName = "Room " + Random.Range(1000, 10000);
+    //     }
+    //
+    //     // 一時的に保存しておく
+    //     pendingRoomName = roomName;
+    //
+    //     // 部屋名入力が終わったのでステージ選択画面へ
+    //     ActivatePanel(StageSelectionRoom_UI_Panel.name);
+    // }
+
     public void OnCreateRoomButtonClicked()
-    {
+        {
+        // すでにステージ選択画面なら「次へ」と同じ処理に進む
+        if (StageSelectionRoom_UI_Panel.activeSelf)
+            {
+            OnStageSelectionNextButtonClicked();
+            return;
+            }
+
         string roomName = roomNameInputField.text;
 
         if (string.IsNullOrEmpty(roomName))
-        {
+            {
             roomName = "Room " + Random.Range(1000, 10000);
-        }
+            }
 
-        // 一時的に保存しておく
         pendingRoomName = roomName;
 
-        // 部屋名入力が終わったのでステージ選択画面へ
         ActivatePanel(StageSelectionRoom_UI_Panel.name);
-    }
+        }
+
 
     //public void OnCreateRoomButtonClicked()
     //{
@@ -355,13 +377,16 @@ public class LobbyController : MonoBehaviourPunCallbacks
         switch (selectedStage)
         {
             case 1:
-                sceneName = "TGameScene";   // ステージ1用シーン
+                sceneName = "TGameScene 1";   // ステージ1用シーン
+                //sceneName = "TGameScene";
                 break;
             case 2:
-                sceneName = "TGameScene";  // ステージ2用シーン
+                //sceneName = "Stage2";  // ステージ2用シーン
+                sceneName = "TGameScene";
                 break;
             case 3:
-                sceneName = "TGameScene";  // ステージ3用シーン
+                //  sceneName = "Stage3";  // ステージ3用シーン
+                sceneName = "TGameScene";
                 break;
             default:
                 // 想定外の番号が入っていた場合は安全のためステージ1にフォールバック
