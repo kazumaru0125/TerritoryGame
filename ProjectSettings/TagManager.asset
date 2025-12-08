@@ -14,6 +14,7 @@ TagManager:
   - "MiniMapIcon \u3000"
   - Trap
   - Bomb
+  - AitemBox
   layers:
   - Default
   - TransparentFX

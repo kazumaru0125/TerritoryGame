@@ -57,4 +57,16 @@ public class ItemRouletteScript : MonoBehaviour
 
         isSpinning = false;
         }
+
+    public void StartRoulette()
+        {
+        if (!isSpinning)
+            {
+            StartCoroutine(SpinRoulette());
+            }
+        }
+
+
+
+
     }
