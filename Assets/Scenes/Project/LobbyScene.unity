@@ -2602,6 +2602,7 @@ MonoBehaviour:
   GameOptions_UI_Panel: {fileID: 1234112491}
   CreateRoom_UI_Panel: {fileID: 1332044517}
   roomNameInputField: {fileID: 537239611}
+  StageSelectionRoom_UI_Panel: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 450882451}
   roomInfoText: {fileID: 182870644}
   playerListPrefab: {fileID: 993963742}
@@ -6035,6 +6036,7 @@ MonoBehaviour:
   GameOptions_UI_Panel: {fileID: 1205556859}
   CreateRoom_UI_Panel: {fileID: 1652382003}
   roomNameInputField: {fileID: 988315995}
+  StageSelectionRoom_UI_Panel: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 429897601}
   roomInfoText: {fileID: 1356254110}
   playerListPrefab: {fileID: 81728839}
@@ -24784,7 +24786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1227726402
 Transform:
   m_ObjectHideFlags: 0
@@ -37270,6 +37272,7 @@ MonoBehaviour:
   GameOptions_UI_Panel: {fileID: 681353762}
   CreateRoom_UI_Panel: {fileID: 359255327}
   roomNameInputField: {fileID: 630613838}
+  StageSelectionRoom_UI_Panel: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 193800742}
   roomInfoText: {fileID: 2075208013}
   playerListPrefab: {fileID: 411472375}
@@ -39387,6 +39390,7 @@ MonoBehaviour:
   GameOptions_UI_Panel: {fileID: 401173996}
   CreateRoom_UI_Panel: {fileID: 1372300738}
   roomNameInputField: {fileID: 1620771098}
+  StageSelectionRoom_UI_Panel: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 485463341}
   roomInfoText: {fileID: 1877221209}
   playerListPrefab: {fileID: 8135745641931580309, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
