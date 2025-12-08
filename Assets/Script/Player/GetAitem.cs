@@ -27,7 +27,7 @@ public class GetAitem : MonoBehaviourPun
         {
         if (!photonView.IsMine) return;
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X)|| Input.GetKey("joystick button 5"))
             {
             int num = ItemRouletteScript.decidedItemNumber;
 
@@ -78,14 +78,6 @@ public class GetAitem : MonoBehaviourPun
                 SpawnBearTrap();
                 break;
 
-            case 3:
-                IncreaseStamina();
-                break;
-
-            case 4:
-                IncreaseSpeed();
-                break;
-
             default:
                 Debug.Log("未定義の効果です。");
                 break;
@@ -100,7 +92,7 @@ public class GetAitem : MonoBehaviourPun
                 {
                 // 自分のクライアントだけで生成
                 PhotonNetwork.Instantiate(bombPrefab.name, player.transform.position, Quaternion.identity);
-                Debug.Log("💣 爆弾を生成しました！（自分のみ）");
+                Debug.Log(" 爆弾を生成しました！（自分のみ）");
                 }
             }
         else
