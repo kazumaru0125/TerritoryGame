@@ -71,6 +71,10 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public GameObject emptyRoomImage;
     public TMP_Text emptyRoomText;
 
+    // ステージ選択まで保持しておくルーム名
+    private string pendingRoomName = "";
+    // 選択中ステージ番号（1,2,3など）0は未選択
+    private int selectedStage = 1;
 
     private List<string> randomNames = new List<string> 
     {
@@ -112,13 +116,32 @@ public class LobbyController : MonoBehaviourPunCallbacks
     {
         connectionStatusText.text = "Connection status: " + PhotonNetwork.NetworkClientState;
 
-        // アニメーションタイマー処理
+        // 数字キーでステージ選択（ステージ選択パネルが表示中のときだけ）
+        if (StageSelectionRoom_UI_Panel != null && StageSelectionRoom_UI_Panel.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                selectedStage = 1;
+                Debug.Log("Stage 1 selected");
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                selectedStage = 2;
+                Debug.Log("Stage 2 selected");
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                selectedStage = 3;
+                Debug.Log("Stage 3 selected");
+            }
+        }
+
+        // 既存のドットアニメ処理
         dotsAnimTimer += Time.deltaTime;
         if (dotsAnimTimer >= dotsAnimInterval)
         {
             dotsAnimIndex = (dotsAnimIndex + 1) % dotsAnimArray.Length;
             dotsAnimTimer = 0f;
-            // アニメーション表示をアップデート
             if (InsideRoom_UI_Panel.activeSelf)
             {
                 UpdateRoomInfoUI();
@@ -204,7 +227,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
     }
 
-
     public void OnCreateRoomButtonClicked()
     {
         string roomName = roomNameInputField.text;
@@ -214,9 +236,13 @@ public class LobbyController : MonoBehaviourPunCallbacks
             roomName = "Room " + Random.Range(1000, 10000);
         }
 
+        // 一時的に保存しておく
+        pendingRoomName = roomName;
+
         // 部屋名入力が終わったのでステージ選択画面へ
         ActivatePanel(StageSelectionRoom_UI_Panel.name);
     }
+
     //public void OnCreateRoomButtonClicked()
     //{
     //    string roomName = roomNameInputField.text;
@@ -232,6 +258,29 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     //    PhotonNetwork.CreateRoom(roomName, roomOptions);
     //}
+
+    // ステージ選択画面の「次へ」ボタンから呼ぶ
+    // ステージ選択画面の「次へ」ボタンから呼ぶ
+    public void OnStageSelectionNextButtonClicked()
+    {
+        if (string.IsNullOrEmpty(pendingRoomName))
+        {
+            Debug.LogWarning("pendingRoomName is empty. Back to CreateRoom UI.");
+            ActivatePanel(CreateRoom_UI_Panel.name);
+            return;
+        }
+
+        // ここでルームを作成
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 4;
+
+        PhotonNetwork.CreateRoom(pendingRoomName, roomOptions);
+
+        // ここでは UI を切り替えない
+        // ルーム作成→参加に成功すると OnJoinedRoom() が呼ばれ、
+        // その中で ActivatePanel(InsideRoom_UI_Panel.name); が実行される
+    }
+
 
     public void OnCancelButtonClicked()
     {
@@ -288,12 +337,45 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void OnStartGameButtonClicked()
     {
-        if (PhotonNetwork.IsMasterClient)
+        // マスタークライアント（ホスト）以外はステージを開始できないようにする
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+
+        // ステージ未選択なら何もしない（警告だけ出して終了）
+        if (selectedStage == 0)
         {
-            PhotonNetwork.LoadLevel("TGameScene");
-            //PhotonNetwork.LoadLevel("SampleScene");
+            Debug.LogWarning("Stage not selected!");
+            return;
         }
+
+        // 読み込むシーン名を格納する変数
+        string sceneName = "";
+
+        // 選択されたステージ番号に応じて読み込むシーンを切り替える
+        switch (selectedStage)
+        {
+            case 1:
+                sceneName = "TGameScene";   // ステージ1用シーン
+                break;
+            case 2:
+                sceneName = "TGameScene";  // ステージ2用シーン
+                break;
+            case 3:
+                sceneName = "TGameScene";  // ステージ3用シーン
+                break;
+            default:
+                // 想定外の番号が入っていた場合は安全のためステージ1にフォールバック
+                sceneName = "TGameScene";
+                break;
+        }
+
+        // どのステージが選ばれてどのシーンをロードするかログに出す（デバッグ用）
+        Debug.Log("Load stage " + selectedStage + " : " + sceneName);
+
+        // Photonを通じて全クライアントでシーンを同期ロード
+        PhotonNetwork.LoadLevel(sceneName);
     }
+
 
     #endregion
 
