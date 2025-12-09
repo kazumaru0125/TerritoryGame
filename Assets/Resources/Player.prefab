@@ -53638,9 +53638,6 @@ MonoBehaviour:
   player: {fileID: 7188627608320446384}
   bombPrefab: {fileID: 6798921797372410193, guid: 3dac18181a7e46948b0882df15b6022f, type: 3}
   BearTrapPrefab: {fileID: 5855856240255083517, guid: 1afeb2fdca42f51469356ad5ef38e226, type: 3}
-  stamina: 100
-  moveSpeed: 5
-  jumpPower: 7
 --- !u!1 &7203659100262464425
 GameObject:
   m_ObjectHideFlags: 0

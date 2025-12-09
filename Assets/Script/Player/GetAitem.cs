@@ -3,36 +3,30 @@ using Photon.Pun;
 
 public class GetAitem : MonoBehaviourPun
     {
-    [Header("プレイヤー本体（自分自身でもOK）")]
     public GameObject player;
 
-    [Header("生成用プレハブ（Resources 直下に入れておく）")]
-    public GameObject bombPrefab;           // 爆弾
-    public GameObject BearTrapPrefab;  // 電撃床
-
-    [Header("プレイヤーのパラメータ")]
-    public float stamina = 100f;
-    public float moveSpeed = 5f;
-    public float jumpPower = 7f;
+    public GameObject bombPrefab;
+    public GameObject BearTrapPrefab;
 
     private Rigidbody rb;
     private ItemRouletteScript roulette;
+
     void Start()
         {
         if (player == null) player = gameObject;
         rb = player.GetComponent<Rigidbody>();
 
-        // ★ Canvas 内の特定オブジェクト（例： "ItemRoulette"）から取得
+        // ルーレットUIオブジェクト取得
         GameObject rouletteObj = GameObject.Find("ItemRoulette");
 
         if (rouletteObj != null)
             {
             roulette = rouletteObj.GetComponent<ItemRouletteScript>();
-            Debug.Log("画面上のルーレットUIを取得しました！");
+            Debug.Log("ルーレットUIを取得しました");
             }
         else
             {
-            Debug.LogError("ItemRoulette オブジェクトが見つかりません！名前を確認してください");
+            Debug.LogError("ItemRoulette がシーンに見つかりません！");
             }
         }
 
@@ -40,55 +34,36 @@ public class GetAitem : MonoBehaviourPun
         {
         if (!photonView.IsMine) return;
 
-        if (Input.GetKeyDown(KeyCode.X)|| Input.GetKey("joystick button 5"))
+        // ▼ B：アイテム取得 → UIルーレット開始
+        if (Input.GetKeyDown("joystick button 1"))
+            {
+            if (roulette != null)
+                {
+                roulette.StartRoulette(); // UI アニメ開始！
+                Debug.Log("🎰 ルーレット開始！");
+                }
+            }
+
+        // ▼ RB：アイテム使用
+        if (Input.GetKeyDown("joystick button 5"))
             {
             int num = ItemRouletteScript.decidedItemNumber;
 
             if (num == -1)
                 {
-                Debug.Log("まだアイテムが決まっていません。");
+                Debug.Log("❗アイテム未所持");
                 return;
                 }
 
-            Debug.Log($"取得アイテム番号: {num}");
-
-            // RPC ではなくローカルで直接呼び出す
-            ActivateEffect(num);
-            }
-
-        if (Input.GetKeyDown(KeyCode.C))
-            {
-            int num = ItemRouletteScript.decidedItemNumber;
-
-            if (num == -1)
-                {
-                Debug.Log("まだアイテムが決まっていません。");
-                return;
-                }
-
-            Debug.Log($"取得アイテム番号: {num}");
-
-            // RPC ではなくローカルで直接呼び出す
+            Debug.Log($"🔥 アイテム使用: {num}");
             ActivateEffect(num);
 
-            num = -2;
+            // 使用後は空欄へ
+            ItemRouletteScript.decidedItemNumber = -1;
+
+            // UI更新したかったら：roulette.ClearIcon() など追加できる
             }
         }
-
-    private void OnTriggerStay(Collider other)
-        {
-        if (other.CompareTag("AitemBox"))
-            {
-            if (Input.GetKey("joystick button 5"))
-                {
-                if (roulette != null)
-                    {
-                    roulette.StartRoulette(); // 画面上 UI のルーレット開始！
-                    }
-                }
-            }
-        }
-
 
     void ActivateEffect(int itemNumber)
         {
@@ -97,75 +72,35 @@ public class GetAitem : MonoBehaviourPun
             case 0:
                 SpawnBomb();
                 break;
-
             case 1:
                 HighJump();
                 break;
-
             case 2:
                 SpawnBearTrap();
                 break;
-
             default:
-                Debug.Log("未定義の効果です。");
+                Debug.Log("未定義アイテム");
                 break;
             }
         }
 
     void SpawnBomb()
         {
-        if (bombPrefab != null)
-            {
-            if (photonView.IsMine)
-                {
-                // 自分のクライアントだけで生成
-                PhotonNetwork.Instantiate(bombPrefab.name, player.transform.position, Quaternion.identity);
-                Debug.Log(" 爆弾を生成しました！（自分のみ）");
-                }
-            }
-        else
-            {
-            Debug.LogWarning("爆弾プレハブが設定されていません！");
-            }
+        PhotonNetwork.Instantiate(bombPrefab.name, player.transform.position, Quaternion.identity);
+        Debug.Log("爆弾生成！");
         }
-
 
     void HighJump()
         {
-        if (rb != null)
-            {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-            rb.AddForce(Vector3.up * (jumpPower * 2f), ForceMode.VelocityChange);
-            Debug.Log(" ハイジャンプ発動！（ローカル）");
-            }
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        rb.AddForce(Vector3.up * 20f, ForceMode.VelocityChange);
+        Debug.Log("ハイジャンプ！");
         }
 
     void SpawnBearTrap()
         {
-        if (BearTrapPrefab != null)
-            {
-            if (photonView.IsMine)
-                {
-                Vector3 spawnPos = player.transform.position + Vector3.down * 0.5f;
-                PhotonNetwork.Instantiate(BearTrapPrefab.name, spawnPos, Quaternion.identity);
-                Debug.Log("トラばさみを生成しました！（自分のみ）");
-                }
-            }
-        else
-            {
-            Debug.LogWarning("トラばさみが設定されていません！");
-            }
-        }
-
-    void IncreaseStamina()
-        {
-        stamina += 50f;
-        Debug.Log($"💪 スタミナ上昇！ 現在のスタミナ: {stamina}");
-        }
-
-    void IncreaseSpeed()
-        {
-        moveSpeed += 2f;
-        Debug.Log($"🏃 速度上昇！ 現在の速度: {moveSpeed}");
+        Vector3 pos = player.transform.position + Vector3.down * 0.5f;
+        PhotonNetwork.Instantiate(BearTrapPrefab.name, pos, Quaternion.identity);
+        Debug.Log(" トラバサミ設置！");
         }
     }

@@ -16,9 +16,10 @@ public class ItemRouletteScript : MonoBehaviour
 
     private bool isSpinning = false;
 
-    //  他のスクリプトから参照できる変数
     public static Texture2D decidedItem;
-    public static int decidedItemNumber = -1; // アイテム番号（-1は未決定の意味）
+    public static int decidedItemNumber = -1;
+
+    private int lastItem = -1;      // ←直前のアイテムを記録
 
     void Update()
         {
@@ -36,6 +37,9 @@ public class ItemRouletteScript : MonoBehaviour
             yield break;
             }
 
+        // ★ランダムシードを変えて偏りを減らす
+        Random.InitState(System.DateTime.Now.Millisecond + Random.Range(0, 999999));
+
         isSpinning = true;
         float timer = 0f;
 
@@ -47,10 +51,18 @@ public class ItemRouletteScript : MonoBehaviour
             timer += switchInterval;
             }
 
-        // 最終結果
-        int finalIndex = Random.Range(0, itemTextures.Length);
+        // ★最終決定：直前と同じなら引き直す
+        int finalIndex;
+        do
+            {
+            finalIndex = Random.Range(0, itemTextures.Length);
+            }
+        while (finalIndex == lastItem);   // ←同じだったらやり直し
+
+        lastItem = finalIndex; // 記録
+
         decidedItem = itemTextures[finalIndex];
-        decidedItemNumber = finalIndex; 
+        decidedItemNumber = finalIndex;
         rouletteImage.texture = decidedItem;
 
         Debug.Log($"決定アイテム番号: {finalIndex}, 名前: {decidedItem.name}");
@@ -65,8 +77,4 @@ public class ItemRouletteScript : MonoBehaviour
             StartCoroutine(SpinRoulette());
             }
         }
-
-
-
-
     }
