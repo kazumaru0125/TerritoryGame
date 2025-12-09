@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class LifeUIManager : MonoBehaviour
     {
@@ -22,28 +23,46 @@ public class LifeUIManager : MonoBehaviour
 
     private TestPlayerRoll player;
 
-    void Start()
+    private void Start()
         {
-        player = FindObjectOfType<TestPlayerRoll>();
-
-        if (player == null)
-            {
-            Debug.LogError("TestPlayerRoll が見つかりません");
-            return;
-            }
+        // ★ プレイヤーが生成されるまで待つ
+        StartCoroutine(WaitForPlayer());
         }
 
-    void Update()
+    private IEnumerator WaitForPlayer()
         {
+        // 少し待ってから開始（Photon の生成待ち）
+        yield return new WaitForSeconds(0.1f);
+
+        while (player == null)
+            {
+            player = FindAnyObjectByType<TestPlayerRoll>();
+            if (player != null) break;
+            yield return null;
+            }
+
+        Debug.Log("LifeUIManager: Player を検出しました -> " + player.name);
+
+        // 初回 UI 更新
+        UpdateUI();
+        }
+
+    private void Update()
+        {
+        // プレイヤーが見つかるまでは何もしない
+        if (player == null) return;
+
         UpdateUI();
         }
 
     private void UpdateUI()
         {
-        // Humanの残り
+        if (player == null) return;
+
+        // Human残り
         int humanRemaining = player.GetRemainingLifeForTeam(player.CurrentTeam);
 
-        // Oniチームの残り
+        // Oni残り
         string oniTeam = (player.CurrentTeam == "A") ? "B" : "A";
         int oniRemaining = player.GetRemainingLifeForTeam(oniTeam);
 
@@ -63,20 +82,6 @@ public class LifeUIManager : MonoBehaviour
             else if (oniRemaining == 1) ShowUI(oniR1);
             }
         }
-
-
-    private bool IsUIActive(GameObject[] uiList)
-{
-    if (uiList == null) return false;
-
-    foreach (var ui in uiList)
-    {
-        if (ui != null && ui.activeSelf)
-            return true; // どれか1つでも表示中なら true
-    }
-    return false;
-}
-
 
     private void HideAllUI()
         {

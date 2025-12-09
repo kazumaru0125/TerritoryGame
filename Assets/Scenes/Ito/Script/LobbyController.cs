@@ -26,7 +26,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     [Header("Stage Selection UI Panel")]
     public GameObject StageSelectionRoom_UI_Panel;
-
+    public TMP_Text StageNumber;
     //public InputField maxPlayerInputField;
 
     [Header("Inside Room UI Panel")]
@@ -35,6 +35,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public GameObject playerListPrefab;
     public GameObject playerListContent;
     public GameObject startGameButton;
+    public TMP_Text HostStageNumber;
 
     [Header("Room List UI Panel")]
     public GameObject RoomList_UI_Panel;
@@ -123,18 +124,52 @@ public class LobbyController : MonoBehaviourPunCallbacks
             {
                 selectedStage = 1;
                 Debug.Log("Stage 1 selected");
-            }
+            
+                }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 selectedStage = 2;
                 Debug.Log("Stage 2 selected");
-            }
+                StageNumber.text = "Stage:2";
+                HostStageNumber.text = "Stage2";
+                }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 selectedStage = 3;
                 Debug.Log("Stage 3 selected");
-            }
+                StageNumber.text = "Stage:3";
+                HostStageNumber.text = "Stage3";
+                }
+            else
+                {
+                StageNumber.text = "NoStage";
+                HostStageNumber.text = "NoStage";
+                }
         }
+
+        if(selectedStage == 1) 
+            {
+            StageNumber.text = "Stage:1";
+            HostStageNumber.text = "Stage1";
+            }
+        else if(selectedStage == 2) 
+            {
+            StageNumber.text = "Stage:2";
+            HostStageNumber.text = "Stage3";
+            } 
+        else if(selectedStage==3)
+            {
+            StageNumber.text = "Stage:3";
+            HostStageNumber.text = "Stage3";
+            }
+        else
+            {
+            StageNumber.text = "NoStage";
+            HostStageNumber.text = "NoStage";
+            }
+            
+
+        
 
         // 既存のドットアニメ処理
         dotsAnimTimer += Time.deltaTime;
@@ -376,17 +411,24 @@ public class LobbyController : MonoBehaviourPunCallbacks
         // 選択されたステージ番号に応じて読み込むシーンを切り替える
         switch (selectedStage)
         {
+            case 0:
+                sceneName = "Tutorial";
+                break;
+
             case 1:
-                sceneName = "TGameScene 1";   // ステージ1用シーン
+               // sceneName = "TGameScene 1";   // ステージ1用シーン
                 //sceneName = "TGameScene";
+                sceneName = "Stage1";
                 break;
             case 2:
                 //sceneName = "Stage2";  // ステージ2用シーン
-                sceneName = "TGameScene";
+                //sceneName = "TGameScene";
+                sceneName = "Stage2";
                 break;
             case 3:
                 //  sceneName = "Stage3";  // ステージ3用シーン
-                sceneName = "TGameScene";
+                // sceneName = "TGameScene";
+                sceneName = "Stage3";
                 break;
             default:
                 // 想定外の番号が入っていた場合は安全のためステージ1にフォールバック

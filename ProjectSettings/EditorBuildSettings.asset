@@ -17,11 +17,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Project/LobbyScene.unity
     guid: 900a65e953426fb4dbe7bfb2632af31f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Project/TGameScene 1.unity
     guid: 99ec79bf4e936ea478a2c1ad834b239c
   - enabled: 1
     path: Assets/Scenes/Project/TGameScene.unity
     guid: d94b8e0c9515ce04d9db372a23a3d1ee
+  - enabled: 1
+    path: Assets/Scenes/Project/Stage1.unity
+    guid: 81318ad716275ac499c41d8c83b92332
+  - enabled: 1
+    path: Assets/Scenes/Project/Stage2.unity
+    guid: eeccfb41a7398ca4e92e515ad1579c1f
+  - enabled: 1
+    path: Assets/Scenes/Project/Stage3.unity
+    guid: 421533e7348d838408ab1d49c66b81b2
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
