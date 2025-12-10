@@ -794,6 +794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783784741}
   - component: {fileID: 1783784742}
+  - component: {fileID: 1783784743}
   m_Layer: 0
   m_Name: NewMapCreate
   m_TagString: Untagged
@@ -823,7 +824,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783784739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d092cc8348f76a499d55ff01e8554b1, type: 3}
   m_Name: 
@@ -840,6 +841,33 @@ MonoBehaviour:
   boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
   jumps: {fileID: 4976997056025506496, guid: 25716c2ebf8494343911b0bd69fa5f4b, type: 3}
   newhiwalls: {fileID: 8724796524908712674, guid: fac446728a43e7d4ea615a34b5c1112f, type: 3}
+--- !u!114 &1783784743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783784739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2966c41fe024a4742a20e43e1d7a17a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: {fileID: 4900000, guid: 7155c780b5318364d9911262c093dc5e, type: 3}
+  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  stoneA: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
+  stoneB: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
+  stoneC: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
+  stoneD: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
+  nomalwalls: {fileID: 7292319159218376259, guid: d9a027720de9da3409e12c7c0a9208fe, type: 3}
+  floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
+  items: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
+  starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0, type: 3}
+  ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
+  boxs: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
+  jumps: {fileID: 4976997056025506496, guid: 25716c2ebf8494343911b0bd69fa5f4b, type: 3}
+  newhiwalls: {fileID: 1314821455373216, guid: 3a1862665799bd44784b304ccef9bf73, type: 3}
 --- !u!1 &2055210114
 GameObject:
   m_ObjectHideFlags: 0
