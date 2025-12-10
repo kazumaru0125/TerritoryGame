@@ -5109,11 +5109,13 @@ MonoBehaviour:
   CreateRoom_UI_Panel: {fileID: 442605070}
   roomNameInputField: {fileID: 1855360233}
   StageSelectionRoom_UI_Panel: {fileID: 0}
+  StageNumber: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 1423316121}
   roomInfoText: {fileID: 1305675302}
   playerListPrefab: {fileID: 210772302}
   playerListContent: {fileID: 1987019481}
   startGameButton: {fileID: 2128707417}
+  HostStageNumber: {fileID: 0}
   RoomList_UI_Panel: {fileID: 1468249588}
   roomListEntryPrefab: {fileID: 3994814421131352053, guid: 4fc0b83b946785f438bd30a1270c19a7, type: 3}
   roomListParentGameObject: {fileID: 900179000}
@@ -6797,8 +6799,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6b7e90b7591178b468da8569b9a9729b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7934,11 +7936,13 @@ MonoBehaviour:
   CreateRoom_UI_Panel: {fileID: 1711516462}
   roomNameInputField: {fileID: 1261186823}
   StageSelectionRoom_UI_Panel: {fileID: 0}
+  StageNumber: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 1859205001}
   roomInfoText: {fileID: 1655369858}
   playerListPrefab: {fileID: 1096859298}
   playerListContent: {fileID: 2021758473}
   startGameButton: {fileID: 223356145}
+  HostStageNumber: {fileID: 0}
   RoomList_UI_Panel: {fileID: 611829968}
   roomListEntryPrefab: {fileID: 3994814421131352053, guid: 4fc0b83b946785f438bd30a1270c19a7, type: 3}
   roomListParentGameObject: {fileID: 92121293}
@@ -10491,7 +10495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6faddf1849d869c4cb4de1b2ad92007c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b7e90b7591178b468da8569b9a9729b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13493,11 +13497,13 @@ MonoBehaviour:
   CreateRoom_UI_Panel: {fileID: 1170076124}
   roomNameInputField: {fileID: 361547929}
   StageSelectionRoom_UI_Panel: {fileID: 0}
+  StageNumber: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 2143153789}
   roomInfoText: {fileID: 1545048644}
   playerListPrefab: {fileID: 8135745641931580309, guid: 3ff7450742b85954ab298656407cf4ec, type: 3}
   playerListContent: {fileID: 2087300847}
   startGameButton: {fileID: 1785272596}
+  HostStageNumber: {fileID: 0}
   RoomList_UI_Panel: {fileID: 589482003}
   roomListEntryPrefab: {fileID: 3994814421131352053, guid: 4fc0b83b946785f438bd30a1270c19a7, type: 3}
   roomListParentGameObject: {fileID: 1162715162}
@@ -14708,8 +14714,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6b7e90b7591178b468da8569b9a9729b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -15031,7 +15037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &883618806
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15504,7 +15510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &910866353
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16176,11 +16182,13 @@ MonoBehaviour:
   CreateRoom_UI_Panel: {fileID: 1502249493}
   roomNameInputField: {fileID: 734246676}
   StageSelectionRoom_UI_Panel: {fileID: 466957244}
+  StageNumber: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 1973767410}
   roomInfoText: {fileID: 2123712914}
   playerListPrefab: {fileID: 1628108746}
   playerListContent: {fileID: 2021758473}
   startGameButton: {fileID: 552622705}
+  HostStageNumber: {fileID: 0}
   RoomList_UI_Panel: {fileID: 313729296}
   roomListEntryPrefab: {fileID: 3994814421131352053, guid: 4fc0b83b946785f438bd30a1270c19a7, type: 3}
   roomListParentGameObject: {fileID: 329301514}
@@ -16634,8 +16642,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6b7e90b7591178b468da8569b9a9729b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -33996,7 +34004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1690033796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40737,7 +40745,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 33b20ad3485134745be7892553c09e42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b7e90b7591178b468da8569b9a9729b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
