@@ -77,6 +77,10 @@ public class LobbyController : MonoBehaviourPunCallbacks
     // 選択中ステージ番号（1,2,3など）0は未選択
     private int selectedStage = 1;
 
+    // true の間はチーム上限チェックを無効にする（決定前モード）
+    public bool ignoreMaxPerTeamBeforeDecision = true;
+
+
     private List<string> randomNames = new List<string> 
     {
         "Unityちゃん", "トライデント", "ぼんじり", "前田",
@@ -155,7 +159,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
         else if(selectedStage == 2) 
             {
             StageNumber.text = "Stage:2";
-            HostStageNumber.text = "Stage3";
+            HostStageNumber.text = "Stage2";
             } 
         else if(selectedStage==3)
             {
@@ -806,7 +810,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void OnTeamAButtonClicked()
     {
-        if (CountPlayersInTeam("A") >= MaxPerTeam)
+        // フラグが false のときだけ上限チェックを有効にする
+        if (!ignoreMaxPerTeamBeforeDecision && CountPlayersInTeam("A") >= MaxPerTeam)
         {
             Debug.Log("Team A is full!");
             return;
@@ -819,7 +824,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void OnTeamBButtonClicked()
     {
-        if (CountPlayersInTeam("B") >= MaxPerTeam)
+        if (!ignoreMaxPerTeamBeforeDecision && CountPlayersInTeam("B") >= MaxPerTeam)
         {
             Debug.Log("Team B is full!");
             return;
@@ -828,6 +833,16 @@ public class LobbyController : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
         props["Team"] = "B";
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+    }
+
+
+    // 例：ホスト用の「チーム決定」ボタン
+    public void OnDecideTeamButtonClicked()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        ignoreMaxPerTeamBeforeDecision = false;
+        Debug.Log("Teams are now locked. MaxPerTeam check is enabled.");
     }
 
     private int CountPlayersInTeam(string team)
