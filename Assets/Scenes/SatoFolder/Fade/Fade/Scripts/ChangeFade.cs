@@ -1,48 +1,48 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Fade : MonoBehaviour
-    {
+public class ChangeFade : MonoBehaviour
+{
     IFade fade;
     float cutoutRange;
 
     void Awake()
         {
         Init();
-        // 開始時は真っ暗にする
+        // �J�n���͐^���Âɂ���
         cutoutRange = 1f;
         fade.Range = cutoutRange;
         }
 
     void Start()
         {
-        // シーン開始時にフェードイン
+        // �V�[���J�n���Ƀt�F�[�h�C��
         FadeOut(1.0f);
         }
 
 
     void Update()
         {
-        // スペースキーが押されたらフェードアウト
-        if (Input.GetKeyDown(KeyCode.T))
+        // �X�y�[�X�L�[�������ꂽ��t�F�[�h�A�E�g
+        if (Input.GetKeyDown(KeyCode.Space))
             {
-            FadeOut(1.0f, () =>
-            {
-                Debug.Log("フェードアウト完了！");
-                // ここにシーン遷移などを追加できる
-                // SceneManager.LoadScene("NextScene");
-            });
+            //FadeOut(1.0f, () =>
+            //{
+            //    Debug.Log("�t�F�[�h�A�E�g�����I");
+            //    // �����ɃV�[���J�ڂȂǂ�ǉ��ł���
+            //    // SceneManager.LoadScene("NextScene");
+            //});
             }
 
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.Z))
             {
 
-            FadeIn(1.0f, () =>
-            {
-                Debug.Log("フェードイン完了！");
-                // ここにシーン遷移などを追加できる
-                // SceneManager.LoadScene("NextScene");
-            });
+            //FadeIn(1.0f, () =>
+            //{
+            //    Debug.Log("�t�F�[�h�C�������I");
+            //    // �����ɃV�[���J�ڂȂǂ�ǉ��ł���
+            //    // SceneManager.LoadScene("NextScene");
+            //});
             }
         }
 
@@ -50,7 +50,7 @@ public class Fade : MonoBehaviour
         {
         FadeIn(1.0f, () =>
         {
-            Debug.Log("フェードイン完了！");
+            Debug.Log("�t�F�[�h�C�������I");
         });
         }
 
