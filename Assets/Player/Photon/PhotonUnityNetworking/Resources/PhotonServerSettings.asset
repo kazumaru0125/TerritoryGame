@@ -71,6 +71,11 @@ MonoBehaviour:
   - RPC_DestroySelf
   - RPC_ExplosionStart
   - StartJump
+  - PlayDisappointmentAnimation
+  - PlayDisappointmentAllRPC
+  - TeleportByRoleRPC
+  - ToggleRoleForTeamRPC
+  - FadeAllPlayersRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
