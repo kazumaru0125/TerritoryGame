@@ -862,7 +862,7 @@ MonoBehaviour:
   stoneD: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   nomalwalls: {fileID: 7292319159218376259, guid: d9a027720de9da3409e12c7c0a9208fe, type: 3}
   floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
-  items: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
+  items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
   starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0, type: 3}
   ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
   boxs: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
