@@ -15,6 +15,8 @@ TagManager:
   - Trap
   - Bomb
   - AitemBox
+  - OniSpawnArea
+  - ChengeFade
   layers:
   - Default
   - TransparentFX

@@ -53223,6 +53223,7 @@ GameObject:
   - component: {fileID: 3400802970881686639}
   - component: {fileID: 4159382970079350881}
   - component: {fileID: 2680647912401526124}
+  - component: {fileID: 1654922712035369930}
   m_Layer: 0
   m_Name: unitychan_human
   m_TagString: Player
@@ -53527,6 +53528,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 8615903974875732005}
   - {fileID: 5356774827330264297}
   - {fileID: 3885927396054513016}
   sceneViewId: 0
@@ -53638,6 +53640,18 @@ MonoBehaviour:
   player: {fileID: 7188627608320446384}
   bombPrefab: {fileID: 6798921797372410193, guid: 3dac18181a7e46948b0882df15b6022f, type: 3}
   BearTrapPrefab: {fileID: 5855856240255083517, guid: 1afeb2fdca42f51469356ad5ef38e226, type: 3}
+--- !u!114 &1654922712035369930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7188627608320446384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f84815f4c67e294685114ad437754d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7203659100262464425
 GameObject:
   m_ObjectHideFlags: 0
@@ -55230,7 +55244,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   humanModel: {fileID: 7188627608320446384}
   oniModel: {fileID: 9158597635818744719}
-  uiOffset: {x: 0, y: 0, z: 0}
+  uiOffset: {x: 0, y: 2, z: 0}
+  fadeOutTime: 1
+  fadeInTime: 1
+  switchDelay: 0.3
 --- !u!1 &8018071686338404750
 GameObject:
   m_ObjectHideFlags: 0
