@@ -101,10 +101,10 @@ public class createSeasonMaps: MonoBehaviour
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            case "3"://全員が超えれる壁
-                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
-                                //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                                break;
+                            //case "3"://全員が超えれる壁
+                            //    Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                            //    //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                            //    break;
 
                             case "4": // ランタン
                                 if (PhotonNetwork.IsMasterClient)
@@ -139,7 +139,22 @@ public class createSeasonMaps: MonoBehaviour
                                 Instantiate(starts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
-
+                            case "21"://全員が超えれる壁
+                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                                break;
+                            case "22"://全員が超えれる壁
+                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                                break;
+                            case "23"://全員が超えれる壁
+                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                                break;
+                            case "24"://全員が超えれる壁
+                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
+                                break;
                         }
                         Instantiate(floors, new Vector3((-4.5f + j) * scale,0.0f, (4.5f - i) * scale), Quaternion.identity);
                     }
