@@ -126,7 +126,7 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
                                 
                                 case "14"://ì¡éÍåöï®
-                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 5.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
                             case "11"://êVÇµÇ¢ï«
@@ -156,11 +156,11 @@ public class createSeasonMaps: MonoBehaviour
                                 
                                 break;
                             case "23"://ëSàıÇ™í¥Ç¶ÇÍÇÈï«
-                                Instantiate(stoneC, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                Instantiate(stoneC, new Vector3((-4.5f + j) * scale, 4.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
                                 
                                 break;
                             case "24"://ëSàıÇ™í¥Ç¶ÇÍÇÈï«
-                                Instantiate(stoneD, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                Instantiate(stoneD, new Vector3((-4.5f + j) * scale, 4.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
                                 break;
                         }
                         Instantiate(floors, new Vector3((-4.5f + j) * scale,0.0f, (4.5f - i) * scale), Quaternion.identity);
