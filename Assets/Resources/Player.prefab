@@ -629,8 +629,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: -4054985965322405587, guid: 7106e4f34c7264842b2223224b337d80, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -53201,6 +53201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3951354347613009549}
   - component: {fileID: 8432721179365598756}
+  - component: {fileID: 9134755775262397362}
   - component: {fileID: 8615903974875732005}
   - component: {fileID: 5243757704984741222}
   - component: {fileID: 7839519997189391517}
@@ -53223,7 +53224,6 @@ GameObject:
   - component: {fileID: 3400802970881686639}
   - component: {fileID: 4159382970079350881}
   - component: {fileID: 2680647912401526124}
-  - component: {fileID: 1654922712035369930}
   m_Layer: 0
   m_Name: unitychan_human
   m_TagString: Player
@@ -53281,6 +53281,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9134755775262397362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7188627608320446384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f84815f4c67e294685114ad437754d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8615903974875732005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53402,6 +53414,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: is_dizzying
+  - Type: 4
+    SynchronizeType: 0
+    Name: is_Disappointmenting
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -53640,18 +53655,6 @@ MonoBehaviour:
   player: {fileID: 7188627608320446384}
   bombPrefab: {fileID: 6798921797372410193, guid: 3dac18181a7e46948b0882df15b6022f, type: 3}
   BearTrapPrefab: {fileID: 5855856240255083517, guid: 1afeb2fdca42f51469356ad5ef38e226, type: 3}
---- !u!114 &1654922712035369930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7188627608320446384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f84815f4c67e294685114ad437754d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7203659100262464425
 GameObject:
   m_ObjectHideFlags: 0
@@ -55245,9 +55248,6 @@ MonoBehaviour:
   humanModel: {fileID: 7188627608320446384}
   oniModel: {fileID: 9158597635818744719}
   uiOffset: {x: 0, y: 2, z: 0}
-  fadeOutTime: 1
-  fadeInTime: 1
-  switchDelay: 0.3
 --- !u!1 &8018071686338404750
 GameObject:
   m_ObjectHideFlags: 0
@@ -61736,8 +61736,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: -4054985965322405587, guid: 7106e4f34c7264842b2223224b337d80, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -62994,6 +62994,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: is_attacking
+  - Type: 4
+    SynchronizeType: 0
+    Name: is_dizzying
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

@@ -2,72 +2,51 @@ using UnityEngine;
 using System.Collections;
 
 public class ChangeFade : MonoBehaviour
-{
-    IFade fade;
-    float cutoutRange;
+    {
+    public static ChangeFade Instance { get; private set; }
 
-    void Awake()
+    private IFade fade;
+    private float cutoutRange;
+
+    private void Awake()
         {
-        Init();
-        // 開始時は真っ暗にする
+        if (Instance != null)
+            {
+            Destroy(gameObject);
+            return;
+            }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        fade = GetComponent<IFade>();
+
+        // 起動時は真っ暗
         cutoutRange = 1f;
         fade.Range = cutoutRange;
         }
 
-    void Start()
+    private void Start()
         {
-        // シーン開始時にフェードイン
         FadeOut(1.0f);
         }
 
 
-    void Update()
+    public Coroutine FadeOut(float time, System.Action onComplete = null)
         {
-        // スペースキーが押されたらフェードアウト
-        if (Input.GetKeyDown(KeyCode.Space))
-            {
-            //FadeOut(1.0f, () =>
-            //{
-            //    Debug.Log("フェードアウト完了！");
-            //    // ここにシーン遷移などを追加できる
-            //    // SceneManager.LoadScene("NextScene");
-            //});
-            }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-            {
-
-            //FadeIn(1.0f, () =>
-            //{
-            //    Debug.Log("フェードイン完了！");
-            //    // ここにシーン遷移などを追加できる
-            //    // SceneManager.LoadScene("NextScene");
-            //});
-            }
+        StopAllCoroutines();
+        return StartCoroutine(FadeoutCoroutine(time, onComplete));
         }
 
-    public void CloseFade()
+    public Coroutine FadeIn(float time, System.Action onComplete = null)
         {
-        FadeIn(1.0f, () =>
-        {
-            Debug.Log("フェードイン完了！");
-        });
+        StopAllCoroutines();
+        return StartCoroutine(FadeinCoroutine(time, onComplete));
         }
 
-    void Init()
+    private IEnumerator FadeoutCoroutine(float time, System.Action action)
         {
-        fade = GetComponent<IFade>();
-        }
-
-    void OnValidate()
-        {
-        Init();
-        if (fade != null) fade.Range = cutoutRange;
-        }
-
-    IEnumerator FadeoutCoroutine(float time, System.Action action)
-        {
-        float endTime = Time.timeSinceLevelLoad + time * (cutoutRange);
+        float endTime = Time.timeSinceLevelLoad + time * cutoutRange;
         var endFrame = new WaitForEndOfFrame();
 
         while (Time.timeSinceLevelLoad <= endTime)
@@ -76,38 +55,26 @@ public class ChangeFade : MonoBehaviour
             fade.Range = cutoutRange;
             yield return endFrame;
             }
-        cutoutRange = 0;
-        fade.Range = cutoutRange;
 
+        cutoutRange = 0f;
+        fade.Range = cutoutRange;
         action?.Invoke();
         }
 
-    IEnumerator FadeinCoroutine(float time, System.Action action)
+    private IEnumerator FadeinCoroutine(float time, System.Action action)
         {
-        float endTime = Time.timeSinceLevelLoad + time * (1 - cutoutRange);
+        float endTime = Time.timeSinceLevelLoad + time * (1f - cutoutRange);
         var endFrame = new WaitForEndOfFrame();
 
         while (Time.timeSinceLevelLoad <= endTime)
             {
-            cutoutRange = 1 - ((endTime - Time.timeSinceLevelLoad) / time);
+            cutoutRange = 1f - ((endTime - Time.timeSinceLevelLoad) / time);
             fade.Range = cutoutRange;
             yield return endFrame;
             }
-        cutoutRange = 1;
+
+        cutoutRange = 1f;
         fade.Range = cutoutRange;
-
         action?.Invoke();
-        }
-
-    public Coroutine FadeOut(float time, System.Action action = null)
-        {
-        StopAllCoroutines();
-        return StartCoroutine(FadeoutCoroutine(time, action));
-        }
-
-    public Coroutine FadeIn(float time, System.Action action = null)
-        {
-        StopAllCoroutines();
-        return StartCoroutine(FadeinCoroutine(time, action));
         }
     }
