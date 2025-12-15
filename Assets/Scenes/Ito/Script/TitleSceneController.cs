@@ -9,7 +9,6 @@ public class TitleSceneController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) || 
-            Input.GetMouseButtonDown(0) ||
             Input.GetKeyDown("joystick button 0") ||
             Input.GetKeyDown("joystick button 1"))
         {
