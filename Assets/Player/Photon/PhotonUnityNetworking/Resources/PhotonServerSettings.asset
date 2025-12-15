@@ -76,6 +76,10 @@ MonoBehaviour:
   - TeleportByRoleRPC
   - ToggleRoleForTeamRPC
   - FadeAllPlayersRPC
+  - StartFadeAndSwapRPC
+  - RequestRoleChangeRPC
+  - RPC_PlayAnimation
+  - RPC_Play
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

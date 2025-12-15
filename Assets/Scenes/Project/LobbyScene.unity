@@ -13823,8 +13823,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4282598399
+  m_fontColor: {r: 1, g: 0.26226407, b: 0.26226407, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13847,7 +13847,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -16100,6 +16100,7 @@ MonoBehaviour:
   maxPlayers: 4
   emptyRoomImage: {fileID: 487063412}
   emptyRoomText: {fileID: 1125003290}
+  ignoreMaxPerTeamBeforeDecision: 1
 --- !u!4 &1053013457
 Transform:
   m_ObjectHideFlags: 0
@@ -19177,7 +19178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1217922915
 Transform:
   m_ObjectHideFlags: 0
@@ -29481,7 +29482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1889350737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33844,6 +33845,7 @@ MonoBehaviour:
   maxPlayers: 4
   emptyRoomImage: {fileID: 2106250232}
   emptyRoomText: {fileID: 473173108}
+  ignoreMaxPerTeamBeforeDecision: 1
 --- !u!4 &2118232402
 Transform:
   m_ObjectHideFlags: 0

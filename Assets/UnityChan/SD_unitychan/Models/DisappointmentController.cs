@@ -3,65 +3,62 @@ using Photon.Pun;
 
 public class DisappointmentController : MonoBehaviourPun
     {
-    private Animator anim;
-    private bool isDisappointmentPlaying = false;
+    private bool isPlaying = false;
+    private TestPlayerRoll playerRoll;
 
-    void Start()
+    void Awake()
         {
-        anim = GetComponent<Animator>();
+        playerRoll = GetComponentInParent<TestPlayerRoll>();
 
-        if (anim == null)
-            Debug.LogError("Animator が見つかりません！");
+        if (playerRoll == null)
+            Debug.LogError("TestPlayerRoll が見つかりません");
         }
 
-    void Update()
+    // ==============================
+    // 外部公開API
+    // ==============================
+    public void Play()
         {
-        // 他プレイヤーは操作しない
-        if (!photonView.IsMine)
-            return;
+        if (isPlaying) return;
+        if (!photonView.IsMine) return;
 
-        // 入力受付
-        if (!isDisappointmentPlaying)
-            {
-            if (Input.GetKeyDown(KeyCode.O))
-                {
-                isDisappointmentPlaying = true;
-                photonView.RPC(nameof(PlayDisappointmentAnimation), RpcTarget.All);
-                }
-            }
-        else
-            {
-            // アニメーション終了チェック（ローカルだけでOK）
-            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-
-            // Animator の state 名は実際のステート名に合わせる
-            if (!stateInfo.IsName("is_Disappointmenting") || stateInfo.normalizedTime >= 1f)
-                {
-                isDisappointmentPlaying = false;
-                }
-            }
+        isPlaying = true;
+        photonView.RPC(nameof(RPC_PlayAnimation), RpcTarget.All);
         }
 
     [PunRPC]
-    public void PlayDisappointmentAnimation()
+    private void RPC_PlayAnimation()
         {
-        anim.SetBool("is_Disappointmenting", true);
+        // ★ RPC側で必ず Animator を取得する
+        Animator anim = playerRoll.GetCurrentAnimator();
+        if (anim == null)
+            {
+            Debug.LogError("RPC_PlayAnimation: Animator が取得できません");
+            return;
+            }
 
-        // すぐオフにすると再生されないため、AnimatorController側で
-        // Transition Exit Time を使うのが推奨
-        // 終了後に自動で false に戻したいなら Coroutine を使う
-        StartCoroutine(ResetBoolAfterAnimation());
+        anim.SetBool("is_Disappointmenting", true);
         }
 
-    private System.Collections.IEnumerator ResetBoolAfterAnimation()
+    // ==============================
+    // Animation Event
+    // ==============================
+    public void OnDisappointmentFinished()
         {
-        yield return new WaitForEndOfFrame();
+        Animator anim = playerRoll.GetCurrentAnimator();
+        if (anim != null)
+            anim.SetBool("is_Disappointmenting", false);
 
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-
-        // 長さ分待つ
-        yield return new WaitForSeconds(stateInfo.length);
-
-        anim.SetBool("is_Disappointmenting", false);
+        if (photonView.IsMine)
+            {
+            playerRoll.ExecuteFadeRoleChange(() =>
+            {
+                isPlaying = false;
+            });
+            }
+        else
+            {
+            isPlaying = false;
+            }
         }
     }
