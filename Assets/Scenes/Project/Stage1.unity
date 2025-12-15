@@ -1107,7 +1107,7 @@ MonoBehaviour:
   starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0, type: 3}
   ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
   boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
-  jumps: {fileID: 4976997056025506496, guid: 25716c2ebf8494343911b0bd69fa5f4b, type: 3}
+  jumps: {fileID: 3436486406897738887, guid: a94055cd558755b47baf922902fe7ba5, type: 3}
   newhiwalls: {fileID: 8724796524908712674, guid: fac446728a43e7d4ea615a34b5c1112f, type: 3}
 --- !u!4 &183372568
 Transform:

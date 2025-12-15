@@ -3,6 +3,9 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
+using System.Collections;
+
+
 public class TestPlayerRoll : MonoBehaviourPunCallbacks
     {
     [Header("モデル参照")]
@@ -208,7 +211,7 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.SetCustomProperties(
                 new ExitGames.Client.Photon.Hashtable { { "Role", newRole } }
             );
-
+            RespawnByRole(newRole);
             ChangeFade.Instance.FadeOut(0.5f);
         });
 
@@ -322,6 +325,7 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
     // ==============================
     // ダメージ管理（Master）
     // ==============================
+    [PunRPC]
     public void AddTeamDamageRPC(string team)
         {
         if (!PhotonNetwork.IsMasterClient) return;
@@ -428,6 +432,25 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         Debug.Log($"[TestPlayerRoll] RequestRoleChange -> {newRole}");
         }
 
+    //public void ExecuteFadeRoleChange(System.Action onComplete = null)
+    //    {
+    //    if (!photonView.IsMine) return;
+    //    if (ChangeFade.Instance == null) return;
+
+    //    ChangeFade.Instance.FadeIn(1.0f, () =>
+    //    {
+    //        PhotonNetwork.LocalPlayer.SetCustomProperties(
+    //            new ExitGames.Client.Photon.Hashtable { { "Role", pendingRole } }
+    //        );
+
+    //        ChangeFade.Instance.FadeOut(0.5f, () =>
+    //        {
+    //            onComplete?.Invoke();
+    //        });
+    //    });
+    //    }
+
+
     public void ExecuteFadeRoleChange(System.Action onComplete = null)
         {
         if (!photonView.IsMine) return;
@@ -439,6 +462,9 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
                 new ExitGames.Client.Photon.Hashtable { { "Role", pendingRole } }
             );
 
+            // ★ ここでも Role別リスポーン
+            RespawnByRole(pendingRole);
+
             ChangeFade.Instance.FadeOut(0.5f, () =>
             {
                 onComplete?.Invoke();
@@ -447,12 +473,168 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         }
 
 
+
     public Animator GetCurrentAnimator()
         {
         GameObject active = (CurrentRole == "Human") ? humanModel : oniModel;
         if (active == null) return null;
         return active.GetComponent<Animator>();
         }
+
+    // ==============================
+    // Role別リスポーン（TestPlayerRoll完結）
+    // ==============================
+    //private void RespawnByRole(string role)
+    //    {
+    //    if (!photonView.IsMine) return;
+
+    //    string tag = (role == "Oni") ? "OniSpawnArea" : "SpawnArea";
+
+    //    GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(tag);
+    //    if (spawnAreas.Length == 0)
+    //        {
+    //        Debug.LogWarning($"[{tag}] が見つかりません");
+    //        return;
+    //        }
+
+    //    GameObject randomArea = spawnAreas[Random.Range(0, spawnAreas.Length)];
+    //    Vector3 pos = randomArea.transform.position + Vector3.up;
+
+    //    // 自分は自分で動かす
+    //    transform.position = pos;
+
+    //    // 他人に同期
+    //    photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, pos);
+
+    //    Debug.Log($"[{role}] {tag} にリスポーン");
+    //    }
+
+
+    //private void RespawnByRole(string role)
+    //    {
+    //    if (!photonView.IsMine) return;
+
+    //    string tag = (role == "Oni") ? "OniSpawnArea" : "SpawnArea";
+    //    GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(tag);
+    //    if (spawnAreas.Length == 0)
+    //        {
+    //        Debug.LogWarning($"[{tag}] が見つかりません");
+    //        return;
+    //        }
+
+    //    GameObject area = spawnAreas[Random.Range(0, spawnAreas.Length)];
+
+    //    // ★ Collider 必須
+    //    Collider col = area.GetComponent<Collider>();
+    //    if (col == null)
+    //        {
+    //        Debug.LogError($"[{area.name}] に Collider がありません");
+    //        return;
+    //        }
+
+    //    // ===== 正確な「上面中央」 =====
+    //    Vector3 spawnPos = col.bounds.center;
+    //    spawnPos.y = col.bounds.max.y;
+
+    //    // ===== CharacterController を考慮 =====
+    //    CharacterController cc = GetComponent<CharacterController>();
+    //    if (cc != null)
+    //        {
+    //        cc.enabled = false;
+    //        spawnPos.y += cc.height * 0.5f + cc.skinWidth;
+    //        }
+
+    //    transform.position = spawnPos;
+
+    //    if (cc != null)
+    //        cc.enabled = true;
+
+    //    // 他クライアント同期
+    //    photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, spawnPos);
+
+    //    Debug.Log($"[{role}] 正確に {area.name} の上へリスポーン");
+    //    }
+
+
+    private void RespawnByRole(string role)
+        {
+        if (!photonView.IsMine) return;
+
+        GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(
+            role == "Oni" ? "OniSpawnArea" : "SpawnArea"
+        );
+
+        if (spawnAreas.Length == 0) return;
+
+        GameObject area = spawnAreas[Random.Range(0, spawnAreas.Length)];
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+            {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            }
+
+        Vector3 spawnPos = area.transform.position + Vector3.up;
+
+        transform.position = spawnPos;
+
+        photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, spawnPos);
+        }
+
+
+    private IEnumerator RespawnByRoleCoroutine(string role)
+        {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+            {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.Sleep();
+            rb.isKinematic = true; // 移動中の物理干渉を防ぐ
+            }
+
+        CharacterController cc = GetComponent<CharacterController>();
+        if (cc != null) cc.enabled = false;
+
+        yield return null; // ★ 1フレーム待つ
+
+        string tag = (role == "Oni") ? "OniSpawnArea" : "SpawnArea";
+        GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(tag);
+        if (spawnAreas.Length == 0) yield break;
+
+        GameObject area = spawnAreas[Random.Range(0, spawnAreas.Length)];
+
+        // ===== Collider の上面を取得 =====
+        Collider col = area.GetComponent<Collider>();
+        Vector3 spawnPos = (col != null) ? col.bounds.center : area.transform.position;
+        if (col != null) spawnPos.y = col.bounds.max.y; // 上面
+
+        // ===== CharacterController を考慮して高さ補正 =====
+        if (cc != null)
+            {
+            spawnPos.y += cc.height * 0.5f + cc.skinWidth;
+            }
+
+        transform.position = spawnPos;
+
+        // 他クライアント同期
+        photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, spawnPos);
+
+        if (cc != null) cc.enabled = true;
+        if (rb != null) rb.isKinematic = false;
+        if (rb != null) rb.WakeUp();
+
+        Debug.Log($"[{role}] {area.name} に正確にリスポーン");
+        }
+
+
+    [PunRPC]
+    private void RPC_SetRespawnPosition(Vector3 pos)
+        {
+        transform.position = pos;
+        }
+
 
 
 

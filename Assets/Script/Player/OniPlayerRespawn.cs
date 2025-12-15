@@ -3,6 +3,43 @@ using Photon.Pun;
 
 public class OniPlayerRespawn : MonoBehaviourPunCallbacks
     {
+    [SerializeField] private float fallLimitY = -5f;
+    private bool isRespawning = false;
+
+    private void Update()
+        {
+        if (!photonView.IsMine) return;
+
+        Debug.Log($"[RespawnCheck] y = {transform.position.y}");
+
+        if (transform.position.y < -5f)
+            {
+
+            RespawnAtRandomSpawnArea();
+            }
+        }
+
+
+    private System.Collections.IEnumerator RespawnDelay()
+        {
+        isRespawning = true;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+            {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            }
+
+        yield return null; 
+
+        RespawnAtRandomSpawnArea();
+
+      
+        yield return new WaitForSeconds(0.5f);
+        isRespawning = false;
+        }
+
     public void RespawnAtRandomSpawnArea()
         {
         //if (!photonView.IsMine) return; // 自分のプレイヤーのみ実行

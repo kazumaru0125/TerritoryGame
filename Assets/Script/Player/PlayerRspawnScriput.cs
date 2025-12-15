@@ -3,14 +3,53 @@ using Photon.Pun;
 
 public class PlayerRespawnScript : MonoBehaviourPunCallbacks
     {
+    [SerializeField] private float fallLimitY = -5f;
+    private bool isRespawning = false;
+
+    private void Update()
+        {
+        if (!photonView.IsMine) return;
+
+        Debug.Log($"[RespawnCheck] y = {transform.position.y}");
+
+        if (transform.position.y < -5f)
+            {
+ 
+            RespawnAtRandomSpawnArea();
+            }
+        }
+
+
+    private System.Collections.IEnumerator RespawnDelay()
+        {
+        isRespawning = true;
+
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+            {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            }
+
+        yield return null;
+
+        RespawnAtRandomSpawnArea();
+
+      
+        yield return new WaitForSeconds(0.5f);
+        isRespawning = false;
+        }
+
+
+
     public void RespawnAtRandomSpawnArea()
         {
-        //if (!photonView.IsMine) return; // ©•ª‚ÌƒvƒŒƒCƒ„[‚Ì‚İÀs
 
         GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag("SpawnArea");
         if (spawnAreas.Length == 0)
             {
-            Debug.LogWarning("SpawnAreaƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+         ;
             return;
             }
 
@@ -18,20 +57,21 @@ public class PlayerRespawnScript : MonoBehaviourPunCallbacks
         Vector3 areaPos = randomArea.transform.position;
         Vector3 newPosition = new Vector3(areaPos.x, areaPos.y + 1.0f, areaPos.z);
 
-        // ©•ª‚ÌˆÊ’u‚ğ’¼Ú•ÏXi©©•ª‚Í©•ª‚Å“®‚©‚·j
+      
         transform.position = newPosition;
 
-        // š ‘Sˆõ‚É‚±‚ÌÀ•W‚ğ’Ê’m
+     
         photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, newPosition);
 
-        Debug.Log($"[©•ª‘¤] {gameObject.name} ‚ª {randomArea.name} ‚Ìã‚ÉˆÚ“®‚µ‚Ü‚µ‚½B");
+        Debug.Log($"[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½] {gameObject.name} ï¿½ï¿½ {randomArea.name} ï¿½Ìï¿½ÉˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
+
+
         }
 
-    // ‘¼ƒvƒŒƒCƒ„[‚ªŒ©‚éˆÊ’u‚ğXV
     [PunRPC]
     void RPC_SetRespawnPosition(Vector3 newPosition)
         {
         transform.position = newPosition;
-        Debug.Log($"[‘¼ƒNƒ‰ƒCƒAƒ“ƒg] {gameObject.name} ‚ªƒŠƒXƒ|[ƒ“‚µ‚Ü‚µ‚½B");
+        Debug.Log($"[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Cï¿½Aï¿½ï¿½ï¿½g] {gameObject.name} ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½|ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
         }
     }

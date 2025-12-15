@@ -53561,6 +53561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c6e72da0ad1a0489c77c8eb0d1d8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallLimitY: -5
 --- !u!114 &6513585260218286718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63064,6 +63065,7 @@ GameObject:
   - component: {fileID: 7738200665747438560}
   - component: {fileID: 1233781975050966230}
   - component: {fileID: 1639675186892258534}
+  - component: {fileID: 1763220899075443333}
   m_Layer: 0
   m_Name: Set Costume_02 SD Unity-Chan WTD (1)
   m_TagString: Oni
@@ -63290,6 +63292,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+--- !u!114 &1763220899075443333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158597635818744719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1519754637de44d94e99d22a48094e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallLimitY: -5
 --- !u!1 &9173441848636151874
 GameObject:
   m_ObjectHideFlags: 0
