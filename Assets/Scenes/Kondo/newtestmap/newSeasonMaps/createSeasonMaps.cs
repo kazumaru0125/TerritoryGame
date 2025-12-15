@@ -42,6 +42,8 @@ public class createSeasonMaps: MonoBehaviour
     private GameObject jumps;
     [SerializeField]
     private GameObject newhiwalls;
+    [SerializeField]
+    private GameObject gimmick;
     //[SerializeField]
     //private GameObject testOBJ;
     /*
@@ -97,7 +99,7 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
 
                             case "2"://鬼が超えれる壁
-                                Instantiate(nomalwalls, new Vector3((-4.5f + j) * nomalscale, 0.0f, (4.5f - i) * nomalscale), Quaternion.Euler(-89.98f, 0, 0));
+                                Instantiate(nomalwalls, new Vector3((-4.5f + j) * nomalscale, 5.0f, (4.5f - i) * nomalscale), Quaternion.Euler(-89.98f, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
@@ -128,11 +130,15 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
                                 
                                 case "11"://新しい壁
-                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 5.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
-                                
-                                case "12"://人間側スタート地点
-                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
+
+                                case "15"://新しい壁
+                                Instantiate(gimmick, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+
+                            case "12"://人間側スタート地点
+                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 10.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
                                 case "13"://鬼側スタート地点
@@ -144,15 +150,15 @@ public class createSeasonMaps: MonoBehaviour
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
                             case "22"://全員が超えれる壁
-                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                Instantiate(stoneB, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
                             case "23"://全員が超えれる壁
-                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                Instantiate(stoneC, new Vector3((-4.5f + j) * scale, 4.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
                             case "24"://全員が超えれる壁
-                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                Instantiate(stoneD, new Vector3((-4.5f + j) * scale, 4.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
                         }

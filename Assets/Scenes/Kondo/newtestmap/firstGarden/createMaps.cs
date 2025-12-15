@@ -126,7 +126,7 @@ public class createMaps : MonoBehaviour
                                 break;
                                 
                                 case "12"://人間側スタート地点
-                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 8.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
                                 case "13"://鬼側スタート地点
