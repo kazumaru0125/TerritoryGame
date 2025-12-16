@@ -824,7 +824,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783784739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d092cc8348f76a499d55ff01e8554b1, type: 3}
   m_Name: 
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783784739}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2966c41fe024a4742a20e43e1d7a17a2, type: 3}
   m_Name: 
@@ -858,7 +858,7 @@ MonoBehaviour:
   hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
   stoneA: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   stoneB: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
-  stoneC: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  stoneC: {fileID: 8325719057679156394, guid: abe2c3590bdfc584d94dc4cdd722f331, type: 3}
   stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
@@ -955,7 +955,7 @@ Transform:
   m_GameObject: {fileID: 2055210114}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 64.5, y: 452, z: -55}
+  m_LocalPosition: {x: 64.5, y: 229, z: -55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1104,7 +1104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 389, y: 139}
+  m_AnchoredPosition: {x: 392, y: 145}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2092411005
