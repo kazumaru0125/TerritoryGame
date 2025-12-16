@@ -824,7 +824,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783784739}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d092cc8348f76a499d55ff01e8554b1, type: 3}
   m_Name: 
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783784739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2966c41fe024a4742a20e43e1d7a17a2, type: 3}
   m_Name: 
@@ -865,7 +865,7 @@ MonoBehaviour:
   items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
   starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
   ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
-  boxs: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
+  boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
   jumps: {fileID: 4976997056025506496, guid: 25716c2ebf8494343911b0bd69fa5f4b, type: 3}
   newhiwalls: {fileID: 1314821455373216, guid: 47ffcdc5f7106d34f9dc7e5b8a53642e, type: 3}
   gimmick: {fileID: 1314821455373216, guid: 3a1862665799bd44784b304ccef9bf73, type: 3}
