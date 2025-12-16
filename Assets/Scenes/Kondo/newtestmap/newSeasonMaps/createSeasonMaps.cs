@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class createSeasonMaps: MonoBehaviour
 {
@@ -135,7 +136,10 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
 
                                 case "15"://ランタン有ギミック
-                                Instantiate(gimmick, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                              //  Instantiate(gimmick, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+
+                                Vector3 Newpos = new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale);
+                                PhotonNetwork.Instantiate("Bld_Rectangular_Base", Newpos, Quaternion.identity);
                                 break;
 
                             case "12"://人間側スタート地点
