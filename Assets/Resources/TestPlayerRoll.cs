@@ -222,24 +222,7 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
 
         }
 
-    //    public void PlayDisappointmentAndChangeRole(string newRole)
-    //{
-    //    if (!photonView.IsMine) return;
-    //    if (CurrentRole == newRole) return;
 
-    //    var disappointment = GetComponentInChildren<DisappointmentController>();
-    //    if (disappointment == null)
-    //    {
-    //        Debug.LogError("DisappointmentController が見つかりません");
-    //        return;
-    //    }
-
-    //    // 次のロールを一時保存（AnimationEvent から使う）
-    //    pendingRole = newRole;
-
-    //    // 落胆アニメ再生（全員同期）
-    //    disappointment.Play();
-    //}
 
     public void PlayDisappointmentAndChangeRole(string newRole)
         {
@@ -561,12 +544,39 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
     //    }
 
 
+    //private void RespawnByRole(string role)
+    //    {
+    //    if (!photonView.IsMine) return;
+
+    //    StartCoroutine(RespawnCoroutine(role));
+    //    }
+
     private void RespawnByRole(string role)
         {
         if (!photonView.IsMine) return;
 
-        StartCoroutine(RespawnCoroutine(role));
+        if (role == "Human")
+            {
+            if (prespawn == null)
+                {
+                Debug.LogError("PlayerRespawnScript が設定されていません");
+                return;
+                }
+
+            prespawn.RespawnAtRandomSpawnArea();
+            }
+        else if (role == "Oni")
+            {
+            if (orespawn == null)
+                {
+                Debug.LogError("OniPlayerRespawn が設定されていません");
+                return;
+                }
+
+            orespawn.RespawnAtRandomSpawnArea();
+            }
         }
+
 
 
 
@@ -634,50 +644,7 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
 
 
 
-    //private IEnumerator RespawnByRoleCoroutine(string role)
-    //    {
-    //    Rigidbody rb = GetComponent<Rigidbody>();
-    //    if (rb != null)
-    //        {
-    //        rb.linearVelocity = Vector3.zero;
-    //        rb.angularVelocity = Vector3.zero;
-    //        rb.Sleep();
-    //        rb.isKinematic = true; // 移動中の物理干渉を防ぐ
-    //        }
-
-    //    CharacterController cc = GetComponent<CharacterController>();
-    //    if (cc != null) cc.enabled = false;
-
-    //    yield return null; 
-
-    //    string tag = (role == "Oni") ? "OniSpawnArea" : "SpawnArea";
-    //    GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(tag);
-    //    if (spawnAreas.Length == 0) yield break;
-
-    //    GameObject area = spawnAreas[Random.Range(0, spawnAreas.Length)];
-
-    //    // ===== Collider の上面を取得 =====
-    //    Collider col = area.GetComponent<Collider>();
-    //    Vector3 spawnPos = (col != null) ? col.bounds.center : area.transform.position;
-    //    if (col != null) spawnPos.y = col.bounds.max.y; // 上面
-
-    //    // ===== CharacterController を考慮して高さ補正 =====
-    //    if (cc != null)
-    //        {
-    //        spawnPos.y += cc.height * 0.5f + cc.skinWidth;
-    //        }
-
-    //    transform.position = spawnPos;
-
-    //    // 他クライアント同期
-    //    photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, spawnPos);
-
-    //    if (cc != null) cc.enabled = true;
-    //    if (rb != null) rb.isKinematic = false;
-    //    if (rb != null) rb.WakeUp();
-
-    //    Debug.Log($"[{role}] {area.name} に正確にリスポーン");
-    //    }
+   
 
 
     [PunRPC]
