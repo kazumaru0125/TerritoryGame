@@ -841,6 +841,7 @@ MonoBehaviour:
   boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
   jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
   newhiwalls: {fileID: 8724796524908712674, guid: fac446728a43e7d4ea615a34b5c1112f, type: 3}
+  saku: {fileID: 5269607771082784851, guid: ef2b77c529bc43b4cafe30da462a613a, type: 3}
 --- !u!114 &1783784743
 MonoBehaviour:
   m_ObjectHideFlags: 0
