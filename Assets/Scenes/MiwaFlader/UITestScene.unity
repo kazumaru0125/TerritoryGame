@@ -3805,9 +3805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39e78d8f5581e24c8a025c43d656534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoukiGaugeA: {fileID: 0}
-  shoukiGaugeB: {fileID: 0}
-  maxShouki: 5
 --- !u!114 &1758315332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3820,9 +3817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39e78d8f5581e24c8a025c43d656534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoukiGaugeA: {fileID: 0}
-  shoukiGaugeB: {fileID: 0}
-  maxShouki: 5
 --- !u!1 &1781828227
 GameObject:
   m_ObjectHideFlags: 0
