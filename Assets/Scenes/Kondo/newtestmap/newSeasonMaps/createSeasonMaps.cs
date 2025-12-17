@@ -132,7 +132,7 @@ public class createSeasonMaps: MonoBehaviour
                             case "11"://新しい壁
                                 Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
 
-                                break;
+                            break;
 
                                 case "15"://ランタン有ギミック
                               //  Instantiate(gimmick, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
