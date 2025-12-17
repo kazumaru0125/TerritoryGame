@@ -3,62 +3,62 @@ using Photon.Pun;
 
 public class DisappointmentController : MonoBehaviourPun
     {
-    private bool isPlaying = false;
-    private TestPlayerRoll playerRoll;
+    //private bool isPlaying = false;
+    //private TestPlayerRoll playerRoll;
 
-    void Awake()
-        {
-        playerRoll = GetComponentInParent<TestPlayerRoll>();
+    //void Awake()
+    //    {
+    //    playerRoll = GetComponentInParent<TestPlayerRoll>();
 
-        if (playerRoll == null)
-            Debug.LogError("TestPlayerRoll が見つかりません");
-        }
+    //    if (playerRoll == null)
+    //        Debug.LogError("TestPlayerRoll が見つかりません");
+    //    }
 
-    // ==============================
-    // 外部公開API
-    // ==============================
-    public void Play()
-        {
-        if (isPlaying) return;
-        if (!photonView.IsMine) return;
+    //// ==============================
+    //// 外部公開API
+    //// ==============================
+    //public void Play()
+    //    {
+    //    if (isPlaying) return;
+    //    if (!photonView.IsMine) return;
 
-        isPlaying = true;
-        photonView.RPC(nameof(RPC_PlayAnimation), RpcTarget.All);
-        }
+    //    isPlaying = true;
+    //    photonView.RPC(nameof(RPC_PlayAnimation), RpcTarget.All);
+    //    }
 
-    [PunRPC]
-    private void RPC_PlayAnimation()
-        {
-        // ★ RPC側で必ず Animator を取得する
-        Animator anim = playerRoll.GetCurrentAnimator();
-        if (anim == null)
-            {
-            Debug.LogError("RPC_PlayAnimation: Animator が取得できません");
-            return;
-            }
+    //[PunRPC]
+    //private void RPC_PlayAnimation()
+    //    {
+    //    // ★ RPC側で必ず Animator を取得する
+    //    Animator anim = playerRoll.GetCurrentAnimator();
+    //    if (anim == null)
+    //        {
+    //        Debug.LogError("RPC_PlayAnimation: Animator が取得できません");
+    //        return;
+    //        }
 
-        anim.SetBool("is_Disappointmenting", true);
-        }
+    //    anim.SetBool("is_Disappointmenting", true);
+    //    }
 
-    // ==============================
-    // Animation Event
-    // ==============================
-    public void OnDisappointmentFinished()
-        {
-        Animator anim = playerRoll.GetCurrentAnimator();
-        if (anim != null)
-            anim.SetBool("is_Disappointmenting", false);
+    //// ==============================
+    //// Animation Event
+    //// ==============================
+    //public void OnDisappointmentFinished()
+    //    {
+    //    Animator anim = playerRoll.GetCurrentAnimator();
+    //    if (anim != null)
+    //        anim.SetBool("is_Disappointmenting", false);
 
-        if (photonView.IsMine)
-            {
-            playerRoll.ExecuteFadeRoleChange(() =>
-            {
-                isPlaying = false;
-            });
-            }
-        else
-            {
-            isPlaying = false;
-            }
-        }
+    //    if (photonView.IsMine)
+    //        {
+    //        playerRoll.ExecuteFadeRoleChange(() =>
+    //        {
+    //            isPlaying = false;
+    //        });
+    //        }
+    //    else
+    //        {
+    //        isPlaying = false;
+    //        }
+    //    }
     }
