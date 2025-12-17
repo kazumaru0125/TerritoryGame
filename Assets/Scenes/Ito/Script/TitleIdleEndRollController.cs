@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class TitleIdleEndRollController : MonoBehaviour
 {
-    public float idleTimeToShowEndRoll = 5f;   // 無操作でエンドロールを出すまで
-    public GameObject titleCanvasRoot;         // タイトル用 Canvas（任意）
-    public GameObject endRollCanvasRoot;       // エンドロール用 Canvas
+    public float idleTimeToShowEndRoll = 5f;
+    public GameObject titleCanvasRoot;
+    public GameObject endRollCanvasRoot;
 
     float lastInputTime;
     bool endRollVisible = false;
@@ -14,46 +14,45 @@ public class TitleIdleEndRollController : MonoBehaviour
         lastInputTime = Time.time;
 
         if (endRollCanvasRoot != null)
-            endRollCanvasRoot.SetActive(false);    // 最初は非表示
+            endRollCanvasRoot.SetActive(false);
         if (titleCanvasRoot != null)
-            titleCanvasRoot.SetActive(true);       // タイトルは表示
+            titleCanvasRoot.SetActive(true);
     }
 
     void Update()
     {
-        // いつでも入力は見る
         bool hasInput = HasAnyInput();
 
         if (!endRollVisible)
         {
-            // タイトル表示中：無操作時間を測る
+            // タイトル表示中：無操作タイマー
             if (hasInput)
-            {
-                lastInputTime = Time.time;         // 入力があったらリセット
-            }
+                lastInputTime = Time.time;
 
             if (Time.time - lastInputTime >= idleTimeToShowEndRoll)
-            {
-                ShowEndRoll();                     // 5秒放置でエンドロール表示
-            }
+                ShowEndRoll();
         }
         else
         {
-            // エンドロール表示中：入力があったらタイトルに戻す
+            // エンドロール表示中：何か入力があったらタイトルに戻る
             if (hasInput)
-            {
                 HideEndRollAndBackToTitle();
-            }
         }
     }
 
     bool HasAnyInput()
     {
+        // キーボード・マウス全般
         if (Input.anyKeyDown) return true;
+
+        // スティック入力
         if (Input.GetAxisRaw("Horizontal") != 0) return true;
         if (Input.GetAxisRaw("Vertical") != 0) return true;
-        // 必要に応じてボタンを追加
-        // if (Input.GetButtonDown("Submit")) return true;
+
+        // Xbox コントローラ A/B ボタン
+        if (Input.GetKeyDown("joystick button 0")) return true; // A
+        if (Input.GetKeyDown("joystick button 1")) return true; // B
+
         return false;
     }
 
@@ -62,27 +61,21 @@ public class TitleIdleEndRollController : MonoBehaviour
         endRollVisible = true;
 
         if (titleCanvasRoot != null)
-            titleCanvasRoot.SetActive(false);      // タイトル非表示
+            titleCanvasRoot.SetActive(false);
 
         if (endRollCanvasRoot != null)
-        {
-            // 必要ならここで位置リセット
-            // var scroller = endRollCanvasRoot.GetComponentInChildren<EndRollScroller>();
-            // if (scroller != null) scroller.ResetPosition();
-
-            endRollCanvasRoot.SetActive(true);     // エンドロール表示開始
-        }
+            endRollCanvasRoot.SetActive(true); // OnEnable で毎回初期化される
     }
 
-    void HideEndRollAndBackToTitle()
+    public void HideEndRollAndBackToTitle()
     {
         endRollVisible = false;
-        lastInputTime = Time.time;                 // 戻った直後から再カウント
+        lastInputTime = Time.time;
 
         if (endRollCanvasRoot != null)
-            endRollCanvasRoot.SetActive(false);    // エンドロール非表示
+            endRollCanvasRoot.SetActive(false);
 
         if (titleCanvasRoot != null)
-            titleCanvasRoot.SetActive(true);       // タイトル再表示
+            titleCanvasRoot.SetActive(true);
     }
 }
