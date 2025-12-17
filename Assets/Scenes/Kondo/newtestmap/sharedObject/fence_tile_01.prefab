@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5132890525478892944}
   - component: {fileID: 9219019367371755534}
   - component: {fileID: 3676973415111788435}
+  - component: {fileID: 7966941412657381001}
   m_Layer: 0
   m_Name: fence_tile_01
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 5269607771082784851}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 62.2, y: 0, z: -33.222046}
-  m_LocalScale: {x: 2, y: 3, z: 1}
+  m_LocalPosition: {x: 62.48, y: 0, z: -33.222046}
+  m_LocalScale: {x: 2.5, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,3 +104,24 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!65 &7966941412657381001
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269607771082784851}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.081958, y: 1.4009002, z: 0.08201317}
+  m_Center: {x: 0.0038528442, y: 0.5103655, z: 0.00000010430813}

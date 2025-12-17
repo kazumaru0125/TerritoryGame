@@ -36,6 +36,8 @@ public class createMaps : MonoBehaviour
     private GameObject jumps;
     [SerializeField]
     private GameObject newhiwalls;
+    [SerializeField]
+    private GameObject saku;
     //[SerializeField]
     //private GameObject testOBJ;
     /*
@@ -131,6 +133,14 @@ public class createMaps : MonoBehaviour
 
                                 case "13"://鬼側スタート地点
                                 Instantiate(starts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+
+                            case "31"://横向きの策
+                                Instantiate(saku, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                                break;
+
+                            case "32"://縦向きの策
+                                Instantiate(saku, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 90f, 0f));
                                 break;
 
 
