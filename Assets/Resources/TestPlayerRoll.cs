@@ -2,7 +2,6 @@
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-
 using System.Collections;
 
 
@@ -12,33 +11,23 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject humanModel;
     [SerializeField] private GameObject oniModel;
 
-
-    [SerializeField] private PlayerRespawnScript prespawn;
-    [SerializeField] private OniPlayerRespawn orespawn;
-
-
     [Header("UI設定")]
     [SerializeField] private Vector3 uiOffset = new Vector3(0, 2.0f, 0);
 
-    public string CurrentTeam { get; private set; }
-    public string CurrentRole { get; private set; }
+    public string CurrentTeam { get; private set; } // "A" or "B"
+    public string CurrentRole { get; private set; } // "Human" or "Oni"
 
     private TextMeshPro teamText;
     private Transform uiTransform;
 
-    private string pendingRole;
-
-    // ==============================
-    // Start
-    // ==============================
     private void Start()
         {
         if (PhotonNetwork.IsMasterClient)
             {
             PhotonNetwork.CurrentRoom.SetCustomProperties(
                 new ExitGames.Client.Photon.Hashtable {
-                    { "TeamA_Damage", 0 },
-                    { "TeamB_Damage", 0 }
+            { "TeamA_Damage", 0 },
+            { "TeamB_Damage", 0 }
                 }
             );
             }
@@ -51,59 +40,201 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
 
     private void LateUpdate()
         {
-#if UNITY_EDITOR
+        // Qキーでチーム全員のロール切り替え
         if (photonView.IsMine && Input.GetKeyDown(KeyCode.Q))
             {
-            DebugToggleRoleForMyTeam();
-            PlayDisappointmentAndChangeRole(
-      (CurrentRole == "Human") ? "Oni" : "Human"
-  );
-
+            if (PhotonNetwork.IsMasterClient)
+                {
+                // Master が全員にフェード付きロール切替を指示
+                photonView.RPC(
+                    "RPC_RoleSwapWithFade",
+                    RpcTarget.All,
+                    CurrentTeam   // 仮で自分のチームを渡す
+                );
+                }
             }
-#endif
 
-        // UIを常にカメラ方向へ
+        // UIをカメラの方向に
         if (uiTransform != null && Camera.main != null)
             {
             uiTransform.position = transform.position + uiOffset;
-            Vector3 dir = uiTransform.position - Camera.main.transform.position;
-            if (dir.sqrMagnitude > 0.001f)
-                uiTransform.rotation = Quaternion.LookRotation(dir);
+            Vector3 direction = uiTransform.position - Camera.main.transform.position;
+            if (direction.sqrMagnitude > 0.001f)
+                uiTransform.rotation = Quaternion.LookRotation(direction);
             }
         }
 
-
-    // ==============================
-    // デバッグ：自分のチーム全員Role切替
-    // ==============================
-    private void DebugToggleRoleForMyTeam()
+    // -----------------------------
+    // --- Photon 同期系 ----------
+    // -----------------------------
+    private void AssignTeamAndRoleIfEmpty()
         {
-        if (!PhotonNetwork.IsMasterClient)
+        var playerList = PhotonNetwork.PlayerList;
+
+        int countA = 0;
+        int countB = 0;
+        foreach (var p in playerList)
             {
-            Debug.LogWarning("[Debug] Masterのみ実行可");
+            if (p.CustomProperties.TryGetValue("Team", out object t))
+                {
+                if ((string)t == "A") countA++;
+                else if ((string)t == "B") countB++;
+                }
+            }
+
+        if (!photonView.Owner.CustomProperties.ContainsKey("Team"))
+            {
+            string assignedTeam = (countA <= countB) ? "A" : "B";
+            photonView.Owner.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Team", assignedTeam } });
+            }
+
+        //if (!photonView.Owner.CustomProperties.ContainsKey("Role"))
+        //    {
+        //    string assignedRole = (Random.value < 0.5f) ? "Human" : "Oni";
+        //    photonView.Owner.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", assignedRole } });
+        //    }
+
+        if (!photonView.Owner.CustomProperties.ContainsKey("Role"))
+            {
+            string assignedRole = "Human"; // 常にHumanを初期設定
+            photonView.Owner.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", assignedRole } });
+            }
+
+        }
+
+    private void ToggleRoleForTeam(string team)
+        {
+        foreach (var player in PhotonNetwork.PlayerList)
+            {
+            if (player.CustomProperties.TryGetValue("Team", out object t) && (string)t == team)
+                {
+                string currentRole = player.CustomProperties.TryGetValue("Role", out object r) ? (string)r : "Human";
+                string newRole = (currentRole == "Human") ? "Oni" : "Human";
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Role", newRole } });
+                }
+            }
+        }
+
+    public override void OnPlayerPropertiesUpdate(
+      Player target,
+      ExitGames.Client.Photon.Hashtable changedProps)
+        {
+        // この TestPlayerRoll が表しているプレイヤーか？
+        if (target != photonView.Owner) return;
+
+        if (changedProps.ContainsKey("Team"))
+            {
+            UpdateTeam();
+            }
+
+        if (changedProps.ContainsKey("Role"))
+            {
+            UpdateRole(); // ← UIとモデルを必ず更新
+            }
+        }
+
+    // -----------------------------
+    // --- Team & Role反映 --------
+    // -----------------------------
+    private void UpdateTeam()
+        {
+        if (photonView.Owner.CustomProperties.TryGetValue("Team", out object team))
+            {
+            CurrentTeam = (string)team;
+            ApplyTeamVisual();
+            UpdateTeamUI();
+            }
+        }
+
+    private void UpdateRole()
+        {
+        if (photonView.Owner.CustomProperties.TryGetValue("Role", out object role))
+            {
+            CurrentRole = (string)role;
+            // 子モデルに直接通知して切り替え
+            UpdateModelByRole();
+            UpdateTeamUI();
+            }
+        }
+
+    // -----------------------------
+    // --- モデル切替 -------------
+    // -----------------------------
+    private void UpdateModelByRole()
+        {
+        if (humanModel == null || oniModel == null)
+            {
+            Debug.LogWarning("HumanModel または OniModel が設定されていません");
             return;
             }
 
-        Debug.Log("[Debug] Qキー Fade付きRole切替");
+        bool isHuman = CurrentRole == "Human";
+        humanModel.SetActive(isHuman);
+        oniModel.SetActive(!isHuman);
 
-        foreach (var p in PhotonNetwork.PlayerList)
+        // Animatorがあればリセット
+        GameObject activeObj = isHuman ? humanModel : oniModel;
+        Animator anim = activeObj.GetComponent<Animator>();
+        if (anim != null)
             {
-            if (!p.CustomProperties.TryGetValue("Team", out object t)) continue;
-            if ((string)t != CurrentTeam) continue;
-
-            string role = p.CustomProperties.TryGetValue("Role", out object r)
-                ? (string)r : "Human";
-
-            string newRole = (role == "Human") ? "Oni" : "Human";
-
-            // ★ ここが超重要
-            photonView.RPC(
-                nameof(RequestRoleChangeRPC),
-                p,
-                newRole
-            );
+            anim.Rebind();
+            anim.Update(0);
             }
         }
+
+    // -----------------------------
+    // --- 表示/UI処理 ------------
+    // -----------------------------
+    private void CreateUI()
+        {
+        GameObject uiObj = new GameObject("TeamUI");
+        uiObj.transform.SetParent(transform);
+        uiTransform = uiObj.transform;
+        uiTransform.localScale = Vector3.one * 0.1f;
+
+        teamText = uiObj.AddComponent<TextMeshPro>();
+        teamText.alignment = TextAlignmentOptions.Center;
+        teamText.fontSize = 2.5f;
+        teamText.enableAutoSizing = true;
+        teamText.color = Color.white;
+        UpdateTeamUI();
+        }
+
+    private void ApplyTeamVisual()
+        {
+        var renderer = GetComponent<Renderer>();
+        if (renderer != null)
+            {
+            renderer.material.color = (CurrentTeam == "A") ? Color.blue : Color.red;
+            }
+        }
+
+    private void UpdateTeamUI()
+        {
+        if (teamText != null)
+            {
+            teamText.text = $"Team {CurrentTeam}\nRole {CurrentRole}";
+            teamText.color = (CurrentTeam == "A") ? Color.blue : Color.red;
+            }
+        }
+
+
+    // ==============================
+    // DualShoukiGauge から呼ばれる
+    // ==============================
+    public void RequestRoleChange(string newRole)
+        {
+        if (CurrentRole == newRole) return;
+
+        // Masterが管理している場合はRPCなどに変更してもOK
+        PhotonNetwork.LocalPlayer.SetCustomProperties(
+            new ExitGames.Client.Photon.Hashtable { { "Role", newRole } }
+        );
+
+        Debug.Log($"[TestPlayerRoll] Role changed to {newRole}");
+        }
+
+
 
     [PunRPC]
     public void AddScoreRPC(string team, int value)
@@ -117,203 +248,107 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             manager.AddBTeamVitality(value);
         }
 
-
     [PunRPC]
-    void RequestRoleChangeRPC(string newRole)
+    public void RequestDestroyRPC(int viewID)
         {
-        RequestRoleChange(newRole);
-        }
+        if (!PhotonNetwork.IsMasterClient) return;
 
-
-
-
-    // ==============================
-    // Team & Role 初期割当
-    // ==============================
-    private void AssignTeamAndRoleIfEmpty()
-        {
-        int countA = 0, countB = 0;
-
-        foreach (var p in PhotonNetwork.PlayerList)
-            {
-            if (p.CustomProperties.TryGetValue("Team", out object t))
-                {
-                if ((string)t == "A") countA++;
-                else if ((string)t == "B") countB++;
-                }
-            }
-
-        if (!photonView.Owner.CustomProperties.ContainsKey("Team"))
-            {
-            string team = (countA <= countB) ? "A" : "B";
-            photonView.Owner.SetCustomProperties(
-                new ExitGames.Client.Photon.Hashtable { { "Team", team } }
-            );
-            }
-
-        if (!photonView.Owner.CustomProperties.ContainsKey("Role"))
-            {
-            photonView.Owner.SetCustomProperties(
-                new ExitGames.Client.Photon.Hashtable { { "Role", "Human" } }
-            );
-            }
-        }
-
-
-
-
-
-    // ==============================
-    // Photon Callback
-    // ==============================
-    public override void OnPlayerPropertiesUpdate(
-        Player target,
-        ExitGames.Client.Photon.Hashtable changedProps)
-        {
-        if (target != photonView.Owner) return;
-
-        if (changedProps.ContainsKey("Team")) UpdateTeam();
-        if (changedProps.ContainsKey("Role")) UpdateRole();
+        PhotonView pv = PhotonView.Find(viewID);
+        if (pv != null)
+            PhotonNetwork.Destroy(pv.gameObject);
         }
 
     // ==============================
-    // Team / Role 表示反映
-    // ==============================
-    private void UpdateTeam()
-        {
-        if (!photonView.Owner.CustomProperties.TryGetValue("Team", out object team))
-            return;
-
-        CurrentTeam = (string)team;
-        ApplyTeamVisual();
-        UpdateTeamUI();
-        }
-
-    private void UpdateRole()
-        {
-        if (!photonView.Owner.CustomProperties.TryGetValue("Role", out object role))
-            return;
-
-        string newRole = (string)role;
-        if (CurrentRole == newRole) return;
-
-        CurrentRole = newRole;
-        UpdateModelByRole();
-        UpdateTeamUI();
-        }
-
-    // ==============================
-    // 暗転 → Role変更 → 明転
-    // ==============================
-    public void ChangeRoleWithFade(string newRole)
-        {
-        if (!photonView.IsMine) return;
-        if (CurrentRole == newRole) return;
-        if (ChangeFade.Instance == null) return;
-
-        ChangeFade.Instance.FadeIn(1.0f, () =>
-        {
-            PhotonNetwork.LocalPlayer.SetCustomProperties(
-                new ExitGames.Client.Photon.Hashtable { { "Role", newRole } }
-            );
-            RespawnByRole(newRole);
-            ChangeFade.Instance.FadeOut(0.5f);
-        });
-
-        }
-
-
-
-    public void PlayDisappointmentAndChangeRole(string newRole)
-        {
-        if (!photonView.IsMine) return;
-        if (CurrentRole == newRole) return;
-
-        // ★ Oni のときは Disappointment を完全スキップ
-        if (CurrentRole == "Oni")
-            {
-            Debug.Log("OniなのでDisappointmentなしでRole変更");
-            ChangeRoleWithFade(newRole);
-            return;
-            }
-
-        // ★ Human のときのみ探す
-        var disappointment = humanModel.GetComponentInChildren<DisappointmentController>(true);
-        if (disappointment == null)
-            {
-            Debug.LogError("Humanモデルに DisappointmentController が見つかりません");
-            return;
-            }
-
-        // 次のロールを保持（AnimationEvent用）
-        pendingRole = newRole;
-
-        // 落胆アニメ（RPC同期）
-        disappointment.Play();
-        }
-
-
-
-
-
-    // ==============================
-    // モデル切替
-    // ==============================
-    private void UpdateModelByRole()
-        {
-        if (humanModel == null || oniModel == null) return;
-
-        bool isHuman = CurrentRole == "Human";
-
-        humanModel.SetActive(isHuman);
-        oniModel.SetActive(!isHuman);
-
-        GameObject active = isHuman ? humanModel : oniModel;
-        Animator anim = active.GetComponent<Animator>();
-        if (anim != null)
-            {
-            anim.Rebind();
-            anim.Update(0);
-            }
-        }
-
-    // ==============================
-    // UI
-    // ==============================
-    private void CreateUI()
-        {
-        GameObject uiObj = new GameObject("TeamUI");
-        uiObj.transform.SetParent(transform);
-        uiTransform = uiObj.transform;
-        uiTransform.localScale = Vector3.one * 0.1f;
-
-        teamText = uiObj.AddComponent<TextMeshPro>();
-        teamText.alignment = TextAlignmentOptions.Center;
-        teamText.fontSize = 2.5f;
-        teamText.enableAutoSizing = true;
-
-        UpdateTeamUI();
-        }
-
-    private void UpdateTeamUI()
-        {
-        if (teamText == null) return;
-
-        teamText.text = $"Team {CurrentTeam}\nRole {CurrentRole}";
-        teamText.color = (CurrentTeam == "A") ? Color.blue : Color.red;
-        }
-
-    private void ApplyTeamVisual()
-        {
-        var r = GetComponent<Renderer>();
-        if (r != null)
-            r.material.color = (CurrentTeam == "A") ? Color.blue : Color.red;
-        }
-
-    // ==============================
-    // ダメージ管理（Master）
+    // チームダメージの加算（Masterのみ）
     // ==============================
     [PunRPC]
+    //public void AddTeamDamageRPC(string team)
+    //    {
+    //    if (!PhotonNetwork.IsMasterClient) return;
+
+    //    // ルームプロパティ辞書
+    //    var room = PhotonNetwork.CurrentRoom;
+    //    if (room == null) return;
+
+    //    // キー決定
+    //    string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+    //    // 現在値を取得
+    //    int current = 0;
+    //    if (room.CustomProperties.ContainsKey(key))
+    //        current = (int)room.CustomProperties[key];
+
+    //    current += 1;
+
+    //    // 更新
+    //    room.SetCustomProperties(
+    //        new ExitGames.Client.Photon.Hashtable { { key, current } }
+    //    );
+
+    //    Debug.Log($"[Master] Team {team} Damage = {current}");
+
+    //    // 3回以上でロール反転
+    //    if (current >= 3)
+    //        {
+    //        // ① 今ダメージを食らったチームを反転
+    //        ToggleRoleForTeam(team);
+
+    //        // ② 相手チームも反転
+    //        string otherTeam = (team == "A") ? "B" : "A";
+    //        ToggleRoleForTeam(otherTeam);
+
+    //        // リセット
+    //        room.SetCustomProperties(
+    //            new ExitGames.Client.Photon.Hashtable { { key, 0 } }
+    //        );
+
+    //        Debug.Log($"[Master] Team A and B Roles Swapped!");
+    //        }
+    //    }
+
+    //  [PunRPC]
+    //public void AddTeamDamageRPC(string team)
+    //    {
+    //    if (!PhotonNetwork.IsMasterClient) return;
+
+    //    var room = PhotonNetwork.CurrentRoom;
+    //    if (room == null) return;
+
+    //    string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+    //    int current = 0;
+    //    if (room.CustomProperties.ContainsKey(key))
+    //        current = (int)room.CustomProperties[key];
+
+    //    current += 1;
+
+    //    room.SetCustomProperties(
+    //        new ExitGames.Client.Photon.Hashtable { { key, current } }
+    //    );
+
+    //    // ★ 残り死亡回数をログに表示（3回まで）
+    //    int remaining = Mathf.Max(0, 3 - current);
+    //    Debug.Log($"[Master] Team {team} Damage = {current} / 3  残り {remaining}回");
+
+    //    // 3回以上でロール反転
+    //    if (current >= 3)
+    //        {
+    //        Debug.Log($"[Master] Team {team} が3回死亡 → 全チームのロール反転開始！");
+
+    //        ToggleRoleForTeam(team);
+
+    //        string otherTeam = (team == "A") ? "B" : "A";
+    //        ToggleRoleForTeam(otherTeam);
+
+    //        // リセット
+    //        room.SetCustomProperties(
+    //            new ExitGames.Client.Photon.Hashtable { { key, 0 } }
+    //        );
+
+    //        Debug.Log($"[Master] Team A と Team B のロールを反転しました！");
+    //        }
+    //    }
+
     public void AddTeamDamageRPC(string team)
         {
         if (!PhotonNetwork.IsMasterClient) return;
@@ -321,50 +356,84 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         var room = PhotonNetwork.CurrentRoom;
         if (room == null) return;
 
+        // ダメージを受けたチームのキー
         string damagedKey = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
+        // ダメージを与えた側のキー
         string attackerKey = (team == "A") ? "TeamB_Damage" : "TeamA_Damage";
 
-        int damaged = room.CustomProperties.ContainsKey(damagedKey)
+        // --- ① ダメージ受けた側を +1 ---
+        int damagedValue = room.CustomProperties.ContainsKey(damagedKey)
             ? (int)room.CustomProperties[damagedKey] : 0;
 
-        int attacker = room.CustomProperties.ContainsKey(attackerKey)
+        damagedValue += 1;
+
+
+        // --- ② ダメージ与えた側を -1（0未満にはしない） ---
+        int attackerValue = room.CustomProperties.ContainsKey(attackerKey)
             ? (int)room.CustomProperties[attackerKey] : 0;
 
-        damaged++;
-        attacker = Mathf.Max(0, attacker - 1);
+        attackerValue = Mathf.Max(0, attackerValue - 1);
 
+
+        // --- ③ ルームプロパティ更新 ---
         room.SetCustomProperties(
             new ExitGames.Client.Photon.Hashtable {
-                { damagedKey, damaged },
-                { attackerKey, attacker }
+            { damagedKey, damagedValue },
+            { attackerKey, attackerValue }
             }
         );
 
-        if (damaged >= 3)
-            {
-            ToggleRoleForTeam("A");
-            ToggleRoleForTeam("B");
+        Debug.Log($"[Master] {team} チームが被弾 → {damagedKey}={damagedValue}, 反対側 {attackerKey}={attackerValue}");
 
+        //// --- ④ ロール反転判定 ---
+        //if (damagedValue >= 3)
+        //    {
+        //    Debug.Log($"[Master] Team {team} が3回死亡 → 全チームのロール反転！");
+
+        //    ToggleRoleForTeam(team);
+
+        //    string otherTeam = (team == "A") ? "B" : "A";
+        //    ToggleRoleForTeam(otherTeam);
+
+        //    // リセット
+        //    room.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { damagedKey, 0 } });
+
+        //    Debug.Log("[Master] ロール反転完了！");
+        //    }
+
+        if (damagedValue >= 3)
+            {
+            Debug.Log($"[Master] Team {team} が3回死亡 → フェード付きロール反転");
+
+            photonView.RPC(
+                "RPC_RoleSwapWithFade",
+                RpcTarget.All,
+                team
+            );
+
+            // ダメージリセット
             room.SetCustomProperties(
                 new ExitGames.Client.Photon.Hashtable { { damagedKey, 0 } }
             );
             }
+
         }
 
-    // ==============================
-    // 残りライフ取得（★保持）
-    // ==============================
     public int GetRemainingLifeForTeam(string team)
         {
         var room = PhotonNetwork.CurrentRoom;
         if (room == null) return 3;
 
         string key = (team == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
         if (!room.CustomProperties.ContainsKey(key)) return 3;
 
         int current = (int)room.CustomProperties[key];
         return Mathf.Max(0, 3 - current);
         }
+
+
 
     public int GetRemainingLife()
         {
@@ -372,285 +441,55 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         if (room == null) return 3;
 
         string key = (CurrentTeam == "A") ? "TeamA_Damage" : "TeamB_Damage";
+
         if (!room.CustomProperties.ContainsKey(key)) return 3;
 
         int current = (int)room.CustomProperties[key];
         return Mathf.Max(0, 3 - current);
         }
 
-    // ==============================
-    // チーム全体ロール反転
-    // ==============================
-    private void ToggleRoleForTeam(string team)
-        {
-        foreach (var p in PhotonNetwork.PlayerList)
-            {
-            if (!p.CustomProperties.TryGetValue("Team", out object t)) continue;
-            if ((string)t != team) continue;
-
-            string role = p.CustomProperties.TryGetValue("Role", out object r)
-                ? (string)r : "Human";
-
-            string newRole = (role == "Human") ? "Oni" : "Human";
-
-            p.SetCustomProperties(
-                new ExitGames.Client.Photon.Hashtable { { "Role", newRole } }
-            );
-            }
-        }
-
-    // ==============================
-    // 外部公開API（★復活）
-    // ==============================
-    public void RequestRoleChange(string newRole)
-        {
-        if (CurrentRole == newRole) return;
-
-        // ローカルプレイヤーのみ暗転演出
-        if (photonView.IsMine)
-            {
-            ChangeRoleWithFade(newRole);
-            }
-        else
-            {
-            // 他人の表示は即反映（Photon同期待ち）
-            UpdateRole();
-            }
-
-        Debug.Log($"[TestPlayerRoll] RequestRoleChange -> {newRole}");
-        }
-
-    //public void ExecuteFadeRoleChange(System.Action onComplete = null)
-    //    {
-    //    if (!photonView.IsMine) return;
-    //    if (ChangeFade.Instance == null) return;
-
-    //    ChangeFade.Instance.FadeIn(1.0f, () =>
-    //    {
-    //        PhotonNetwork.LocalPlayer.SetCustomProperties(
-    //            new ExitGames.Client.Photon.Hashtable { { "Role", pendingRole } }
-    //        );
-
-    //        ChangeFade.Instance.FadeOut(0.5f, () =>
-    //        {
-    //            onComplete?.Invoke();
-    //        });
-    //    });
-    //    }
-
-
-    public void ExecuteFadeRoleChange(System.Action onComplete = null)
-        {
-        if (!photonView.IsMine) return;
-        if (ChangeFade.Instance == null) return;
-
-        ChangeFade.Instance.FadeIn(1.0f, () =>
-        {
-            PhotonNetwork.LocalPlayer.SetCustomProperties(
-                new ExitGames.Client.Photon.Hashtable { { "Role", pendingRole } }
-            );
-
-            // ★ ここでも Role別リスポーン
-            RespawnByRole(pendingRole);
-
-            ChangeFade.Instance.FadeOut(0.5f, () =>
-            {
-                onComplete?.Invoke();
-            });
-        });
-        }
-
-
-
-    public Animator GetCurrentAnimator()
-        {
-        GameObject active = (CurrentRole == "Human") ? humanModel : oniModel;
-        if (active == null) return null;
-        return active.GetComponent<Animator>();
-        }
-
-    // ==============================
-    // Role別リスポーン（TestPlayerRoll完結）
-    // ==============================
-    //private void RespawnByRole(string role)
-    //    {
-    //    if (!photonView.IsMine) return;
-
-    //    string tag = (role == "Oni") ? "OniSpawnArea" : "SpawnArea";
-
-    //    GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(tag);
-    //    if (spawnAreas.Length == 0)
-    //        {
-    //        Debug.LogWarning($"[{tag}] が見つかりません");
-    //        return;
-    //        }
-
-    //    GameObject randomArea = spawnAreas[Random.Range(0, spawnAreas.Length)];
-    //    Vector3 pos = randomArea.transform.position + Vector3.up;
-
-    //    // 自分は自分で動かす
-    //    transform.position = pos;
-
-    //    // 他人に同期
-    //    photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, pos);
-
-    //    Debug.Log($"[{role}] {tag} にリスポーン");
-    //    }
-
-
-    //private void RespawnByRole(string role)
-    //    {
-    //    if (!photonView.IsMine) return;
-
-    //    string tag = (role == "Oni") ? "OniSpawnArea" : "SpawnArea";
-    //    GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(tag);
-    //    if (spawnAreas.Length == 0)
-    //        {
-    //        Debug.LogWarning($"[{tag}] が見つかりません");
-    //        return;
-    //        }
-
-    //    GameObject area = spawnAreas[Random.Range(0, spawnAreas.Length)];
-
-    //    // ★ Collider 必須
-    //    Collider col = area.GetComponent<Collider>();
-    //    if (col == null)
-    //        {
-    //        Debug.LogError($"[{area.name}] に Collider がありません");
-    //        return;
-    //        }
-
-    //    // ===== 正確な「上面中央」 =====
-    //    Vector3 spawnPos = col.bounds.center;
-    //    spawnPos.y = col.bounds.max.y;
-
-    //    // ===== CharacterController を考慮 =====
-    //    CharacterController cc = GetComponent<CharacterController>();
-    //    if (cc != null)
-    //        {
-    //        cc.enabled = false;
-    //        spawnPos.y += cc.height * 0.5f + cc.skinWidth;
-    //        }
-
-    //    transform.position = spawnPos;
-
-    //    if (cc != null)
-    //        cc.enabled = true;
-
-    //    // 他クライアント同期
-    //    photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, spawnPos);
-
-    //    Debug.Log($"[{role}] 正確に {area.name} の上へリスポーン");
-    //    }
-
-
-    //private void RespawnByRole(string role)
-    //    {
-    //    if (!photonView.IsMine) return;
-
-    //    StartCoroutine(RespawnCoroutine(role));
-    //    }
-
-    private void RespawnByRole(string role)
-        {
-        if (!photonView.IsMine) return;
-
-        if (role == "Human")
-            {
-            if (prespawn == null)
-                {
-                Debug.LogError("PlayerRespawnScript が設定されていません");
-                return;
-                }
-
-            prespawn.RespawnAtRandomSpawnArea();
-            }
-        else if (role == "Oni")
-            {
-            if (orespawn == null)
-                {
-                Debug.LogError("OniPlayerRespawn が設定されていません");
-                return;
-                }
-
-            orespawn.RespawnAtRandomSpawnArea();
-            }
-        }
-
-
-
-
-    private IEnumerator RespawnCoroutine(string role)
-        {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        CharacterController cc = GetComponent<CharacterController>();
-
-        // ===== 物理を一時停止 =====
-        if (rb != null)
-            {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
-            }
-
-        if (cc != null)
-            cc.enabled = false;
-
-        yield return null; // ★ 1フレーム待つ（超重要）
-
-        // ===== SpawnArea 取得 =====
-        GameObject[] spawnAreas = GameObject.FindGameObjectsWithTag(
-            role == "Oni" ? "OniSpawnArea" : "SpawnArea"
-        );
-
-        if (spawnAreas.Length == 0) yield break;
-
-        GameObject area = spawnAreas[Random.Range(0, spawnAreas.Length)];
-
-        Vector3 spawnPos = area.transform.position;
-
-        Collider col = area.GetComponent<Collider>();
-        if (col != null)
-            {
-            spawnPos = col.bounds.center;
-            spawnPos.y = col.bounds.max.y;
-            }
-
-        // CharacterController 高さ補正
-        if (cc != null)
-            {
-            spawnPos.y += cc.height * 0.5f + cc.skinWidth;
-            }
-        else
-            {
-            spawnPos.y += 0.1f;
-            }
-
-        transform.position = spawnPos;
-
-        // 他クライアント同期
-        photonView.RPC(nameof(RPC_SetRespawnPosition), RpcTarget.Others, spawnPos);
-
-        yield return null;
-
-        // ===== 物理を戻す =====
-        if (cc != null)
-            cc.enabled = true;
-
-        if (rb != null)
-            rb.isKinematic = false;
-        }
-
-
-
-
-   
-
 
     [PunRPC]
-    private void RPC_SetRespawnPosition(Vector3 pos)
+    private void RPC_RoleSwapWithFade(string team)
         {
-        transform.position = pos;
+        StartCoroutine(RoleSwapFadeSequence(team));
         }
+
+    private IEnumerator RoleSwapFadeSequence(string team)
+        {
+        // ① フェードイン（暗転）
+        if (ChangeFade.Instance != null)
+            {
+            ChangeFade.Instance.FadeIn(0.5f);
+            yield return new WaitForSeconds(0.5f);
+            }
+
+        // ② ロール反転（Masterのみ）
+        if (PhotonNetwork.IsMasterClient)
+            {
+            ToggleRoleForTeam(team);
+
+            string otherTeam = (team == "A") ? "B" : "A";
+            ToggleRoleForTeam(otherTeam);
+            }
+
+        // ★ Photon の CustomProperties 同期待ち
+        yield return new WaitForSeconds(0.1f);
+
+        // ★ ここが方法①の核心
+        // Role / Team を「必ず再取得してUI更新」
+        UpdateTeam();
+        UpdateRole();
+        UpdateTeamUI();
+
+        // ③ フェードアウト（明転）
+        if (ChangeFade.Instance != null)
+            {
+            ChangeFade.Instance.FadeOut(0.5f);
+            }
+        }
+
+
+
 
     }

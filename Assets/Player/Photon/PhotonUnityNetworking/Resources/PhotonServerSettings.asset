@@ -80,6 +80,10 @@ MonoBehaviour:
   - RequestRoleChangeRPC
   - RPC_PlayAnimation
   - RPC_Play
+  - RequestTeamRoleToggleRPC
+  - RequestToggleRoleRPC
+  - RequestToggleRoleForMyTeamRPC
+  - RPC_RoleSwapWithFade
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
