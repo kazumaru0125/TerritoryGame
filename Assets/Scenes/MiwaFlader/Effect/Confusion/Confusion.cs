@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class B1 : MonoBehaviour
+public class Confusion : MonoBehaviour
 {
     [Header("吸収させたいパーティクル")]
     [SerializeField] private ParticleSystem ps;            // 対象パーティクル
