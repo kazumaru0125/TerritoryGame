@@ -34,15 +34,7 @@ public class GetAitem : MonoBehaviourPun
         {
         if (!photonView.IsMine) return;
 
-        // ▼ B：アイテム取得 → UIルーレット開始
-        if (Input.GetKeyDown("joystick button 1"))
-            {
-            if (roulette != null)
-                {
-                roulette.StartRoulette(); // UI アニメ開始！
-                Debug.Log("🎰 ルーレット開始！");
-                }
-            }
+
 
         // ▼ RB：アイテム使用
         if (Input.GetKeyDown("joystick button 5"))
@@ -62,6 +54,22 @@ public class GetAitem : MonoBehaviourPun
             ItemRouletteScript.decidedItemNumber = -1;
 
             // UI更新したかったら：roulette.ClearIcon() など追加できる
+            }
+        }
+
+    private void OnTriggerStay(Collider other)
+        {
+        if (other.CompareTag("ItemBox"))
+            {
+            // ▼ B：アイテム取得 → UIルーレット開始
+            if (Input.GetKeyDown("joystick button 1"))
+                {
+                if (roulette != null)
+                    {
+                    roulette.StartRoulette(); // UI アニメ開始！
+                    Debug.Log("🎰 ルーレット開始！");
+                    }
+                }
             }
         }
 

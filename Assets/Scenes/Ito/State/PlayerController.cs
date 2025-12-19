@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviourPun
     private IPlayerState currentState;
     private bool isAttackTriggered = false; // 攻撃トリガーフラグ
 
+    GameObject currentDamageEffect;
+
     // スタン時間
     public float StunDuration = 2.0f;
     // スタン状態
@@ -28,16 +30,16 @@ public class PlayerController : MonoBehaviourPun
 
     void Start()
         {
-       // Animator = GetComponent<Animator>();
-      //  Rigidbody = GetComponent<Rigidbody>();
+        // Animator = GetComponent<Animator>();
+        //  Rigidbody = GetComponent<Rigidbody>();
         ChangeState(new PlayerMoveingState());
         HetBox.SetActive(false);
         }
 
     public void SetStun(bool isOn)
-    {
+        {
         IsStunned = isOn;
-    }
+        }
 
     void Update()
         {
@@ -45,11 +47,11 @@ public class PlayerController : MonoBehaviourPun
 
         // ここでスタン中は一切の入力を受け付けない
         if (IsStunned)
-        {
+            {
             // 走りトグルや攻撃・ジャンプなども全部スキップ
             currentState?.UpdateState(this); // アニメ進行など必要なら残す
             return;
-        }
+            }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown("joystick button 8"))
             IsRun = !IsRun;
@@ -115,10 +117,10 @@ public class PlayerController : MonoBehaviourPun
     //        }
     //    }
     private void OnCollisionEnter(Collision collision)
-    {
+        {
         Debug.Log("Hit: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Trap"))
-        {
+            {
             Debug.Log("Trap hit!");
             isTrapped = true;
             Rigidbody.linearVelocity = Vector3.zero;
@@ -126,19 +128,19 @@ public class PlayerController : MonoBehaviourPun
             Animator.SetBool("is_running", false);
 
             if (photonView.IsMine)
-            {
+                {
                 ChangeState(new PlayerTrapDameageState());
+                }
             }
         }
-    }
 
     // Collider.IsTrigger = true なオブジェクト用
     private void OnTriggerEnter(Collider other)
-    {
+        {
         Debug.Log("OnTriggerEnter: " + other.name);
 
         if (other.CompareTag("Trap"))
-        {
+            {
             Debug.Log("Trap trigger hit!");
             isTrapped = true;
             Rigidbody.linearVelocity = Vector3.zero;
@@ -146,20 +148,20 @@ public class PlayerController : MonoBehaviourPun
             Animator.SetBool("is_running", false);
 
             if (photonView.IsMine)
-            {
+                {
                 ChangeState(new PlayerTrapDameageState());
+                }
             }
         }
-    }
 
 
     private void OnCollisionExit(Collision collision)
-    {
+        {
         if (collision.gameObject.CompareTag("Trap"))
             {
-         //   isTrapped = false; // 捕まり解除
+            //   isTrapped = false; // 捕まり解除
             }
-    }
+        }
 
 
 
@@ -186,7 +188,7 @@ public class PlayerController : MonoBehaviourPun
     // 攻撃エフェクトの同期
     [PunRPC]
     public void RPC_SpawnAttackEffect()
-    {
+        {
         if (attackEffectPrefab != null)
             {
             // プレイヤーを親として生成（ローカル座標がそのまま使われる）
@@ -196,12 +198,12 @@ public class PlayerController : MonoBehaviourPun
             effect.transform.localPosition = attackEffectPrefab.transform.localPosition;
             effect.transform.localRotation = attackEffectPrefab.transform.localRotation;
             }
-    }
+        }
 
     [PunRPC]
     public void PRC_DamageEffect()
         {
-        if(damageEffectPrefab!=null)
+        if (damageEffectPrefab != null)
             {
             // プレイヤーを親として生成（ローカル座標がそのまま使われる）
             GameObject effect = Instantiate(damageEffectPrefab, transform);
@@ -214,9 +216,28 @@ public class PlayerController : MonoBehaviourPun
 
     [PunRPC]
     public void RPC_SetDizzyingState(bool isDizzying)
-    {
+        {
         Animator.SetBool("is_dizzying", isDizzying);
+        }
+
+
+    [PunRPC]
+    public void RPC_DamageEffectOn()
+        {
+        if (damageEffectPrefab != null && currentDamageEffect == null)
+            {
+            currentDamageEffect = Instantiate(damageEffectPrefab, transform);
+            currentDamageEffect.transform.localPosition = damageEffectPrefab.transform.localPosition;
+            currentDamageEffect.transform.localRotation = damageEffectPrefab.transform.localRotation;
+            }
+        }
+
+    [PunRPC]
+    public void RPC_DamageEffectOff()
+        {
+        if (currentDamageEffect != null)
+            Destroy(currentDamageEffect);
+        }
+
+
     }
-
-
-}

@@ -40,36 +40,66 @@ public class PlayerTrapDameageState : IPlayerState
         
     }
 
+    //private void SpawnDamageEffect(PlayerController player)
+    //    {
+    //    if (!player.photonView.IsMine) return;
+    //    if (effectSpawned) return;   // Å© àÍìxÇæÇØèoÇ∑ÇΩÇﬂÇ…Ç±ÇÍÇégÇ§
+
+    //    if (player.damageEffectPrefab)
+    //        {
+    //        player.photonView.RPC("PRC_DamageEffect", RpcTarget.All);
+    //        effectSpawned = true;
+    //        }
+    //    }
+
     private void SpawnDamageEffect(PlayerController player)
         {
         if (!player.photonView.IsMine) return;
-        if (player.IsStunned) return;
+        if (effectSpawned) return;
 
         if (player.damageEffectPrefab)
             {
-          
-            player.photonView.RPC("RPC_SpawnAttackEffect", RpcTarget.All);
-
+            player.photonView.RPC("RPC_DamageEffectOn", RpcTarget.All);
             effectSpawned = true;
             }
         }
 
-    private void EndDizzying(PlayerController player)
-    {
-        if (player.photonView.IsMine)
-        {
-            player.SetStun(false);
-        }
 
-        player.ChangeState(new PlayerMoveingState());
-    }
+    //private void EndDizzying(PlayerController player)
+    //{
+    //    if (player.photonView.IsMine)
+    //    {
+    //        player.SetStun(false);
+    //    }
+
+    //    player.ChangeState(new PlayerMoveingState());
+    //}
+
+    private void EndDizzying(PlayerController player)
+        {
+        if (player.photonView.IsMine)
+            {
+            player.SetStun(false);
+            player.photonView.RPC("RPC_DamageEffectOff", RpcTarget.All);  // Å© í«â¡
+            }
+
+        player.ChangeState(new PlayerMoveingState()); // Å© Idle Ç÷ñﬂÇ∑
+        }
 
     public void ExitState(PlayerController player)
     {
+        //if (player.photonView.IsMine)
+        //{
+        //    player.photonView.RPC("RPC_SetDizzyingState", RpcTarget.All, false);
+        //    player.SetStun(false);
+        //}
+
         if (player.photonView.IsMine)
-        {
+            {
             player.photonView.RPC("RPC_SetDizzyingState", RpcTarget.All, false);
             player.SetStun(false);
+
+            player.photonView.RPC("RPC_DamageEffectOff", RpcTarget.All); // Å© í«â¡
+            }
         }
-    }
 }

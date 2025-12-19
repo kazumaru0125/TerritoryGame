@@ -29646,7 +29646,7 @@ GameObject:
   - component: {fileID: 2170940201508148629}
   m_Layer: 0
   m_Name: Basket_with_a_lid
-  m_TagString: AitemBox
+  m_TagString: ItemBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

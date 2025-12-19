@@ -29,7 +29,7 @@ public class ItemBoxScript : MonoBehaviour
         {
         if (other.CompareTag("Player"))
             {
-            if (Input.GetKey("joystick button 5"))
+            if (Input.GetKey("joystick button 1"))
                 {
                 OpenSequence();
                 }
