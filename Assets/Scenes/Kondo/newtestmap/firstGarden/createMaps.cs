@@ -29,6 +29,8 @@ public class createMaps : MonoBehaviour
     [SerializeField]
     private GameObject starts;
     [SerializeField]
+    private GameObject enemyStarts;
+    [SerializeField]
     private GameObject ofudas;
     [SerializeField]
     private GameObject boxs;
@@ -132,7 +134,7 @@ public class createMaps : MonoBehaviour
                                 break;
 
                                 case "13"://鬼側スタート地点
-                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(enemyStarts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
                             case "31"://横向きの策
