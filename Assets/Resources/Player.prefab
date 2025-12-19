@@ -55248,6 +55248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   humanModel: {fileID: 7188627608320446384}
   oniModel: {fileID: 9158597635818744719}
+  Prespawn: {fileID: 4189981778301716877}
+  Orespawn: {fileID: 1763220899075443333}
   uiOffset: {x: 0, y: 2, z: 0}
 --- !u!1 &8018071686338404750
 GameObject:

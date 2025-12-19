@@ -11,6 +11,9 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject humanModel;
     [SerializeField] private GameObject oniModel;
 
+    [SerializeField] private PlayerRespawnScript Prespawn;
+    [SerializeField] private OniPlayerRespawn Orespawn;
+
     [Header("UI設定")]
     [SerializeField] private Vector3 uiOffset = new Vector3(0, 2.0f, 0);
 
@@ -19,6 +22,8 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
 
     private TextMeshPro teamText;
     private Transform uiTransform;
+
+
 
     private void Start()
         {
@@ -146,16 +151,43 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             }
         }
 
+    //private void UpdateRole()
+    //    {
+    //    //if (photonView.Owner.CustomProperties.TryGetValue("Role", out object role))
+    //    //    {
+    //    //    CurrentRole = (string)role;
+    //    //    // 子モデルに直接通知して切り替え
+    //    //    UpdateModelByRole();
+    //    //    UpdateTeamUI();
+    //    //    }
+
+    //    }
+
     private void UpdateRole()
         {
         if (photonView.Owner.CustomProperties.TryGetValue("Role", out object role))
             {
             CurrentRole = (string)role;
-            // 子モデルに直接通知して切り替え
+
             UpdateModelByRole();
             UpdateTeamUI();
+
+         if (photonView.IsMine)
+                {
+                if (CurrentRole == "Human")
+                    {
+                    if (Prespawn != null)
+                        Prespawn.RespawnAtRandomSpawnArea();
+                    }
+                else if (CurrentRole == "Oni")
+                    {
+                    if (Orespawn != null)
+                        Orespawn.RespawnAtRandomSpawnArea();
+                    }
+                }
             }
         }
+
 
     // -----------------------------
     // --- モデル切替 -------------
