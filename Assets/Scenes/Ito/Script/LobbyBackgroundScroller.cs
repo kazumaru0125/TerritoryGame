@@ -6,12 +6,13 @@ public class LobbyBackgroundScroller : MonoBehaviour
     public RawImage rawImage;
     public float scrollSpeed = 0.05f;
 
-    float offset = 0;
+    // 全インスタンスで共有するオフセット
+    private static float sharedOffset = 0f;
+
     void Update()
     {
-        offset += scrollSpeed * Time.deltaTime;
-        offset = offset % 1f;
-        rawImage.uvRect = new Rect(offset, 0, 2, 1);
+        sharedOffset += scrollSpeed * Time.unscaledDeltaTime;
+        sharedOffset = sharedOffset % 1f;
+        rawImage.uvRect = new Rect(sharedOffset, 0, 2, 1);
     }
-
 }
