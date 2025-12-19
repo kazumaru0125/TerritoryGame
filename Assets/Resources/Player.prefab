@@ -62958,6 +62958,7 @@ MonoBehaviour:
   Stamina: 100
   HetBox: {fileID: 8077136533012180591}
   attackEffectPrefab: {fileID: 0}
+  damageEffectPrefab: {fileID: 0}
   isTrapped: 0
   StunDuration: 2
 --- !u!114 &7906769824520635133
@@ -63182,6 +63183,7 @@ MonoBehaviour:
   Stamina: 100
   HetBox: {fileID: 527187752998259799}
   attackEffectPrefab: {fileID: 4937401631404549062}
+  damageEffectPrefab: {fileID: 5344678024081207782, guid: ccb727ca59a4b8548bd1cff4de88ce78, type: 3}
   isTrapped: 0
   StunDuration: 5
 --- !u!54 &7796311292477805761

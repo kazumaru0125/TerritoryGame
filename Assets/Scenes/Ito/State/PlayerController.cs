@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviourPun
 
     public GameObject HetBox;
     public GameObject attackEffectPrefab;
+    public GameObject damageEffectPrefab;
 
     public bool isTrapped;
     public bool IsRun { get; private set; }
@@ -196,6 +197,20 @@ public class PlayerController : MonoBehaviourPun
             effect.transform.localRotation = attackEffectPrefab.transform.localRotation;
             }
     }
+
+    [PunRPC]
+    public void PRC_DamageEffect()
+        {
+        if(damageEffectPrefab!=null)
+            {
+            // プレイヤーを親として生成（ローカル座標がそのまま使われる）
+            GameObject effect = Instantiate(damageEffectPrefab, transform);
+
+            // Prefab に設定されている localPosition / localRotation を使用
+            effect.transform.localPosition = damageEffectPrefab.transform.localPosition;
+            effect.transform.localRotation = damageEffectPrefab.transform.localRotation;
+            }
+        }
 
     [PunRPC]
     public void RPC_SetDizzyingState(bool isDizzying)
