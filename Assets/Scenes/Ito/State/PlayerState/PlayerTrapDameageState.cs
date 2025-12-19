@@ -5,9 +5,12 @@ public class PlayerTrapDameageState : IPlayerState
 {
     private float stunStartTime;   // スタン開始時間
     private float stunDuration;    // このステートで使うスタン秒数
+    private bool effectSpawned = false; // エフェクト生成フラグ
 
     public void EnterState(PlayerController player)
     {
+        effectSpawned = false;
+
         // Player側の設定値をコピー（毎回同じでもOKだし、状態ごとに変えてもOK）
         stunDuration = player.StunDuration;
         stunStartTime = Time.time; // 今の時間を記録[web:77][web:78]
@@ -20,7 +23,9 @@ public class PlayerTrapDameageState : IPlayerState
     }
 
     public void UpdateState(PlayerController player)
-    {
+        {
+        SpawnDamageEffect(player);
+
         // 一定時間経過したらスタン解除
         float elapsed = Time.time - stunStartTime; // 経過秒[web:77][web:78]
         if (elapsed >= stunDuration)
@@ -31,7 +36,23 @@ public class PlayerTrapDameageState : IPlayerState
             }
             EndDizzying(player);
         }
+
+        
     }
+
+    private void SpawnDamageEffect(PlayerController player)
+        {
+        if (!player.photonView.IsMine) return;
+        if (player.IsStunned) return;
+
+        if (player.damageEffectPrefab)
+            {
+          
+            player.photonView.RPC("RPC_SpawnAttackEffect", RpcTarget.All);
+
+            effectSpawned = true;
+            }
+        }
 
     private void EndDizzying(PlayerController player)
     {
