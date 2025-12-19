@@ -8831,11 +8831,13 @@ MonoBehaviour:
   CreateRoom_UI_Panel: {fileID: 672361811}
   roomNameInputField: {fileID: 1516788471}
   StageSelectionRoom_UI_Panel: {fileID: 0}
+  StageNumber: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 538518057}
   roomInfoText: {fileID: 1942130456}
   playerListPrefab: {fileID: 727277390}
   playerListContent: {fileID: 2001099832142661876, guid: 5c8e9880b19dfbc48a0d95211f5eefde, type: 3}
   startGameButton: {fileID: 150638419}
+  HostStageNumber: {fileID: 0}
   RoomList_UI_Panel: {fileID: 1984944544}
   roomListEntryPrefab: {fileID: 3994814421131352053, guid: 4fc0b83b946785f438bd30a1270c19a7, type: 3}
   roomListParentGameObject: {fileID: 924120979}
@@ -8849,6 +8851,7 @@ MonoBehaviour:
   maxPlayers: 4
   emptyRoomImage: {fileID: 649804582}
   emptyRoomText: {fileID: 1472618053}
+  ignoreMaxPerTeamBeforeDecision: 1
 --- !u!1 &743012254
 GameObject:
   m_ObjectHideFlags: 0
@@ -13642,12 +13645,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c7fa56b936f38874abd419883199da6c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3dd3abcdb4eabd34c8c490fcae81242e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 13.38, y: 7.65}
+  m_Size: {x: 10.27, y: 10.27}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -14575,11 +14578,13 @@ MonoBehaviour:
   CreateRoom_UI_Panel: {fileID: 1521137869}
   roomNameInputField: {fileID: 204919166}
   StageSelectionRoom_UI_Panel: {fileID: 0}
+  StageNumber: {fileID: 0}
   InsideRoom_UI_Panel: {fileID: 1410883722}
   roomInfoText: {fileID: 2105276597}
   playerListPrefab: {fileID: 1781790425}
   playerListContent: {fileID: 0}
   startGameButton: {fileID: 1706192981}
+  HostStageNumber: {fileID: 0}
   RoomList_UI_Panel: {fileID: 136592844}
   roomListEntryPrefab: {fileID: 3994814421131352053, guid: 4fc0b83b946785f438bd30a1270c19a7, type: 3}
   roomListParentGameObject: {fileID: 240595493}
@@ -14593,6 +14598,7 @@ MonoBehaviour:
   maxPlayers: 4
   emptyRoomImage: {fileID: 1069775388}
   emptyRoomText: {fileID: 1253300398}
+  ignoreMaxPerTeamBeforeDecision: 1
 --- !u!4 &1245148716
 Transform:
   m_ObjectHideFlags: 0
