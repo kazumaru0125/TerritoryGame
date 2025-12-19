@@ -85,6 +85,8 @@ MonoBehaviour:
   - RequestToggleRoleForMyTeamRPC
   - RPC_RoleSwapWithFade
   - PRC_DamageEffect
+  - RPC_DamageEffectOff
+  - RPC_DamageEffectOn
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

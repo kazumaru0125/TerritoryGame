@@ -47,7 +47,7 @@ public class GetAitem : MonoBehaviourPun
                 return;
                 }
 
-            Debug.Log($"🔥 アイテム使用: {num}");
+            Debug.Log($"アイテム使用: {num}");
             ActivateEffect(num);
 
             // 使用後は空欄へ

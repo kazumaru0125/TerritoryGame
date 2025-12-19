@@ -36,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8616613472975287014}
+  - {fileID: 559975712177336359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &4023386255371586369
@@ -163,6 +164,84 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1001 &765993262537361283
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 34388251709261028}
+    m_Modifications:
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3590950887592045882, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_Name
+      value: OfudaIcon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3590950887592045882, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+--- !u!4 &559975712177336359 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+  m_PrefabInstance: {fileID: 765993262537361283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8858695280661726530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,15 +252,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 964953537153660836, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,6 +305,10 @@ PrefabInstance:
     - target: {fileID: 3590950887592045882, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
       propertyPath: m_Name
       value: OfudaIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3590950887592045882, guid: 73018c5672022fb4aa79b1573c136b08, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
