@@ -72,6 +72,9 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public GameObject emptyRoomImage;
     public TMP_Text emptyRoomText;
 
+    public GameObject banishEvilTag222;
+    public GameObject cherryBlossomsEffect3;
+
     // ステージ選択まで保持しておくルーム名
     private string pendingRoomName = "";
     // 選択中ステージ番号（1,2,3など）0は未選択
@@ -321,7 +324,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
     //}
 
     // ステージ選択画面の「次へ」ボタンから呼ぶ
-    // ステージ選択画面の「次へ」ボタンから呼ぶ
     public void OnStageSelectionNextButtonClicked()
     {
         if (string.IsNullOrEmpty(pendingRoomName))
@@ -420,18 +422,12 @@ public class LobbyController : MonoBehaviourPunCallbacks
                 break;
 
             case 1:
-               // sceneName = "TGameScene 1";   // ステージ1用シーン
-                //sceneName = "TGameScene";
                 sceneName = "Stage1";
                 break;
             case 2:
-                //sceneName = "Stage2";  // ステージ2用シーン
-                //sceneName = "TGameScene";
                 sceneName = "Stage2";
                 break;
             case 3:
-                //  sceneName = "Stage3";  // ステージ3用シーン
-                // sceneName = "TGameScene";
                 sceneName = "Stage3";
                 break;
             default:
@@ -791,15 +787,16 @@ public class LobbyController : MonoBehaviourPunCallbacks
         RoomList_UI_Panel.SetActive(panelToBeActivated.Equals(RoomList_UI_Panel.name));
         Team_UI_Panel.SetActive(panelToBeActivated.Equals(Team_UI_Panel.name));
 
-        //// ★ 追加：ステージ選択パネル
-        //if (StageSelectionRoom_UI_Panel != null)
-        //{
-        //    StageSelectionRoom_UI_Panel.SetActive(
-        //        panelToBeActivated.Equals(StageSelectionRoom_UI_Panel.name)
-        //    );
-        //}
+        // ロビー系のときだけ背景オブジェクトを表示
+        bool showLobbyDecor =
+            panelToBeActivated.Equals(Login_UI_Panel.name) ||
+            panelToBeActivated.Equals(GameOptions_UI_Panel.name) ||
+            panelToBeActivated.Equals(CreateRoom_UI_Panel.name) ||
+            panelToBeActivated.Equals(StageSelectionRoom_UI_Panel.name);
 
-        // チームパネル表示のときだけ、ホスト判定でボタン表示
+        if (banishEvilTag222 != null) banishEvilTag222.SetActive(showLobbyDecor);
+        if (cherryBlossomsEffect3 != null) cherryBlossomsEffect3.SetActive(showLobbyDecor);
+
         if (panelToBeActivated.Equals(Team_UI_Panel.name) && StartGameButton != null)
         {
             StartGameButton.SetActive(PhotonNetwork.IsMasterClient);

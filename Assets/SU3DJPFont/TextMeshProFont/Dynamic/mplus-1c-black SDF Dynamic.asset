@@ -235,6 +235,7 @@ MonoBehaviour:
     m_Height: 1023
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
+<<<<<<< HEAD
     m_LigatureSubstitutionRecords:
     - m_ComponentGlyphIDs: 790b0000530b0000
       m_LigatureGlyphID: 2938
@@ -250,6 +251,9 @@ MonoBehaviour:
       m_LigatureGlyphID: 2828
     - m_ComponentGlyphIDs: 110b0000530b0000
       m_LigatureGlyphID: 2834
+=======
+    m_LigatureSubstitutionRecords: []
+>>>>>>> DemoResultSanba
     m_GlyphPairAdjustmentRecords: []
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []
