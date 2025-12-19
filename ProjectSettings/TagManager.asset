@@ -17,6 +17,9 @@ TagManager:
   - AitemBox
   - ChengeFade
   - OniSpawnArea
+  - ItemBox
+  - Icon
+  - BigIcon
   layers:
   - Default
   - TransparentFX
@@ -28,8 +31,8 @@ TagManager:
   - AttackHitbox
   - PostProcessing
   - UI_OverEffect
-  - 
-  - 
+  - MiniMapIcon
+  - BigMapIcon
   - 
   - 
   - 

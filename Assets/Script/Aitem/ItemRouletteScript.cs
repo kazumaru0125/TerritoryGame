@@ -27,6 +27,14 @@ public class ItemRouletteScript : MonoBehaviour
             {
             StartCoroutine(SpinRoulette());
             }
+        if (decidedItemNumber == -1)
+            {
+            // から状態
+            rouletteImage.texture = null;
+            // ※必要なら透明にする
+            // rouletteImage.color = new Color(1,1,1,0);
+            }
+
         }
 
     IEnumerator SpinRoulette()
