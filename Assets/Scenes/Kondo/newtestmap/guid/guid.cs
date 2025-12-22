@@ -46,6 +46,8 @@ public class guid: MonoBehaviour
     private GameObject newhiwalls;
     [SerializeField]
     private GameObject gimmick;
+    [SerializeField]
+    private GameObject saku;
     //[SerializeField]
     //private GameObject testOBJ;
     /*
