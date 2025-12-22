@@ -60,13 +60,13 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             }
 
         // UIをカメラの方向に
-        if (uiTransform != null && Camera.main != null)
-            {
-            uiTransform.position = transform.position + uiOffset;
-            Vector3 direction = uiTransform.position - Camera.main.transform.position;
-            if (direction.sqrMagnitude > 0.001f)
-                uiTransform.rotation = Quaternion.LookRotation(direction);
-            }
+        //if (uiTransform != null && Camera.main != null)
+        //    {
+        //    uiTransform.position = transform.position + uiOffset;
+        //    Vector3 direction = uiTransform.position - Camera.main.transform.position;
+        //    if (direction.sqrMagnitude > 0.001f)
+        //        uiTransform.rotation = Quaternion.LookRotation(direction);
+        //    }
         }
 
     // -----------------------------
@@ -438,12 +438,21 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             {
             Debug.Log($"[Master] Team {team} が3回死亡 → フェード付きロール反転");
 
-            photonView.RPC(
-                "RPC_RoleSwapWithFade",
-                RpcTarget.All,
-                team
-            );
+            //photonView.RPC(
+            //    "RPC_RoleSwapWithFade",
+            //    RpcTarget.All,
+            //    team
+            //);
 
+            if (PhotonNetwork.IsMasterClient)
+                {
+                // Master が全員にフェード付きロール切替を指示
+                photonView.RPC(
+                    "RPC_RoleSwapWithFade",
+                    RpcTarget.All,
+                    CurrentTeam   // 仮で自分のチームを渡す
+                );
+                }
             // ダメージリセット
             room.SetCustomProperties(
                 new ExitGames.Client.Photon.Hashtable { { damagedKey, 0 } }
