@@ -902,11 +902,7 @@ MonoBehaviour:
   jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
   newhiwalls: {fileID: 1314821455373216, guid: 47ffcdc5f7106d34f9dc7e5b8a53642e, type: 3}
   gimmick: {fileID: 1314821455373216, guid: 3a1862665799bd44784b304ccef9bf73, type: 3}
-<<<<<<< HEAD
   saku: {fileID: 5269607771082784851, guid: ef2b77c529bc43b4cafe30da462a613a, type: 3}
-=======
-  saku: {fileID: 0}
->>>>>>> newMap
 --- !u!1 &2055210114
 GameObject:
   m_ObjectHideFlags: 0
