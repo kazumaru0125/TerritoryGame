@@ -5,29 +5,23 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - test: {fileID: 4900000, guid: 7155c780b5318364d9911262c093dc5e, type: 3}
-  - hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694,
-      type: 3}
-  - hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694,
-      type: 3}
-  - stoneA: {fileID: 3619565643783432907, guid: f05bc450be875054e8a7bfe84644a7e1,
-      type: 3}
+  - hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  - hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  - stoneA: {fileID: 3619565643783432907, guid: f05bc450be875054e8a7bfe84644a7e1, type: 3}
   - stoneB: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
-  - stoneC: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5,
-      type: 3}
-  - stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5,
-      type: 3}
-  - nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5,
-      type: 3}
+  - stoneC: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  - stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  - nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   - floors: {fileID: 529180695197480336, guid: 4d231b80b32d9ac41a7ddfa1c930b6ba, type: 3}
   - items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
-  - starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0,
-      type: 3}
+  - starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
+  - enemyStarts: {fileID: 1714038014717785311, guid: 0cade0ba8ff419148840795de316a59e, type: 3}
   - ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
   - boxs: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
-  - jumps: {fileID: 4976997056025506496, guid: 25716c2ebf8494343911b0bd69fa5f4b, type: 3}
-  - newhiwalls: {fileID: 1314821455373216, guid: 47ffcdc5f7106d34f9dc7e5b8a53642e,
-      type: 3}
+  - jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
+  - newhiwalls: {fileID: 1314821455373216, guid: 47ffcdc5f7106d34f9dc7e5b8a53642e, type: 3}
   - gimmick: {fileID: 1314821455373216, guid: 3a1862665799bd44784b304ccef9bf73, type: 3}
+  - saku: {fileID: 5269607771082784851, guid: ef2b77c529bc43b4cafe30da462a613a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
