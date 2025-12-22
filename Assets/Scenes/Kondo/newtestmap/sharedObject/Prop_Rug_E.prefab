@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8292863789881429369}
   m_Layer: 0
   m_Name: Prop_Rug_E
-  m_TagString: Untagged
+  m_TagString: OniSpawnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 16
