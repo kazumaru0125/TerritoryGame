@@ -1084,7 +1084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &183372567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7057,6 +7057,125 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1333866963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333866967}
+  - component: {fileID: 1333866966}
+  - component: {fileID: 1333866965}
+  - component: {fileID: 1333866964}
+  m_Layer: 0
+  m_Name: NewMapCreate (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1333866964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333866963}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ec8f2d8ecc4c04eb6568d73f9737d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: {fileID: 4900000, guid: 79dde1ecf09e97645bceecf20354357d, type: 3}
+  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  stoneA: {fileID: 1943961056280714908, guid: c1b2380da229a1340aabf3caf037341e, type: 3}
+  stoneB: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
+  stoneC: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  floors: {fileID: 529180695197480336, guid: 4d231b80b32d9ac41a7ddfa1c930b6ba, type: 3}
+  items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
+  starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
+  enemyStarts: {fileID: 1969865122010724, guid: 9664b6f656f330f42af0c859d549fd6b, type: 3}
+  ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
+  boxs: {fileID: 8328560604972807400, guid: 9e15741f0dfb3f042811916cfb8225cd, type: 3}
+  jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
+  newhiwalls: {fileID: 1314821455373216, guid: 47ffcdc5f7106d34f9dc7e5b8a53642e, type: 3}
+  gimmick: {fileID: 1314821455373216, guid: 3a1862665799bd44784b304ccef9bf73, type: 3}
+  saku: {fileID: 5269607771082784851, guid: ef2b77c529bc43b4cafe30da462a613a, type: 3}
+--- !u!114 &1333866965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333866963}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2966c41fe024a4742a20e43e1d7a17a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: {fileID: 4900000, guid: 7155c780b5318364d9911262c093dc5e, type: 3}
+  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  stoneA: {fileID: 1943961056280714908, guid: 39a967019eed3114bafcfcfa8e165619, type: 3}
+  stoneB: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
+  stoneC: {fileID: 8325719057679156394, guid: abe2c3590bdfc584d94dc4cdd722f331, type: 3}
+  stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
+  items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
+  starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
+  enemyStarts: {fileID: 1969865122010724, guid: 9664b6f656f330f42af0c859d549fd6b, type: 3}
+  ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
+  boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
+  jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
+  newhiwalls: {fileID: 1314821455373216, guid: 47ffcdc5f7106d34f9dc7e5b8a53642e, type: 3}
+  gimmick: {fileID: 1314821455373216, guid: 3a1862665799bd44784b304ccef9bf73, type: 3}
+--- !u!114 &1333866966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333866963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d092cc8348f76a499d55ff01e8554b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: {fileID: 4900000, guid: bfc775a48e130334586b9c9cecc74d4c, type: 3}
+  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
+  lowwalls: {fileID: 1943961056280714908, guid: c1b2380da229a1340aabf3caf037341e, type: 3}
+  nomalwalls: {fileID: 449982750405866708, guid: 3dd013ea157678e4db91b78e49f2a53c, type: 3}
+  floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
+  items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
+  starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
+  enemyStarts: {fileID: 1969865122010724, guid: 9664b6f656f330f42af0c859d549fd6b, type: 3}
+  ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
+  boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
+  jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
+  newhiwalls: {fileID: 8724796524908712674, guid: fac446728a43e7d4ea615a34b5c1112f, type: 3}
+  saku: {fileID: 5269607771082784851, guid: ef2b77c529bc43b4cafe30da462a613a, type: 3}
+--- !u!4 &1333866967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333866963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.44409895, y: -0.17109038, z: -0.09398274}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1388969472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7988,64 +8107,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577752841}
   m_CullTransparentMesh: 1
---- !u!1 &1593520368
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1593520370}
-  - component: {fileID: 1593520369}
-  m_Layer: 0
-  m_Name: NewMapCreate (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1593520369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593520368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d092cc8348f76a499d55ff01e8554b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: {fileID: 4900000, guid: bfc775a48e130334586b9c9cecc74d4c, type: 3}
-  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  lowwalls: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
-  nomalwalls: {fileID: 449982750405866708, guid: 3dd013ea157678e4db91b78e49f2a53c, type: 3}
-  floors: {fileID: 529180695197480336, guid: 4d231b80b32d9ac41a7ddfa1c930b6ba, type: 3}
-  items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
-  starts: {fileID: 8768764319957394087, guid: c9b8f4a934f071c4499c605e4d2dc8e0, type: 3}
-  enemyStarts: {fileID: 0}
-  ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
-  boxs: {fileID: 919132149155446097, guid: 78f2a785888d8774a865a3ea53e4f9e5, type: 3}
-  jumps: {fileID: 4976997056025506496, guid: 25716c2ebf8494343911b0bd69fa5f4b, type: 3}
-  newhiwalls: {fileID: 8724796524908712674, guid: fac446728a43e7d4ea615a34b5c1112f, type: 3}
-  saku: {fileID: 0}
---- !u!4 &1593520370
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593520368}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.44409895, y: -0.17109038, z: -0.09398274}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601628596
 GameObject:
   m_ObjectHideFlags: 0
@@ -10486,94 +10547,6 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
---- !u!1 &2119341590
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2119341593}
-  - component: {fileID: 2119341592}
-  - component: {fileID: 2119341591}
-  m_Layer: 0
-  m_Name: NewMapCreate (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2119341591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119341590}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2966c41fe024a4742a20e43e1d7a17a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: {fileID: 4900000, guid: 7155c780b5318364d9911262c093dc5e, type: 3}
-  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  stoneA: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
-  stoneB: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
-  stoneC: {fileID: 8325719057679156394, guid: abe2c3590bdfc584d94dc4cdd722f331, type: 3}
-  stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
-  nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
-  floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
-  items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
-  starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
-  enemyStarts: {fileID: 1714038014717785311, guid: 0cade0ba8ff419148840795de316a59e, type: 3}
-  ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
-  boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
-  jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
-  newhiwalls: {fileID: 1314821455373216, guid: 47ffcdc5f7106d34f9dc7e5b8a53642e, type: 3}
-  gimmick: {fileID: 1314821455373216, guid: 3a1862665799bd44784b304ccef9bf73, type: 3}
---- !u!114 &2119341592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119341590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d092cc8348f76a499d55ff01e8554b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: {fileID: 4900000, guid: bfc775a48e130334586b9c9cecc74d4c, type: 3}
-  hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  lowwalls: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
-  nomalwalls: {fileID: 449982750405866708, guid: 3dd013ea157678e4db91b78e49f2a53c, type: 3}
-  floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
-  items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
-  starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
-  enemyStarts: {fileID: 1714038014717785311, guid: 0cade0ba8ff419148840795de316a59e, type: 3}
-  ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
-  boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
-  jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
-  newhiwalls: {fileID: 8724796524908712674, guid: fac446728a43e7d4ea615a34b5c1112f, type: 3}
-  saku: {fileID: 5269607771082784851, guid: ef2b77c529bc43b4cafe30da462a613a, type: 3}
---- !u!4 &2119341593
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119341590}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.44409895, y: -0.17109038, z: -0.09398274}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2129270049
 GameObject:
   m_ObjectHideFlags: 0
@@ -10849,7 +10822,6 @@ SceneRoots:
   - {fileID: 1677136524}
   - {fileID: 1913770871}
   - {fileID: 999464633}
-  - {fileID: 1593520370}
   - {fileID: 1577537944}
   - {fileID: 750237702}
   - {fileID: 45469312}
@@ -10858,7 +10830,6 @@ SceneRoots:
   - {fileID: 1575235991}
   - {fileID: 1128542948}
   - {fileID: 183372568}
-  - {fileID: 2119341593}
   - {fileID: 337344305}
   - {fileID: 189971846}
   - {fileID: 1550126585}
@@ -10883,3 +10854,4 @@ SceneRoots:
   - {fileID: 1097802969}
   - {fileID: 476478300}
   - {fileID: 1616814935}
+  - {fileID: 1333866967}
