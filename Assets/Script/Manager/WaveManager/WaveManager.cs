@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
@@ -11,14 +11,14 @@ public class WaveManager : MonoBehaviourPun
     public TMP_Text Count;
     public TMP_Text Wave;
 
-    [SerializeField] private OfudaCount ofudaCount; // Inspector‚ÅƒZƒbƒg
+    [SerializeField] private OfudaCount ofudaCount; // Inspectorã§ã‚»ãƒƒãƒˆ
 
     private bool wave1Ended = false;
     public int currentWave;
 
     private void Start()
         {
-        // WaveŠJn‚É‘SˆõHuman‚ÉŒÅ’è
+        // Waveé–‹å§‹æ™‚ã«å…¨å“¡Humanã«å›ºå®š
         if (PhotonNetwork.IsMasterClient)
             {
             foreach (Player p in PhotonNetwork.PlayerList)
@@ -27,7 +27,7 @@ public class WaveManager : MonoBehaviourPun
                 props["Role"] = "Human";
                 p.SetCustomProperties(props);
                 }
-            Debug.Log("‘SƒvƒŒƒCƒ„[‚ğHuman‚Éİ’è");
+            Debug.Log("å…¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’Humanã«è¨­å®š");
             }
 
         Wave.text = "Wave1";
@@ -46,7 +46,7 @@ public class WaveManager : MonoBehaviourPun
                 time = 0;
 
                 Wave.text = "Wave2";
-                Debug.Log("Wave1I—¹");
+                Debug.Log("Wave1çµ‚äº†");
                 currentWave = 2;
                 if (PhotonNetwork.IsMasterClient)
                     {
@@ -62,13 +62,13 @@ public class WaveManager : MonoBehaviourPun
         }
 
     // =======================================
-    // Wave1I—¹‚ÉHuman/Oni‚ğŠ„‚è“–‚Ä‚éˆ—
+    // Wave1çµ‚äº†æ™‚ã«Human/Oniã‚’å‰²ã‚Šå½“ã¦ã‚‹å‡¦ç†
     // =======================================
     private void HandleWaveEnd()
         {
         if (ofudaCount == null)
             {
-            Debug.LogWarning("OfudaCount‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+            Debug.LogWarning("OfudaCountãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
             return;
             }
 
@@ -80,25 +80,23 @@ public class WaveManager : MonoBehaviourPun
 
         if (humanTeam != null && oniTeam != null)
             {
-            foreach (Player p in PhotonNetwork.PlayerList)
+            // ğŸ‘‡ ã“ã“ãŒè¿½åŠ éƒ¨åˆ†
+            if (PhotonNetwork.IsMasterClient)
                 {
-                if (p.CustomProperties.TryGetValue("Team", out object team))
-                    {
-                    string t = (string)team;
-                    Hashtable props = new Hashtable();
-                    props["Role"] = (t == humanTeam) ? "Human" : "Oni";
-                    p.SetCustomProperties(props);
-                    }
+                PhotonView pv = FindObjectOfType<TestPlayerRoll>().photonView;
+                pv.RPC("RPC_Wave1RoleAssign", RpcTarget.All, humanTeam);
+
                 }
 
             if (a > b)
-                Debug.Log("Aƒ`[ƒ€Ÿ—˜I ¨ A:Human / B:Oni");
+                Debug.Log("Aãƒãƒ¼ãƒ å‹åˆ©ï¼ â†’ Wave1 Human=A / Oni=B");
             else if (b > a)
-                Debug.Log("Bƒ`[ƒ€Ÿ—˜I ¨ B:Human / A:Oni");
+                Debug.Log("Bãƒãƒ¼ãƒ å‹åˆ©ï¼ â†’ Wave1 Human=B / Oni=A");
             }
         else
             {
-            Debug.Log("ˆø‚«•ª‚¯ ¨ –ğŠ„•ÏX‚È‚µ");
+            Debug.Log("å¼•ãåˆ†ã‘ â†’ å½¹å‰²å¤‰æ›´ãªã—");
             }
         }
+
     }

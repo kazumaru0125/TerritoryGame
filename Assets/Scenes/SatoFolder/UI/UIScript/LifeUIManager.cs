@@ -34,12 +34,30 @@ public class LifeUIManager : MonoBehaviour
         // 少し待ってから開始（Photon の生成待ち）
         yield return new WaitForSeconds(0.1f);
 
+        //while (player == null)
+        //    {
+        //    player = FindAnyObjectByType<TestPlayerRoll>();
+        //    if (player != null) break;
+        //    yield return null;
+        //    }
+
         while (player == null)
             {
-            player = FindAnyObjectByType<TestPlayerRoll>();
-            if (player != null) break;
+            var players = FindObjectsOfType<TestPlayerRoll>();
+
+            foreach (var p in players)
+                {
+                // 自分のプレイヤーだけ取得する
+                if (p.photonView != null && p.photonView.IsMine)
+                    {
+                    player = p;
+                    break;
+                    }
+                }
+
             yield return null;
             }
+
 
         Debug.Log("LifeUIManager: Player を検出しました -> " + player.name);
 
@@ -47,10 +65,18 @@ public class LifeUIManager : MonoBehaviour
         UpdateUI();
         }
 
+    private bool initialized = false;
+
     private void Update()
         {
-        // プレイヤーが見つかるまでは何もしない
         if (player == null) return;
+
+        if (!initialized && player.CurrentTeam != "")
+            {
+            initialized = true;
+            }
+
+        if (!initialized) return;
 
         UpdateUI();
         }
