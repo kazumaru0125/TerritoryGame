@@ -21,25 +21,60 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
         {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
-            {
-            myTeam = (string)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-            }
-        else
-            {
-            myTeam = "A";
-            }
+        //if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
+        //    {
+        //    myTeam = (string)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+        //    }
+        //else
+        //    {
+        //    myTeam = "A";
+        //    }
+        SetTeam();
 
         ATeamcurrentValue = 0;
         BTeamcurrentValue = 0;
         UpdateUI();
         }
+    void SetTeam()
+        {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
+            {
+            myTeam = (string)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+            Debug.Log("My Team = " + myTeam);
+            }
+        }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+        {
+        if (targetPlayer.IsLocal && changedProps.ContainsKey("Team"))
+            {
+            myTeam = (string)changedProps["Team"];
+            Debug.Log("Team Updated → " + myTeam);
+            }
+        }
+
+
+    //void Update()
+    //    {
+    //    if (!photonView.IsMine || isGameEnded) return;
+
+    //    // 勝利判定
+    //    if (ATeamcurrentValue >= maxValue)
+    //        {
+    //        photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "A");
+    //        isGameEnded = true;
+    //        }
+    //    else if (BTeamcurrentValue >= maxValue)
+    //        {
+    //        photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "B");
+    //        isGameEnded = true;
+    //        }
+    //    }
 
     void Update()
         {
-        if (!photonView.IsMine || isGameEnded) return;
+        if (!PhotonNetwork.IsMasterClient || isGameEnded) return;
 
-        // 勝利判定
         if (ATeamcurrentValue >= maxValue)
             {
             photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "A");
@@ -51,6 +86,7 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
             isGameEnded = true;
             }
         }
+
 
     void UpdateUI()
         {
@@ -93,9 +129,40 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         isGameEnded = true;
 
         Debug.Log($"{team} Team WIN!");
+        Debug.Log($"My Team = {myTeam}");
 
-        ChangeSceneManager.Instance.GoToTitleScene(2f);
+        // 自分が勝利側の場合
+        if (team == myTeam)
+            {
+            Debug.Log(" → 自分は勝利側");
+            //   SceneManager.LoadScene("ResultWinScene");
+            GoWin();
+            }
+        else
+            {
+            Debug.Log(" → 自分は敗北側");
+            // SceneManager.LoadScene("ResultLossScene");
+            GoLose();
+            }
         }
+
+
+    public void GoWin()
+        {
+        StartCoroutine(LoadAfterDelay("ResultWinScene"));
+        }
+
+    public void GoLose()
+        {
+        StartCoroutine(LoadAfterDelay("ResultLoseScene"));
+        }
+
+    IEnumerator LoadAfterDelay(string sceneName)
+        {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(sceneName);
+        }
+
 
     private IEnumerator DisconnectAndGoToTitle(float delay)
         {

@@ -87,6 +87,10 @@ MonoBehaviour:
   - PRC_DamageEffect
   - RPC_DamageEffectOff
   - RPC_DamageEffectOn
+  - RPC_EndGame
+  - RPC_ReceiveResult
+  - RPC_OnGameEnd
+  - RPC_Wave1RoleAssign
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

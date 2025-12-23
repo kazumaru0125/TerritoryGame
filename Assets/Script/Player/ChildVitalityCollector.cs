@@ -85,7 +85,8 @@ public class ChildVitalityCollector : MonoBehaviour
                     if (lsView != null)
                         lsView.RPC("RpcConsumeVitality", RpcTarget.MasterClient, addValue);
 
-                    parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, addValue);
+                  //  parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, addValue);
+                    parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, 10);
                     }
 
                 }
