@@ -87,6 +87,9 @@ MonoBehaviour:
   - PRC_DamageEffect
   - RPC_DamageEffectOff
   - RPC_DamageEffectOn
+  - RPC_EndGame
+  - RPC_ReceiveResult
+  - RPC_OnGameEnd
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

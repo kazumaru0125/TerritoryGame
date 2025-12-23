@@ -31,6 +31,18 @@ EditorBuildSettings:
     guid: eeccfb41a7398ca4e92e515ad1579c1f
   - enabled: 1
     path: Assets/Scenes/Project/Stage3.unity
-    guid: 421533e7348d838408ab1d49c66b81b2
+    guid: c6ff719eb12967446b760aaf497917f8
+  - enabled: 1
+    path: Assets/Scenes/Project/ResultLossScene.unity
+    guid: cb423fe9ac295fd4588e6d0641979b42
+  - enabled: 1
+    path: Assets/Scenes/Project/ResultWinScene.unity
+    guid: ef0fc5c4a6f610142a89117427932322
+  - enabled: 0
+    path: Assets/Scenes/Project/Risult/ResultWinLossne.unity
+    guid: c2502965c6fd3954ea4eefd0c6669a4e
+  - enabled: 0
+    path: Assets/Scenes/Project/Risult/ResultLossScene.unity
+    guid: 805fa9539c10e0e4ba0e3e209df160d4
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
