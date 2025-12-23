@@ -661,9 +661,13 @@ public class LobbyController : MonoBehaviourPunCallbacks
             // Prefab を Content の子として生成
             GameObject roomGO = Instantiate(roomListEntryPrefab, roomListParentGameObject.transform, false);
 
-            RectTransform rt = roomGO.GetComponent<RectTransform>();
-            rt.anchoredPosition = Vector2.zero;
-            rt.localScale = Vector3.one;
+
+            // ここでスケールを調整（横・縦を 0.5 倍）
+            roomGO.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+
+            //RectTransform rt = roomGO.GetComponent<RectTransform>();
+            //rt.anchoredPosition = Vector2.zero;
+            //rt.localScale = Vector3.one;
 
             // --- 部屋名の反映 (Text / TMP_Text 両対応) ---
             var nameObj = roomGO.transform.Find("RoomNameText");
@@ -907,7 +911,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
             UpdateTeamUI();
         }
     }
-
 
     public void OnBackFromGameOptions_UI_PanelClicked()
     {
