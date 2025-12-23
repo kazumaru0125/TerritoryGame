@@ -10396,7 +10396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f22fce8d64f194e8d67924a54bda3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 20
+  time: 30
   Count: {fileID: 310494446}
   Wave: {fileID: 1066525137}
   ofudaCount: {fileID: 1994476955}
