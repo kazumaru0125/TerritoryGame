@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -49,4 +50,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("ÉQÅ[ÉÄèIóπ");
         Application.Quit();
         }
+    void Awake()
+        {
+        PhotonNetwork.AutomaticallySyncScene = false;
+        }
+
     }

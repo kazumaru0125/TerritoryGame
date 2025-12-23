@@ -35,6 +35,7 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             { "TeamB_Damage", 0 }
                 }
             );
+
             }
 
         AssignTeamAndRoleIfEmpty();
@@ -530,6 +531,55 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
             }
         }
 
+    [PunRPC]
+    private void RPC_Wave1RoleAssign(string humanTeam)
+        {
+        StartCoroutine(Wave1RoleAssignSequence(humanTeam));
+        }
+
+    private IEnumerator Wave1RoleAssignSequence(string humanTeam)
+        {
+        // ① フェードイン（暗転）
+        if (ChangeFade.Instance != null)
+            {
+            ChangeFade.Instance.FadeIn(0.5f);
+            yield return new WaitForSeconds(0.5f);
+            }
+
+        // ② Master が役割を確定セット
+        if (PhotonNetwork.IsMasterClient)
+            {
+            foreach (var p in PhotonNetwork.PlayerList)
+                {
+                if (p.CustomProperties.TryGetValue("Team", out object teamObj))
+                    {
+                    string team = (string)teamObj;
+
+                    string role = (team == humanTeam) ? "Human" : "Oni";
+
+                    p.SetCustomProperties(
+                        new ExitGames.Client.Photon.Hashtable
+                        {
+                        { "Role", role }
+                        });
+                    }
+                }
+            }
+
+        // ③ Photon同期待ち（重要）
+        yield return new WaitForSeconds(0.1f);
+
+        // ④ 自分の状態を確実に更新
+        UpdateTeam();
+        UpdateRole();
+        UpdateTeamUI();
+
+        // ⑤ フェードアウト（復帰）
+        if (ChangeFade.Instance != null)
+            {
+            ChangeFade.Instance.FadeOut(0.5f);
+            }
+        }
 
 
 
