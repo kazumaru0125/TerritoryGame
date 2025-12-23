@@ -154,7 +154,7 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
 
     public void GoLose()
         {
-        StartCoroutine(LoadAfterDelay("ResultLoseScene"));
+        StartCoroutine(LoadAfterDelay("ResultLossScene"));
         }
 
     IEnumerator LoadAfterDelay(string sceneName)
