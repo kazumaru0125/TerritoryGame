@@ -825,7 +825,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783784739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d092cc8348f76a499d55ff01e8554b1, type: 3}
   m_Name: 
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783784739}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2966c41fe024a4742a20e43e1d7a17a2, type: 3}
   m_Name: 
@@ -859,8 +859,8 @@ MonoBehaviour:
   test: {fileID: 4900000, guid: 7155c780b5318364d9911262c093dc5e, type: 3}
   hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
   hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  stoneA: {fileID: 6058277302206986889, guid: 0796eec2bfef00a4cb09e718aefe291f, type: 3}
-  stoneB: {fileID: 6058277302206986889, guid: 0796eec2bfef00a4cb09e718aefe291f, type: 3}
+  stoneA: {fileID: 1943961056280714908, guid: 39a967019eed3114bafcfcfa8e165619, type: 3}
+  stoneB: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   stoneC: {fileID: 8325719057679156394, guid: abe2c3590bdfc584d94dc4cdd722f331, type: 3}
   stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
@@ -888,8 +888,8 @@ MonoBehaviour:
   test: {fileID: 4900000, guid: 79dde1ecf09e97645bceecf20354357d, type: 3}
   hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
   hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  stoneA: {fileID: 3619565643783432907, guid: f05bc450be875054e8a7bfe84644a7e1, type: 3}
-  stoneB: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
+  stoneA: {fileID: 1943961056280714908, guid: c1b2380da229a1340aabf3caf037341e, type: 3}
+  stoneB: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   stoneC: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}

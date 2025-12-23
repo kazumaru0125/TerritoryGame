@@ -152,7 +152,7 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
 
                             case "21"://‘Sˆõ‚ª’´‚¦‚ê‚é•Ç
-                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
                                 
                                 break;
                             case "22"://‘Sˆõ‚ª’´‚¦‚ê‚é•Ç
