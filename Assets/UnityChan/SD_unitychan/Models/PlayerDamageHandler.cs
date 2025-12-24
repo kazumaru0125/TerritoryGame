@@ -46,44 +46,81 @@ public class PlayerDamageHandler : MonoBehaviourPun
         StartCoroutine(DamageRoutine());
         }
 
+    //private IEnumerator DamageRoutine()
+    //    {
+    //    if (animator != null)
+    //        animator.SetBool("is_damage", true);
+
+    //    // ここでも安全チェック
+    //    if (IsValidParticle())
+    //        //damageParticle.Play();
+    //        SafePlayDamageParticle();
+    //    yield return new WaitForSeconds(1.0f);
+
+    //    if (animator != null)
+    //        animator.SetBool("is_damage", false);
+
+    //    // ダメージを受けたらチームに1ダメージ加算
+    //    // ダメージ時のチーム加算
+    //    if (photonView.IsMine)
+    //        {
+    //        TestPlayerRoll role = GetComponentInParent<TestPlayerRoll>();
+    //        if (role != null)
+    //            {
+    //            role.photonView.RPC("AddTeamDamageRPC", RpcTarget.MasterClient, role.CurrentTeam);
+    //            Debug.Log("[PlayerDamageHandler] AddTeamDamageRPC 呼び出し: " + role.CurrentTeam);
+    //            }
+    //        }
+
+
+
+    //    // リスポーン処理（自分のキャラのみ）
+    //    if (photonView.IsMine && respawnScript != null)
+    //        {
+    //        Debug.Log("ダメージ後にリスポーン実行");
+    //        respawnScript.RespawnAtRandomSpawnArea();
+    //        }
+
+
+
+    //    }
+
+
     private IEnumerator DamageRoutine()
         {
         if (animator != null)
             animator.SetBool("is_damage", true);
 
-        // ここでも安全チェック
         if (IsValidParticle())
-            //damageParticle.Play();
             SafePlayDamageParticle();
+
         yield return new WaitForSeconds(1.0f);
 
         if (animator != null)
             animator.SetBool("is_damage", false);
 
-        // ダメージを受けたらチームに1ダメージ加算
-        // ダメージ時のチーム加算
         if (photonView.IsMine)
             {
             TestPlayerRoll role = GetComponentInParent<TestPlayerRoll>();
             if (role != null)
                 {
+                // 🔵 ダメージ加算（1回だけ）
                 role.photonView.RPC("AddTeamDamageRPC", RpcTarget.MasterClient, role.CurrentTeam);
-                Debug.Log("[PlayerDamageHandler] AddTeamDamageRPC 呼び出し: " + role.CurrentTeam);
+
+                // 🔵 ★死亡スコア -10（安全にここで）
+                role.photonView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, -10);
+
+                Debug.Log("[PlayerDamageHandler] Damage & Score -10: " + role.CurrentTeam);
                 }
             }
 
-
-
-        // リスポーン処理（自分のキャラのみ）
         if (photonView.IsMine && respawnScript != null)
             {
             Debug.Log("ダメージ後にリスポーン実行");
             respawnScript.RespawnAtRandomSpawnArea();
             }
-
-       
-
         }
+
 
     private void OnTriggerStay(Collider other)
         {

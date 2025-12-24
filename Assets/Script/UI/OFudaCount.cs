@@ -1,65 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
+ï»¿using System.Collections;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class OfudaCount : MonoBehaviourPunCallbacks, IPunObservable
     {
     [SerializeField] private TMP_Text ATeamOfudaUI;
     [SerializeField] private TMP_Text BTeamOfudaUI;
 
-    [SerializeField] private int changeValue = 1;
     [SerializeField] private int maxValue = 5;
 
     public int ATeamcuOfuda = 0;
     public int BTeamcuOfuda = 0;
 
+    private string myTeam = "A";
+
     void Start()
         {
-        ATeamcuOfuda = 0;
-        BTeamcuOfuda = 0;
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
+            {
+            myTeam = PhotonNetwork.LocalPlayer.CustomProperties["Team"].ToString();
+            }
+
         UpdateUI();
-        }
-
-    void Update()
-        {
-        if (!photonView.IsMine) return; // ©•ª‚ÌƒIƒuƒWƒFƒNƒg‚Å‚È‚¢‚È‚ç“ü—Í‚Í–³‹
-
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //    {
-        //    ATeamcurrentValue = Mathf.Max(0, ATeamcurrentValue - changeValue);
-        //    UpdateUI();
-        //    }
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //    {
-        //    BTeamcurrentValue = Mathf.Max(0, BTeamcurrentValue - changeValue);
-        //    UpdateUI();
-        //    }
-
-        //if (Input.GetKeyDown(KeyCode.W))
-        //    {
-        //    ATeamcurrentValue = Mathf.Min(maxValue, ATeamcurrentValue + changeValue);
-        //    UpdateUI();
-        //    }
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //    {
-        //    BTeamcurrentValue = Mathf.Min(maxValue, BTeamcurrentValue + changeValue);
-        //    UpdateUI();
-        //    }
         }
 
     void UpdateUI()
         {
-        ATeamOfudaUI.text = $"‚¨DF{ATeamcuOfuda.ToString()}";
-        BTeamOfudaUI.text = $"‚¨DF{BTeamcuOfuda.ToString()}";
+        // ğŸ‘‡ è‡ªåˆ†ãƒãƒ¼ãƒ ã«å¿œã˜ã¦ UI å…¥ã‚Œæ›¿ãˆã ã‘è¡Œã†
+        if (myTeam == "A")
+            {
+            ATeamOfudaUI.text = $"Ã—{ATeamcuOfuda}";
+            BTeamOfudaUI.text = $"Ã—{BTeamcuOfuda}";
+            }
+        else
+            {
+            ATeamOfudaUI.text = $"Ã—{BTeamcuOfuda}";
+            BTeamOfudaUI.text = $"Ã—{ATeamcuOfuda}";
+            }
         }
 
+    // ====== â˜…ã“ã“ã¯å‰Šé™¤ã—ãªã„ã¨è¨€ã‚ã‚ŒãŸãƒ¡ã‚½ãƒƒãƒ‰ ======
     public void AddATeamVitality(int value)
         {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.IsMasterClient) return;
 
         ATeamcuOfuda = Mathf.Min(maxValue, ATeamcuOfuda + value);
         UpdateUI();
@@ -67,22 +52,21 @@ public class OfudaCount : MonoBehaviourPunCallbacks, IPunObservable
 
     public void AddBTeamVitality(int value)
         {
-        if (!photonView.IsMine) return;
+        if (!PhotonNetwork.IsMasterClient) return;
 
         BTeamcuOfuda = Mathf.Min(maxValue, BTeamcuOfuda + value);
         UpdateUI();
         }
+    // ====================================================
 
-
-    // --- PUN‚Ì“¯Šúˆ— ---
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
-        if (stream.IsWriting) // ©•ª‚Ì’l‚ğ‘—M
+        if (stream.IsWriting)
             {
             stream.SendNext(ATeamcuOfuda);
             stream.SendNext(BTeamcuOfuda);
             }
-        else // óM
+        else
             {
             ATeamcuOfuda = (int)stream.ReceiveNext();
             BTeamcuOfuda = (int)stream.ReceiveNext();
