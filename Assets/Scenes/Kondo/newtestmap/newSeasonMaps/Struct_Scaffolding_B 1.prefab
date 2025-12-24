@@ -1056,9 +1056,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1356237245968974, guid: 67bc459a0b3356f40acf743f7b250d1c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1859591806191600, guid: 67bc459a0b3356f40acf743f7b250d1c, type: 3}
       propertyPath: m_Name
       value: Prop_Firewood_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894720355413536, guid: 67bc459a0b3356f40acf743f7b250d1c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4877203376542484, guid: 67bc459a0b3356f40acf743f7b250d1c, type: 3}
       propertyPath: m_LocalScale.x
