@@ -15,6 +15,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     [Header("Login UI Panel")]
     public InputField playerNameInput;
     public GameObject Login_UI_Panel;
+    public Button loginDecideButton;
 
 
     [Header("Game Options UI Panel")]
@@ -103,8 +104,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     private void Start()
     {
-        // Login_UI_Panel.SetActive(true);
-        // GameOptions_UI_Panel.SetActive(false);
         ActivatePanel(Login_UI_Panel.name);
 
         cachedRoomList = new Dictionary<string, RoomInfo>();
@@ -112,12 +111,17 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
         PhotonNetwork.AutomaticallySyncScene = true;
 
+        // ★ 最初は押せないようにする
+        if (loginDecideButton != null)
+            loginDecideButton.interactable = false;
+
         if (SD_unitychan_humanoid != null)
         {
             SD_unitychan_humanoid.SetActive(true);
             animator = SD_unitychan_humanoid.GetComponent<Animator>();
         }
     }
+
 
     // Update is called once per frame
     private void Update()
@@ -230,6 +234,16 @@ public class LobbyController : MonoBehaviourPunCallbacks
             StartGameButton.SetActive(PhotonNetwork.IsMasterClient);
         }
     }
+
+    public void OnPlayerNameInputChanged(string text)
+    {
+        if (loginDecideButton == null) return;
+
+        // 空文字 or 空白のみ の場合は押せない
+        bool hasName = !string.IsNullOrWhiteSpace(text);
+        loginDecideButton.interactable = hasName;
+    }
+
 
     private IEnumerator WaitAndHideModel()
     {
