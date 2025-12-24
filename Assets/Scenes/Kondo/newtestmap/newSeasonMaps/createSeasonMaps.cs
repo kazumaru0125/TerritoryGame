@@ -144,11 +144,11 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
 
                             case "12"://人間側スタート地点
-                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 10.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(starts, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
-                                case "13"://鬼側スタート地点
-                                Instantiate(enemyStarts, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
+                            case "13"://鬼側スタート地点
+                                Instantiate(enemyStarts, new Vector3((-4.5f + j) * scale, -0.5f, (4.5f - i) * scale), Quaternion.Euler(180f, 0f, 0f));
                                 break;
 
                             case "21"://全員が超えれる壁
