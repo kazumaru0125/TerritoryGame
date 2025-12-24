@@ -400,27 +400,35 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void OnStartGameButtonClicked()
     {
-        // マスタークライアント（ホスト）以外はステージを開始できないようにする
+        // マスタークライアント（ホスト）以外は開始不可
         if (!PhotonNetwork.IsMasterClient)
             return;
 
-        // ステージ未選択なら何もしない（警告だけ出して終了）
+        // まずチーム人数を確認
+        int teamACount = CountPlayersInTeam("A");
+        int teamBCount = CountPlayersInTeam("B");
+
+        
+        if (teamACount >= 3 || teamBCount >= 3)
+        {
+            Debug.LogWarning($"チーム人数が不正です: A={teamACount}, B={teamBCount}。");
+            return;
+        }
+
+        // ステージ未選択なら何もしない
         if (selectedStage == 0)
         {
             Debug.LogWarning("Stage not selected!");
             return;
         }
 
-        // 読み込むシーン名を格納する変数
         string sceneName = "";
 
-        // 選択されたステージ番号に応じて読み込むシーンを切り替える
         switch (selectedStage)
         {
             case 0:
                 sceneName = "Tutorial";
                 break;
-
             case 1:
                 sceneName = "Stage1";
                 break;
@@ -431,17 +439,14 @@ public class LobbyController : MonoBehaviourPunCallbacks
                 sceneName = "Stage3";
                 break;
             default:
-                // 想定外の番号が入っていた場合は安全のためステージ1にフォールバック
                 sceneName = "TGameScene";
                 break;
         }
 
-        // どのステージが選ばれてどのシーンをロードするかログに出す（デバッグ用）
         Debug.Log("Load stage " + selectedStage + " : " + sceneName);
-
-        // Photonを通じて全クライアントでシーンを同期ロード
         PhotonNetwork.LoadLevel(sceneName);
     }
+
 
 
     #endregion
