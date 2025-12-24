@@ -86,13 +86,14 @@ public class ChildVitalityCollector : MonoBehaviour
                         lsView.RPC("RpcConsumeVitality", RpcTarget.MasterClient, addValue);
 
                     parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, addValue);
-                  //  parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, 10);
+                    //  parentView.RPC("AddScoreRPC", RpcTarget.All, role.CurrentTeam, 10);
                     }
 
                 }
             }
 
 
-            }
+
+        }
     }
-    
+
