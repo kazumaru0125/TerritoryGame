@@ -3,6 +3,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using ExitGames.Client.Photon;
+using System.Collections;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerSpawner : MonoBehaviourPunCallbacks
     {
@@ -16,58 +18,75 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
     void Start()
         {
-        // SpawnAreaタグを持つオブジェクトを全部取得
+        StartCoroutine(InitRoutine());
+        }
+
+    IEnumerator InitRoutine()
+        {
+        // Photon が部屋接続完了するまで待つ
+        while (!PhotonNetwork.InRoom)
+            {
+            yield return null;
+            }
+
+        // SpawnArea 検索
         GameObject[] spawnObjs = GameObject.FindGameObjectsWithTag("SpawnArea");
+        while (spawnObjs.Length == 0)
+            {
+            Debug.Log("SpawnArea がまだ見つからない。待機中…");
+            yield return null;
+            spawnObjs = GameObject.FindGameObjectsWithTag("SpawnArea");
+            }
+
         spawnAreas = new Transform[spawnObjs.Length];
         for (int i = 0; i < spawnObjs.Length; i++)
             {
             spawnAreas[i] = spawnObjs[i].transform;
             }
 
-        if (PhotonNetwork.InRoom) // ルームにいる場合
+        // PlayerList が揃うまで待つ
+        while (PhotonNetwork.PlayerList.Length == 0)
             {
-            UpdatePlayerNameUI();
-            SpawnPlayer();
+            yield return null;
             }
+
+        UpdatePlayerNameUI();
+        SpawnPlayer();
         }
 
     void UpdatePlayerNameUI()
         {
-        // 各テキストを一旦クリア
+        if (!playerNicNameTextLD || !playerNicNameTextLU || !playerNicNameTextRD || !playerNicNameTextRU)
+            {
+            Debug.LogWarning("Player Name UI がセットされていません");
+            return;
+            }
+
         playerNicNameTextLD.text = "";
         playerNicNameTextLU.text = "";
         playerNicNameTextRD.text = "";
         playerNicNameTextRU.text = "";
 
-        // 自分のチーム取得
         string myTeam = "None";
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
-            {
             myTeam = (string)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-            }
 
-        // 敵チーム表示用インデックス
         int enemyIndex = 0;
 
         foreach (Player p in PhotonNetwork.PlayerList)
             {
-            string team = p.CustomProperties.ContainsKey("Team") ? (string)p.CustomProperties["Team"] : "None";
+            string team = p.CustomProperties.ContainsKey("Team") ?
+                          (string)p.CustomProperties["Team"] : "None";
 
             if (team == myTeam)
                 {
-                // 自分チーム
                 if (p == PhotonNetwork.LocalPlayer)
-                    {
-                    playerNicNameTextLU.text =  p.NickName;
-                    }
+                    playerNicNameTextLU.text = p.NickName;
                 else
-                    {
                     playerNicNameTextLD.text = p.NickName;
-                    }
                 }
             else
                 {
-                // 敵チーム → 右側に配置
                 switch (enemyIndex)
                     {
                     case 0: playerNicNameTextRD.text = p.NickName; break;
@@ -83,11 +102,16 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         Player[] players = PhotonNetwork.PlayerList;
         int myIndex = System.Array.IndexOf(players, PhotonNetwork.LocalPlayer);
 
+        if (spawnAreas == null || spawnAreas.Length == 0)
+            {
+            Debug.LogError("SpawnArea がありません！");
+            return;
+            }
+
         if (myIndex >= 0 && myIndex < spawnAreas.Length)
             {
             Transform spawnPoint = spawnAreas[myIndex];
-            // PhotonNetwork.Instantiate("unitychan", spawnPoint.position, spawnPoint.rotation);
-               PhotonNetwork.Instantiate("Player", spawnPoint.position, spawnPoint.rotation);
+            PhotonNetwork.Instantiate("Player", spawnPoint.position, spawnPoint.rotation);
             }
         else
             {
@@ -95,22 +119,15 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
             }
         }
 
-    // --- 他プレイヤーが入退室した時も更新する ---
     public override void OnPlayerEnteredRoom(Player newPlayer)
-        {
-        UpdatePlayerNameUI();
-        }
+        => UpdatePlayerNameUI();
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
-        {
-        UpdatePlayerNameUI();
-        }
+        => UpdatePlayerNameUI();
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
         if (changedProps.ContainsKey("Team"))
-            {
             UpdatePlayerNameUI();
-            }
         }
     }
