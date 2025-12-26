@@ -20,6 +20,7 @@ TagManager:
   - ItemBox
   - Icon
   - BigIcon
+  - UIEffect
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - UI_OverEffect
   - MiniMapIcon
   - BigMapIcon
-  - 
+  - UIEffect
   - 
   - 
   - 
