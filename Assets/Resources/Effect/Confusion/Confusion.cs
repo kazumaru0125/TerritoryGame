@@ -1,54 +1,80 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Confusion : MonoBehaviour
-{
-    [Header("‹zû‚³‚¹‚½‚¢ƒp[ƒeƒBƒNƒ‹")]
-    [SerializeField] private ParticleSystem ps;            // ‘ÎÛƒp[ƒeƒBƒNƒ‹
+    {
+    [Header("å¸åã•ã›ãŸã„ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«")]
+    [SerializeField] private ParticleSystem ps;
 
-    [Header("ƒp[ƒeƒBƒNƒ‹‚ªŒü‚©‚¤‹zûƒ|ƒCƒ“ƒg")]
-    [SerializeField] private Transform target;             // Player ‚Ì‘Ì‚É’u‚¢‚½‹zûƒ|ƒCƒ“ƒg
+    [Header("ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ãŒå‘ã‹ã†å¸åãƒã‚¤ãƒ³ãƒˆï¼ˆè‡ªå‹•å–å¾—ï¼‰")]
+    [SerializeField] private Transform target;
 
-    [Header("‹zˆø‘¬“x")]
-    [SerializeField] private float speed = 5f;             // ƒp[ƒeƒBƒNƒ‹‚ªŒü‚©‚¤‘¬‚³
+    [Header("å¸å¼•é€Ÿåº¦")]
+    [SerializeField] private float speed = 5f;
 
-    [Header("‹zˆø‚ª—LŒø‚É‚È‚éÅ‘å‹——£")]
-    [SerializeField] private float enableDistance = 5f;    // ‚±‚Ì‹——£ˆÈ“à‚¾‚¯ƒXƒNƒŠƒvƒg‚ğ—LŒø‚É‚·‚é
+    [Header("å¸å¼•ãŒæœ‰åŠ¹ã«ãªã‚‹æœ€å¤§è·é›¢ (Player è·é›¢)")]
+    [SerializeField] private float enableDistance = 5f;
 
-    private ParticleSystem.Particle[] particles;           // ƒp[ƒeƒBƒNƒ‹”z—ñ
+    [Header("ã‚µã‚¤ã‚ºå¤‰åŒ–")]
+    [SerializeField] private float minSize = 0.2f;
+    [SerializeField] private float maxSize = 1.2f;
+
+    private ParticleSystem.Particle[] particles;
+
+    void Start()
+        {
+        if (target == null)
+            {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+                target = player.transform;
+            else
+                Debug.LogWarning("Playerã‚¿ã‚°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
+            }
+        }
 
     void LateUpdate()
-    {
-        // ƒp[ƒeƒBƒNƒ‹ or ƒ^[ƒQƒbƒg‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í‰½‚à‚µ‚È‚¢
+        {
         if (ps == null || target == null) return;
 
-        // ƒp[ƒeƒBƒNƒ‹”z—ñ‚ª–¢ì¬‚Ìê‡‚Í‰Šú‰»
+        // --- Bãƒœã‚¿ãƒ³æŠ¼ã—ã¦ã„ãªã„ãªã‚‰éè¡¨ç¤ºã«ã—ã¦çµ‚äº† ---
+        if (!Input.GetKey(KeyCode.JoystickButton1))
+            {
+            if (ps.isPlaying)
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            return;
+            }
+        else
+            {
+            if (!ps.isPlaying)
+                ps.Play();
+            }
+
+        // --- Player ãŒç¯„å›²å¤–ãªã‚‰å‡¦ç†ã—ãªã„ ---
+        float playerDistance = Vector3.Distance(ps.transform.position, target.position);
+        if (playerDistance > enableDistance)
+            return;
+
+        // --- ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«å¸å¼•å‡¦ç† ---
         if (particles == null || particles.Length < ps.main.maxParticles)
             particles = new ParticleSystem.Particle[ps.main.maxParticles];
 
-        // Œ»İ¶‘¶‚µ‚Ä‚¢‚éƒp[ƒeƒBƒNƒ‹”‚ğæ“¾
         int count = ps.GetParticles(particles);
-
-        // ‹zûƒ|ƒCƒ“ƒg‚ÌˆÊ’u‚ğæ“¾
         Vector3 targetPos = target.position;
 
-        // ‚·‚×‚Ä‚Ìƒp[ƒeƒBƒNƒ‹‚ğˆ—
         for (int i = 0; i < count; i++)
-        {
-            // ‹zûƒ|ƒCƒ“ƒg‚Æ‚Ì‹——£‚ğŒvZ
+            {
             float distance = Vector3.Distance(particles[i].position, targetPos);
 
-            // ‹——£‚ªw’è”ÍˆÍŠO‚È‚ç‹zûˆ—‚ğs‚í‚¸ƒXƒLƒbƒv
-            if (distance > enableDistance)
-                continue;
+            // â­ è·é›¢ã«å¿œã˜ã¦ã‚µã‚¤ã‚ºã‚’å¤§ããã™ã‚‹ â­
+            float t = Mathf.Clamp01(1f - (distance / enableDistance));
+            float size = Mathf.Lerp(minSize, maxSize, t);
+            particles[i].startSize = size;
 
-            // ‹zûƒ|ƒCƒ“ƒg‚Ö‚Ì•ûŒü‚ğŒvZ
-            Vector3 direction = (targetPos - particles[i].position).normalized;
+            // å¸å¼•ç§»å‹•
+            Vector3 dir = (targetPos - particles[i].position).normalized;
+            particles[i].position += dir * speed * Time.deltaTime;
+            }
 
-            // ‹zû•ûŒü‚Éƒp[ƒeƒBƒNƒ‹‚ğˆÚ“®
-            particles[i].position += direction * speed * Time.deltaTime;
-        }
-
-        // ƒp[ƒeƒBƒNƒ‹‚ğXV
         ps.SetParticles(particles, count);
+        }
     }
-}
