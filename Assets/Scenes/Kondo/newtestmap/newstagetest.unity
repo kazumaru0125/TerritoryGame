@@ -854,7 +854,7 @@ MonoBehaviour:
   stoneB: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   stoneC: {fileID: 8325719057679156394, guid: abe2c3590bdfc584d94dc4cdd722f331, type: 3}
   stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
-  nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
+  nomalwalls: {fileID: 449982750405866708, guid: 3dd013ea157678e4db91b78e49f2a53c, type: 3}
   floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
   items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
   starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
@@ -879,12 +879,12 @@ MonoBehaviour:
   test: {fileID: 4900000, guid: 79dde1ecf09e97645bceecf20354357d, type: 3}
   hiwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
   hitwalls: {fileID: 749928396290867411, guid: 90b2fb14df6cff84d8d16c1518eca694, type: 3}
-  stoneA: {fileID: 1943961056280714908, guid: c1b2380da229a1340aabf3caf037341e, type: 3}
+  stoneA: {fileID: 7466675510915701488, guid: 291912abed66ff74da01208f7f800bae, type: 3}
   stoneB: {fileID: 4294386137221315637, guid: 1eda93020cee4b84d9254cd77e601d75, type: 3}
   stoneC: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   stoneD: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
   nomalwalls: {fileID: 8325719057679156394, guid: 4e70acb5ed4384c4e8e06785fbae4de5, type: 3}
-  floors: {fileID: 529180695197480336, guid: 4d231b80b32d9ac41a7ddfa1c930b6ba, type: 3}
+  floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
   items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
   starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
   enemyStarts: {fileID: 1969865122010724, guid: 9664b6f656f330f42af0c859d549fd6b, type: 3}

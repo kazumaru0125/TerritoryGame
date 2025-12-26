@@ -101,14 +101,14 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
 
                             case "2"://‹S‚ª’´‚¦‚ê‚é•Ç
-                                Instantiate(nomalwalls, new Vector3((-4.5f + j) * nomalscale, 5.0f, (4.5f - i) * nomalscale), Quaternion.Euler(-89.98f, 0, 0));
+                                Instantiate(nomalwalls, new Vector3((-4.5f + j) * nomalscale, 0.0f, (4.5f - i) * nomalscale), Quaternion.Euler(-89.98f, 0, 0));
                                 //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
                                 break;
 
-                            //case "3"://‘Sˆõ‚ª’´‚¦‚ê‚é•Ç
-                            //    Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                            case "3"://‘Sˆõ‚ª’´‚¦‚ê‚é•Ç
+                                Instantiate(stoneA, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
                             //    //Instantiate(floor, new Vector3(-4.5f + j, -0.5f, 4.5f - i), Quaternion.identity);
-                            //    break;
+                                break;
 
                             case "4": // ƒ‰ƒ“ƒ^ƒ“
                                 if (PhotonNetwork.IsMasterClient)
