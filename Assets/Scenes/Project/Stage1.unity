@@ -4666,7 +4666,7 @@ MonoBehaviour:
   floors: {fileID: 187316, guid: 25e11b3370c728b488de708d711e90ad, type: 3}
   items: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
   starts: {fileID: 1714038014717785311, guid: 673e56706762d9f41974fb51f534282f, type: 3}
-  enemyStarts: {fileID: 1194173877849408, guid: 72a975b90498a4a419ebb3b1c758eb93, type: 3}
+  enemyStarts: {fileID: 1714038014717785311, guid: abd4195633c12654787f633ac13ea86c, type: 3}
   ofudas: {fileID: 806702070725058142, guid: 14d7091d72b9b6e408bea2ab7c8e0659, type: 3}
   boxs: {fileID: 4904609066594640244, guid: 381e4810ce1f6c94eb18f9108a8615de, type: 3}
   jumps: {fileID: 940547433731826603, guid: 85d44a9a866ddd34facf3a12a86c01a0, type: 3}
