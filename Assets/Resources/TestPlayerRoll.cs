@@ -41,7 +41,7 @@ public class TestPlayerRoll : MonoBehaviourPunCallbacks
         AssignTeamAndRoleIfEmpty();
         UpdateTeam();
         UpdateRole();
-        CreateUI();
+      //  CreateUI();
         }
 
     private void LateUpdate()
