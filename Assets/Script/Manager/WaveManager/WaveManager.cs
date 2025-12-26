@@ -30,7 +30,7 @@ public class WaveManager : MonoBehaviourPun
             Debug.Log("全プレイヤーをHumanに設定");
             }
 
-        Wave.text = "Wave1";
+        Wave.text = "お札を集めろ！";
         currentWave = 1;
         }
 
@@ -45,7 +45,7 @@ public class WaveManager : MonoBehaviourPun
                 wave1Ended = true;
                 time = 0;
 
-                Wave.text = "Wave2";
+              //  Wave.text = "Wave2";
                 Debug.Log("Wave1終了");
                 currentWave = 2;
                 if (PhotonNetwork.IsMasterClient)
