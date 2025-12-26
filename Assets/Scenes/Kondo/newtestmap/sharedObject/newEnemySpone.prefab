@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3916306471978396372}
   - component: {fileID: 9006870069722087852}
   m_Layer: 0
-  m_Name: Prop_Barrel_A
+  m_Name: newEnemySpone
   m_TagString: OniSpawnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
