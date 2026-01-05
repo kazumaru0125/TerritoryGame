@@ -162,6 +162,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2896212444740497340, guid: fede8f1077fb66e478618ca32974668d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 08f52fa8dbf26c345aec3a72981baee2, type: 2}
+    - target: {fileID: 4745862961370693860, guid: fede8f1077fb66e478618ca32974668d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 08f52fa8dbf26c345aec3a72981baee2, type: 2}
     - target: {fileID: 7499151234154285395, guid: fede8f1077fb66e478618ca32974668d, type: 3}
       propertyPath: m_Name
       value: Lantern_Stone
