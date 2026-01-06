@@ -11,12 +11,18 @@ public class BillBoard : MonoBehaviour
 
     void LateUpdate()
         {
-        if (cam == null) return;
+        if (cam == null)
+            {
+            cam = Camera.main;
+            if (cam == null) return;
+            }
 
-        // ƒJƒƒ‰‚Ì•ûŒü‚ğŒü‚­iY²”½“]‚µ‚È‚¢•û®j
-        Vector3 targetPos = transform.position + cam.transform.rotation * Vector3.forward;
-        Vector3 targetUp = cam.transform.rotation * Vector3.up;
+        Vector3 camForward = cam.transform.forward;
+        camForward.y = 0f; // © ‚‚³¬•ª‚ğØ‚é
 
-        transform.LookAt(targetPos, targetUp);
+        if (camForward.sqrMagnitude < 0.001f) return;
+
+        transform.rotation = Quaternion.LookRotation(camForward, Vector3.up);
         }
+
     }
