@@ -83,7 +83,8 @@ public class PlayerTrapDameageState : IPlayerState
             player.photonView.RPC("RPC_DamageEffectOff", RpcTarget.All);  // Å© í«â¡
             }
 
-        player.ChangeState(new PlayerMoveingState()); // Å© Idle Ç÷ñﬂÇ∑
+      //  player.ChangeState(new PlayerMoveingState()); // Å© Idle Ç÷ñﬂÇ∑
+        player.ChangeState(player.moveState);
         }
 
     public void ExitState(PlayerController player)

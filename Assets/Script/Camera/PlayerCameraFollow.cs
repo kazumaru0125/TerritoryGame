@@ -59,16 +59,16 @@ public class PlayerCameraFollow : MonoBehaviour
         float cameraDistance = offset2.magnitude; // 本来の距離
         Vector3 cameraDir = (rotation * offset2).normalized;
 
-        if (Physics.Raycast(targetPos, cameraDir, out hit, cameraDistance, collisionMask))
-            {
-            // 遮蔽物の手前で止める
-            float hitDist = Mathf.Max(0.2f, hit.distance - 0.2f);
-            desiredPos = targetPos + cameraDir * hitDist;
-            }
-        else
-            {
-            desiredPos = targetPos + rotation * offset2;
-            }
+        //if (Physics.Raycast(targetPos, cameraDir, out hit, cameraDistance, collisionMask))
+        //    {
+        //    // 遮蔽物の手前で止める
+        //    float hitDist = Mathf.Max(0.2f, hit.distance - 0.2f);
+        //    desiredPos = targetPos + cameraDir * hitDist;
+        //    }
+        //else
+        //    {
+        //    desiredPos = targetPos + rotation * offset2;
+        //    }
 
 
         // スムーズに移動

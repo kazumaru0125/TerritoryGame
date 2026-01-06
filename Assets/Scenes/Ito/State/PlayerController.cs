@@ -28,11 +28,16 @@ public class PlayerController : MonoBehaviourPun
     // スタン状態
     public bool IsStunned { get; private set; }
 
+    public PlayerMoveingState moveState = new PlayerMoveingState();
+    public PlayerAttackingState attackState = new PlayerAttackingState();
+    public PlayerJumpingState jumpState = new PlayerJumpingState();
+    public PlayerTrapDameageState trapDamageState = new PlayerTrapDameageState();
+
     void Start()
         {
         // Animator = GetComponent<Animator>();
         //  Rigidbody = GetComponent<Rigidbody>();
-        ChangeState(new PlayerMoveingState());
+        ChangeState(moveState);
         HetBox.SetActive(false);
         }
 
@@ -60,7 +65,7 @@ public class PlayerController : MonoBehaviourPun
         if (!isAttackTriggered && (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 1")))
             {
             isAttackTriggered = true;
-            ChangeState(new PlayerAttackingState());
+            ChangeState(attackState);
             HetBox.SetActive(true);
             }
         else
@@ -77,7 +82,7 @@ public class PlayerController : MonoBehaviourPun
 
         // ジャンプトリガーは攻撃フラグが立ってないときのみ許可
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0")) && IsGrounded() && !(currentState is PlayerAttackingState))
-            ChangeState(new PlayerJumpingState());
+            ChangeState(jumpState);
         }
 
     public void ChangeState(IPlayerState newState)
@@ -129,7 +134,7 @@ public class PlayerController : MonoBehaviourPun
 
             if (photonView.IsMine)
                 {
-                ChangeState(new PlayerTrapDameageState());
+                ChangeState(trapDamageState);
                 }
             }
         }
@@ -149,7 +154,7 @@ public class PlayerController : MonoBehaviourPun
 
             if (photonView.IsMine)
                 {
-                ChangeState(new PlayerTrapDameageState());
+                ChangeState(trapDamageState);
                 }
             }
         }

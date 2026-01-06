@@ -28,7 +28,8 @@ public class PlayerJumpingState : IPlayerState
         // ローカルプレイヤーだけが地面判定してステート遷移
         if (player.photonView.IsMine && player.IsGrounded())
             {
-            player.ChangeState(new PlayerMoveingState());
+         //   player.ChangeState(new PlayerMoveingState());
+            player.ChangeState(player.moveState);
             }
         }
 
