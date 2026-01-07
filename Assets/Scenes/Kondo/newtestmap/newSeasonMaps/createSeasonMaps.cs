@@ -128,11 +128,11 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
                                 
                                 case "14"://ì¡éÍåöï®
-                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, -2.0f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
 
                             case "11"://êVÇµÇ¢ï«
-                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, -0.6f, (4.5f - i) * scale), Quaternion.identity);
 
                             break;
 
