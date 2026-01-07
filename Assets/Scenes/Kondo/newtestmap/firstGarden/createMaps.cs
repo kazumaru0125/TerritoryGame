@@ -149,7 +149,7 @@ public class createMaps : MonoBehaviour
                                 break;
 
                             case "99"://ècå¸Ç´ÇÃçÙ
-                                Instantiate(hokora, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 90f, 0f));
+                                Instantiate(hokora, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 180f, 0f));
                                 break;
 
 
