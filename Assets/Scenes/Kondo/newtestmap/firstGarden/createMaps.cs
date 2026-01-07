@@ -40,6 +40,9 @@ public class createMaps : MonoBehaviour
     private GameObject newhiwalls;
     [SerializeField]
     private GameObject saku;
+    [SerializeField]
+    private GameObject hokora;
+    
     //[SerializeField]
     //private GameObject testOBJ;
     /*
@@ -143,6 +146,10 @@ public class createMaps : MonoBehaviour
 
                             case "32"://ècå¸Ç´ÇÃçÙ
                                 Instantiate(saku, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 90f, 0f));
+                                break;
+
+                            case "99"://ècå¸Ç´ÇÃçÙ
+                                Instantiate(hokora, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 90f, 0f));
                                 break;
 
 
