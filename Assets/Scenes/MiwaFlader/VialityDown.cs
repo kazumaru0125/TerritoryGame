@@ -13,8 +13,8 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private int changeValue = 1;
     [SerializeField] private int maxValue = 100;
 
-    private int ATeamcurrentValue = 0;
-    private int BTeamcurrentValue = 0;
+    public int ATeamcurrentValue = 0;
+    public int BTeamcurrentValue = 0;
     private bool isGameEnded = false;
 
     private string myTeam; // 自分のチーム ("A" or "B")
