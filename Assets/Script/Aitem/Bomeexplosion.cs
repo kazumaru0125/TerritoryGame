@@ -23,11 +23,11 @@ public class Bomeexplosion : MonoBehaviourPun
 
     private System.Collections.IEnumerator ExplosionRoutine()
         {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         photonView.RPC(nameof(RPC_ExplosionStart), RpcTarget.All);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         photonView.RPC(nameof(RPC_DestroySelf), RpcTarget.All);
         }
