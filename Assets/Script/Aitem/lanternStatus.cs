@@ -1,6 +1,8 @@
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using System.Collections;
+
 
 public class lanternStatus : MonoBehaviour, IPunObservable
     {
@@ -19,6 +21,15 @@ public class lanternStatus : MonoBehaviour, IPunObservable
     [Header("UI")]
     [SerializeField] private TMP_Text vitalityText;
 
+    [Header("Recovery Settings")]
+    public float recoveryDelay = 10f;
+    public float recoveryInterval = 2f;
+
+    private bool playerInRange = false;
+    private Coroutine recoveryCoroutine;
+
+
+
     void Start()
         {
         CurrentVitality = Maxvitality;
@@ -30,7 +41,7 @@ public class lanternStatus : MonoBehaviour, IPunObservable
         UpdateVisible();
         UpdateUI();
         }
-    public void Update() 
+    public void Update()
         {
 
         Recovery();
@@ -70,9 +81,9 @@ public class lanternStatus : MonoBehaviour, IPunObservable
 
     private void Recovery()
         {
-        if(CurrentVitality==0)
+        if (CurrentVitality == 0)
             {
-            CurrentVitality = 20;
+           // CurrentVitality = 20;
             }
         }
 
@@ -110,6 +121,8 @@ public class lanternStatus : MonoBehaviour, IPunObservable
 
 
         }
+
+
     // ---------------------------------------------
 
     public int GetRecoveryVitality()
@@ -124,4 +137,49 @@ public class lanternStatus : MonoBehaviour, IPunObservable
 
         AddVitality(-amount);
         }
+
+
+
+    private void OnTriggerEnter(Collider other)
+        {
+        if (other.CompareTag("Player"))
+            {
+            playerInRange = true;
+
+            if (recoveryCoroutine != null)
+                {
+                StopCoroutine(recoveryCoroutine);
+                recoveryCoroutine = null;
+                }
+            }
+        }
+
+    private void OnTriggerExit(Collider other)
+        {
+        if (other.CompareTag("Player"))
+            {
+            playerInRange = false;
+
+            if (recoveryCoroutine == null)
+                {
+                recoveryCoroutine = StartCoroutine(RecoveryAfterDelay());
+                }
+            }
+        }
+
+    private IEnumerator RecoveryAfterDelay()
+        {
+        if (!PhotonNetwork.IsMasterClient) yield break;
+
+        yield return new WaitForSeconds(recoveryDelay);
+
+        while (!playerInRange && CurrentVitality < Maxvitality)
+            {
+            AddVitality(1);
+            yield return new WaitForSeconds(recoveryInterval);
+            }
+
+        recoveryCoroutine = null;
+        }
+
     }
