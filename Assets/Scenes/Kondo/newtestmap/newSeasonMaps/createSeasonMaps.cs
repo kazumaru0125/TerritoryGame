@@ -46,6 +46,8 @@ public class createSeasonMaps: MonoBehaviour
     private GameObject newhiwalls;
     [SerializeField]
     private GameObject gimmick;
+    [SerializeField]
+    private GameObject hokora;
     //[SerializeField]
     //private GameObject testOBJ;
     /*
@@ -166,6 +168,9 @@ public class createSeasonMaps: MonoBehaviour
                                 break;
                             case "24"://‘Sˆõ‚ª’´‚¦‚ê‚é•Ç
                                 Instantiate(stoneD, new Vector3((-4.5f + j) * scale, 4.0f, (4.5f - i) * scale), Quaternion.Euler(0, 0, 0));
+                                break;
+                            case "99"://âK
+                                Instantiate(hokora, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 180f, 0f));
                                 break;
                         }
                         Instantiate(floors, new Vector3((-4.5f + j) * scale,0.0f, (4.5f - i) * scale), Quaternion.identity);
