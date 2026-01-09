@@ -122,14 +122,14 @@ public class createMaps : MonoBehaviour
                                 Instantiate(ofudas, new Vector3((-4.5f + j) * scale, 1.0f, (4.5f - i) * scale), Quaternion.Euler(-90f, 0f, 0f));
                                 break;
                                 case "7"://アイテムボックス
-                                Instantiate(boxs, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 0f, 0f));
+                                Instantiate(boxs, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 180f, 0f));
                                 break;
                                 case "8"://ジャンプ
                                 Instantiate(jumps, new Vector3((-4.5f + j) * scale, 0.2f, (4.5f - i) * scale), Quaternion.identity);
                                 break;
                                 
                                 case "11"://新しい壁
-                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
+                                Instantiate(newhiwalls, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.Euler(0f, 180f, 0f));
                                 break;
                                 
                                 case "12"://人間側スタート地点
