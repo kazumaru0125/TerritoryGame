@@ -75,16 +75,16 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         {
         if (!PhotonNetwork.IsMasterClient || isGameEnded) return;
 
-        if (ATeamcurrentValue >= maxValue)
-            {
-            photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "A");
-            isGameEnded = true;
-            }
-        else if (BTeamcurrentValue >= maxValue)
-            {
-            photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "B");
-            isGameEnded = true;
-            }
+        //if (ATeamcurrentValue >= maxValue)
+        //    {
+        //    photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "A");
+        //    isGameEnded = true;
+        //    }
+        //else if (BTeamcurrentValue >= maxValue)
+        //    {
+        //    photonView.RPC(nameof(OnTeamWin), RpcTarget.All, "B");
+        //    isGameEnded = true;
+        //    }
         }
 
 
@@ -135,13 +135,13 @@ public class DecreaseTMPNumber : MonoBehaviourPunCallbacks, IPunObservable
         if (team == myTeam)
             {
             Debug.Log(" → 自分は勝利側");
-            //   SceneManager.LoadScene("ResultWinScene");
+               SceneManager.LoadScene("ResultWinScene");
             GoWin();
             }
         else
             {
             Debug.Log(" → 自分は敗北側");
-            // SceneManager.LoadScene("ResultLossScene");
+             SceneManager.LoadScene("ResultLossScene");
             GoLose();
             }
         }

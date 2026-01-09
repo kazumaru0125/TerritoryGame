@@ -110,26 +110,81 @@ public class WaveManager : MonoBehaviourPun
     //        }
     //    }
 
+    //private void Update()
+    //    {
+    //    if (!waveStarted) return;
+
+    //    if (time > 0)
+    //        {
+    //        time -= Time.deltaTime;
+    //        Count.text = Mathf.CeilToInt(time).ToString();
+
+    //        if (time <= 0 && !wave1Ended)
+    //            {
+    //            wave1Ended = true;
+    //            time = 0;
+    //            currentWave = 2;
+
+    //            if (PhotonNetwork.IsMasterClient)
+    //                HandleWaveEnd();
+    //            }
+    //        }
+    //    }
+    private string lastRole = ""; // 直前の役割を保持
+
     private void Update()
         {
         if (!waveStarted) return;
 
+        // タイマー処理
         if (time > 0)
             {
             time -= Time.deltaTime;
             Count.text = Mathf.CeilToInt(time).ToString();
+            }
+        else
+            {
+            Count.text = ""; // タイマー0で表示消す
+            }
 
-            if (time <= 0 && !wave1Ended)
+        // Wave1終了時の処理
+        if (time <= 0 && !wave1Ended)
+            {
+            wave1Ended = true;
+            currentWave = 2;
+
+            if (PhotonNetwork.IsMasterClient)
+                HandleWaveEnd();
+            }
+
+        // Wave2中は自分の役割に応じて常にメッセージを更新
+        if (currentWave == 2)
+            {
+            UpdateWave2Message();
+            }
+        }
+
+    private void UpdateWave2Message()
+        {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Role", out object roleObj))
+            {
+            string role = roleObj as string;
+
+            // 役割が変わったときだけ更新
+            if (role != lastRole)
                 {
-                wave1Ended = true;
-                time = 0;
-                currentWave = 2;
+                lastRole = role;
 
-                if (PhotonNetwork.IsMasterClient)
-                    HandleWaveEnd();
+                if (role == "Human")
+                    Wave.text = "灯篭の火を集めろ";
+                else if (role == "Oni")
+                    Wave.text = "人を捕まえろ！";
+                else
+                    Wave.text = "";
                 }
             }
         }
+
 
 
     // =======================================

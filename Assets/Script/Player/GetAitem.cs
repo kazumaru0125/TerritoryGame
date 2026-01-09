@@ -101,7 +101,7 @@ public class GetAitem : MonoBehaviourPun
     void HighJump()
         {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        rb.AddForce(Vector3.up * 10f, ForceMode.VelocityChange);
+        rb.AddForce(Vector3.up * 13f, ForceMode.VelocityChange);
         Debug.Log("ハイジャンプ！");
         }
 

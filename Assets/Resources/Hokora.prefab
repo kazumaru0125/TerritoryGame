@@ -187,8 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadf649629115aa4dac8be73a6e52042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gauge: {fileID: 0}
-  clearSceneName: ResultWinScene
+  winScene: ResultWinScene
+  loseScene: ResultLossScene
 --- !u!4 &3436414909844186626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4898669030277842, guid: 7b416b0fa77ed1840a9f280019e863ed, type: 3}
@@ -277,6 +277,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 330328392848762538}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01333137cac0b6d4ab1b03e34b940811, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4119099896795344240}
     - targetCorrespondingSourceObject: {fileID: -3762964357804094917, guid: 01333137cac0b6d4ab1b03e34b940811, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4375462677117099578}
@@ -403,3 +406,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01333137cac0b6d4ab1b03e34b940811, type: 3}
   m_PrefabInstance: {fileID: 7110890583413667921}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7957751271573128448 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01333137cac0b6d4ab1b03e34b940811, type: 3}
+  m_PrefabInstance: {fileID: 7110890583413667921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4119099896795344240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957751271573128448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
