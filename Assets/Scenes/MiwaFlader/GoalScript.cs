@@ -1,16 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 public class GoalScript : MonoBehaviour
     {
-    public string winScene = "ResultWinScene";
-    public string loseScene = "ResultLossScene";
-
     DecreaseTMPNumber gauge;
     string touchingTeam = null;
-
-    string myTeam;   // ← 追加！
+    string myTeam;
 
     void Start()
         {
@@ -31,30 +26,23 @@ public class GoalScript : MonoBehaviour
 
     void Update()
         {
-        if (touchingTeam == null) return;
+        if (touchingTeam == null || gauge == null) return;
 
-        if (gauge == null) return;
+        // ゴールに触れたチームのゲージ値を取得
+        int value = (touchingTeam == "A") ? gauge.ATeamcurrentValue : gauge.BTeamcurrentValue;
 
-        int value = (touchingTeam == "A")
-            ? gauge.ATeamcurrentValue
-            : gauge.BTeamcurrentValue;
+        // ゲージが100未満なら何もしない
+        if (value < 100) return;
 
-        // 条件を満たしていなければ何もしない
-        if (value < 2) return;
-
-        // Xbox B ボタン
+        // Xbox B ボタン押下
         if (Input.GetKeyDown(KeyCode.JoystickButton1))
             {
             Debug.Log("CLEAR! Team = " + touchingTeam);
 
-            // 勝ち負け判定！
-            if (touchingTeam == myTeam)
+            // 勝利 RPC を呼ぶのはマスタークライアントだけ
+            if (PhotonNetwork.IsMasterClient)
                 {
-                SceneManager.LoadScene(winScene);
-                }
-            else
-                {
-                SceneManager.LoadScene(loseScene);
+                gauge.photonView.RPC("OnTeamWin", RpcTarget.All, touchingTeam);
                 }
             }
         }
@@ -64,7 +52,6 @@ public class GoalScript : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         PhotonView view = other.GetComponent<PhotonView>();
-
         if (view != null && view.Owner.CustomProperties.ContainsKey("Team"))
             {
             touchingTeam = (string)view.Owner.CustomProperties["Team"];

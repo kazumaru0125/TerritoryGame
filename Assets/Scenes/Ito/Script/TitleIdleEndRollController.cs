@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class TitleIdleEndRollController : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class TitleIdleEndRollController : MonoBehaviour
 
         if (!endRollVisible)
         {
-            // ƒ^ƒCƒgƒ‹•\¦’†F–³‘€ìƒ^ƒCƒ}[
+            // ã‚¿ã‚¤ãƒˆãƒ«è¡¨ç¤ºä¸­ï¼šç„¡æ“ä½œã‚¿ã‚¤ãƒãƒ¼
             if (hasInput)
                 lastInputTime = Time.time;
 
@@ -34,7 +34,7 @@ public class TitleIdleEndRollController : MonoBehaviour
         }
         else
         {
-            // ƒGƒ“ƒhƒ[ƒ‹•\¦’†F‰½‚©“ü—Í‚ª‚ ‚Á‚½‚çƒ^ƒCƒgƒ‹‚É–ß‚é
+            // ã‚¨ãƒ³ãƒ‰ãƒ­ãƒ¼ãƒ«è¡¨ç¤ºä¸­ï¼šä½•ã‹å…¥åŠ›ãŒã‚ã£ãŸã‚‰ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹
             if (hasInput)
                 HideEndRollAndBackToTitle();
         }
@@ -42,14 +42,14 @@ public class TitleIdleEndRollController : MonoBehaviour
 
     bool HasAnyInput()
     {
-        // ƒL[ƒ{[ƒhEƒ}ƒEƒX‘S”Ê
+        // ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ»ãƒã‚¦ã‚¹å…¨èˆ¬
         if (Input.anyKeyDown) return true;
 
-        // ƒXƒeƒBƒbƒN“ü—Í
+        // ã‚¹ãƒ†ã‚£ãƒƒã‚¯å…¥åŠ›
         if (Input.GetAxisRaw("Horizontal") != 0) return true;
         if (Input.GetAxisRaw("Vertical") != 0) return true;
 
-        // Xbox ƒRƒ“ƒgƒ[ƒ‰ A/B ƒ{ƒ^ƒ“
+        // Xbox ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ© A/B ãƒœã‚¿ãƒ³
         if (Input.GetKeyDown("joystick button 0")) return true; // A
         if (Input.GetKeyDown("joystick button 1")) return true; // B
 
@@ -64,7 +64,7 @@ public class TitleIdleEndRollController : MonoBehaviour
             titleCanvasRoot.SetActive(false);
 
         if (endRollCanvasRoot != null)
-            endRollCanvasRoot.SetActive(true); // OnEnable ‚Å–ˆ‰ñ‰Šú‰»‚³‚ê‚é
+            endRollCanvasRoot.SetActive(true); // OnEnable ã§æ¯å›åˆæœŸåŒ–ã•ã‚Œã‚‹
     }
 
     public void HideEndRollAndBackToTitle()
