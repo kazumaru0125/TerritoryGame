@@ -139,7 +139,7 @@ public class createSeasonMaps: MonoBehaviour
                                 case "15"://ランタン有ギミック
                               //  Instantiate(gimmick, new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale), Quaternion.identity);
 
-                                Vector3 Newpos = new Vector3((-4.5f + j) * scale, 0.0f, (4.5f - i) * scale);
+                                Vector3 Newpos = new Vector3((-4.5f + j) * scale, -0.6f, (4.5f - i) * scale);
                                 PhotonNetwork.Instantiate("Bld_Rectangular_Base", Newpos, Quaternion.identity);
                                 break;
 
