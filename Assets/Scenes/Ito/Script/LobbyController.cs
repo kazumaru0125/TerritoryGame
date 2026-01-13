@@ -29,6 +29,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public GameObject StageSelectionRoom_UI_Panel;
     public TMP_Text StageNumber;
     //public InputField maxPlayerInputField;
+    public GameObject Stage1;
+    public GameObject Stage2;
 
     [Header("Inside Room UI Panel")]
     public GameObject InsideRoom_UI_Panel;
@@ -135,7 +137,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
             {
                 selectedStage = 1;
                 Debug.Log("Stage 1 selected");
-            
+                
+
                 }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -162,21 +165,29 @@ public class LobbyController : MonoBehaviourPunCallbacks
             {
             StageNumber.text = "Stage:1";
             HostStageNumber.text = "Stage1";
+            Stage1.SetActive(true);
+            Stage2.SetActive(false);
+
+
             }
         else if(selectedStage == 2) 
             {
             StageNumber.text = "Stage:2";
             HostStageNumber.text = "Stage2";
-            } 
-        else if(selectedStage==3)
-            {
-            StageNumber.text = "Stage:3";
-            HostStageNumber.text = "Stage3";
+            Stage1.SetActive(false);
+            Stage2.SetActive(true);
             }
+        //else if(selectedStage==3)
+        //    {
+        //    StageNumber.text = "Stage:3";
+        //    HostStageNumber.text = "Stage3";
+        //    }
         else
             {
             StageNumber.text = "NoStage";
             HostStageNumber.text = "NoStage";
+            Stage1.SetActive(false);
+            Stage2.SetActive(false);
             }
             
 
@@ -449,9 +460,9 @@ public class LobbyController : MonoBehaviourPunCallbacks
             case 2:
                 sceneName = "Stage2";
                 break;
-            case 3:
-                sceneName = "Stage3";
-                break;
+            //case 3:
+            //    sceneName = "Stage3";
+            //    break;
             default:
                 sceneName = "TGameScene";
                 break;
